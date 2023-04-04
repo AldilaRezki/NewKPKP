@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lecturer', function (Blueprint $table) {
-            $table->string('id');
+        Schema::create('lecturers', function (Blueprint $table) {
+            $table->string('id')->primary();
             $table->string('NIP',21)->nullable();
             $table->string('Nama_Lengkap');
             $table->char('Jenis_Kelamin',1);
@@ -20,6 +20,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('id')->references('id')->on('accounts')->onDelete('cascade');
+        
 
             $table->index('id','id');
         });

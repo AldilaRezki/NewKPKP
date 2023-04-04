@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('question options', function (Blueprint $table) {
+        Schema::create('question_options', function (Blueprint $table) {
             $table->id('id');
             $table->text('Deskripsi_Opsi');
             $table->enum('Tipe_opsi', ['Benar', 'Salah']);

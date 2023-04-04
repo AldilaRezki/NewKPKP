@@ -4,41 +4,47 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Account;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function addAccount(Request $request){
-        $validator = Validator::make($request->all(), [
-            'Username' => 'required',
-            'Password' => 'required',
-            'Role' => 'required',
+    public function login (Request $request) {
+
+        $credentials = $request->validate([
+            'Username' => ['required'],
+            'Password' => ['required'],
         ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Ada Kesalahan',
-                'data' => $validator->errors(),
-            ]);
+        // return response()->json([
+        //     'data' => $credentials
+        // ]);
+
+        if (Auth::attempt($credentials)) {
+            
+            $auth = Auth::users();
+
+            $succes['token'] = $auth->createToken('auth_token')->plainTextToken;
+            $succes['name'] = $auth->Nama_User;
+            $succes['role'] = $auth->Role;
+            
+            return response()->json(
+                [
+                    'success' => true,
+                    'massage' => 'Berhasil Login',
+                    'data' => $succes,
+                ]
+            ); 
+        } 
+        else {
+            return response()->json(
+                [
+                    'success' => false,
+                    'massage' => 'Silahkan Cek kembali username dan password anda',
+                    'data' => null,
+                ]
+            ); 
         }
-
-        $input = $request->all();
-        $input['Password'] = bcrypt($input['Password']);
-
-        $akun = Account::create($input);
-        
-        $success['token'] = $akun->createToken('auth_token')->plainTextToken;
-
-        $succes['name'] = $akun->Nama_User;
-        $succes['role'] = $akun->Role;
-
-        return response()->json([
-            'succes' => true,
-            'massage' => 'Akun berhasil dibuat',
-            'data' => $succes
-        ]);
     }
 }

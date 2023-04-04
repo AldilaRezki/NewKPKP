@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('assignments', function (Blueprint $table) {
             $table->id('id');
             $table->text('Judul_Tugas');
-            $table->integer('Poin');
+            $table->string('Poin',3);
             $table->dateTime('Deadline');
             $table->enum('Tipe_Deadline',['Strict', 'unStrict']);
             $table->string('Filename')->nullable();

@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('student_assigments', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->string('Filename')->nullable();
-            $table->integer('Poin',3);
+            $table->string('Poin',3);
             $table->dateTime('Tanggal_Upload');
             $table->timestamps();
             $table->string('ID_Siswa');
