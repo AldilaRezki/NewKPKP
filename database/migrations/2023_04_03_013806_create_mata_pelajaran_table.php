@@ -13,15 +13,16 @@ return new class extends Migration
     {
         Schema::create('subjects', function (Blueprint $table) {
             $table->id('id');
-            $table->dateTime('jadwal');
+            $table->string('nama_matpel');
+            $table->dateTime('jadwal')->nullable();
             $table->timestamps();
-            $table->unsignedBigInteger('ID_Kelas');
-            $table->string('ID_Guru');
-            $table->string('ID_Kelas');
+            $table->unsignedBigInteger('id_kelas');
+            $table->string('id_guru');
+            // $table->unsignedBigInteger('id_packages');
 
-            $table->foreign('ID_Kelas')->references('id')->on('classess')->onDelete('cascade');
-            $table->foreign('ID_Guru')->references('id')->on('lecturers')->onDelete('cascade');
-            $table->foreign('ID_Kelas')->references('id')->on('subjects')->onDelete('cascade');
+            $table->foreign('id_kelas')->references('id')->on('classess')->onDelete('cascade');
+            $table->foreign('id_guru')->references('id')->on('lecturers')->onDelete('cascade');
+            // $table->foreign('id_packages')->references('id')->on('class_packages')->onDelete('cascade');
 
             $table->index('id','id');
         });

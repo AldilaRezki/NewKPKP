@@ -4,47 +4,48 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Account;
+use Illuminate\Http\Client\ResponseSequence;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function login (Request $request) {
+    public function login(Request $request)
+    {
 
         $credentials = $request->validate([
-            'Username' => ['required'],
-            'Password' => ['required'],
+            'username' => ['required'],
+            'password' => ['required'],
         ]);
 
-        // return response()->json([
-        //     'data' => $credentials
-        // ]);
+        $user = Account::where('username', $credentials['username'])->first();
 
-        if (Auth::attempt($credentials)) {
-            
-            $auth = Auth::users();
-
-            $succes['token'] = $auth->createToken('auth_token')->plainTextToken;
-            $succes['name'] = $auth->Nama_User;
-            $succes['role'] = $auth->Role;
-            
-            return response()->json(
-                [
-                    'success' => true,
-                    'massage' => 'Berhasil Login',
-                    'data' => $succes,
-                ]
-            ); 
-        } 
-        else {
-            return response()->json(
-                [
-                    'success' => false,
-                    'massage' => 'Silahkan Cek kembali username dan password anda',
-                    'data' => null,
-                ]
-            ); 
+        if (!$user || !Hash::check($credentials['password'], $user->password)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal login, silahkan cek kembali username dan password'
+            ]);
         }
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        $res = [
+            'success' => true,
+            'user' => $user['username'],
+            'role' => $user['role'],
+            'token' => $token,
+        ];
+
+        return response()->json($res);
+    }
+
+    public function logout()
+    {
+        auth()->user()->tokens()->delete();
+        return [
+            'message' => 'user logged out'
+        ];
     }
 }

@@ -11,17 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('student_assigments', function (Blueprint $table) {
-            $table->uuid('id');
-            $table->string('filename')->nullable();
-            $table->integer('nilai');
-            // $table->dateTime('tanggal_upload');
-            $table->timestamps();
+        Schema::create('collect_tests', function (Blueprint $table) {
+            $table->id('id');
             $table->string('id_siswa');
-            $table->unsignedBigInteger('id_tugas');
-            
+            $table->unsignedBigInteger('id_ujian');
+            $table->integer('nilai');
+            $table->timestamps();
+
             $table->foreign('id_siswa')->references('id')->on('students')->onDelete('cascade');
-            $table->foreign('id_tugas')->references('id')->on('assignments')->onDelete('cascade');
+            $table->foreign('id_ujian')->references('id')->on('tests')->onDelete('cascade');
 
             $table->index('id','id');
         });
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kumpul_tugas');
+        Schema::dropIfExists('collect_tests');
     }
 };

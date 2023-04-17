@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id('id');
-            $table->text('Pertanyaan');
-            $table->string('Filename')->nullable();
-            $table->enum('Tipe_Soal',['Pilihan Ganda', 'Pilihan Centang', 'Essay']);
-            $table->integer('Poin');
+            $table->text('pertanyaan');
+            $table->string('filename')->nullable();
+            $table->enum('tipe_soal',['ganda', 'centang', 'essay']);
+            $table->integer('nilai');
             $table->timestamps();
-            $table->unsignedBigInteger('ID_Ujian');
+            $table->unsignedBigInteger('id_ujian');
 
-            $table->foreign('ID_Ujian')->references('id')->on('tests')->onDelete('cascade');
+            $table->foreign('id_ujian')->references('id')->on('tests')->onDelete('cascade');
 
             $table->index('id','id');
         });

@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('assignments', function (Blueprint $table) {
             $table->id('id');
-            $table->text('Judul_Tugas');
-            $table->string('Poin',3);
-            $table->dateTime('Deadline');
-            $table->enum('Tipe_Deadline',['Strict', 'unStrict']);
-            $table->string('Filename')->nullable();
+            $table->text('judul_tugas');
+            $table->integer('nilai');
+            $table->dateTime('deadline')->nullable();
+            $table->enum('tipe_deadline',['strict', 'unstrict']);
+            $table->string('filename')->nullable();
             $table->timestamps();
-            $table->unsignedBigInteger('ID_Matpel');
+            $table->unsignedBigInteger('id_matpel');
 
-            $table->foreign('ID_Matpel')->references('id')->on('subjects')->onDelete('cascade');
+            $table->foreign('id_matpel')->references('id')->on('subjects')->onDelete('cascade');
 
             $table->index('id','id');
         });

@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('forums', function (Blueprint $table) {
             $table->id('id');
-            $table->string('Judul_forum');
-            $table->text('Isi_forum');
-            $table->dateTime('Tanggal_Forum');
+            $table->string('judul_forum');
+            $table->text('isi_forum');
+            // $table->dateTime('tanggal_forum');
             $table->timestamps();
-            $table->unsignedBigInteger('ID_Matpel');
+            $table->unsignedBigInteger('id_matpel');
 
-            $table->foreign('ID_Matpel')->references('id')->on('subjects')->onDelete('cascade');
+            $table->foreign('id_matpel')->references('id')->on('subjects')->onDelete('cascade');
 
             $table->index('id','id');
         });

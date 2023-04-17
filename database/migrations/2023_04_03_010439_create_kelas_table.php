@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('classess', function (Blueprint $table) {
             $table->id('id');
-            $table->string('Nama_Kelas');
+            $table->string('nama_kelas');
+            $table->timestamps();
 
             $table->index('id','id');
         });

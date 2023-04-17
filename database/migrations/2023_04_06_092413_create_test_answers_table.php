@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('question_options', function (Blueprint $table) {
+        Schema::create('test_answers', function (Blueprint $table) {
             $table->id('id');
-            $table->text('deskripsi');
-            $table->enum('tipe_opsi', ['benar', 'salah']);
-            $table->timestamps();
             $table->unsignedBigInteger('id_soal');
+            $table->unsignedBigInteger('id_kumpul');
+            $table->string('jawaban');
+            $table->enum('status',['benar','salah']);
+            $table->timestamps();
 
             $table->foreign('id_soal')->references('id')->on('questions')->onDelete('cascade');
+            $table->foreign('id_kumpul')->references('id')->on('collect_tests')->onDelete('cascade');
 
             $table->index('id','id');
         });
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('komentar_opsi_soal');
+        Schema::dropIfExists('test_answers');
     }
 };

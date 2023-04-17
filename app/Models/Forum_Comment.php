@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Student extends Authenticatable
+class Forum_Comment extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    use Uuids;
 
     /**
      * The attributes that are mass assignable.
@@ -19,13 +21,14 @@ class Student extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'id',
-        'nisn',
-        'nama_lengkap',
-        'jenis_kelamin',
-        'agama',
-        'id_kelas',
+        'komentar',
+        // 'tanggal_upload',
+        'id_forum',
+        'id_pengirim',
+        'id_reply'
     ];
+
+    protected $table = 'forum_comments';
 
     /**
      * The attributes that should be hidden for serialization.
@@ -43,10 +46,8 @@ class Student extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
+        
     ];
 
-    public function account()
-    {
-        return $this->belongsTo(Account::class);
-    }
+
 }

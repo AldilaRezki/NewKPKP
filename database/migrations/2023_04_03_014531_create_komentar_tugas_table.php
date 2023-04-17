@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('assigment_comments', function (Blueprint $table) {
             $table->id('id');
-            $table->text('Komentar');
-            $table->dateTime('Tanggal_Upload');
+            $table->text('komentar');
+            // $table->dateTime('tanggal_upload');
             $table->timestamps();
-            $table->string('ID_Pengirim');
-            $table->string('ID_Kumpul');
+            $table->string('id_pengirim');
+            $table->string('id_kumpul');
 
-            $table->foreign('ID_Pengirim')->references('id')->on('accounts')->onDelete('cascade');
-            $table->foreign('ID_kumpul')->references('id')->on('student_assigments')->onDelete('cascade');
+            $table->foreign('id_pengirim')->references('id')->on('accounts')->onDelete('cascade');
+            $table->foreign('id_kumpul')->references('id')->on('student_assigments')->onDelete('cascade');
 
             $table->index('id','id');
         });

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Lecturer extends Authenticatable
 {
@@ -19,11 +20,11 @@ class Lecturer extends Authenticatable
      */
     protected $fillable = [
         'id',
-        'NIP',
-        'Nama_Lengkap',
-        'Jenis_Kelamin',
-        'Golongan',
-        'ID_Matpel',
+        'nip',
+        'nama_lengkap',
+        'jenis_kelamin',
+        'golongan',
+        'id_matpel',
     ];
 
     /**
@@ -42,6 +43,11 @@ class Lecturer extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        
     ];
+
+    public function account()
+    {
+        return $this->belongsTo(Account::class);
+    }
 }

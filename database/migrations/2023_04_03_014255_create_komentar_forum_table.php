@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('forum_comments', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->text('Komentar');
-            $table->dateTime('Tanggal_Upload');
+            $table->text('komentar');
+            // $table->dateTime('tanggal_upload');
             $table->timestamps();
-            $table->unsignedBigInteger('ID_Forum');
-            $table->string('ID_Pengirim');
+            $table->unsignedBigInteger('id_forum');
+            $table->string('id_pengirim');
 
-            $table->foreign('ID_Forum')->references('id')->on('forums')->onDelete('cascade');
-            $table->foreign('ID_Pengirim')->references('id')->on('accounts')->onDelete('cascade');
+            $table->foreign('id_forum')->references('id')->on('forums')->onDelete('cascade');
+            $table->foreign('id_pengirim')->references('id')->on('accounts')->onDelete('cascade');
 
             $table->index('id','id');
         });

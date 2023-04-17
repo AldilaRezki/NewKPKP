@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('class_packages', function (Blueprint $table) {
             $table->id('id');
-            $table->string('Nama_Paket');
+            $table->string('nama_paket');
             $table->timestamps();
 
-            $table->string('ID_Guru');
-            $table->foreign('ID_Guru')->references('id')->on('lecturers')->onDelete('cascade');
+            $table->string('id_guru');
+            $table->foreign('id_guru')->references('id')->on('lecturers')->onDelete('cascade');
 
             $table->index('id','id');
         });

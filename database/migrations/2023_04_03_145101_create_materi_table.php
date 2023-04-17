@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('materials', function (Blueprint $table) {
             $table->id('id');
-            $table->unsignedBigInteger('ID_Matpel');
-            $table->text('Judul_Materi');
-            $table->text('Isi_Materi')->nullable();
-            $table->string('Filename')->nullable();
+            $table->unsignedBigInteger('id_matpel');
+            $table->text('judul_materi');
+            $table->text('isi_materi')->nullable();
+            $table->string('filename')->nullable();
 
-            $table->foreign('ID_Matpel')->references('id')->on('subjects')->onDelete('cascade');
+            $table->foreign('id_matpel')->references('id')->on('subjects')->onDelete('cascade');
 
             $table->index('id','id');
             $table->timestamps();

@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Traits\Uuids;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Account extends Authenticatable
 {
@@ -20,10 +21,10 @@ class Account extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'Username',
-        'Password',
-        'Role',
-        'Nama_User',
+        'username',
+        'password',
+        'role',
+        'nama_user',
     ];
 
     /**
@@ -44,4 +45,14 @@ class Account extends Authenticatable
     protected $casts = [
         
     ];
+
+    public function lecture(): HasOne
+    {
+        return $this->hasOne(Lecturer::class);
+    }
+
+    public function student(): HasOne
+    {
+        return $this->hasOne(Student::class);
+    }
 }

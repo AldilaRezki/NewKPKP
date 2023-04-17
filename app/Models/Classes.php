@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Student extends Authenticatable
+class Classes extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -19,13 +20,11 @@ class Student extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'id',
-        'nisn',
-        'nama_lengkap',
-        'jenis_kelamin',
-        'agama',
-        'id_kelas',
+        'nama_kelas',
+        'id_guru'
     ];
+
+    protected $table = 'classess';
 
     /**
      * The attributes that should be hidden for serialization.
@@ -43,10 +42,10 @@ class Student extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
+        
     ];
 
-    public function account()
-    {
-        return $this->belongsTo(Account::class);
-    }
+    
+
+    
 }

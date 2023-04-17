@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('lecturers', function (Blueprint $table) {
             $table->string('id')->primary();
-            $table->string('NIP',21)->nullable();
-            $table->string('Nama_Lengkap');
-            $table->char('Jenis_Kelamin',1);
-            $table->string('Golongan',5)->nullable();
+            $table->string('nip',21)->nullable();
+            $table->string('nama_lengkap');
+            $table->char('jenis_kelamin',1);
+            $table->string('golongan',5)->nullable();
+            $table->string('matpel')->nullable();
             $table->timestamps();
 
             $table->foreign('id')->references('id')->on('accounts')->onDelete('cascade');

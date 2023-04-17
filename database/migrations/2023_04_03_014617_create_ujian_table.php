@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('tests', function (Blueprint $table) {
             $table->id('id');
-            $table->text('Deskripsi');
-            $table->time('Waktu');
-            $table->dateTime('Tanggal_Ujian');
-            $table->string('Filename')->nullable();
-            $table->enum('Tipe_ujian', ['Acak', 'Tidak Acak']);
+            $table->text('deskripsi');
+            $table->time('waktu');
+            $table->dateTime('tanggal_ujian')->nullable();
+            $table->string('filename')->nullable();
+            $table->enum('tipe_soal', ['acak', 'tidak acak']);
             $table->timestamps();
-            $table->unsignedBigInteger('ID_Matpel');
+            $table->unsignedBigInteger('id_matpel');
 
-            $table->foreign('ID_Matpel')->references('id')->on('subjects')->onDelete('cascade');
+            $table->foreign('id_matpel')->references('id')->on('subjects')->onDelete('cascade');
 
             $table->index('id','id');
         });

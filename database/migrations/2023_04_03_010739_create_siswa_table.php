@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             // $table->id('id');
             $table->uuid('id')->primary();
-            $table->string('NISN',10);
-            $table->string('Nama_Lengkap');
-            $table->char('Jenis_Kelamin',1);
-            $table->char('Agama',18);
+            $table->string('nisn',10);
+            $table->string('nama_lengkap');
+            $table->char('jenis_kelamin',1);
+            $table->char('agama',18);
             $table->timestamps();
 
             $table->foreign('id')->references('id')->on('accounts')->onDelete('cascade');
