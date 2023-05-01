@@ -2,12 +2,15 @@
 
 **Pastikan berada di folder *YookLearn BE***
 
-#### 1. Run Migration
+#### 1. Setting database
+**Pada file *env* di folder "YookLearn BE" Silahkan setting pada line ke 11-16 sesuai dengan database pada laptop masing-masing**
+
+#### 2. Run Migration
 ```
 php artisan migrate:fresh --seed --seeder=DatabaseSeeder
 ```
 
-#### 2. Run Server
+#### 3. Run Server
 ```
 php artisan serve
 ```
