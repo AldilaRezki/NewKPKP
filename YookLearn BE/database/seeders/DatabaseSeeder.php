@@ -31,16 +31,16 @@ class DatabaseSeeder extends Seeder
         DB::table('accounts')->insert([
             'id' => 'adminuuid',
             'Username' => 'admin',
-            'Password' => Hash::make('admin123'), 
-            'Role' => 'admin', 
+            'Password' => Hash::make('admin123'),
+            'Role' => 'admin',
             'Nama_User' => 'Admin Sistem',
         ]);
 
         DB::table('accounts')->insert([
             'id' => 'guruuuid',
             'Username' => 'guru',
-            'Password' => Hash::make('lecture321'), 
-            'Role' => 'guru', 
+            'Password' => Hash::make('lecture321'),
+            'Role' => 'guru',
             'Nama_User' => 'Guru Sistem',
         ]);
 
@@ -49,41 +49,41 @@ class DatabaseSeeder extends Seeder
             'nip' => 'niptesting',
             'nama_lengkap' => 'Guru Sistem',
             'jenis_kelamin' => 'L',
-            'golongan'  => 'V',
+            'golongan' => 'V',
         ]);
 
         DB::table('classess')->insert([
             'id' => 1,
             'nama_kelas' => 'Kelas 12 Test',
-            'id_guru'  => 'guruuuid',
+            'id_guru' => 'guruuuid',
         ]);
 
         DB::table('subjects')->insert([
             'id' => 1,
             'nama_matpel' => 'Matematika 12 Test',
-            'id_kelas'  => '1',
-            'id_guru'  => 'guruuuid',
+            'id_kelas' => '1',
+            'id_guru' => 'guruuuid',
         ]);
 
         DB::table('subjects')->insert([
             'id' => 2,
             'nama_matpel' => 'IPA 12 Test',
-            'id_kelas'  => '1',
-            'id_guru'  => 'guruuuid',
+            'id_kelas' => '1',
+            'id_guru' => 'guruuuid',
         ]);
 
         DB::table('subjects')->insert([
             'id' => 3,
             'nama_matpel' => 'Bahasa 12 Test',
-            'id_kelas'  => '1',
-            'id_guru'  => 'guruuuid',
+            'id_kelas' => '1',
+            'id_guru' => 'guruuuid',
         ]);
 
         DB::table('accounts')->insert([
             'id' => 'siswauuid',
             'Username' => 'siswa',
-            'Password' => Hash::make('student@123'), 
-            'Role' => 'siswa', 
+            'Password' => Hash::make('student@123'),
+            'Role' => 'siswa',
             'Nama_User' => 'Siswa Sistem',
         ]);
 
@@ -92,15 +92,15 @@ class DatabaseSeeder extends Seeder
             'nisn' => 'nisntest',
             'nama_lengkap' => 'Siswa Sistem',
             'jenis_kelamin' => 'L',
-            'agama'  => 'Islam',
+            'agama' => 'Islam',
             'id_kelas' => 1,
         ]);
 
         DB::table('accounts')->insert([
             'id' => 'siswauuid2',
             'Username' => 'siswa2',
-            'Password' => Hash::make('student@123'), 
-            'Role' => 'siswa', 
+            'Password' => Hash::make('student@123'),
+            'Role' => 'siswa',
             'Nama_User' => 'Siswa Sistem 2',
         ]);
 
@@ -109,7 +109,7 @@ class DatabaseSeeder extends Seeder
             'nisn' => 'nisntest2',
             'nama_lengkap' => 'Siswa Sistem 2',
             'jenis_kelamin' => 'L',
-            'agama'  => 'Kristen Protestan',
+            'agama' => 'Kristen Protestan',
             'id_kelas' => 1,
         ]);
 
@@ -118,7 +118,7 @@ class DatabaseSeeder extends Seeder
             'judul_tugas' => 'Tugas Test 1',
             'detail_tugas' => 'Ini adalah tugas test 1',
             'nilai' => 90,
-            'tipe_deadline'  => 'strict',
+            'tipe_deadline' => 'strict',
             'id_matpel' => 1,
         ]);
 
@@ -127,42 +127,88 @@ class DatabaseSeeder extends Seeder
             'judul_tugas' => 'Tugas Test 2',
             'detail_tugas' => 'Ini adalah tugas test 2',
             'nilai' => 100,
-            'tipe_deadline'  => 'unstrict',
+            'tipe_deadline' => 'unstrict',
             'id_matpel' => 1,
         ]);
 
-        // DB::table('assigment_comments')->insert([
-        //     'id' => 1,
-        //     'komentar' => 'Ini adalah komentar 1 tugas pada tugas 1',
-        //     'id_pengirim'  => 'siswauuid',
-        //     'id_kumpul' => 1,
-        // ]);
+        DB::table('student_assigments')->insert([
+            'id' => 'uuidkumpultugas1',
+            'filename' => 'filetugas1',
+            'nilai' => 0,
+            'id_siswa' => 'siswauuid',
+            'id_tugas' => 1,
+        ]);
 
-        // DB::table('assigment_comments')->insert([
-        //     'id' => 2,
-        //     'komentar' => 'Ini adalah komentar 1 tugas pada tugas 1',
-        //     'id_pengirim'  => 'guruuuid',
-        //     'id_kumpul' => 1,
-        // ]);
+        DB::table('student_assigments')->insert([
+            'id' => 'uuidkumpultugas2',
+            'filename' => 'filetugas2',
+            'nilai' => 0,
+            'id_siswa' => 'siswauuid',
+            'id_tugas' => 2,
+        ]);
+
+        DB::table('student_assigments')->insert([
+            'id' => 'uuidkumpultugas3',
+            'filename' => 'filetugas3',
+            'nilai' => 0,
+            'id_siswa' => 'siswauuid2',
+            'id_tugas' => 2,
+        ]);
+
+        DB::table('student_assigments')->insert([
+            'id' => 'uuidkumpultugas3',
+            'filename' => 'filetugas3',
+            'nilai' => 0,
+            'id_siswa' => 'siswauuid2',
+            'id_tugas' => 2,
+        ]);
+
+        DB::table('assigment_comments')->insert([
+            'id' => 1,
+            'komentar' => 'Ini adalah komentar 1 tugas pada tugas 1',
+            'id_pengirim' => 'siswauuid',
+            'id_kumpul' => "uuidkumpultugas1",
+        ]);
+
+        DB::table('assigment_comments')->insert([
+            'id' => 2,
+            'komentar' => 'Ini adalah komentar 2 tugas pada tugas 1',
+            'id_pengirim' => 'guruuuid',
+            'id_kumpul' => "uuidkumpultugas2",
+        ]);
+
+        DB::table('assigment_comments')->insert([
+            'id' => 3,
+            'komentar' => 'Ini adalah komentar 1 tugas pada tugas 2',
+            'id_pengirim' => 'siswauuid2',
+            'id_kumpul' => "uuidkumpultugas2",
+        ]);
+
+        DB::table('assigment_comments')->insert([
+            'id' => 4,
+            'komentar' => 'Ini adalah komentar 2 tugas pada tugas 2',
+            'id_pengirim' => 'guruuuid',
+            'id_kumpul' => "uuidkumpultugas2",
+        ]);
 
         DB::table('forums')->insert([
             'id' => 1,
             'judul_forum' => 'Forum Test 1',
-            'isi_forum'  => 'Ini adalah isi dari forum test 1',
+            'isi_forum' => 'Ini adalah isi dari forum test 1',
             'id_matpel' => 1,
         ]);
 
         DB::table('forum_comments')->insert([
             'id' => 'komen1uuid',
             'komentar' => 'Ini adalah komentar 1 tugas pada forum 1',
-            'id_pengirim'  => 'guruuuid',
+            'id_pengirim' => 'guruuuid',
             'id_forum' => 1,
         ]);
 
         DB::table('forum_comments')->insert([
             'id' => 'komen2uuid',
             'komentar' => 'Ini adalah komentar 2 tugas pada forum 1',
-            'id_pengirim'  => 'siswauuid',
+            'id_pengirim' => 'siswauuid',
             'id_forum' => 1,
             'id_reply' => 'komen1uuid'
         ]);
@@ -170,7 +216,7 @@ class DatabaseSeeder extends Seeder
         DB::table('materials')->insert([
             'id' => 1,
             'id_matpel' => 1,
-            'judul_materi'  => 'Materi test 1',
+            'judul_materi' => 'Materi test 1',
             'isi_materi' => 'Ini adalah isi materi test 1',
             'filename' => 'materi1.pdf'
         ]);
@@ -178,7 +224,7 @@ class DatabaseSeeder extends Seeder
         DB::table('materials')->insert([
             'id' => 2,
             'id_matpel' => 1,
-            'judul_materi'  => 'Materi test 2',
+            'judul_materi' => 'Materi test 2',
             'isi_materi' => 'Ini adalah isi materi test 2',
             'filename' => 'materi2.pdf'
         ]);
@@ -186,14 +232,9 @@ class DatabaseSeeder extends Seeder
         DB::table('materials')->insert([
             'id' => 3,
             'id_matpel' => 1,
-            'judul_materi'  => 'Materi test 3',
+            'judul_materi' => 'Materi test 3',
             'isi_materi' => 'Ini adalah isi materi test 3',
             'filename' => 'materi3.pdf'
         ]);
-
-
-
-
-        
     }
 }

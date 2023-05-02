@@ -28,6 +28,8 @@ class Student_Assigment extends Authenticatable
         'id_tugas'
     ];
 
+    protected  $table = "student_assigments";
+
     /**
      * The attributes that should be hidden for serialization.
      *
