@@ -1,37 +1,31 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom/client';
-// import App from './App';
-// import './index.css';
-
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-// import App from './App';
+import App from './App';
 import './index.css';
-import ErrorPage from './Siswa/Non Edit/Errorpage';
-import Ubahpass from './Siswa/Non Edit/pages/Ubahpass';
-import Datadiri from './Siswa/Non Edit/pages/Datadiri';
-import Kelas from './Siswa/Non Edit/pages/Kelas';
-import Mapel from './Siswa/Non Edit/pages/Mapel';
-import Isikelas from './Siswa/Non Edit/pages/Isikelas';
+import ErrorPage from '../../Errorpage';
+import Ubahpass from './pages/Ubahpass';
+import Datadiri from './pages/Datadiri';
+import Kelas from './pages/Kelas';
+import Mapel from './pages/Mapel';
+import Isikelas from './pages/Isikelas';
 import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
-import Tugas from './Siswa/Non Edit/pages/Tugas';
-import Materi from './Siswa/Non Edit/pages/Materi';
-import Detailmateri from './Siswa/Non Edit/pages/Detailmateri';
-import Homepage from './Siswa/Non Edit/homepage';
+import Tugas from './pages/Tugas';
+import Materi from './pages/Materi';
+import Detailmateri from './pages/Detailmateri';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Homepage />,
+    element: <App />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/ubahpass',
+    path: ' /ubahpass',
     element: <Ubahpass />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/datadiri',
+    path: ' /datadiri',
     element: <Datadiri />,
     errorElement: <ErrorPage />,
   },
@@ -70,12 +64,5 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>
-);
-
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
   </React.StrictMode>
 );
