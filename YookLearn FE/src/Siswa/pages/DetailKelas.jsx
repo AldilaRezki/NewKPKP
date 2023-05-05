@@ -6,9 +6,10 @@ import { HiUserGroup } from 'react-icons/hi';
 import { MdTask } from 'react-icons/md';
 import { IoMdPaper } from 'react-icons/io';
 import { RiFilePaperLine } from 'react-icons/ri';
-import FiturKelas from '../components/FiturKelas';
+import Fiturkelas from '../components/Fiturkelas';
+import { Link } from 'react-router-dom';
 
-export default function DetailKelas() {
+function DetailKelas() {
   return (
     <>
       <div>
@@ -23,18 +24,26 @@ export default function DetailKelas() {
       </div>
       <div className='grid grid-cols-4 gap-4 mt-10'>
         <div>
-          <FiturKelas icon={<HiUserGroup size={50} />} label='Daftar Siswa' />
+          <Fiturkelas icon={<HiUserGroup size={50} />} label='Daftar Siswa' />
         </div>
+        <Link to='/tugas'>
+          {' '}
+          <div>
+            <Fiturkelas icon={<MdTask size={50} color='#1A1F5A' />} label='Tugas' />
+          </div>
+        </Link>
+        <Link to='/materi'>
+          {' '}
+          <div>
+            <Fiturkelas icon={<IoMdPaper size={50} color='#1A1F5A' />} label='Materi' />
+          </div>
+        </Link>
         <div>
-          <FiturKelas icon={<MdTask size={50} color='#1A1F5A' />} label='Tugas' />
-        </div>
-        <div>
-          <FiturKelas icon={<IoMdPaper size={50} color='#1A1F5A' />} label='Materi' />
-        </div>
-        <div>
-          <FiturKelas icon={<RiFilePaperLine size={50} color='#1A1F5A' />} label='Ujian' />
+          <Fiturkelas icon={<RiFilePaperLine size={50} color='#1A1F5A' />} label='Ujian' />
         </div>
       </div>
     </>
   );
 }
+
+export default DetailKelas;

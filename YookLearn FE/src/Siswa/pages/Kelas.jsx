@@ -9,7 +9,7 @@ import { BiUserCircle } from 'react-icons/bi';
 import { MdGroups } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
-export default function Kelas() {
+function Kelas() {
   return (
     <>
       <div>
@@ -21,7 +21,7 @@ export default function Kelas() {
           <MdOutlineDriveFileMove className='text-2xl text-[#1A1F5A]' />
           <h1 className='font-bold ml-4 text-[#1A1F5A]'>SEMESTER AWAL 2022/2023</h1>
         </div>
-        <Link to='mapel'>
+        <Link to='/mapel'>
           {' '}
           <div className='mt-2 ml-10 w-[559px] h-[49px] bg-[#EEF4FA] flex items-center'>
             <SiGoogleclassroom className='text-2xl text-[#1A1F5A] ml-1' />
@@ -45,3 +45,4 @@ export default function Kelas() {
     </>
   );
 }
+export default Kelas;
