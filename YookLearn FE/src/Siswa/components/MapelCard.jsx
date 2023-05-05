@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 const MapelCard = ({ namaMapel, namaPengajar, jadwal }) => {
   return (
     <>
-      <Link to='detail'>
+      <Link to='/detailkelas'>
         {' '}
         <div className='bg-[#EEF4FA] flex flex-col w-[365px] h-[210px] shadow-md'>
           <div className='flex items-center justify-start bg-[#1A1F5A] w-[365px] h-[73px]'>

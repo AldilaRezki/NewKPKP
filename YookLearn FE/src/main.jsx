@@ -8,16 +8,16 @@ import ReactDOM from 'react-dom/client';
 // import App from './App';
 import './index.css';
 import ErrorPage from './Siswa/Non Edit/Errorpage';
-import Ubahpass from './Siswa/Non Edit/pages/Ubahpass';
-import Datadiri from './Siswa/Non Edit/pages/Datadiri';
-import Kelas from './Siswa/Non Edit/pages/Kelas';
-import Mapel from './Siswa/Non Edit/pages/Mapel';
-import Isikelas from './Siswa/Non Edit/pages/Isikelas';
+import Ubahpass from './Siswa/pages/Ubahpass';
+import Datadiri from './Siswa/pages/DataDiri';
+import Kelas from './Siswa/pages/Kelas';
+import Mapel from './Siswa/pages/Mapel';
+import DetailKelas from './Siswa/pages/DetailKelas';
 import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
-import Tugas from './Siswa/Non Edit/pages/Tugas';
-import Materi from './Siswa/Non Edit/pages/Materi';
-import Detailmateri from './Siswa/Non Edit/pages/Detailmateri';
-import Homepage from './Siswa/Non Edit/homepage';
+import Tugas from './Siswa/pages/Tugas';
+import Materi from './Siswa/pages/Materi';
+import Detailmateri from './Siswa/pages/Detailmateri';
+import StudentPage from './Siswa/pages/StudentPage';
 
 import HomepageUtama from './Guru/Homepage Utama/HomepageUtama';
 import DaftarKelas from './Guru/Daftar Kelas/DaftarKelas';
@@ -37,7 +37,7 @@ import DaftarTugas from './Guru/Kelas/Tugas Kelas/DaftarTugas';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Homepage />,
+    element: <StudentPage />,
     errorElement: <ErrorPage />,
   },
   {
@@ -61,8 +61,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: '/isikelas',
-    element: <Isikelas />,
+    path: '/detailkelas',
+    element: <DetailKelas />,
     errorElement: <ErrorPage />,
   },
   {
