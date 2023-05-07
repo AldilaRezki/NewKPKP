@@ -35,9 +35,9 @@
 
 // export default BoxDaftarKelas;
 
-import React, { useState } from 'react';
-import clsx from 'clsx';
-import BoxKelas from './BoxKelas';
+import React, { useState } from "react";
+import clsx from "clsx";
+import BoxKelas from "./BoxKelas";
 
 function BoxDaftarKelas(props) {
   const { className, kelas } = props;
@@ -49,25 +49,25 @@ function BoxDaftarKelas(props) {
 
   let dropdownContent = null;
 
-  if (kelas === 'X') {
+  if (kelas === "X") {
     dropdownContent = (
-      <div className='ml-20 mt-2'>
-        <BoxKelas namaKelas={`${kelas} IPA 1`} href='/xipa1' />
+      <div className="ml-20 mt-2">
+        <BoxKelas namaKelas={`${kelas} IPA 1`} href="/xipa1" />
         <BoxKelas namaKelas={`${kelas} IPA 2`} />
       </div>
     );
-  } else if (kelas === 'XI') {
+  } else if (kelas === "XI") {
     dropdownContent = (
-      <div className='ml-20 mt-2'>
+      <div className="ml-20 mt-2">
         <BoxKelas namaKelas={`${kelas} IPA 1`} />
         <BoxKelas namaKelas={`${kelas} IPA 2`} />
         <BoxKelas namaKelas={`${kelas} IPS 1`} />
         <BoxKelas namaKelas={`${kelas} IPS 2`} />
       </div>
     );
-  } else if (kelas === 'XII') {
+  } else if (kelas === "XII") {
     dropdownContent = (
-      <div className='ml-20 mt-2 mb-20'>
+      <div className="ml-20 mt-2 mb-20">
         <BoxKelas namaKelas={`${kelas} IPS 1`} />
         <BoxKelas namaKelas={`${kelas} IPS 2`} />
       </div>
@@ -78,8 +78,12 @@ function BoxDaftarKelas(props) {
     <div>
       <a
         {...props}
-        className={clsx(className, 'text-xl ml-10 mt-10 mr-10 py-3 px-6 rounded-md bg-tosca block cursor-pointer text-biru')}
-        onClick={toggleDropdown}>
+        className={clsx(
+          className,
+          "text-xl ml-10 mt-10 mr-10 py-3 px-6 rounded-md bg-tosca block cursor-pointer text-biru"
+        )}
+        onClick={toggleDropdown}
+      >
         Kelas {kelas}
       </a>
       {isDropdownOpen && dropdownContent}

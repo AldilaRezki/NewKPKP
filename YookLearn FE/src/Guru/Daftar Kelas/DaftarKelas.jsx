@@ -1,13 +1,15 @@
-import Header from '../Header';
-import BoxDaftarKelas from './BoxDaftarKelas';
-import BoxKelas from './BoxKelas';
+import Header from "../Header";
+import BoxDaftarKelas from "./BoxDaftarKelas";
+import BoxKelas from "./BoxKelas";
 
 function DaftarKelas() {
   return (
     <div>
       <Header></Header>
 
-      <h1 className='text-biru mt-10 ml-10 text-xl font-semibold '>Daftar Kelas</h1>
+      <h1 className="text-biru mt-10 ml-10 text-xl font-semibold ">
+        Daftar Kelas
+      </h1>
 
       {/* <BoxDaftarKelas kelas='X'></BoxDaftarKelas> */}
       {/* <BoxKelas namaKelas='X IPA 1'></BoxKelas>
@@ -15,9 +17,22 @@ function DaftarKelas() {
       {/* <BoxDaftarKelas kelas='XI'></BoxDaftarKelas>
       <BoxDaftarKelas kelas='XII'></BoxDaftarKelas> */}
 
-      <BoxDaftarKelas className='mb-5' kelas='X' options={['IPA 1', 'IPA 2']} onClick='/xipa1' />
-      <BoxDaftarKelas className='mb-5' kelas='XI' options={['IPA 1', 'IPA 2', 'IPS 1', 'IPS 2']} />
-      <BoxDaftarKelas className='mb-5' kelas='XII' options={['IPS 1', 'IPS 2']} />
+      <BoxDaftarKelas
+        className="mb-5"
+        kelas="X"
+        options={["IPA 1", "IPA 2"]}
+        onClick="/xipa1"
+      />
+      <BoxDaftarKelas
+        className="mb-5"
+        kelas="XI"
+        options={["IPA 1", "IPA 2", "IPS 1", "IPS 2"]}
+      />
+      <BoxDaftarKelas
+        className="mb-5"
+        kelas="XII"
+        options={["IPS 1", "IPS 2"]}
+      />
     </div>
   );
 }
