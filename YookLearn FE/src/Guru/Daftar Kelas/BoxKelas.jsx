@@ -1,10 +1,17 @@
-import clsx from 'clsx';
+import clsx from "clsx";
 
 function BoxKelas(props) {
   const { className, namaKelas, href } = props;
   return (
     <div>
-      <a {...props} href={href} className={clsx(className, 'text-l mt-10 mr-10 py-3 px-6 rounded-md bg-tosca/40 block cursor-pointer text-biru')}>
+      <a
+        {...props}
+        href={href}
+        className={clsx(
+          className,
+          "text-l mt-10 mr-10 py-3 px-6 rounded-md bg-tosca/40 block cursor-pointer text-biru"
+        )}
+      >
         Kelas {namaKelas}
       </a>
     </div>

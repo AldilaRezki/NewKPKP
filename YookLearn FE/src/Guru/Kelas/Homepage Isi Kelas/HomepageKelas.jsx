@@ -1,6 +1,6 @@
-import Header from '../../Header';
-import HeaderKelas from '../HeaderKelas';
-import BoxDeskripsi from './BoxDeskripsi';
+import Header from "../../Header";
+import HeaderKelas from "../HeaderKelas";
+import BoxDeskripsi from "./BoxDeskripsi";
 
 function KelasJadwalAjar() {
   return (
