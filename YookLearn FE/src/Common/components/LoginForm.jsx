@@ -39,12 +39,12 @@ export default function LoginForm() {
       localStorage.setItem("token", data.token);
       localStorage.setItem("role", data.role);
 
-      if (userRole === "admin") {
-        navigate("/admin");
-      } else if (userRole === "guru") {
-        navigate("/lecture");
-      } else if (userRole === "siswa") {
-        navigate("/student");
+      if (userRole === 'admin') {
+        navigate('/admin/homepage');
+      } else if (userRole === 'guru') {
+        navigate('/guru/homepage');
+      } else if (userRole === 'siswa') {
+        navigate('/siswa/homepage');
       }
     } catch (error) {
       setError(error.message);

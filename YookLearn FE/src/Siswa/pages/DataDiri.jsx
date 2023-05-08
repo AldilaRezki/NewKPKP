@@ -1,9 +1,21 @@
-import React from "react";
-import Header from "../components/Header";
-import Nav from "../components/Nav";
-import { FaRegUser } from "react-icons/fa";
+import React, { useEffect } from 'react';
+import { isAuthenticated } from '../../Common/functions/Auth';
+import { useNavigate } from 'react-router-dom';
+
+import Header from '../components/Header';
+import Nav from '../components/Nav';
+import { FaRegUser } from 'react-icons/fa';
 
 function DataDiri() {
+  const navigate = useNavigate();
+  const login = isAuthenticated('siswa');
+
+  useEffect(() => {
+    if (!login) {
+      navigate('/');
+    }
+  }, [login, navigate]);
+
   return (
     <>
       <div>

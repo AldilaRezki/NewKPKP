@@ -1,13 +1,26 @@
-import React from "react";
-import { useState } from "react";
-import Header from "../components/Header";
-import Nav from "../components/Nav";
-import { BsList } from "react-icons/bs";
-import { FaSearch } from "react-icons/fa";
-import MapelCard from "../components/MapelCard";
+import React, { useEffect } from 'react';
+import { isAuthenticated } from '../../Common/functions/Auth';
+import { useNavigate } from 'react-router-dom';
+
+import { useState } from 'react';
+import Header from '../components/Header';
+import Nav from '../components/Nav';
+import { BsList } from 'react-icons/bs';
+import { FaSearch } from 'react-icons/fa';
+import MapelCard from '../components/MapelCard';
 
 const Mapel = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
+  const login = isAuthenticated('siswa');
+
+  useEffect(() => {
+    if (!login) {
+      navigate('/');
+    }
+  }, [login, navigate]);
+
+
+  const [searchTerm, setSearchTerm] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
