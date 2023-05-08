@@ -25,9 +25,12 @@ function DetailKelas() {
         </div>
       </div>
       <div className="grid grid-cols-4 gap-4 mt-10">
+      <Link to="/daftarsiswa">
+          {" "}
         <div>
           <Fiturkelas icon={<HiUserGroup size={50} />} label="Daftar Siswa" />
         </div>
+        </Link>
         <Link to="/tugas">
           {" "}
           <div>

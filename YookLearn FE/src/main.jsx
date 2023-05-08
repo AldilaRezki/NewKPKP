@@ -33,6 +33,7 @@ import HasilUjianPeserta from "./Guru/Kelas/Ujian Kelas/Hasil Ujian Peserta/Hasi
 import HasilUjianKelas from "./Guru/Kelas/Ujian Kelas/Hasil Ujian Kelas/HasilUjianKelas";
 import DaftarAnggotaKelas from "./Guru/Kelas/Anggota Kelas/DaftarAnggotaKelas";
 import DaftarTugas from "./Guru/Kelas/Tugas Kelas/DaftarTugas";
+import DaftarSiswa from "./Siswa/pages/DaftarSiswa";
 
 const router = createBrowserRouter([
   {
@@ -78,6 +79,11 @@ const router = createBrowserRouter([
   {
     path: "/detailmateri",
     element: <Detailmateri />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path :"/daftarsiswa",
+    element: <DaftarSiswa />,
     errorElement: <ErrorPage />,
   },
 
