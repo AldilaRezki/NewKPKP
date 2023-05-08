@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function UbahPassword() {
-  return (
-    <div>
-        
-    </div>
-  )
+  return <div></div>;
 }
 
-export default UbahPassword
+export default UbahPassword;

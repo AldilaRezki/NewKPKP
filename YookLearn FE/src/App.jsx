@@ -28,14 +28,13 @@ export default App;
 // //         <Route path="student/kelas/mapel" element={<Mapel />} />
 // //         <Route path="student/kelas/mapel/detail" element={<DetailKelas />} />
 
-// //         {/* <Route path="Nurza" element={<Homepage />} /> */}
-        
+//         {/* <Route path="Nurza" element={<Homepage />} /> */}
 
-// //         {/* <Route path="/lecture" element={<LecturePage />} /> */}
-// //         {/* <Route path="/admin" element={<AdminPage />} /> */}
-// //       </Routes>
-// //     </BrowserRouter>
-// //   );
-// // }
+//         {/* <Route path="/lecture" element={<LecturePage />} /> */}
+//         {/* <Route path="/admin" element={<AdminPage />} /> */}
+//       </Routes>
+//     </BrowserRouter>
+//   );
+// }
 
-// // export default App;
+// export default App;

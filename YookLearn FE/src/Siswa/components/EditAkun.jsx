@@ -1,6 +1,6 @@
-import React from 'react';
-import { AiOutlineDatabase, AiFillEdit } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { AiOutlineDatabase, AiFillEdit } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const EditAkun = () => {
   return (

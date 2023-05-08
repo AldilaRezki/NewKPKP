@@ -34,7 +34,6 @@ import HasilUjianPeserta from './Guru/Kelas/Ujian Kelas/Hasil Ujian Peserta/Hasi
 import HasilUjianKelas from './Guru/Kelas/Ujian Kelas/Hasil Ujian Kelas/HasilUjianKelas';
 import DaftarAnggotaKelas from './Guru/Kelas/Anggota Kelas/DaftarAnggotaKelas';
 import DaftarTugas from './Guru/Kelas/Tugas Kelas/DaftarTugas';
-import LoginPage from './Common/pages/LoginPage';
 
 const router = createBrowserRouter([
   {
@@ -90,64 +89,64 @@ const router = createBrowserRouter([
 
   // Guru
   {
-    path: '/homepage',
+    path: "/homepage",
     element: <HomepageUtama />,
   },
   {
-    path: '/daftarkelas',
+    path: "/daftarkelas",
     element: <DaftarKelas />,
   },
   {
-    path: '/xipa1',
+    path: "/xipa1",
     element: <HomepageKelas />,
   },
   {
-    path: '/xipa1/forum',
+    path: "/xipa1/forum",
     element: <DaftarForum />,
   },
   {
-    path: '/xipa1/forum/diskusi-pekan-1',
+    path: "/xipa1/forum/diskusi-pekan-1",
     element: <IsiForum />,
   },
   {
-    path: '/xipa1/daftar-tugas',
+    path: "/xipa1/daftar-tugas",
     element: <DaftarTugas />,
   },
   {
-    path: '/xipa1/ujian',
+    path: "/xipa1/ujian",
     element: <DaftarUjian />,
   },
   {
-    path: '/xipa1/ujian/ujian-pekan-1',
+    path: "/xipa1/ujian/ujian-pekan-1",
     element: <DetailUjian />,
   },
   {
-    path: '/xipa1/ujian/ujian-pekan-1/daftar-soal',
+    path: "/xipa1/ujian/ujian-pekan-1/daftar-soal",
     element: <DaftarSoalUjian />,
   },
   {
-    path: '/xipa1/ujian/ujian-pekan-1/hasil-ujian-peserta',
+    path: "/xipa1/ujian/ujian-pekan-1/hasil-ujian-peserta",
     element: <HasilUjianPeserta />,
   },
   {
-    path: '/xipa1/ujian/ujian-pekan-1/hasil-ujian-kelas',
+    path: "/xipa1/ujian/ujian-pekan-1/hasil-ujian-kelas",
     element: <HasilUjianKelas />,
   },
   {
-    path: '/xipa1/daftar-anggota-kelas',
+    path: "/xipa1/daftar-anggota-kelas",
     element: <DaftarAnggotaKelas />,
   },
   {
-    path: '/profil',
+    path: "/profil",
     element: <Profil />,
   },
   {
-    path: '/profil/ubah-password',
+    path: "/profil/ubah-password",
     element: <UbahPassword />,
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>
