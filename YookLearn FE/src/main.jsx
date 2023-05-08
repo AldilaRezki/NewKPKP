@@ -22,6 +22,7 @@ import Materi from './Siswa/pages/Materi';
 import Detailmateri from './Siswa/pages/Detailmateri';
 import StudentPage from './Siswa/pages/StudentPage';
 
+
 import HomepageUtama from './Guru/Homepage Utama/HomepageUtama';
 import DaftarKelas from './Guru/Daftar Kelas/DaftarKelas';
 import HomepageKelas from './Guru/Kelas/Homepage Isi Kelas/HomepageKelas';
@@ -36,6 +37,7 @@ import HasilUjianPeserta from './Guru/Kelas/Ujian Kelas/Hasil Ujian Peserta/Hasi
 import HasilUjianKelas from './Guru/Kelas/Ujian Kelas/Hasil Ujian Kelas/HasilUjianKelas';
 import DaftarAnggotaKelas from './Guru/Kelas/Anggota Kelas/DaftarAnggotaKelas';
 import DaftarTugas from './Guru/Kelas/Tugas Kelas/DaftarTugas';
+
 
 const router = createBrowserRouter([
   {
@@ -86,6 +88,11 @@ const router = createBrowserRouter([
   {
     path: '/siswa/kelas/mapel/detailkelas/detailmateri',
     element: <Detailmateri />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path :"/daftarsiswa",
+    element: <DaftarSiswa />,
     errorElement: <ErrorPage />,
   },
 
