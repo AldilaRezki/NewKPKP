@@ -1,22 +1,21 @@
-import React, { useEffect } from 'react';
-import { isAuthenticated } from '../../Common/functions/Auth';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { isAuthenticated } from "../../Common/functions/Auth";
+import { useNavigate } from "react-router-dom";
 
-import Header from '../components/Header';
-import Nav from '../components/Nav';
-import Editakun from '../components/EditAkun';
-import Listtugas from '../components/ListTugas';
+import Header from "../components/Header";
+import Nav from "../components/Nav";
+import Editakun from "../components/EditAkun";
+import Listtugas from "../components/ListTugas";
 
-import { CgProfile } from 'react-icons/cg';
+import { CgProfile } from "react-icons/cg";
 
 function StudentPage() {
-
   const navigate = useNavigate();
-  const login = isAuthenticated('siswa');
+  const login = isAuthenticated("siswa");
 
   useEffect(() => {
     if (!login) {
-      navigate('/');
+      navigate("/");
     }
   }, [login, navigate]);
 

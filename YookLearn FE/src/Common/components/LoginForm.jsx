@@ -39,12 +39,12 @@ export default function LoginForm() {
       localStorage.setItem("token", data.token);
       localStorage.setItem("role", data.role);
 
-      if (userRole === 'admin') {
-        navigate('/admin/homepage');
-      } else if (userRole === 'guru') {
-        navigate('/guru/homepage');
-      } else if (userRole === 'siswa') {
-        navigate('/siswa/homepage');
+      if (userRole === "admin") {
+        navigate("/admin/homepage");
+      } else if (userRole === "guru") {
+        navigate("/guru/homepage");
+      } else if (userRole === "siswa") {
+        navigate("/siswa/homepage");
       }
     } catch (error) {
       setError(error.message);
@@ -84,6 +84,7 @@ export default function LoginForm() {
           Forgot Password?
         </a>
       </div>
+
       <button
         className="border-2 border-[#1A1F5A] rounded-full px-12 py-2 inline-block font-semibold hover:bg-white hover:text-gray-300"
         onClick={handleLogin}

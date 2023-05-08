@@ -3,8 +3,8 @@ import { AiOutlineUser } from "react-icons/ai";
 
 const Nav = () => {
   let Links = [
-    { name: 'Homepage', link: '/siswa/homepage' },
-    { name: 'Kelas', link: '/siswa/kelas' },
+    { name: "Homepage", link: "/siswa/homepage" },
+    { name: "Kelas", link: "/siswa/kelas" },
   ];
   return (
     <div className="shadow-md w-full h-10 bg-[#EEF4FA] ">
