@@ -9,6 +9,8 @@ import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
+import LoginPage from './Common/pages/LoginPage';
+
 import ErrorPage from './Siswa/pages/Errorpage';
 import Ubahpass from './Siswa/pages/Ubahpass';
 import Datadiri from './Siswa/pages/DataDiri';

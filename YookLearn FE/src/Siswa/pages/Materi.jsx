@@ -28,7 +28,7 @@ function Materi() {
       <div className="flex flex-col justify-between">
         <div className="mt-16 ml-10 w-1/2 flex">
           <BsFillJournalBookmarkFill className="text-2xl text-[#1A1F5A]" />
-          <Link to="/detailkelas">
+          <Link to="/siswa/kelas/mapel/detailkelas">
             {" "}
             <h1 className="text-xl ml-5 text-slate-400 font-bold">
               Bahasa Indonesia
@@ -39,7 +39,7 @@ function Materi() {
         </div>
       </div>
       <div className="flex flex-col">
-        <Link to="/detailmateri">
+        <Link to="/siswa/kelas/mapel/detailkelas/detailmateri">
           {" "}
           <MateriTitle
             pertemuan="Pertemuan 1"
