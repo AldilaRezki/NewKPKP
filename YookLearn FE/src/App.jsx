@@ -1,14 +1,12 @@
-import { BrowserRouter, Routes } from 'react-router-dom';
-import router from './routes.jsx';
-import './index.css';
+import { BrowserRouter, Routes } from "react-router-dom";
+import router from "./routes.jsx";
+import "./index.css";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Routes>
-          {router}
-        </Routes>
+        <Routes>{router}</Routes>
       </BrowserRouter>
     </div>
   );
@@ -29,7 +27,6 @@ export default App;
 // //         <Route path="student/kelas/mapel/detail" element={<DetailKelas />} />
 
 // //         {/* <Route path="Nurza" element={<Homepage />} /> */}
-        
 
 // //         {/* <Route path="/lecture" element={<LecturePage />} /> */}
 // //         {/* <Route path="/admin" element={<AdminPage />} /> */}

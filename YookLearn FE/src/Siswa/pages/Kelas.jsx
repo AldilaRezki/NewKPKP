@@ -1,24 +1,24 @@
-import React, { useEffect } from 'react';
-import { isAuthenticated } from '../../Common/functions/Auth';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { isAuthenticated } from "../../Common/functions/Auth";
+import { useNavigate } from "react-router-dom";
 
-import Header from '../components/Header';
-import Nav from '../components/Nav';
-import ListTugas from '../components/ListTugas';
-import EditAkun from '../components/EditAkun';
-import { MdOutlineDriveFileMove } from 'react-icons/md';
-import { SiGoogleclassroom } from 'react-icons/si';
-import { BiUserCircle } from 'react-icons/bi';
-import { MdGroups } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import Header from "../components/Header";
+import Nav from "../components/Nav";
+import ListTugas from "../components/ListTugas";
+import EditAkun from "../components/EditAkun";
+import { MdOutlineDriveFileMove } from "react-icons/md";
+import { SiGoogleclassroom } from "react-icons/si";
+import { BiUserCircle } from "react-icons/bi";
+import { MdGroups } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 function Kelas() {
   const navigate = useNavigate();
-  const login = isAuthenticated('siswa');
+  const login = isAuthenticated("siswa");
 
   useEffect(() => {
     if (!login) {
-      navigate('/');
+      navigate("/");
     }
   }, [login, navigate]);
 
@@ -35,11 +35,11 @@ function Kelas() {
             SEMESTER AWAL 2022/2023
           </h1>
         </div>
-        <Link to='mapel'>
-          {' '}
-          <div className='mt-2 ml-10 w-[559px] h-[49px] bg-[#EEF4FA] flex items-center'>
-            <SiGoogleclassroom className='text-2xl text-[#1A1F5A] ml-1' />
-            <h1 className='font-bold ml-4 text-[#1A1F5A]'>XII IPA 1</h1>
+        <Link to="mapel">
+          {" "}
+          <div className="mt-2 ml-10 w-[559px] h-[49px] bg-[#EEF4FA] flex items-center">
+            <SiGoogleclassroom className="text-2xl text-[#1A1F5A] ml-1" />
+            <h1 className="font-bold ml-4 text-[#1A1F5A]">XII IPA 1</h1>
           </div>
         </Link>
         <div className="mt-2 ml-10 w-[559px] h-[66px] border border-[#1A1F5A] flex items-center shadow-md">
