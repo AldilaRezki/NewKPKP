@@ -12,18 +12,18 @@ function DetailTugas() {
         <Header />
         <Nav />
       </div>
-      
-        <div className="mt-16 ml-10 w-1/2 flex">
-          <BsFillJournalBookmarkFill className="text-2xl text-[#1A1F5A]" />
-          <Link to="/siswa/kelas/mapel/detailkelas">
-            {" "}
-            <h1 className="text-xl ml-5 text-slate-400 font-bold">
-              Bahasa Indonesia
-            </h1>{" "}
-          </Link>
-          <h1 className="text-xl ml-5 text-slate-400 font-bold"> > </h1>
-          <h1 className="text-xl ml-5 text-slate-400 font-bold">Tugas</h1>
-        </div>
+
+      <div className="mt-16 ml-10 w-1/2 flex">
+        <BsFillJournalBookmarkFill className="text-2xl text-[#1A1F5A]" />
+        <Link to="/siswa/kelas/mapel/detailkelas">
+          {" "}
+          <h1 className="text-xl ml-5 text-slate-400 font-bold">
+            Bahasa Indonesia
+          </h1>{" "}
+        </Link>
+        <h1 className="text-xl ml-5 text-slate-400 font-bold"> > </h1>
+        <h1 className="text-xl ml-5 text-slate-400 font-bold">Tugas</h1>
+      </div>
       <div>
         <DetailTgsCard />
       </div>

@@ -61,12 +61,15 @@ function DetailKelas() {
             />
           </div>
         </Link>
-        <div>
-          <Fiturkelas
-            icon={<RiFilePaperLine size={50} color="#1A1F5A" />}
-            label="Ujian"
-          />
-        </div>
+        <Link to="/siswa/kelas/mapel/ujian">
+          {" "}
+          <div>
+            <Fiturkelas
+              icon={<RiFilePaperLine size={50} color="#1A1F5A" />}
+              label="Ujian"
+            />
+          </div>
+        </Link>
       </div>
     </>
   );
