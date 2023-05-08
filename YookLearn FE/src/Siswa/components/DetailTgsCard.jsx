@@ -15,7 +15,9 @@ function DetailTgsCard() {
         <hr className="border-t border-[#1A1F5A] w-[798px] ml-[103px] mt-4"></hr>
         <div className=" ml-[103px] mt-2">
           <h1 className="text-[#1A1F5A] font-bold">Detail :</h1>
-          <p className="text-[#1A1F5A] mt-2">Buatlah makalah tentang Lorem Ipsum</p>
+          <p className="text-[#1A1F5A] mt-2">
+            Buatlah makalah tentang Lorem Ipsum
+          </p>
           <p className="text-[#1A1F5A] w-[770px] mt-3">
             Dikumpul hanya melalui LMS dan paling lambat tanggal 19 Maret 2023,
             batas akhir upload closed pukul 14.00 WITA. selamat bekerja.
@@ -24,10 +26,10 @@ function DetailTgsCard() {
         <hr className="border-t border-[#1A1F5A] w-[798px] ml-[103px] mt-6"></hr>
       </div>
       <div className="flex justify-center mt-6">
-    <button className="bg-[#1A1F5A] text-white py-5 px-10 rounded-md hover:bg-[#303371]">
-      + Upload Tugas
-    </button>
-  </div>
+        <button className="bg-[#1A1F5A] text-white py-5 px-10 rounded-md hover:bg-[#303371]">
+          + Upload Tugas
+        </button>
+      </div>
     </>
   );
 }

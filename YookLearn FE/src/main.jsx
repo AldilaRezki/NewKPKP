@@ -38,6 +38,8 @@ import HasilUjianKelas from "./Guru/Kelas/Ujian Kelas/Hasil Ujian Kelas/HasilUji
 import DaftarAnggotaKelas from "./Guru/Kelas/Anggota Kelas/DaftarAnggotaKelas";
 import DaftarTugas from "./Guru/Kelas/Tugas Kelas/DaftarTugas";
 import DetailTugas from "./Siswa/pages/DetailTugas";
+import Ujian from "./Siswa/pages/Ujian";
+import DetailUjianSiswa from "./Siswa/pages/DetailUjianSiswa";
 
 const router = createBrowserRouter([
   {
@@ -98,6 +100,16 @@ const router = createBrowserRouter([
   {
     path: "/siswa/kelas/mapel/tugas/detailtugas",
     element: <DetailTugas />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/siswa/kelas/mapel/ujian",
+    element: <Ujian />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/siswa/kelas/mapel/ujian/detailujian",
+    element: <DetailUjianSiswa />,
     errorElement: <ErrorPage />,
   },
 
