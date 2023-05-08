@@ -1,44 +1,38 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom/client';
-// import App from './App';
-// import './index.css';
-
-// import App from './App'; 
 import React from 'react';
 import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import '../index.css';
 
-import ErrorPage from './Siswa/pages/Errorpage';
-import Ubahpass from './Siswa/pages/Ubahpass';
-import Datadiri from './Siswa/pages/DataDiri';
-import Kelas from './Siswa/pages/Kelas';
-import Mapel from './Siswa/pages/Mapel';
-import DetailKelas from './Siswa/pages/DetailKelas';
-import Tugas from './Siswa/pages/Tugas';
-import Materi from './Siswa/pages/Materi';
-import Detailmateri from './Siswa/pages/Detailmateri';
-import StudentPage from './Siswa/pages/StudentPage';
+import ErrorPage from '../Siswa/pages/Errorpage';
+import Ubahpass from '../Siswa/pages/Ubahpass';
+import Datadiri from '../Siswa/pages/DataDiri';
+import Kelas from '../Siswa/pages/Kelas';
+import Mapel from '../Siswa/pages/Mapel';
+import DetailKelas from '../Siswa/pages/DetailKelas';
+import Tugas from '../Siswa/pages/Tugas';
+import Materi from '../Siswa/pages/Materi';
+import Detailmateri from '../Siswa/pages/Detailmateri';
+import StudentPage from '../Siswa/pages/StudentPage';
 
-import HomepageUtama from './Guru/Homepage Utama/HomepageUtama';
-import DaftarKelas from './Guru/Daftar Kelas/DaftarKelas';
-import HomepageKelas from './Guru/Kelas/Homepage Isi Kelas/HomepageKelas';
-import DaftarForum from './Guru/Kelas/Forum Kelas/DaftarForum';
-import IsiForum from './Guru/Kelas/Forum Kelas/IsiForum';
-import Profil from './Guru/Profil/Profil';
-import UbahPassword from './Guru/Profil/UbahPassword';
-import DaftarUjian from './Guru/Kelas/Ujian Kelas/DaftarUjian';
-import DetailUjian from './Guru/Kelas/Ujian Kelas/DetailUjian';
-import DaftarSoalUjian from './Guru/Kelas/Ujian Kelas/Daftar Soal Ujian Kelas/DaftarSoalUjian';
-import HasilUjianPeserta from './Guru/Kelas/Ujian Kelas/Hasil Ujian Peserta/HasilUjianPeserta';
-import HasilUjianKelas from './Guru/Kelas/Ujian Kelas/Hasil Ujian Kelas/HasilUjianKelas';
-import DaftarAnggotaKelas from './Guru/Kelas/Anggota Kelas/DaftarAnggotaKelas';
-import DaftarTugas from './Guru/Kelas/Tugas Kelas/DaftarTugas';
-import LoginPage from './Common/pages/LoginPage';
+import HomepageUtama from '../Guru/Homepage Utama/HomepageUtama';
+import DaftarKelas from '../Guru/Daftar Kelas/DaftarKelas';
+import HomepageKelas from '../Guru/Kelas/Homepage Isi Kelas/HomepageKelas';
+import DaftarForum from '../Guru/Kelas/Forum Kelas/DaftarForum';
+import IsiForum from '../Guru/Kelas/Forum Kelas/IsiForum';
+import Profil from '../Guru/Profil/Profil';
+import UbahPassword from '../Guru/Profil/UbahPassword';
+import DaftarUjian from '../Guru/Kelas/Ujian Kelas/DaftarUjian';
+import DetailUjian from '../Guru/Kelas/Ujian Kelas/DetailUjian';
+import DaftarSoalUjian from '../Guru/Kelas/Ujian Kelas/Daftar Soal Ujian Kelas/DaftarSoalUjian';
+import HasilUjianPeserta from '../Guru/Kelas/Ujian Kelas/Hasil Ujian Peserta/HasilUjianPeserta';
+import HasilUjianKelas from '../Guru/Kelas/Ujian Kelas/Hasil Ujian Kelas/HasilUjianKelas';
+import DaftarAnggotaKelas from '../Guru/Kelas/Anggota Kelas/DaftarAnggotaKelas';
+import DaftarTugas from '../Guru/Kelas/Tugas Kelas/DaftarTugas';
+import LoginPage from '../Common/pages/LoginPage';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/login',
     element: <LoginPage />,
     errorElement: <ErrorPage />,
   },
@@ -147,15 +141,7 @@ const router = createBrowserRouter([
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
-);
-
-
-// ReactDOM.createRoot(document.getElementById('root')).render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>
-// );
+export default function Page()
+{
+  <RouterProvider router={router} />
+}

@@ -41,11 +41,11 @@ export default function LoginForm() {
       localStorage.setItem('role', data.role);
 
       if (userRole === 'admin') {
-        navigate('/admin');
+        navigate('/admin/homepage');
       } else if (userRole === 'guru') {
-        navigate('/lecture');
+        navigate('/guru/homepage');
       } else if (userRole === 'siswa') {
-        navigate('/student');
+        navigate('/siswa/homepage');
       }
 
     } catch (error) {

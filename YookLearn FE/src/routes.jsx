@@ -1,12 +1,5 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom/client';
-// import App from './App';
-// import './index.css';
-
-// import App from './App'; 
 import React from 'react';
 import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
-import ReactDOM from 'react-dom/client';
 import './index.css';
 
 import ErrorPage from './Siswa/pages/Errorpage';
@@ -38,7 +31,7 @@ import LoginPage from './Common/pages/LoginPage';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/login',
     element: <LoginPage />,
     errorElement: <ErrorPage />,
   },
@@ -147,15 +140,4 @@ const router = createBrowserRouter([
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
-);
-
-
-// ReactDOM.createRoot(document.getElementById('root')).render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>
-// );
+export default router;

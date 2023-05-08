@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { isAuthenticated } from '../../Common/functions/Auth';
+import { useNavigate } from 'react-router-dom';
+
 import { BsFillJournalBookmarkFill } from 'react-icons/bs';
 import { MdDownloadForOffline } from 'react-icons/md';
 import Header from '../components/Header';
@@ -7,6 +10,16 @@ import MateriTitle from '../components/MateriTitle';
 import { Link } from 'react-router-dom';
 
 function Detailmateri() {
+  const navigate = useNavigate();
+  const login = isAuthenticated('siswa');
+
+  useEffect(() => {
+    if (!login) {
+      navigate('/');
+    }
+  }, [login, navigate]);
+
+
   return (
     <>
       <div>
