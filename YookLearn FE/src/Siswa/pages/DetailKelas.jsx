@@ -1,15 +1,27 @@
-import React from "react";
-import Header from "../components/Header";
-import Nav from "../components/Nav";
-import { BsFillJournalBookmarkFill } from "react-icons/bs";
-import { HiUserGroup } from "react-icons/hi";
-import { MdTask } from "react-icons/md";
-import { IoMdPaper } from "react-icons/io";
-import { RiFilePaperLine } from "react-icons/ri";
-import Fiturkelas from "../components/Fiturkelas";
-import { Link } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { isAuthenticated } from '../../Common/functions/Auth';
+import { useNavigate } from 'react-router-dom';
+
+import Header from '../components/Header';
+import Nav from '../components/Nav';
+import { BsFillJournalBookmarkFill } from 'react-icons/bs';
+import { HiUserGroup } from 'react-icons/hi';
+import { MdTask } from 'react-icons/md';
+import { IoMdPaper } from 'react-icons/io';
+import { RiFilePaperLine } from 'react-icons/ri';
+import Fiturkelas from '../components/Fiturkelas';
+import { Link } from 'react-router-dom';
 
 function DetailKelas() {
+  const navigate = useNavigate();
+  const login = isAuthenticated('siswa');
+
+  useEffect(() => {
+    if (!login) {
+      navigate('/');
+    }
+  }, [login, navigate]);
+
   return (
     <>
       <div>
@@ -28,8 +40,8 @@ function DetailKelas() {
         <div>
           <Fiturkelas icon={<HiUserGroup size={50} />} label="Daftar Siswa" />
         </div>
-        <Link to="/tugas">
-          {" "}
+        <Link to='tugas'>
+          {' '}
           <div>
             <Fiturkelas
               icon={<MdTask size={50} color="#1A1F5A" />}
@@ -37,8 +49,8 @@ function DetailKelas() {
             />
           </div>
         </Link>
-        <Link to="/materi">
-          {" "}
+        <Link to='materi'>
+          {' '}
           <div>
             <Fiturkelas
               icon={<IoMdPaper size={50} color="#1A1F5A" />}
