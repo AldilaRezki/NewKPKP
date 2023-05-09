@@ -37,7 +37,7 @@ function pms() {
               />
             </div>
             <button type="submit" className="bg-[#1A1F5A] text-white px-4 py-2 rounded-lg">
-              <a href="/berhasil/">
+              <a href="/berhasil">
                   Simpan
               </a>
             </button>

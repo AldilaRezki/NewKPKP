@@ -13,7 +13,7 @@ function simpan() {
       <main className='container items-center justify-center flex min-h-screen flex-col'>
           <h1 className='pb-10 text-3xl text-[#1A1F5A]'>Data Berhasil Disimpan!</h1>
           <button type="submit" className="bg-[#1A1F5A] text-white p-4 rounded-lg">
-            <a href="/list/" className='flex'>
+            <a href="/listsiswa" className='flex'>
                 <FontAwesomeIcon icon={faCircleCheck} className=' text-white text-5xl' />
                 <h1 className=' text-xl p-2'>Simpan</h1>
             </a>

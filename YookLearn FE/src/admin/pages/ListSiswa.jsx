@@ -18,7 +18,7 @@ function Daftar() {
       </header>
       <div className="container mx-auto px-4 py-6">
         <div className='flex'>
-          <a href="/">
+          <a href="/adminpage">
             <FontAwesomeIcon icon={faAngleLeft} className='text-[#1A1F5A] text-3xl ml-2 pr-3' />
           </a>
             <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">Daftar Siswa</h1>
@@ -31,13 +31,13 @@ function Daftar() {
               <span className=' ml-2 mr-4 font-bold text-xl text-[#1A1F5A]'>Siswa</span>
             </div>
             <div className='p-4 rounded-t-md'>
-              <a href="/list2/">
+              <a href="/listguru">
               <FontAwesomeIcon icon={faPersonChalkboard} className='text-gray-500 text-2xl' />
               <span className=' ml-2 font-bold text-lg text-gray-500'>Guru</span>
               </a>
             </div>
             <div className='p-4 rounded-t-md'>
-              <a href="/list3/">
+              <a href="/listakun">
               <FontAwesomeIcon icon={faAddressCard} className='text-gray-500 text-2xl' />
               <span className=' ml-2 font-bold text-lg text-gray-500'>Akun</span>
               </a>
@@ -51,7 +51,7 @@ function Daftar() {
               </a>
             </div>
             <div className='bg-gray-200 p-2 rounded-md'>
-              <a href="/ltsiswa/">
+              <a href="/daftarsiswa">
               <FontAwesomeIcon icon={faPlus} className='text-[#1A1F5A] text-3xl ml-2' />
               <span className=' ml-2 mr-4 font-bold text-xl text-[#1A1F5A]'>Tambahkan Siswa</span>
               </a>

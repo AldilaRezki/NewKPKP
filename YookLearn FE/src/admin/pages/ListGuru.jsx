@@ -2,11 +2,11 @@ import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAddressCard, faAngleLeft, faFileImport, faGreaterThan, faLessThan, faMagnifyingGlass, faPen, faPersonChalkboard, faPlus, faTrash, faUserTie } from '@fortawesome/free-solid-svg-icons';
 
-function Daftar() {
+function Daftar2() {
   const students = [
-    { id: 1, name: 'John Doe', nisn: '1234567890', gender: 'L', agama: 'Islam' },
-    { id: 2, name: 'Jane Smith', nisn: '1234567890', gender: 'P', agama: 'Protestan' },
-    { id: 3, name: 'Bob Johnson', nisn: '1234567890', gender: 'L', agama: 'Hindu' },
+    { id: 1, name: 'Susi', nip: '197410052007011006', pangkat: 'Pembina', golongan: 'Golongan II a', mapel: 'Matematika'},
+    { id: 2, name: 'Budi', nip: '198501102016011003', pangkat: 'Penata Muda', golongan: 'Golongan I a', mapel: 'Bahasa Indonesia'},
+    { id: 3, name: 'Ratna', nip: '197907012009011005', pangkat: 'Penata Tingkat Satu', golongan: 'Golongan III a', mapel: 'Bahasa Inggris'},
   ];
 
   return (
@@ -17,27 +17,27 @@ function Daftar() {
         </div>
       </header>
       <div className="container mx-auto px-4 py-6">
-        <div className='flex'>
-          <a href="/">
+      <div className='flex'>
+          <a href="/adminpage">
             <FontAwesomeIcon icon={faAngleLeft} className='text-[#1A1F5A] text-3xl ml-2 pr-3' />
           </a>
-            <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">Daftar Siswa</h1>
+            <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">Daftar Guru</h1>
         </div>
-
+        
         <div className='flex justify-between'>
           <span className='flex items-center'>
-            <div className='bg-gray-200 p-4 rounded-t-md'>
-              <FontAwesomeIcon icon={faUserTie} className='text-[#1A1F5A] text-3xl ml-2' />
-              <span className=' ml-2 mr-4 font-bold text-xl text-[#1A1F5A]'>Siswa</span>
-            </div>
-            <div className='p-4 rounded-t-md'>
-              <a href="/list2/">
-              <FontAwesomeIcon icon={faPersonChalkboard} className='text-gray-500 text-2xl' />
-              <span className=' ml-2 font-bold text-lg text-gray-500'>Guru</span>
+            <div className='p-3 rounded-t-md'>
+              <a href="/listsiswa">
+              <FontAwesomeIcon icon={faUserTie} className='text-gray-500 text-2xl' />
+              <span className=' ml-2 font-bold text-lg text-gray-500'>Siswa</span>
               </a>
             </div>
+            <div className='bg-gray-200 p-4 rounded-t-md'>
+              <FontAwesomeIcon icon={faPersonChalkboard} className='text-[#1A1F5A] text-3xl ml-2' />
+              <span className=' ml-2 mr-4 font-bold text-xl text-[#1A1F5A]'>Guru</span>
+            </div>
             <div className='p-4 rounded-t-md'>
-              <a href="/list3/">
+              <a href="/listakun">
               <FontAwesomeIcon icon={faAddressCard} className='text-gray-500 text-2xl' />
               <span className=' ml-2 font-bold text-lg text-gray-500'>Akun</span>
               </a>
@@ -51,9 +51,9 @@ function Daftar() {
               </a>
             </div>
             <div className='bg-gray-200 p-2 rounded-md'>
-              <a href="/ltsiswa/">
+              <a href="/daftarguru">
               <FontAwesomeIcon icon={faPlus} className='text-[#1A1F5A] text-3xl ml-2' />
-              <span className=' ml-2 mr-4 font-bold text-xl text-[#1A1F5A]'>Tambahkan Siswa</span>
+              <span className=' ml-2 mr-4 font-bold text-xl text-[#1A1F5A]'>Tambahkan Guru</span>
               </a>
             </div>
           </span>
@@ -65,7 +65,7 @@ function Daftar() {
             <input
             type="text"
             className="w-11/12 border rounded-lg px-4 py-2"
-            placeholder="Cari Siswa"
+            placeholder="Cari Guru"
             />
           </div>
           <table className="min-w-full divide-y divide-gray-200">
@@ -81,25 +81,31 @@ function Daftar() {
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  NISN Peserta
+                  NIP
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  L/P
+                  Pangkat
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  Agama
+                  Golongan
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
                   Nama Lengkap
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Mata Pelajaran
                 </th>
                 <th></th>
                 <th></th>
@@ -111,10 +117,11 @@ function Daftar() {
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                     {student.id}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.nisn}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.gender}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.agama}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.nip}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.pangkat}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.golongan}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.name}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.mapel}</td>
                   <td className='pl-2 pr-1'><FontAwesomeIcon icon={faPen} className='text-[#1A1F5A]' /></td>
                   <td className='pr-2'><FontAwesomeIcon icon={faTrash} className='text-[#1A1F5A]' /></td>
                 </tr>
@@ -138,4 +145,4 @@ function Daftar() {
   );
 }
 
-export default Daftar;
+export default Daftar2;
