@@ -1,12 +1,42 @@
-import React from 'react';
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAddressCard, faAngleLeft, faFileImport, faGreaterThan, faLessThan, faMagnifyingGlass, faPen, faPersonChalkboard, faPlus, faTrash, faUserTie } from '@fortawesome/free-solid-svg-icons';
+import {
+  faAddressCard,
+  faAngleLeft,
+  faFileImport,
+  faGreaterThan,
+  faLessThan,
+  faMagnifyingGlass,
+  faPen,
+  faPersonChalkboard,
+  faPlus,
+  faTrash,
+  faUserTie,
+} from "@fortawesome/free-solid-svg-icons";
 
 function Daftar() {
   const students = [
-    { id: 1, name: 'John Doe', nisn: '1234567890', gender: 'L', agama: 'Islam' },
-    { id: 2, name: 'Jane Smith', nisn: '1234567890', gender: 'P', agama: 'Protestan' },
-    { id: 3, name: 'Bob Johnson', nisn: '1234567890', gender: 'L', agama: 'Hindu' },
+    {
+      id: 1,
+      name: "John Doe",
+      nisn: "1234567890",
+      gender: "L",
+      agama: "Islam",
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      nisn: "1234567890",
+      gender: "P",
+      agama: "Protestan",
+    },
+    {
+      id: 3,
+      name: "Bob Johnson",
+      nisn: "1234567890",
+      gender: "L",
+      agama: "Hindu",
+    },
   ];
 
   return (
@@ -17,11 +47,11 @@ function Daftar() {
         </div>
       </header>
       <div className="container mx-auto px-4 py-6">
-        <div className='flex'>
+        <div className="flex">
           <a href="/">
             <FontAwesomeIcon icon={faAngleLeft} className='text-[#1A1F5A] text-3xl ml-2 pr-3' />
           </a>
-            <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">Daftar Siswa</h1>
+            <h1 className="text-2xl font-bold text-blue-950 mb-4">Daftar Siswa</h1>
         </div>
 
         <div className='flex justify-between'>
@@ -30,27 +60,37 @@ function Daftar() {
               <FontAwesomeIcon icon={faUserTie} className='text-[#1A1F5A] text-3xl ml-2' />
               <span className=' ml-2 mr-4 font-bold text-xl text-[#1A1F5A]'>Siswa</span>
             </div>
-            <div className='p-4 rounded-t-md'>
+            <div className="p-4 rounded-t-md">
               <a href="/list2/">
-              <FontAwesomeIcon icon={faPersonChalkboard} className='text-gray-500 text-2xl' />
-              <span className=' ml-2 font-bold text-lg text-gray-500'>Guru</span>
+                <FontAwesomeIcon
+                  icon={faPersonChalkboard}
+                  className="text-gray-500 text-2xl"
+                />
+                <span className=" ml-2 font-bold text-lg text-gray-500">
+                  Guru
+                </span>
               </a>
             </div>
-            <div className='p-4 rounded-t-md'>
+            <div className="p-4 rounded-t-md">
               <a href="/list3/">
-              <FontAwesomeIcon icon={faAddressCard} className='text-gray-500 text-2xl' />
-              <span className=' ml-2 font-bold text-lg text-gray-500'>Akun</span>
+                <FontAwesomeIcon
+                  icon={faAddressCard}
+                  className="text-gray-500 text-2xl"
+                />
+                <span className=" ml-2 font-bold text-lg text-gray-500">
+                  Akun
+                </span>
               </a>
             </div>
           </span>
-          <span className='flex items-center'>
-            <div className='bg-gray-200 p-2 rounded-md m-2'>
+          <span className="flex items-center">
+            <div className="bg-gray-200 p-2 rounded-md m-2">
               <a href="">
               <FontAwesomeIcon icon={faFileImport} className='text-[#1A1F5A] text-3xl ml-2' />
               <span className=' ml-2 mr-4 font-bold text-xl text-[#1A1F5A]'>Import</span>
               </a>
             </div>
-            <div className='bg-gray-200 p-2 rounded-md'>
+            <div className="bg-gray-200 p-2 rounded-md">
               <a href="/ltsiswa/">
               <FontAwesomeIcon icon={faPlus} className='text-[#1A1F5A] text-3xl ml-2' />
               <span className=' ml-2 mr-4 font-bold text-xl text-[#1A1F5A]'>Tambahkan Siswa</span>
@@ -58,14 +98,14 @@ function Daftar() {
             </div>
           </span>
         </div>
-        
+
         <div className="bg-white shadow overflow-hidden rounded-none">
           <div className='p-2 bg-gray-200'>
             <FontAwesomeIcon icon={faMagnifyingGlass} className='text-[#1A1F5A] px-2 pr-4' />
             <input
-            type="text"
-            className="w-11/12 border rounded-lg px-4 py-2"
-            placeholder="Cari Siswa"
+              type="text"
+              className="w-11/12 border rounded-lg px-4 py-2"
+              placeholder="Cari Siswa"
             />
           </div>
           <table className="min-w-full divide-y divide-gray-200">
