@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { isAuthenticated } from '../../Common/functions/Auth';
-import { useNavigate } from 'react-router-dom';
-import Header from '../components/Header';
-import Nav from '../components/Nav';
-import FormUbahPass from '../components/FormUbahPass';
+import React, { useEffect, useState } from "react";
+import { isAuthenticated } from "../../Common/functions/Auth";
+import { useNavigate } from "react-router-dom";
+import Header from "../components/Header";
+import Nav from "../components/Nav";
+import FormUbahPass from "../components/FormUbahPass";
 
 export default function UbahPass() {
   
@@ -16,7 +16,7 @@ export default function UbahPass() {
   
   useEffect(() => {
     if (!login) {
-      navigate('/');
+      navigate("/");
     }
   }, [login, navigate]);
 

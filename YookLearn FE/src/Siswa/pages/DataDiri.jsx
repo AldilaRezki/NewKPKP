@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { isAuthenticated } from '../../Common/functions/Auth';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { isAuthenticated } from "../../Common/functions/Auth";
+import { useNavigate } from "react-router-dom";
 
-import Header from '../components/Header';
-import Nav from '../components/Nav';
-import { FaRegUser } from 'react-icons/fa';
+import Header from "../components/Header";
+import Nav from "../components/Nav";
+import { FaRegUser } from "react-icons/fa";
 
 function DataDiri() {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ function DataDiri() {
 
   useEffect(() => {
     if (!login) {
-      navigate('/');
+      navigate("/");
     }
   }, [login, navigate]);
 

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Header from "../components/Header";
 import Nav from "../components/Nav";
 import { IoMdPaper } from "react-icons/io";
+import { MdTask } from "react-icons/md";
 import { BsFillJournalBookmarkFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
@@ -33,17 +34,28 @@ const Tugas = () => {
       <div>
         <button onClick={toggleDropdown}>
           <div className="flex flex-row items-center mt-[75px] ml-[103px]">
-            <IoMdPaper className="rounded-full bg-[#EEF4FA] text-[#1A1F5A] text-5xl p-2 align-middle"></IoMdPaper>
+            <MdTask className="rounded-full bg-[#EEF4FA] text-[#1A1F5A] text-5xl p-2 align-middle"></MdTask>
             <h1 className="font-bold text-[#1A1F5A] ml-10"> Tugas 1 </h1>
-            <h1 className="text-slate-400 font-bold ml-60">Deadline</h1>
+            <h1 className="text-slate-400 font-bold ml-60">
+              Tenggat: 11 Maret 2023, 23.59
+            </h1>
           </div>
         </button>
-        {isOpen && (
-          <div className=" bg-[#EEF4FA] text-[#1A1F5A] p-2 align-middle mx-[103px]">
-            <p>Detail of tugas goes here</p>
-          </div>
-        )}
+        <Link to="/siswa/kelas/mapel/tugas/detailtugas">
+          {" "}
+          {isOpen && (
+            <div className=" bg-[#EEF4FA] text-[#1A1F5A] p-6 align-middle mx-[103px] shadow-md">
+              <p className="text-slate-400 font-bold ml-5 text-sm">
+                Diposting 10 Maret 2023
+              </p>
+              <h1 className="mt-5 ml-5 text-[#1A1F5A]">
+                Buatlah makalah tentang Lorem Ipsum
+              </h1>
+            </div>
+          )}
+        </Link>
       </div>
+      
     </>
   );
 };

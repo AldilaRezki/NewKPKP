@@ -1,14 +1,15 @@
-import React, { useState } from "react";
-
+import React, { useState } from 'react';
+  
 function tsiswa() {
-  const [nama, setNama] = useState("");
-  const [nisn, setNISN] = useState("");
-  const [jeniskelamin, setJenisKelamin] = useState("");
-  const [agama, setAgama] = useState("");
-  const [password, setPassword] = useState("");
+  const [nama, setNama] = useState('');
+  const [nisn, setNISN] = useState('');
+  const [jeniskelamin, setJenisKelamin] = useState('');
+  const [agama, setAgama] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    
   };
 
   return (
@@ -26,15 +27,9 @@ function tsiswa() {
             <div className='border-l-4 border-gray-500 text-gray-500 pl-4 my-4'>Pilihan Kelas</div>
             <div className='border-l-4 border-gray-500 text-gray-500 pl-4 my-4'>Pendaftaran Akun Selesai</div>
           </div>
-          <form
-            onSubmit={handleSubmit}
-            className="bg-white rounded-lg shadow-md p-6 w-3/5"
-          >
+          <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-6 w-3/5">
             <div className="mb-4">
-              <label
-                htmlFor="nama"
-                className="block text-gray-700 font-bold mb-2"
-              >
+              <label htmlFor="nama" className="block text-gray-700 font-bold mb-2">
                 Nama Lengkap
               </label>
               <input
@@ -47,10 +42,7 @@ function tsiswa() {
               />
             </div>
             <div className="mb-4">
-              <label
-                htmlFor="nisn"
-                className="block text-gray-700 font-bold mb-2"
-              >
+              <label htmlFor="nisn" className="block text-gray-700 font-bold mb-2">
                 NISN
               </label>
               <input
@@ -63,10 +55,7 @@ function tsiswa() {
               />
             </div>
             <div className="mb-4">
-              <label
-                htmlFor="jeniskelamin"
-                className="block text-gray-700 font-bold mb-2"
-              >
+              <label htmlFor="jeniskelamin" className="block text-gray-700 font-bold mb-2">
                 Jenis Kelamin
               </label>
               <input
@@ -79,10 +68,7 @@ function tsiswa() {
               />
             </div>
             <div className="mb-4">
-              <label
-                htmlFor="agama"
-                className="block text-gray-700 font-bold mb-2"
-              >
+              <label htmlFor="agama" className="block text-gray-700 font-bold mb-2">
                 Agama
               </label>
               <input
@@ -95,10 +81,7 @@ function tsiswa() {
               />
             </div>
             <div className="mb-4">
-              <label
-                htmlFor="password"
-                className="block text-gray-700 font-bold mb-2"
-              >
+              <label htmlFor="password" className="block text-gray-700 font-bold mb-2">
                 Buat Password
               </label>
               <input
@@ -111,7 +94,7 @@ function tsiswa() {
               />
             </div>
             <button type="submit" className="bg-[#1A1F5A] text-white px-4 py-2 rounded-lg">
-              <a href="/pilmapelsiswa/">
+              <a href="/daftarsiswamapel">
                   Berikutnya
               </a>
             </button>
@@ -119,6 +102,8 @@ function tsiswa() {
         </div>
       </main>
     </div>
+
+    
   );
 }
 

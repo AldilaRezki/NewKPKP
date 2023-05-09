@@ -5,7 +5,6 @@ import React, { useEffect, useState } from 'react';
 import { isAuthenticated } from "../functions/Auth";
 
 export default function LoginPage() {
-
   const navigate = useNavigate();
 
   const login = isAuthenticated('siswa');

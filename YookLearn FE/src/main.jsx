@@ -3,89 +3,123 @@
 // import App from './App';
 // import './index.css';
 
-// import App from './App'; 
-import React from 'react';
-import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
-import ReactDOM from 'react-dom/client';
-import './index.css';
+// import App from './App';
+import React from "react";
+import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
+import ReactDOM from "react-dom/client";
+import "./index.css";
 
-import LoginPage from './Common/pages/LoginPage';
+import LoginPage from "./Common/pages/LoginPage";
 
-import ErrorPage from './Siswa/pages/Errorpage';
-import Ubahpass from './Siswa/pages/Ubahpass';
-import Datadiri from './Siswa/pages/DataDiri';
-import Kelas from './Siswa/pages/Kelas';
-import Mapel from './Siswa/pages/Mapel';
-import DetailKelas from './Siswa/pages/DetailKelas';
-import Tugas from './Siswa/pages/Tugas';
-import Materi from './Siswa/pages/Materi';
-import Detailmateri from './Siswa/pages/Detailmateri';
-import StudentPage from './Siswa/pages/StudentPage';
+import ErrorPage from "./Siswa/pages/Errorpage";
+import Ubahpass from "./Siswa/pages/Ubahpass";
+import Datadiri from "./Siswa/pages/DataDiri";
+import Kelas from "./Siswa/pages/Kelas";
+import Mapel from "./Siswa/pages/Mapel";
+import DetailKelas from "./Siswa/pages/DetailKelas";
+import Tugas from "./Siswa/pages/Tugas";
+import Materi from "./Siswa/pages/Materi";
+import Detailmateri from "./Siswa/pages/Detailmateri";
+import StudentPage from "./Siswa/pages/StudentPage";
+import DaftarSiswa from "./Siswa/pages/DaftarSiswa";
 
-import HomepageUtama from './Guru/Homepage Utama/HomepageUtama';
-import DaftarKelas from './Guru/Daftar Kelas/DaftarKelas';
-import HomepageKelas from './Guru/Kelas/Homepage Isi Kelas/HomepageKelas';
-import DaftarForum from './Guru/Kelas/Forum Kelas/DaftarForum';
-import IsiForum from './Guru/Kelas/Forum Kelas/IsiForum';
-import Profil from './Guru/Profil/Profil';
-import UbahPassword from './Guru/Profil/UbahPassword';
-import DaftarUjian from './Guru/Kelas/Ujian Kelas/DaftarUjian';
-import DetailUjian from './Guru/Kelas/Ujian Kelas/DetailUjian';
-import DaftarSoalUjian from './Guru/Kelas/Ujian Kelas/Daftar Soal Ujian Kelas/DaftarSoalUjian';
-import HasilUjianPeserta from './Guru/Kelas/Ujian Kelas/Hasil Ujian Peserta/HasilUjianPeserta';
-import HasilUjianKelas from './Guru/Kelas/Ujian Kelas/Hasil Ujian Kelas/HasilUjianKelas';
-import DaftarAnggotaKelas from './Guru/Kelas/Anggota Kelas/DaftarAnggotaKelas';
-import DaftarTugas from './Guru/Kelas/Tugas Kelas/DaftarTugas';
+import HomepageUtama from "./Guru/Homepage Utama/HomepageUtama";
+import DaftarKelas from "./Guru/Daftar Kelas/DaftarKelas";
+import HomepageKelas from "./Guru/Kelas/Homepage Isi Kelas/HomepageKelas";
+import DaftarForum from "./Guru/Kelas/Forum Kelas/DaftarForum";
+import IsiForum from "./Guru/Kelas/Forum Kelas/IsiForum";
+import Profil from "./Guru/Profil/Profil";
+import UbahPassword from "./Guru/Profil/UbahPassword";
+import DaftarUjian from "./Guru/Kelas/Ujian Kelas/DaftarUjian";
+import DetailUjian from "./Guru/Kelas/Ujian Kelas/DetailUjian";
+import DaftarSoalUjian from "./Guru/Kelas/Ujian Kelas/Daftar Soal Ujian Kelas/DaftarSoalUjian";
+import HasilUjianPeserta from "./Guru/Kelas/Ujian Kelas/Hasil Ujian Peserta/HasilUjianPeserta";
+import HasilUjianKelas from "./Guru/Kelas/Ujian Kelas/Hasil Ujian Kelas/HasilUjianKelas";
+import DaftarAnggotaKelas from "./Guru/Kelas/Anggota Kelas/DaftarAnggotaKelas";
+import DaftarTugas from "./Guru/Kelas/Tugas Kelas/DaftarTugas";
+import DetailTugas from "./Siswa/pages/DetailTugas";
+import Ujian from "./Siswa/pages/Ujian";
+import DetailUjianSiswa from "./Siswa/pages/DetailUjianSiswa";
+import AdBerhasil from "./admin/pages/Berhasil"
+import AdAdminHomepage from "./admin/pages/AdminMainPage";
+import AdDaftarAkun from "./admin/pages/DaftarAkun";
+import AdDaftarGuru from "./admin/pages/DaftarGuru";
+import AdDaftarPaketKelas from "./admin/pages/DaftarPaketKelas";
+import AdDaftarSiswa from "./admin/pages/DaftarSiswa";
+import AdDaftarSiswaMapel from "./admin/pages/DaftarSiswaMapel";
+import AdListAkun from "./admin/pages/ListAkun";
+import AdListGuru from "./admin/pages/ListGuru";
+import AdListSiswa from "./admin/pages/ListSiswa";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <LoginPage />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/siswa/homepage',
+    path: "/siswa/homepage",
     element: <StudentPage />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/siswa/ubahpass',
+    path: "/siswa/ubahpass",
     element: <Ubahpass />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/siswa/datadiri',
+    path: "/siswa/datadiri",
     element: <Datadiri />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/siswa/kelas',
+    path: "/siswa/kelas",
     element: <Kelas />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/siswa/kelas/mapel',
+    path: "/siswa/kelas/mapel",
     element: <Mapel />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/siswa/kelas/mapel/detailkelas',
+    path: "/siswa/kelas/mapel/detailkelas",
     element: <DetailKelas />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/siswa/kelas/mapel/detailkelas/tugas',
+    path: "/siswa/kelas/mapel/detailkelas/tugas",
     element: <Tugas />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/siswa/kelas/mapel/detailkelas/materi',
+    path: "/siswa/kelas/mapel/detailkelas/materi",
     element: <Materi />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/siswa/kelas/mapel/detailkelas/detailmateri',
+    path: "/siswa/kelas/mapel/detailkelas/detailmateri",
     element: <Detailmateri />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/siswa/kelas/mapel/daftarsiswa",
+    element: <DaftarSiswa />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/siswa/kelas/mapel/tugas/detailtugas",
+    element: <DetailTugas />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/siswa/kelas/mapel/ujian",
+    element: <Ujian />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/siswa/kelas/mapel/ujian/detailujian",
+    element: <DetailUjianSiswa />,
     errorElement: <ErrorPage />,
   },
 
@@ -146,6 +180,56 @@ const router = createBrowserRouter([
     path: "/profil/ubah-password",
     element: <UbahPassword />,
   },
+  {
+    path: '/berhasil',
+    element: <AdBerhasil />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/adminpage',
+    element: <AdAdminHomepage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/daftarakun',
+    element: <AdDaftarAkun />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/daftarguru',
+    element: <AdDaftarGuru />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/daftarsiswa',
+    element: <AdDaftarSiswa />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/daftarsiswamapel',
+    element: <AdDaftarSiswaMapel />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/listakun',
+    element: <AdListAkun />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/listguru',
+    element: <AdListGuru />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/listsiswa',
+    element: <AdListSiswa />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/daftarpaketkelas',
+    element: <AdDaftarPaketKelas />,
+    errorElement: <ErrorPage />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -153,7 +237,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <RouterProvider router={router} />
   </React.StrictMode>
 );
-
 
 // ReactDOM.createRoot(document.getElementById('root')).render(
 //   <React.StrictMode>
