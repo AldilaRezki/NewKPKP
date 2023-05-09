@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-
+import React, { useState } from 'react';
+  
 function pms() {
-  const [nama, setNama] = useState("");
+  const [nama, setNama] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    
   };
 
   return (
@@ -22,15 +23,9 @@ function pms() {
             <div className='border-l-4 border-[#1A1F5A] pl-4 my-4'>Pilihan Kelas</div>
             <div className='border-l-4 border-gray-500 text-gray-500 pl-4 my-4'>Pendaftaran Akun Selesai</div>
           </div>
-          <form
-            onSubmit={handleSubmit}
-            className="bg-white rounded-lg shadow-md p-6 w-3/5"
-          >
+          <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-6 w-3/5">
             <div className="mb-4">
-              <label
-                htmlFor="nama"
-                className="block text-gray-700 font-bold mb-2"
-              >
+              <label htmlFor="nama" className="block text-gray-700 font-bold mb-2">
                 Pilih Kelas
               </label>
               <input
@@ -42,7 +37,7 @@ function pms() {
               />
             </div>
             <button type="submit" className="bg-[#1A1F5A] text-white px-4 py-2 rounded-lg">
-              <a href="/berhasil/">
+              <a href="/berhasil">
                   Simpan
               </a>
             </button>
@@ -50,6 +45,8 @@ function pms() {
         </div>
       </main>
     </div>
+
+    
   );
 }
 

@@ -40,6 +40,16 @@ import DaftarTugas from "./Guru/Kelas/Tugas Kelas/DaftarTugas";
 import DetailTugas from "./Siswa/pages/DetailTugas";
 import Ujian from "./Siswa/pages/Ujian";
 import DetailUjianSiswa from "./Siswa/pages/DetailUjianSiswa";
+import AdBerhasil from "./admin/pages/Berhasil"
+import AdAdminHomepage from "./admin/pages/AdminMainPage";
+import AdDaftarAkun from "./admin/pages/DaftarAkun";
+import AdDaftarGuru from "./admin/pages/DaftarGuru";
+import AdDaftarPaketKelas from "./admin/pages/DaftarPaketKelas";
+import AdDaftarSiswa from "./admin/pages/DaftarSiswa";
+import AdDaftarSiswaMapel from "./admin/pages/DaftarSiswaMapel";
+import AdListAkun from "./admin/pages/ListAkun";
+import AdListGuru from "./admin/pages/ListGuru";
+import AdListSiswa from "./admin/pages/ListSiswa";
 
 const router = createBrowserRouter([
   {
@@ -169,6 +179,56 @@ const router = createBrowserRouter([
   {
     path: "/profil/ubah-password",
     element: <UbahPassword />,
+  },
+  {
+    path: '/berhasil',
+    element: <AdBerhasil />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/adminpage',
+    element: <AdAdminHomepage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/daftarakun',
+    element: <AdDaftarAkun />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/daftarguru',
+    element: <AdDaftarGuru />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/daftarsiswa',
+    element: <AdDaftarSiswa />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/daftarsiswamapel',
+    element: <AdDaftarSiswaMapel />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/listakun',
+    element: <AdListAkun />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/listguru',
+    element: <AdListGuru />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/listsiswa',
+    element: <AdListSiswa />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/daftarpaketkelas',
+    element: <AdDaftarPaketKelas />,
+    errorElement: <ErrorPage />,
   },
 ]);
 

@@ -1,44 +1,12 @@
-import React from "react";
+import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faAddressBook,
-  faAddressCard,
-  faBookOpen,
-  faFileImport,
-  faGreaterThan,
-  faHome,
-  faLessThan,
-  faMagnifyingGlass,
-  faPen,
-  faPersonChalkboard,
-  faPlus,
-  faTrash,
-  faUserTie,
-} from "@fortawesome/free-solid-svg-icons";
+import { faAddressBook, faAddressCard, faBookOpen, faFileImport, faGreaterThan, faHome, faLessThan, faMagnifyingGlass, faPen, faPersonChalkboard, faPlus, faTrash, faUserTie } from '@fortawesome/free-solid-svg-icons';
 
-function main() {
+function AdminHomepage() {
   const students = [
-    {
-      id: 1,
-      name: "John Doe",
-      nisn: "1234567890",
-      gender: "L",
-      agama: "Islam",
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      nisn: "1234567890",
-      gender: "P",
-      agama: "Protestan",
-    },
-    {
-      id: 3,
-      name: "Bob Johnson",
-      nisn: "1234567890",
-      gender: "L",
-      agama: "Hindu",
-    },
+    { id: 1, name: 'John Doe', nisn: '1234567890', gender: 'L', agama: 'Islam' },
+    { id: 2, name: 'Jane Smith', nisn: '1234567890', gender: 'P', agama: 'Protestan' },
+    { id: 3, name: 'Bob Johnson', nisn: '1234567890', gender: 'L', agama: 'Hindu' },
   ];
 
   return (
@@ -56,24 +24,25 @@ function main() {
               <span className=' mr-4 font-bold text-xl text-[#1A1F5A]'>Home</span>
             </div>
           </span>
-          <span className="flex items-center">
-            <div className="bg-gray-200 p-2 rounded-md m-2">
-              <a href="">
+          <span className='flex items-center'>
+            <div className='bg-gray-200 p-2 rounded-md m-2'>
+              <a href="/daftarpaketkelas">
               <FontAwesomeIcon icon={faBookOpen} className='text-[#1A1F5A] text-3xl ml-2' />
-              <span className=' ml-2 mr-4 font-bold text-xl text-[#1A1F5A]'>Daftar Mata Pelajaran</span>
+              <span className=' ml-2 mr-4 font-bold text-xl text-[#1A1F5A]'>Daftar Paket Kelas</span>
               </a>
             </div>
-            <div className="bg-gray-200 p-2 rounded-md">
-              <a href="/list/">
+            <div className='bg-gray-200 p-2 rounded-md'>
+              <a href="/listsiswa">
               <FontAwesomeIcon icon={faAddressBook} className='text-[#1A1F5A] text-3xl ml-2' />
               <span className=' ml-2 mr-4 font-bold text-xl text-[#1A1F5A]'>Daftar Akun</span>
               </a>
             </div>
           </span>
         </div>
-
+        
         <div className="bg-white shadow overflow-hidden rounded-none">
-          <div className="p-4 bg-gray-200"></div>
+          <div className='p-4 bg-gray-200'>
+          </div>
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-200">
               
@@ -90,4 +59,4 @@ function main() {
   );
 }
 
-export default main;
+export default AdminHomepage;
