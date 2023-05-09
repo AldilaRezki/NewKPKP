@@ -5,7 +5,7 @@ function BoxDaftarUjian() {
   return (
     <a
       className="flex mx-32 justify-between border-[0.3px] my-10 p-8 shadow-md"
-      href="/xipa1/ujian/ujian-pekan-1"
+      href="/guru/xipa1/ujian/ujian-pekan-1"
     >
       <div className="flex gap-x-12">
         <div className="text-biru bg-tosca w-fit h-fit text-4xl p-1 rounded-full">

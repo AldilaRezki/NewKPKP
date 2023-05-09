@@ -10,7 +10,7 @@ function DetailUjian() {
       <Header></Header>
       <HeaderKelas></HeaderKelas>
       <div className="bg-tosca mt-10 mx-10 p-2">
-        <a href="/xipa1/ujian">
+        <a href="/guru/xipa1/ujian">
           <BiArrowBack className="bg-white text-xl"></BiArrowBack>
         </a>
       </div>
@@ -20,7 +20,7 @@ function DetailUjian() {
 
       <a
         className="flex ml-10 mt-10 gap-x-8 border-[0.3px] my-10 py-4 pl-5 shadow-md w-[360px]"
-        href="/xipa1/ujian/ujian-pekan-1/daftar-soal"
+        href="/guru/xipa1/ujian/ujian-pekan-1/daftar-soal"
       >
         <div className="text-biru bg-tosca w-fit h-fit text-3xl p-1 rounded-full">
           <CgGoogleTasks></CgGoogleTasks>
@@ -30,7 +30,7 @@ function DetailUjian() {
 
       <a
         className="flex ml-10 mt-10 gap-x-8 border-[0.3px] my-10 py-4 pl-5 shadow-md w-[360px]"
-        href="/xipa1/ujian/ujian-pekan-1/hasil-ujian-peserta"
+        href="/guru/xipa1/ujian/ujian-pekan-1/hasil-ujian-peserta"
       >
         <div className="text-biru bg-tosca w-fit h-fit text-3xl p-1 rounded-full">
           <CgGoogleTasks></CgGoogleTasks>
@@ -40,7 +40,7 @@ function DetailUjian() {
 
       <a
         className="flex ml-10 mt-10 gap-x-8 border-[0.3px] my-10 py-4 pl-5 shadow-md w-[360px]"
-        href="/xipa1/ujian/ujian-pekan-1/hasil-ujian-kelas"
+        href="/guru/xipa1/ujian/ujian-pekan-1/hasil-ujian-kelas"
       >
         <div className="text-biru bg-tosca w-fit h-fit text-3xl p-1 rounded-full">
           <CgGoogleTasks></CgGoogleTasks>

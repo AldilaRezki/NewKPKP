@@ -10,7 +10,7 @@ function IsiForum() {
       <Header></Header>
       <HeaderKelas></HeaderKelas>
       <div className="bg-tosca mt-10 mx-10 p-2">
-        <a href="/xipa1/forum">
+        <a href="/guru/xipa1/forum">
           <BiArrowBack className="bg-white text-xl"></BiArrowBack>
         </a>
       </div>

@@ -21,7 +21,7 @@ function DaftarKelas() {
         className="mb-5"
         kelas="X"
         options={["IPA 1", "IPA 2"]}
-        onClick="/xipa1"
+        onClick="/guru/xipa1"
       />
       <BoxDaftarKelas
         className="mb-5"
