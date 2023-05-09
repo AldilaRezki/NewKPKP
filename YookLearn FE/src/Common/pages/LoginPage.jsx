@@ -1,9 +1,19 @@
 // src/pages/LoginPage.jsx
 import LoginForm from "../components/LoginForm";
 import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { isAuthenticated } from "../functions/Auth";
 
 export default function LoginPage() {
   const navigate = useNavigate();
+
+  const login = isAuthenticated('siswa');
+
+  useEffect(() => {
+    if (login) {
+      navigate('/siswa/homepage');
+    }
+  }, [login, navigate]);
 
   return (
     <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center min-h-screen py-2">

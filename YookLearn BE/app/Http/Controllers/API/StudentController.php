@@ -8,6 +8,7 @@ use App\Models\Assigment_Comment;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Forum;
 use App\Models\Forum_Comment;
@@ -38,7 +39,8 @@ class StudentController extends Controller
         $user = auth()->user();
 
         $validator = Validator::make($request->all(), [
-            'new_password' => 'required'
+            'new_password' => 'required',
+            'old_password' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -51,6 +53,17 @@ class StudentController extends Controller
 
         $input = $request->all();
 
+        
+        if (!Hash::check($request['old_password'], $user['password']))
+        {
+            $res = [
+                'success' => false,
+                'message' => 'password lama tidak sama dengan yang dimasukkan'
+            ];
+
+            return response()->json($res);
+        }
+        
         $input['new_password'] = bcrypt($input['new_password']);
         $affected = Account::where('id', $user['id'])->update(['password' => $input['new_password']]);
 

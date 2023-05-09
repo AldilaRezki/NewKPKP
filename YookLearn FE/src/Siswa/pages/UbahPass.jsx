@@ -6,18 +6,49 @@ import Nav from "../components/Nav";
 import FormUbahPass from "../components/FormUbahPass";
 
 export default function UbahPass() {
+  
   const navigate = useNavigate();
-  const login = isAuthenticated("siswa");
-
+  const login = isAuthenticated('siswa');
+  const [new_password, setnew_password] = useState("");
+  const [old_password, setold_password] = useState("");
+  const [showFormUbahPass, setShowFormUbahPass] = useState(false);
+  const handleOnClose = () => setShowFormUbahPass(false);
+  
   useEffect(() => {
     if (!login) {
       navigate("/");
     }
   }, [login, navigate]);
 
-  const [showFormUbahPass, setShowFormUbahPass] = useState(false);
+  const handleResetPassword = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch('http://localhost:8000/api/student/editpassword', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ 
+          new_password,
+          old_password,
+        })
+      });
+  
+      const data = await response.json();
+  
+      if (!response.ok) {
+        throw new Error(data.message);
+      }
 
-  const handleOnClose = () => setShowFormUbahPass(false);
+      setShowFormUbahPass(true)
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
   return (
     <>
       <div>
@@ -37,10 +68,12 @@ export default function UbahPass() {
               Kata Sandi Lama
             </label>
             <input
+              // id="name"
               type="password"
               className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-[616px]"
-              id="name"
               placeholder="Masukkan kata sandi lama"
+              value={old_password}
+              onChange={(e) => setold_password(e.target.value)}
             />
           </div>
           <div className="mt-5">
@@ -51,15 +84,17 @@ export default function UbahPass() {
               Kata Sandi Baru
             </label>
             <input
+              // id="name"
               type="password"
               className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-[616px]"
-              id="name"
               placeholder="Masukkan kata sandi baru"
+              value={new_password}
+              onChange={(e) => setnew_password(e.target.value)}
             />
           </div>
 
           <button
-            onClick={() => setShowFormUbahPass(true)}
+            onClick={ handleResetPassword }
             className="bg-[#1A1F5A] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-5"
             type="button"
           >
@@ -69,6 +104,7 @@ export default function UbahPass() {
       </div>
 
       <FormUbahPass onClose={handleOnClose} visible={showFormUbahPass} />
+
     </>
   );
 }
