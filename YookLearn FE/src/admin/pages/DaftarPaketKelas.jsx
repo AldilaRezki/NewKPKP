@@ -1,16 +1,8 @@
 import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAddressCard, faAngleLeft, faFileImport, faGreaterThan, faLessThan, faMagnifyingGlass, faPen, faPersonChalkboard, faPlus, faTrash, faUserTie } from '@fortawesome/free-solid-svg-icons';
+import { faAddressCard, faAngleLeft, faChalkboardTeacher, faFileImport, faGreaterThan, faLessThan, faMagnifyingGlass, faPen, faPersonChalkboard, faPlus, faTrash, faUser, faUserTie } from '@fortawesome/free-solid-svg-icons';
 
 function Daftar3() {
-  const pakets = [
-    { id: 1, name: '11-IPA-1'},
-    { id: 2, name: '11-IPA-2'},
-    { id: 3, name: '11-IPS'},
-    { id: 4, name: '12-IPA-1'},
-    { id: 5, name: '12-IPA-2'},
-    { id: 6, name: '12-IPS'},
-  ];
 
   return (
     <div className="bg-white min-h-screen">
@@ -53,38 +45,96 @@ function Daftar3() {
             placeholder="Cari Paket"
             />
           </div>
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-200">
-              <tr>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  No
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Nama Paket
-                </th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {pakets.map((paket) => (
-                <tr key={paket.id}>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    {paket.id}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-[#1A1F5A] font-bold">{paket.name}</td>
-                  <td className=''><FontAwesomeIcon icon={faPen} className='text-[#1A1F5A]' /></td>
-                  <td className='pr-2'><FontAwesomeIcon icon={faTrash} className='text-[#1A1F5A]' /></td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div>
+              <div className='flex justify-evenly p-10'>
+                <div>
+                  <div className='bg-[#1A1F5A] text-white rounded-t-md font-bold py-3 pl-12'>XI IPA 1
+                  <FontAwesomeIcon icon={faPen} className='text-white pl-14' />
+                  <FontAwesomeIcon icon={faTrash} className='text-white px-4' />
+                  </div>
+                  <div className='text-[#1A1F5A] font-bold py-3 pl-2'>
+                  <FontAwesomeIcon icon={faChalkboardTeacher} className='text-[#1A1F5A] px-4' />
+                  Harper Lee
+                  </div>
+                  <div className='text-[#1A1F5A] font-bold pl-2'>
+                  <FontAwesomeIcon icon={faUser} className='text-[#1A1F5A] px-4' />
+                  30 Siswa
+                  </div>
+                </div>
+                <div>
+                  <div className='bg-[#1A1F5A] text-white rounded-t-md font-bold py-3 pl-12'>XI IPA 2
+                  <FontAwesomeIcon icon={faPen} className='text-white pl-14' />
+                  <FontAwesomeIcon icon={faTrash} className='text-white px-4' />
+                  </div>
+                  <div className='text-[#1A1F5A] font-bold py-3 pl-2'>
+                  <FontAwesomeIcon icon={faChalkboardTeacher} className='text-[#1A1F5A] px-4' />
+                  Harper Lee
+                  </div>
+                  <div className='text-[#1A1F5A] font-bold pl-2'>
+                  <FontAwesomeIcon icon={faUser} className='text-[#1A1F5A] px-4' />
+                  30 Siswa
+                  </div>
+                </div>
+                <div>
+                  <div className='bg-[#1A1F5A] text-white rounded-t-md font-bold py-3 pl-12'>XI IPS
+                  <FontAwesomeIcon icon={faPen} className='text-white pl-14' />
+                  <FontAwesomeIcon icon={faTrash} className='text-white px-4' />
+                  </div>
+                  <div className='text-[#1A1F5A] font-bold py-3 pl-2'>
+                  <FontAwesomeIcon icon={faChalkboardTeacher} className='text-[#1A1F5A] px-4' />
+                  Harper Lee
+                  </div>
+                  <div className='text-[#1A1F5A] font-bold pl-2'>
+                  <FontAwesomeIcon icon={faUser} className='text-[#1A1F5A] px-4' />
+                  30 Siswa
+                  </div>
+                </div>
+              </div>
+              <div className='flex justify-evenly p-10'>
+                <div>
+                  <div className='bg-[#1A1F5A] text-white rounded-t-md font-bold py-3 pl-12'>XII IPA 1
+                  <FontAwesomeIcon icon={faPen} className='text-white pl-14' />
+                  <FontAwesomeIcon icon={faTrash} className='text-white px-4' />
+                  </div>
+                  <div className='text-[#1A1F5A] font-bold py-3 pl-2'>
+                  <FontAwesomeIcon icon={faChalkboardTeacher} className='text-[#1A1F5A] px-4' />
+                  Harper Lee
+                  </div>
+                  <div className='text-[#1A1F5A] font-bold pl-2'>
+                  <FontAwesomeIcon icon={faUser} className='text-[#1A1F5A] px-4' />
+                  30 Siswa
+                  </div>
+                </div>
+                <div>
+                  <div className='bg-[#1A1F5A] text-white rounded-t-md font-bold py-3 pl-12'>XII IPA 2
+                  <FontAwesomeIcon icon={faPen} className='text-white pl-14' />
+                  <FontAwesomeIcon icon={faTrash} className='text-white px-4' />
+                  </div>
+                  <div className='text-[#1A1F5A] font-bold py-3 pl-2'>
+                  <FontAwesomeIcon icon={faChalkboardTeacher} className='text-[#1A1F5A] px-4' />
+                  Harper Lee
+                  </div>
+                  <div className='text-[#1A1F5A] font-bold pl-2'>
+                  <FontAwesomeIcon icon={faUser} className='text-[#1A1F5A] px-4' />
+                  30 Siswa
+                  </div>
+                </div>
+                <div>
+                  <div className='bg-[#1A1F5A] text-white rounded-t-md font-bold py-3 pl-12'>XII IPS
+                  <FontAwesomeIcon icon={faPen} className='text-white pl-14' />
+                  <FontAwesomeIcon icon={faTrash} className='text-white px-4' />
+                  </div>
+                  <div className='text-[#1A1F5A] font-bold py-3 pl-2'>
+                  <FontAwesomeIcon icon={faChalkboardTeacher} className='text-[#1A1F5A] px-4' />
+                  Harper Lee
+                  </div>
+                  <div className='text-[#1A1F5A] font-bold pl-2'>
+                  <FontAwesomeIcon icon={faUser} className='text-[#1A1F5A] px-4' />
+                  30 Siswa
+                  </div>
+                </div>
+              </div>
+          </div>
           <div className='flex justify-center py-4'>
             <div className='px-2'><FontAwesomeIcon icon={faLessThan} className='text-[#1A1F5A]' /></div>
             <div className='px-2'>1</div>
