@@ -40,6 +40,16 @@ import DaftarTugas from "./Guru/Kelas/Tugas Kelas/DaftarTugas";
 import DetailTugas from "./Siswa/pages/DetailTugas";
 import Ujian from "./Siswa/pages/Ujian";
 import DetailUjianSiswa from "./Siswa/pages/DetailUjianSiswa";
+import AdBerhasil from "./admin/pages/Berhasil"
+import AdAdminHomepage from "./admin/pages/AdminMainPage";
+import AdDaftarAkun from "./admin/pages/DaftarAkun";
+import AdDaftarGuru from "./admin/pages/DaftarGuru";
+import AdDaftarPaketKelas from "./admin/pages/DaftarPaketKelas";
+import AdDaftarSiswa from "./admin/pages/DaftarSiswa";
+import AdDaftarSiswaMapel from "./admin/pages/DaftarSiswaMapel";
+import AdListAkun from "./admin/pages/ListAkun";
+import AdListGuru from "./admin/pages/ListGuru";
+import AdListSiswa from "./admin/pages/ListSiswa";
 
 const router = createBrowserRouter([
   {
@@ -172,52 +182,52 @@ const router = createBrowserRouter([
   },
   {
     path: '/berhasil',
-    element: <Berhasil />,
+    element: <AdBerhasil />,
     errorElement: <ErrorPage />,
   },
   {
     path: '/adminpage',
-    element: <AdminHomepage />,
+    element: <AdAdminHomepage />,
     errorElement: <ErrorPage />,
   },
   {
     path: '/daftarakun',
-    element: <DaftarAkun />,
+    element: <AdDaftarAkun />,
     errorElement: <ErrorPage />,
   },
   {
     path: '/daftarguru',
-    element: <DaftarGuru />,
+    element: <AdDaftarGuru />,
     errorElement: <ErrorPage />,
   },
   {
     path: '/daftarsiswa',
-    element: <DaftarSiswa />,
+    element: <AdDaftarSiswa />,
     errorElement: <ErrorPage />,
   },
   {
     path: '/daftarsiswamapel',
-    element: <DaftarSiswaMapel />,
+    element: <AdDaftarSiswaMapel />,
     errorElement: <ErrorPage />,
   },
   {
     path: '/listakun',
-    element: <ListAkun />,
+    element: <AdListAkun />,
     errorElement: <ErrorPage />,
   },
   {
     path: '/listguru',
-    element: <ListGuru />,
+    element: <AdListGuru />,
     errorElement: <ErrorPage />,
   },
   {
     path: '/listsiswa',
-    element: <ListSiswa />,
+    element: <AdListSiswa />,
     errorElement: <ErrorPage />,
   },
   {
     path: '/daftarpaketkelas',
-    element: <DaftarPaketKelas />,
+    element: <AdDaftarPaketKelas />,
     errorElement: <ErrorPage />,
   },
 ]);
