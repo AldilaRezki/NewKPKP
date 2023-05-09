@@ -40,6 +40,7 @@ import DaftarTugas from "./Guru/Kelas/Tugas Kelas/DaftarTugas";
 import DetailTugas from "./Siswa/pages/DetailTugas";
 import Ujian from "./Siswa/pages/Ujian";
 import DetailUjianSiswa from "./Siswa/pages/DetailUjianSiswa";
+
 import AdBerhasil from "./admin/pages/Berhasil"
 import AdAdminHomepage from "./admin/pages/AdminMainPage";
 import AdDaftarAkun from "./admin/pages/DaftarAkun";
@@ -180,6 +181,7 @@ const router = createBrowserRouter([
     path: "/profil/ubah-password",
     element: <UbahPassword />,
   },
+  //Admin
   {
     path: '/berhasil',
     element: <AdBerhasil />,
