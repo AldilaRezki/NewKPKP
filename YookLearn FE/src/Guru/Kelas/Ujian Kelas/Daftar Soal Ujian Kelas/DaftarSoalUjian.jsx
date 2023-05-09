@@ -12,7 +12,7 @@ function DaftarSoalUjian() {
       <Header></Header>
       <HeaderKelas></HeaderKelas>
       <div className="bg-tosca mt-10 mx-10 p-2">
-        <a href="/xipa1/ujian/ujian-pekan-1">
+        <a href="/guru/xipa1/ujian/ujian-pekan-1">
           <BiArrowBack className="bg-white text-xl"></BiArrowBack>
         </a>
       </div>

@@ -37,6 +37,12 @@ import HasilUjianPeserta from "./Guru/Kelas/Ujian Kelas/Hasil Ujian Peserta/Hasi
 import HasilUjianKelas from "./Guru/Kelas/Ujian Kelas/Hasil Ujian Kelas/HasilUjianKelas";
 import DaftarAnggotaKelas from "./Guru/Kelas/Anggota Kelas/DaftarAnggotaKelas";
 import DaftarTugas from "./Guru/Kelas/Tugas Kelas/DaftarTugas";
+import DaftarMateri from "./Guru/Kelas/Materi Kelas/DaftarMateri";
+import TambahMateri from "./Guru/Kelas/Materi Kelas/TambahMateri";
+import TambahTugas from "./Guru/Kelas/Tugas Kelas/TambahTugas";
+import TambahUjian from "./Guru/Kelas/Ujian Kelas/TambahUjian";
+import TambahForum from "./Guru/Kelas/Forum Kelas/TambahForum";
+
 import DetailTugas from "./Siswa/pages/DetailTugas";
 import Ujian from "./Siswa/pages/Ujian";
 import DetailUjianSiswa from "./Siswa/pages/DetailUjianSiswa";
@@ -51,6 +57,8 @@ import AdDaftarSiswaMapel from "./admin/pages/DaftarSiswaMapel";
 import AdListAkun from "./admin/pages/ListAkun";
 import AdListGuru from "./admin/pages/ListGuru";
 import AdListSiswa from "./admin/pages/ListSiswa";
+import DetailTugasGuru from "./Guru/Kelas/Tugas Kelas/DetailTugasGuru";
+
 
 const router = createBrowserRouter([
   {
@@ -126,59 +134,83 @@ const router = createBrowserRouter([
 
   // Guru
   {
-    path: "/homepage",
+    path: "/guru/homepage",
     element: <HomepageUtama />,
   },
   {
-    path: "/daftarkelas",
+    path: "/guru/daftarkelas",
     element: <DaftarKelas />,
   },
   {
-    path: "/xipa1",
+    path: "/guru/xipa1",
     element: <HomepageKelas />,
   },
   {
-    path: "/xipa1/forum",
+    path: '/xipa1/forum/tambah-forum',
+    element: <TambahForum />,
+  },
+  {
+    path: "/guru/xipa1/forum",
     element: <DaftarForum />,
   },
   {
-    path: "/xipa1/forum/diskusi-pekan-1",
+    path: "/guru/xipa1/forum/diskusi-pekan-1",
     element: <IsiForum />,
   },
   {
-    path: "/xipa1/daftar-tugas",
+    path: '/guru/xipa1/tambah-tugas',
+    element: <TambahTugas />,
+  },
+  {
+    path: "/guru/xipa1/daftar-tugas",
     element: <DaftarTugas />,
   },
   {
-    path: "/xipa1/ujian",
+    path: '/guru/xipa1/detail-tugas',
+    element: <DetailTugasGuru />,
+  },
+  {
+    path: "/guru/xipa1/ujian",
     element: <DaftarUjian />,
   },
   {
-    path: "/xipa1/ujian/ujian-pekan-1",
+    path: '/guru/xipa1/ujian/tambah-ujian',
+    element: <TambahUjian />,
+  },
+  {
+    path: "/guru/xipa1/ujian/ujian-pekan-1",
     element: <DetailUjian />,
   },
   {
-    path: "/xipa1/ujian/ujian-pekan-1/daftar-soal",
+    path: "/guru/xipa1/ujian/ujian-pekan-1/daftar-soal",
     element: <DaftarSoalUjian />,
   },
   {
-    path: "/xipa1/ujian/ujian-pekan-1/hasil-ujian-peserta",
+    path: "/guru/xipa1/ujian/ujian-pekan-1/hasil-ujian-peserta",
     element: <HasilUjianPeserta />,
   },
   {
-    path: "/xipa1/ujian/ujian-pekan-1/hasil-ujian-kelas",
+    path: "/guru/xipa1/ujian/ujian-pekan-1/hasil-ujian-kelas",
     element: <HasilUjianKelas />,
   },
   {
-    path: "/xipa1/daftar-anggota-kelas",
+    path: "/guru/xipa1/daftar-materi",
+    element: <DaftarMateri />,
+  },
+  {
+    path: "/guru/xipa1/tambah-materi",
+    element: <TambahMateri />,
+  },
+  {
+    path: "/guru/xipa1/daftar-anggota-kelas",
     element: <DaftarAnggotaKelas />,
   },
   {
-    path: "/profil",
+    path: "/guru/profil",
     element: <Profil />,
   },
   {
-    path: "/profil/ubah-password",
+    path: "/guru/profil/ubah-password",
     element: <UbahPassword />,
   },
   //Admin
