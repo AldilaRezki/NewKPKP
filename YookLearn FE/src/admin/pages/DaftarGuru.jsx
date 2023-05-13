@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Header from "../pages/Header";
   
 function tguru() {
   const [nama, setNama] = useState('');
@@ -15,11 +16,7 @@ function tguru() {
 
   return (
     <div className="bg-white min-h-screen">
-      <header className="bg-[#1A1F5A] text-white py-4">
-        <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-semibold font-mono">YookLearn</h1>
-        </div>
-      </header>
+      <Header />
       <main className="container mx-auto px-4 py-6">
       <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">Daftar Akun Guru</h1>
         <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-6">
@@ -102,7 +99,7 @@ function tguru() {
             />
           </div>
           <button type="submit" className="bg-[#1A1F5A] text-white px-4 py-2 rounded-lg">
-              <a href="/berhasil">
+              <a href="/admin/berhasil">
                   Simpan
               </a>
           </button>
