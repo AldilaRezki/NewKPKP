@@ -1,5 +1,6 @@
 import React from "react";
-import { AiOutlineUser } from "react-icons/ai";
+
+import ButtonSignOut from "./ButtonSignOut";
 
 const Nav = () => {
   let Links = [
@@ -7,7 +8,8 @@ const Nav = () => {
     { name: "Kelas", link: "/siswa/kelas" },
   ];
   return (
-    <div className="shadow-md w-full h-10 bg-[#EEF4FA] ">
+    <div className="shadow-md flex justify-between w-full h-10 bg-[#EEF4FA] ">
+      <div> </div>
       <div className="flex items-center justify-center  ">
         <ul className="flex items-center">
           {Links.map((Link) => (
@@ -22,8 +24,8 @@ const Nav = () => {
           ))}
         </ul>
       </div>
-      <div className="flex justify-end mr-4 text-xl">
-        <AiOutlineUser />
+      <div className="flex justify-end mr-4 mt-1">
+        <ButtonSignOut />
       </div>
     </div>
   );

@@ -1,15 +1,27 @@
-import React from 'react';
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAddressCard, faAngleLeft, faFileImport, faGreaterThan, faLessThan, faMagnifyingGlass, faPen, faPersonChalkboard, faPlus, faTrash, faUserTie } from '@fortawesome/free-solid-svg-icons';
+import {
+  faAddressCard,
+  faAngleLeft,
+  faFileImport,
+  faGreaterThan,
+  faLessThan,
+  faMagnifyingGlass,
+  faPen,
+  faPersonChalkboard,
+  faPlus,
+  faTrash,
+  faUserTie,
+} from "@fortawesome/free-solid-svg-icons";
 
 function Daftar3() {
   const students = [
-    { id: 1, name: 'Harper Lee', status: 'Guru'},
-    { id: 2, name: 'Logan Cole', status: 'Guru'},
-    { id: 3, name: 'Ava Grace', status: 'Murid'},
-    { id: 4, name: 'Lily Grace', status: 'Murid'},
-    { id: 5, name: 'Ethan James', status: 'Admin'},
-    { id: 6, name: 'Olivia Mae', status: 'Admin'},
+    { id: 1, name: "Harper Lee", status: "Guru" },
+    { id: 2, name: "Logan Cole", status: "Guru" },
+    { id: 3, name: "Ava Grace", status: "Murid" },
+    { id: 4, name: "Lily Grace", status: "Murid" },
+    { id: 5, name: "Ethan James", status: "Admin" },
+    { id: 6, name: "Olivia Mae", status: "Admin" },
   ];
 
   return (
@@ -20,55 +32,88 @@ function Daftar3() {
         </div>
       </header>
       <div className="container mx-auto px-4 py-6">
-        <div className='flex'>
+        <div className="flex">
           <a href="/adminpage">
-            <FontAwesomeIcon icon={faAngleLeft} className='text-[#1A1F5A] text-3xl ml-2 pr-3' />
+            <FontAwesomeIcon
+              icon={faAngleLeft}
+              className="text-[#1A1F5A] text-3xl ml-2 pr-3"
+            />
           </a>
-            <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">Daftar Akun</h1>
+          <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">
+            Daftar Akun
+          </h1>
         </div>
-        
-        <div className='flex justify-between'>
-          <span className='flex items-center'>
-            <div className='p-3 rounded-t-md'>
+
+        <div className="flex justify-between">
+          <span className="flex items-center">
+            <div className="p-3 rounded-t-md">
               <a href="/listsiswa">
-              <FontAwesomeIcon icon={faUserTie} className='text-gray-500 text-2xl' />
-              <span className=' ml-2 font-bold text-lg text-gray-500'>Siswa</span>
+                <FontAwesomeIcon
+                  icon={faUserTie}
+                  className="text-gray-500 text-2xl"
+                />
+                <span className=" ml-2 font-bold text-lg text-gray-500">
+                  Siswa
+                </span>
               </a>
             </div>
-            <div className='p-3 rounded-t-md'>
+            <div className="p-3 rounded-t-md">
               <a href="/listguru">
-              <FontAwesomeIcon icon={faPersonChalkboard} className='text-gray-500 text-2xl' />
-              <span className=' ml-2 font-bold text-lg text-gray-500'>Guru</span>
+                <FontAwesomeIcon
+                  icon={faPersonChalkboard}
+                  className="text-gray-500 text-2xl"
+                />
+                <span className=" ml-2 font-bold text-lg text-gray-500">
+                  Guru
+                </span>
               </a>
             </div>
-            <div className='bg-gray-200 p-4 rounded-t-md'>
-              <FontAwesomeIcon icon={faAddressCard} className='text-[#1A1F5A] text-3xl ml-2' />
-              <span className=' ml-2 mr-4 font-bold text-xl text-[#1A1F5A]'>Akun</span>
+            <div className="bg-gray-200 p-4 rounded-t-md">
+              <FontAwesomeIcon
+                icon={faAddressCard}
+                className="text-[#1A1F5A] text-3xl ml-2"
+              />
+              <span className=" ml-2 mr-4 font-bold text-xl text-[#1A1F5A]">
+                Akun
+              </span>
             </div>
           </span>
-          <span className='flex items-center'>
-            <div className='bg-gray-200 p-2 rounded-md m-2'>
+          <span className="flex items-center">
+            <div className="bg-gray-200 p-2 rounded-md m-2">
               <a href="">
-              <FontAwesomeIcon icon={faFileImport} className='text-[#1A1F5A] text-3xl ml-2' />
-              <span className=' ml-2 mr-4 font-bold text-xl text-[#1A1F5A]'>Import</span>
+                <FontAwesomeIcon
+                  icon={faFileImport}
+                  className="text-[#1A1F5A] text-3xl ml-2"
+                />
+                <span className=" ml-2 mr-4 font-bold text-xl text-[#1A1F5A]">
+                  Import
+                </span>
               </a>
             </div>
-            <div className='bg-gray-200 p-2 rounded-md'>
+            <div className="bg-gray-200 p-2 rounded-md">
               <a href="/daftarakun">
-              <FontAwesomeIcon icon={faPlus} className='text-[#1A1F5A] text-3xl ml-2' />
-              <span className=' ml-2 mr-4 font-bold text-xl text-[#1A1F5A]'>Tambahkan Admin</span>
+                <FontAwesomeIcon
+                  icon={faPlus}
+                  className="text-[#1A1F5A] text-3xl ml-2"
+                />
+                <span className=" ml-2 mr-4 font-bold text-xl text-[#1A1F5A]">
+                  Tambahkan Admin
+                </span>
               </a>
             </div>
           </span>
         </div>
-        
+
         <div className="bg-white shadow overflow-hidden rounded-none">
-          <div className='p-2 bg-gray-200'>
-            <FontAwesomeIcon icon={faMagnifyingGlass} className='text-[#1A1F5A] px-2 pr-4' />
+          <div className="p-2 bg-gray-200">
+            <FontAwesomeIcon
+              icon={faMagnifyingGlass}
+              className="text-[#1A1F5A] px-2 pr-4"
+            />
             <input
-            type="text"
-            className="w-11/12 border rounded-lg px-4 py-2"
-            placeholder="Cari Akun"
+              type="text"
+              className="w-11/12 border rounded-lg px-4 py-2"
+              placeholder="Cari Akun"
             />
           </div>
           <table className="min-w-full divide-y divide-gray-200">
@@ -102,24 +147,41 @@ function Daftar3() {
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                     {student.id}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.name}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.status}</td>
-                  <td className='pl-2 pr-1'><FontAwesomeIcon icon={faPen} className='text-[#1A1F5A]' /></td>
-                  <td className='pr-2'><FontAwesomeIcon icon={faTrash} className='text-[#1A1F5A]' /></td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {student.name}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {student.status}
+                  </td>
+                  <td className="pl-2 pr-1">
+                    <FontAwesomeIcon icon={faPen} className="text-[#1A1F5A]" />
+                  </td>
+                  <td className="pr-2">
+                    <FontAwesomeIcon
+                      icon={faTrash}
+                      className="text-[#1A1F5A]"
+                    />
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
-          <div className='flex justify-center py-4'>
-            <div className='px-2'><FontAwesomeIcon icon={faLessThan} className='text-[#1A1F5A]' /></div>
-            <div className='px-2'>1</div>
-            <div className='px-2'>2</div>
-            <div className='px-2'>3</div>
-            <div className='px-2'>...</div>
-            <div className='px-2'>9</div>
-            <div className='px-2'>10</div>
-            <div className='px-2'><FontAwesomeIcon icon={faGreaterThan} className='text-[#1A1F5A]' /></div>
-            
+          <div className="flex justify-center py-4">
+            <div className="px-2">
+              <FontAwesomeIcon icon={faLessThan} className="text-[#1A1F5A]" />
+            </div>
+            <div className="px-2">1</div>
+            <div className="px-2">2</div>
+            <div className="px-2">3</div>
+            <div className="px-2">...</div>
+            <div className="px-2">9</div>
+            <div className="px-2">10</div>
+            <div className="px-2">
+              <FontAwesomeIcon
+                icon={faGreaterThan}
+                className="text-[#1A1F5A]"
+              />
+            </div>
           </div>
         </div>
       </div>

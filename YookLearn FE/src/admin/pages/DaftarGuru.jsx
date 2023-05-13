@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
-  
+import React, { useState } from "react";
+
 function tguru() {
-  const [nama, setNama] = useState('');
-  const [nip, setNIP] = useState('');
-  const [pangkat, setPangkat] = useState('');
-  const [golongan, setGolongan] = useState('');
-  const [mapel, setMapel] = useState('');
-  const [password, setPassword] = useState('');
+  const [nama, setNama] = useState("");
+  const [nip, setNIP] = useState("");
+  const [pangkat, setPangkat] = useState("");
+  const [golongan, setGolongan] = useState("");
+  const [mapel, setMapel] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
   };
 
   return (
@@ -21,10 +20,18 @@ function tguru() {
         </div>
       </header>
       <main className="container mx-auto px-4 py-6">
-      <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">Daftar Akun Guru</h1>
-        <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-6">
+        <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">
+          Daftar Akun Guru
+        </h1>
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white rounded-lg shadow-md p-6"
+        >
           <div className="mb-4">
-            <label htmlFor="nama" className="block text-gray-700 font-bold mb-2">
+            <label
+              htmlFor="nama"
+              className="block text-gray-700 font-bold mb-2"
+            >
               Nama Lengkap
             </label>
             <input
@@ -50,7 +57,10 @@ function tguru() {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="pangkat" className="block text-gray-700 font-bold mb-2">
+            <label
+              htmlFor="pangkat"
+              className="block text-gray-700 font-bold mb-2"
+            >
               Pangkat
             </label>
             <input
@@ -63,7 +73,10 @@ function tguru() {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="golongan" className="block text-gray-700 font-bold mb-2">
+            <label
+              htmlFor="golongan"
+              className="block text-gray-700 font-bold mb-2"
+            >
               Golongan
             </label>
             <input
@@ -76,7 +89,10 @@ function tguru() {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="mapel" className="block text-gray-700 font-bold mb-2">
+            <label
+              htmlFor="mapel"
+              className="block text-gray-700 font-bold mb-2"
+            >
               Mata Pelajaran
             </label>
             <input
@@ -89,7 +105,10 @@ function tguru() {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="password" className="block text-gray-700 font-bold mb-2">
+            <label
+              htmlFor="password"
+              className="block text-gray-700 font-bold mb-2"
+            >
               Buat Password
             </label>
             <input
@@ -101,16 +120,15 @@ function tguru() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <button type="submit" className="bg-[#1A1F5A] text-white px-4 py-2 rounded-lg">
-              <a href="/berhasil">
-                  Simpan
-              </a>
+          <button
+            type="submit"
+            className="bg-[#1A1F5A] text-white px-4 py-2 rounded-lg"
+          >
+            <a href="/berhasil">Simpan</a>
           </button>
         </form>
       </main>
     </div>
-
-    
   );
 }
 

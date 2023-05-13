@@ -47,7 +47,7 @@ import DetailTugas from "./Siswa/pages/DetailTugas";
 import Ujian from "./Siswa/pages/Ujian";
 import DetailUjianSiswa from "./Siswa/pages/DetailUjianSiswa";
 
-import AdBerhasil from "./admin/pages/Berhasil"
+import AdBerhasil from "./admin/pages/Berhasil";
 import AdAdminHomepage from "./admin/pages/AdminMainPage";
 import AdDaftarAkun from "./admin/pages/DaftarAkun";
 import AdDaftarGuru from "./admin/pages/DaftarGuru";
@@ -58,7 +58,6 @@ import AdListAkun from "./admin/pages/ListAkun";
 import AdListGuru from "./admin/pages/ListGuru";
 import AdListSiswa from "./admin/pages/ListSiswa";
 import DetailTugasGuru from "./Guru/Kelas/Tugas Kelas/DetailTugasGuru";
-
 
 const router = createBrowserRouter([
   {
@@ -146,7 +145,7 @@ const router = createBrowserRouter([
     element: <HomepageKelas />,
   },
   {
-    path: '/xipa1/forum/tambah-forum',
+    path: "/xipa1/forum/tambah-forum",
     element: <TambahForum />,
   },
   {
@@ -158,7 +157,7 @@ const router = createBrowserRouter([
     element: <IsiForum />,
   },
   {
-    path: '/guru/xipa1/tambah-tugas',
+    path: "/guru/xipa1/tambah-tugas",
     element: <TambahTugas />,
   },
   {
@@ -166,7 +165,7 @@ const router = createBrowserRouter([
     element: <DaftarTugas />,
   },
   {
-    path: '/guru/xipa1/detail-tugas',
+    path: "/guru/xipa1/detail-tugas",
     element: <DetailTugasGuru />,
   },
   {
@@ -174,7 +173,7 @@ const router = createBrowserRouter([
     element: <DaftarUjian />,
   },
   {
-    path: '/guru/xipa1/ujian/tambah-ujian',
+    path: "/guru/xipa1/ujian/tambah-ujian",
     element: <TambahUjian />,
   },
   {
@@ -215,52 +214,52 @@ const router = createBrowserRouter([
   },
   //Admin
   {
-    path: '/berhasil',
+    path: "/berhasil",
     element: <AdBerhasil />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/adminpage',
+    path: "/adminpage",
     element: <AdAdminHomepage />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/daftarakun',
+    path: "/daftarakun",
     element: <AdDaftarAkun />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/daftarguru',
+    path: "/daftarguru",
     element: <AdDaftarGuru />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/daftarsiswa',
+    path: "/daftarsiswa",
     element: <AdDaftarSiswa />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/daftarsiswamapel',
+    path: "/daftarsiswamapel",
     element: <AdDaftarSiswaMapel />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/listakun',
+    path: "/listakun",
     element: <AdListAkun />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/listguru',
+    path: "/listguru",
     element: <AdListGuru />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/listsiswa',
+    path: "/listsiswa",
     element: <AdListSiswa />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/daftarpaketkelas',
+    path: "/daftarpaketkelas",
     element: <AdDaftarPaketKelas />,
     errorElement: <ErrorPage />,
   },

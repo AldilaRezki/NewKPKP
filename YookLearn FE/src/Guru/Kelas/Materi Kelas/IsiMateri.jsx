@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function IsiMateri() {
-  return (
-    <div>IsiMateri</div>
-  )
+  return <div>IsiMateri</div>;
 }
 
-export default IsiMateri
+export default IsiMateri;

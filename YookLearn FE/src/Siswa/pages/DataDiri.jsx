@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { isAuthenticated } from "../../Common/functions/Auth";
 import { useNavigate } from "react-router-dom";
 
@@ -8,7 +8,7 @@ import { FaRegUser } from "react-icons/fa";
 
 function DataDiri() {
   const navigate = useNavigate();
-  const login = isAuthenticated('siswa');
+  const login = isAuthenticated("siswa");
   const [siswa, setSiswa] = useState(null);
 
   useEffect(() => {
@@ -17,15 +17,17 @@ function DataDiri() {
     }
   }, [login, navigate]);
 
-
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch('http://localhost:8000/api/student/profile', {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
-      });
+      const response = await fetch(
+        "http://localhost:8000/api/student/profile",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
 
       const data = await response.json();
 
@@ -35,7 +37,7 @@ function DataDiri() {
         setSiswa(data.student);
       }
     }
-    
+
     fetchData();
   }, []);
 
