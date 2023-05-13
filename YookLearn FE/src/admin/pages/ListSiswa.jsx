@@ -1,6 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAddressCard, faAngleLeft, faFileImport, faGreaterThan, faLessThan, faMagnifyingGlass, faPen, faPersonChalkboard, faPlus, faTrash, faUserTie } from '@fortawesome/free-solid-svg-icons';
+import Header from './Header';
 
 function Daftar() {
   const students = [
@@ -11,14 +12,10 @@ function Daftar() {
 
   return (
     <div className="bg-white min-h-screen">
-      <header className="bg-[#1A1F5A] text-white py-4">
-        <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-semibold font-mono">YookLearn</h1>
-        </div>
-      </header>
+      <Header/>
       <div className="container mx-auto px-4 py-6">
         <div className='flex'>
-          <a href="/adminpage">
+          <a href="/admin/homepage">
             <FontAwesomeIcon icon={faAngleLeft} className='text-[#1A1F5A] text-3xl ml-2 pr-3' />
           </a>
             <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">Daftar Siswa</h1>
@@ -31,13 +28,13 @@ function Daftar() {
               <span className=' ml-2 mr-4 font-bold text-xl text-[#1A1F5A]'>Siswa</span>
             </div>
             <div className='p-4 rounded-t-md'>
-              <a href="/listguru">
+              <a href="/admin/listguru">
               <FontAwesomeIcon icon={faPersonChalkboard} className='text-gray-500 text-2xl' />
               <span className=' ml-2 font-bold text-lg text-gray-500'>Guru</span>
               </a>
             </div>
             <div className='p-4 rounded-t-md'>
-              <a href="/listakun">
+              <a href="/admin/listakun">
               <FontAwesomeIcon icon={faAddressCard} className='text-gray-500 text-2xl' />
               <span className=' ml-2 font-bold text-lg text-gray-500'>Akun</span>
               </a>
@@ -51,7 +48,7 @@ function Daftar() {
               </a>
             </div>
             <div className='bg-gray-200 p-2 rounded-md'>
-              <a href="/daftarsiswa">
+              <a href="/admin/daftarsiswa">
               <FontAwesomeIcon icon={faPlus} className='text-[#1A1F5A] text-3xl ml-2' />
               <span className=' ml-2 mr-4 font-bold text-xl text-[#1A1F5A]'>Tambahkan Siswa</span>
               </a>
