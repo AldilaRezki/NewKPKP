@@ -13,7 +13,7 @@ function DaftarTugas() {
           Daftar Anggota Kelas
         </h1>
         <a className="tombolTambahForum  flex flex-row justify-between text-white bg-biru w-fit rounded-full py-3"
-        href='/xipa1/tambah-tugas'>
+        href='/guru/xipa1/tambah-tugas'>
           <span className="px-5">+</span>
           <span className="pr-6"> Tambah Forum</span>
         </a>
