@@ -1,13 +1,34 @@
-import React from 'react';
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAddressCard, faAngleLeft, faFileImport, faGreaterThan, faLessThan, faMagnifyingGlass, faPen, faPersonChalkboard, faPlus, faTrash, faUserTie } from '@fortawesome/free-solid-svg-icons';
 import Header from './Header';
 
 function Daftar2() {
   const students = [
-    { id: 1, name: 'Susi', nip: '197410052007011006', pangkat: 'Pembina', golongan: 'Golongan II a', mapel: 'Matematika'},
-    { id: 2, name: 'Budi', nip: '198501102016011003', pangkat: 'Penata Muda', golongan: 'Golongan I a', mapel: 'Bahasa Indonesia'},
-    { id: 3, name: 'Ratna', nip: '197907012009011005', pangkat: 'Penata Tingkat Satu', golongan: 'Golongan III a', mapel: 'Bahasa Inggris'},
+    {
+      id: 1,
+      name: "Susi",
+      nip: "197410052007011006",
+      pangkat: "Pembina",
+      golongan: "Golongan II a",
+      mapel: "Matematika",
+    },
+    {
+      id: 2,
+      name: "Budi",
+      nip: "198501102016011003",
+      pangkat: "Penata Muda",
+      golongan: "Golongan I a",
+      mapel: "Bahasa Indonesia",
+    },
+    {
+      id: 3,
+      name: "Ratna",
+      nip: "197907012009011005",
+      pangkat: "Penata Tingkat Satu",
+      golongan: "Golongan III a",
+      mapel: "Bahasa Inggris",
+    },
   ];
 
   return (
@@ -18,7 +39,9 @@ function Daftar2() {
           <a href="/admin/homepage">
             <FontAwesomeIcon icon={faAngleLeft} className='text-[#1A1F5A] text-3xl ml-2 pr-3' />
           </a>
-            <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">Daftar Guru</h1>
+          <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">
+            Daftar Guru
+          </h1>
         </div>
         
         <div className='flex justify-between'>
@@ -29,9 +52,14 @@ function Daftar2() {
               <span className=' ml-2 font-bold text-lg text-gray-500'>Siswa</span>
               </a>
             </div>
-            <div className='bg-gray-200 p-4 rounded-t-md'>
-              <FontAwesomeIcon icon={faPersonChalkboard} className='text-[#1A1F5A] text-3xl ml-2' />
-              <span className=' ml-2 mr-4 font-bold text-xl text-[#1A1F5A]'>Guru</span>
+            <div className="bg-gray-200 p-4 rounded-t-md">
+              <FontAwesomeIcon
+                icon={faPersonChalkboard}
+                className="text-[#1A1F5A] text-3xl ml-2"
+              />
+              <span className=" ml-2 mr-4 font-bold text-xl text-[#1A1F5A]">
+                Guru
+              </span>
             </div>
             <div className='p-4 rounded-t-md'>
               <a href="/admin/listakun">
@@ -40,11 +68,16 @@ function Daftar2() {
               </a>
             </div>
           </span>
-          <span className='flex items-center'>
-            <div className='bg-gray-200 p-2 rounded-md m-2'>
+          <span className="flex items-center">
+            <div className="bg-gray-200 p-2 rounded-md m-2">
               <a href="">
-              <FontAwesomeIcon icon={faFileImport} className='text-[#1A1F5A] text-3xl ml-2' />
-              <span className=' ml-2 mr-4 font-bold text-xl text-[#1A1F5A]'>Import</span>
+                <FontAwesomeIcon
+                  icon={faFileImport}
+                  className="text-[#1A1F5A] text-3xl ml-2"
+                />
+                <span className=" ml-2 mr-4 font-bold text-xl text-[#1A1F5A]">
+                  Import
+                </span>
               </a>
             </div>
             <div className='bg-gray-200 p-2 rounded-md'>
@@ -55,14 +88,17 @@ function Daftar2() {
             </div>
           </span>
         </div>
-        
+
         <div className="bg-white shadow overflow-hidden rounded-none">
-          <div className='p-2 bg-gray-200'>
-            <FontAwesomeIcon icon={faMagnifyingGlass} className='text-[#1A1F5A] px-2 pr-4' />
+          <div className="p-2 bg-gray-200">
+            <FontAwesomeIcon
+              icon={faMagnifyingGlass}
+              className="text-[#1A1F5A] px-2 pr-4"
+            />
             <input
-            type="text"
-            className="w-11/12 border rounded-lg px-4 py-2"
-            placeholder="Cari Guru"
+              type="text"
+              className="w-11/12 border rounded-lg px-4 py-2"
+              placeholder="Cari Guru"
             />
           </div>
           <table className="min-w-full divide-y divide-gray-200">
@@ -114,27 +150,50 @@ function Daftar2() {
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                     {student.id}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.nip}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.pangkat}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.golongan}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.name}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{student.mapel}</td>
-                  <td className='pl-2 pr-1'><FontAwesomeIcon icon={faPen} className='text-[#1A1F5A]' /></td>
-                  <td className='pr-2'><FontAwesomeIcon icon={faTrash} className='text-[#1A1F5A]' /></td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {student.nip}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {student.pangkat}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {student.golongan}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {student.name}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {student.mapel}
+                  </td>
+                  <td className="pl-2 pr-1">
+                    <FontAwesomeIcon icon={faPen} className="text-[#1A1F5A]" />
+                  </td>
+                  <td className="pr-2">
+                    <FontAwesomeIcon
+                      icon={faTrash}
+                      className="text-[#1A1F5A]"
+                    />
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
-          <div className='flex justify-center py-4'>
-            <div className='px-2'><FontAwesomeIcon icon={faLessThan} className='text-[#1A1F5A]' /></div>
-            <div className='px-2'>1</div>
-            <div className='px-2'>2</div>
-            <div className='px-2'>3</div>
-            <div className='px-2'>...</div>
-            <div className='px-2'>9</div>
-            <div className='px-2'>10</div>
-            <div className='px-2'><FontAwesomeIcon icon={faGreaterThan} className='text-[#1A1F5A]' /></div>
-            
+          <div className="flex justify-center py-4">
+            <div className="px-2">
+              <FontAwesomeIcon icon={faLessThan} className="text-[#1A1F5A]" />
+            </div>
+            <div className="px-2">1</div>
+            <div className="px-2">2</div>
+            <div className="px-2">3</div>
+            <div className="px-2">...</div>
+            <div className="px-2">9</div>
+            <div className="px-2">10</div>
+            <div className="px-2">
+              <FontAwesomeIcon
+                icon={faGreaterThan}
+                className="text-[#1A1F5A]"
+              />
+            </div>
           </div>
         </div>
       </div>

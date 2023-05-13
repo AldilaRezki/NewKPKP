@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Header from "../pages/Header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
-  
+import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+
 function simpan() {
   return (
     <div className=' bg-white max-h-screen'>

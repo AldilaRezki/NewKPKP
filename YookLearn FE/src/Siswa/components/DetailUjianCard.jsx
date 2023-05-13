@@ -26,7 +26,7 @@ function DetailUjianCard() {
       </div>
       <div className="flex justify-center mt-10">
         <button className="bg-[#1A1F5A] text-white py-5 px-10 rounded-md hover:bg-[#303371]">
-         Mulai
+          Mulai
         </button>
       </div>
     </>

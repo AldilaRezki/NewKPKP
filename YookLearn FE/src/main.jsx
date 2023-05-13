@@ -47,7 +47,7 @@ import DetailTugas from "./Siswa/pages/DetailTugas";
 import Ujian from "./Siswa/pages/Ujian";
 import DetailUjianSiswa from "./Siswa/pages/DetailUjianSiswa";
 
-import AdBerhasil from "./admin/pages/Berhasil"
+import AdBerhasil from "./admin/pages/Berhasil";
 import AdAdminHomepage from "./admin/pages/AdminMainPage";
 import AdDaftarAkun from "./admin/pages/DaftarAkun";
 import AdDaftarGuru from "./admin/pages/DaftarGuru";
@@ -58,7 +58,6 @@ import AdListAkun from "./admin/pages/ListAkun";
 import AdListGuru from "./admin/pages/ListGuru";
 import AdListSiswa from "./admin/pages/ListSiswa";
 import DetailTugasGuru from "./Guru/Kelas/Tugas Kelas/DetailTugasGuru";
-import AdTest from "./admin/pages/Header";
 
 
 const router = createBrowserRouter([
@@ -147,7 +146,7 @@ const router = createBrowserRouter([
     element: <HomepageKelas />,
   },
   {
-    path: '/xipa1/forum/tambah-forum',
+    path: "/xipa1/forum/tambah-forum",
     element: <TambahForum />,
   },
   {
@@ -159,7 +158,7 @@ const router = createBrowserRouter([
     element: <IsiForum />,
   },
   {
-    path: '/guru/xipa1/tambah-tugas',
+    path: "/guru/xipa1/tambah-tugas",
     element: <TambahTugas />,
   },
   {
@@ -167,7 +166,7 @@ const router = createBrowserRouter([
     element: <DaftarTugas />,
   },
   {
-    path: '/guru/xipa1/detail-tugas',
+    path: "/guru/xipa1/detail-tugas",
     element: <DetailTugasGuru />,
   },
   {
@@ -175,7 +174,7 @@ const router = createBrowserRouter([
     element: <DaftarUjian />,
   },
   {
-    path: '/guru/xipa1/ujian/tambah-ujian',
+    path: "/guru/xipa1/ujian/tambah-ujian",
     element: <TambahUjian />,
   },
   {

@@ -1,13 +1,31 @@
-import React from 'react';
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Header from "../pages/Header";
 import { faAddressBook, faAddressCard, faBookOpen, faFileImport, faGreaterThan, faHome, faLessThan, faMagnifyingGlass, faPen, faPersonChalkboard, faPlus, faTrash, faUserTie } from '@fortawesome/free-solid-svg-icons';
 
 function AdminHomepage() {
   const students = [
-    { id: 1, name: 'John Doe', nisn: '1234567890', gender: 'L', agama: 'Islam' },
-    { id: 2, name: 'Jane Smith', nisn: '1234567890', gender: 'P', agama: 'Protestan' },
-    { id: 3, name: 'Bob Johnson', nisn: '1234567890', gender: 'L', agama: 'Hindu' },
+    {
+      id: 1,
+      name: "John Doe",
+      nisn: "1234567890",
+      gender: "L",
+      agama: "Islam",
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      nisn: "1234567890",
+      gender: "P",
+      agama: "Protestan",
+    },
+    {
+      id: 3,
+      name: "Bob Johnson",
+      nisn: "1234567890",
+      gender: "L",
+      agama: "Hindu",
+    },
   ];
 
   return (
@@ -36,18 +54,15 @@ function AdminHomepage() {
             </div>
           </span>
         </div>
-        
+
         <div className="bg-white shadow overflow-hidden rounded-none">
-          <div className='p-4 bg-gray-200'>
-          </div>
+          <div className="p-4 bg-gray-200"></div>
           <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-200">
-              
-            </thead>
-            <div className='bg-white divide-y divide-gray-200 '>
-                <h1 className='text-[#1A1F5A] text-3xl p-5'>
-                  Selamat Datang di Admin Homepage
-                </h1>
+            <thead className="bg-gray-200"></thead>
+            <div className="bg-white divide-y divide-gray-200 ">
+              <h1 className="text-[#1A1F5A] text-3xl p-5">
+                Selamat Datang di Admin Homepage
+              </h1>
             </div>
           </table>
         </div>

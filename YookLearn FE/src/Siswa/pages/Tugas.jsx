@@ -55,7 +55,6 @@ const Tugas = () => {
           )}
         </Link>
       </div>
-      
     </>
   );
 };
