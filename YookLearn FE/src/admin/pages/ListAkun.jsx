@@ -1,18 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faAddressCard,
-  faAngleLeft,
-  faFileImport,
-  faGreaterThan,
-  faLessThan,
-  faMagnifyingGlass,
-  faPen,
-  faPersonChalkboard,
-  faPlus,
-  faTrash,
-  faUserTie,
-} from "@fortawesome/free-solid-svg-icons";
+import { faAddressCard, faAngleLeft, faFileImport, faGreaterThan, faLessThan, faMagnifyingGlass, faPen, faPersonChalkboard, faPlus, faTrash, faUserTie } from '@fortawesome/free-solid-svg-icons';
+import Header from './Header';
 
 function Daftar3() {
   const students = [
@@ -26,46 +15,29 @@ function Daftar3() {
 
   return (
     <div className="bg-white min-h-screen">
-      <header className="bg-[#1A1F5A] text-white py-4">
-        <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-semibold font-mono">YookLearn</h1>
-        </div>
-      </header>
+      <Header/>
       <div className="container mx-auto px-4 py-6">
-        <div className="flex">
-          <a href="/adminpage">
-            <FontAwesomeIcon
-              icon={faAngleLeft}
-              className="text-[#1A1F5A] text-3xl ml-2 pr-3"
-            />
+        <div className='flex'>
+          <a href="/admin/homepage">
+            <FontAwesomeIcon icon={faAngleLeft} className='text-[#1A1F5A] text-3xl ml-2 pr-3' />
           </a>
           <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">
             Daftar Akun
           </h1>
         </div>
-
-        <div className="flex justify-between">
-          <span className="flex items-center">
-            <div className="p-3 rounded-t-md">
-              <a href="/listsiswa">
-                <FontAwesomeIcon
-                  icon={faUserTie}
-                  className="text-gray-500 text-2xl"
-                />
-                <span className=" ml-2 font-bold text-lg text-gray-500">
-                  Siswa
-                </span>
+        
+        <div className='flex justify-between'>
+          <span className='flex items-center'>
+            <div className='p-3 rounded-t-md'>
+              <a href="/admin/listsiswa">
+              <FontAwesomeIcon icon={faUserTie} className='text-gray-500 text-2xl' />
+              <span className=' ml-2 font-bold text-lg text-gray-500'>Siswa</span>
               </a>
             </div>
-            <div className="p-3 rounded-t-md">
-              <a href="/listguru">
-                <FontAwesomeIcon
-                  icon={faPersonChalkboard}
-                  className="text-gray-500 text-2xl"
-                />
-                <span className=" ml-2 font-bold text-lg text-gray-500">
-                  Guru
-                </span>
+            <div className='p-3 rounded-t-md'>
+              <a href="/admin/listguru">
+              <FontAwesomeIcon icon={faPersonChalkboard} className='text-gray-500 text-2xl' />
+              <span className=' ml-2 font-bold text-lg text-gray-500'>Guru</span>
               </a>
             </div>
             <div className="bg-gray-200 p-4 rounded-t-md">
@@ -90,15 +62,10 @@ function Daftar3() {
                 </span>
               </a>
             </div>
-            <div className="bg-gray-200 p-2 rounded-md">
-              <a href="/daftarakun">
-                <FontAwesomeIcon
-                  icon={faPlus}
-                  className="text-[#1A1F5A] text-3xl ml-2"
-                />
-                <span className=" ml-2 mr-4 font-bold text-xl text-[#1A1F5A]">
-                  Tambahkan Admin
-                </span>
+            <div className='bg-gray-200 p-2 rounded-md'>
+              <a href="/admin/daftarakun">
+              <FontAwesomeIcon icon={faPlus} className='text-[#1A1F5A] text-3xl ml-2' />
+              <span className=' ml-2 mr-4 font-bold text-xl text-[#1A1F5A]'>Tambahkan Admin</span>
               </a>
             </div>
           </span>

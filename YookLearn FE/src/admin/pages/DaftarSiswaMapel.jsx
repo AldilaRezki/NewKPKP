@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-
+import React, { useState } from 'react';
+import Header from './Header';
+  
 function pms() {
   const [nama, setNama] = useState("");
 
@@ -9,11 +10,7 @@ function pms() {
 
   return (
     <div className="bg-white max-h-screen">
-      <header className="bg-[#1A1F5A] text-white py-4">
-        <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-semibold font-mono">YookLearn</h1>
-        </div>
-      </header>
+      <Header />
       <main className="container mx-auto px-4 py-6 items-center justify-center h-max">
         <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">
           Daftar Akun Siswa
@@ -49,11 +46,10 @@ function pms() {
                 onChange={(e) => setNama(e.target.value)}
               />
             </div>
-            <button
-              type="submit"
-              className="bg-[#1A1F5A] text-white px-4 py-2 rounded-lg"
-            >
-              <a href="/berhasil">Simpan</a>
+            <button type="submit" className="bg-[#1A1F5A] text-white px-4 py-2 rounded-lg">
+              <a href="/admin/berhasil">
+                  Simpan
+              </a>
             </button>
           </form>
         </div>

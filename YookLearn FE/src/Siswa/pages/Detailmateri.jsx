@@ -36,10 +36,7 @@ function Detailmateri() {
               Bahasa Indonesia
             </h1>
           </Link>
-          <h1 className="text-xl ml-5 text-slate-400 font-bold">
-            <FontAwesomeIcon icon={faAngleRight} className="text-slate-400" />
-          </h1>
-
+          <h1 className="text-xl ml-5 text-slate-400 font-bold"></h1>
           <h1 className="text-xl ml-5 text-slate-400 font-bold">Materi</h1>
         </div>
       </div>

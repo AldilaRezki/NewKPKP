@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-
+import React, { useState } from 'react';
+import Header from "../pages/Header";
+  
 function tadmin() {
   const [nama, setNama] = useState("");
   const [status, setStatus] = useState("");
@@ -11,11 +12,7 @@ function tadmin() {
 
   return (
     <div className="bg-white min-h-screen">
-      <header className="bg-[#1A1F5A] text-white py-4">
-        <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-semibold font-mono">YookLearn</h1>
-        </div>
-      </header>
+      <Header />
       <main className="container mx-auto px-4 py-6">
         <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">
           Daftar Akun Admin
@@ -72,11 +69,10 @@ function tadmin() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <button
-            type="submit"
-            className="bg-[#1A1F5A] text-white px-4 py-2 rounded-lg"
-          >
-            <a href="/berhasil">Simpan</a>
+          <button type="submit" className="bg-[#1A1F5A] text-white px-4 py-2 rounded-lg">
+              <a href="/admin/berhasil">
+                  Simpan
+              </a>
           </button>
         </form>
       </main>
