@@ -4,16 +4,16 @@ import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Nav from "../components/Nav";
 import FormUbahPass from "../components/FormUbahPass";
+import { resetPassword } from "../services/api";
 
 export default function UbahPass() {
-  
   const navigate = useNavigate();
-  const login = isAuthenticated('siswa');
+  const login = isAuthenticated("siswa");
   const [new_password, setnew_password] = useState("");
   const [old_password, setold_password] = useState("");
   const [showFormUbahPass, setShowFormUbahPass] = useState(false);
   const handleOnClose = () => setShowFormUbahPass(false);
-  
+
   useEffect(() => {
     if (!login) {
       navigate("/");
@@ -21,33 +21,11 @@ export default function UbahPass() {
   }, [login, navigate]);
 
   const handleResetPassword = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8000/api/student/editpassword', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({ 
-          new_password,
-          old_password,
-        })
-      });
-  
-      const data = await response.json();
-  
-      if (!response.ok) {
-        throw new Error(data.message);
-      }
-
-      setShowFormUbahPass(true)
-
-    } catch (error) {
-      console.log(error);
+    const isSuccess = await resetPassword(new_password, old_password);
+    if (isSuccess) {
+      setShowFormUbahPass(true);
     }
-  }
-
+  };
 
   return (
     <>
@@ -94,7 +72,7 @@ export default function UbahPass() {
           </div>
 
           <button
-            onClick={ handleResetPassword }
+            onClick={handleResetPassword}
             className="bg-[#1A1F5A] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-5"
             type="button"
           >
@@ -104,7 +82,6 @@ export default function UbahPass() {
       </div>
 
       <FormUbahPass onClose={handleOnClose} visible={showFormUbahPass} />
-
     </>
   );
 }

@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { isAuthenticated } from "../../Common/functions/Auth";
 import { useNavigate } from "react-router-dom";
+import { fetchSiswaProfile } from "../services/api";
 
 import Header from "../components/Header";
 import Nav from "../components/Nav";
@@ -8,8 +9,9 @@ import { FaRegUser } from "react-icons/fa";
 
 function DataDiri() {
   const navigate = useNavigate();
-  const login = isAuthenticated('siswa');
+  const login = isAuthenticated("siswa");
   const [siswa, setSiswa] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (!login) {
@@ -17,27 +19,18 @@ function DataDiri() {
     }
   }, [login, navigate]);
 
-
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch('http://localhost:8000/api/student/profile', {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        console.error(data.message);
-      } else {
-        setSiswa(data.student);
-      }
+      const data = await fetchSiswaProfile();
+      setSiswa(data);
+      setIsLoading(false);
     }
-    
     fetchData();
   }, []);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>

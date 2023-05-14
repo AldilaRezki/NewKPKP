@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { isAuthenticated } from "../../Common/functions/Auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import Header from "../components/Header";
 import Nav from "../components/Nav";
@@ -11,16 +11,27 @@ import { IoMdPaper } from "react-icons/io";
 import { RiFilePaperLine } from "react-icons/ri";
 import Fiturkelas from "../components/Fiturkelas";
 import { Link } from "react-router-dom";
+import { fetchCurrentMapel } from "../services/api";
 
 function DetailKelas() {
   const navigate = useNavigate();
   const login = isAuthenticated("siswa");
+  const [mapel, setMapel] = useState([]);
+  const { idKelas, idMapel } = useParams();
 
   useEffect(() => {
     if (!login) {
       navigate("/");
     }
   }, [login, navigate]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchCurrentMapel(idMapel);
+      setMapel(data);
+    }
+    fetchData(idMapel);
+  }, []);
 
   return (
     <>
@@ -32,18 +43,18 @@ function DetailKelas() {
         <div className="mt-16 ml-10 w-1/2 flex">
           <BsFillJournalBookmarkFill className="text-2xl text-[#1A1F5A]" />
           <h1 className="text-xl ml-5 text-slate-400 font-bold">
-            Bahasa Indonesia
+            {mapel.nama_matpel}
           </h1>
         </div>
       </div>
       <div className="grid grid-cols-4 gap-4 mt-10">
-        <Link to="/siswa/kelas/mapel/daftarsiswa">
+        <Link to={`daftarsiswa`}>
           {" "}
           <div>
             <Fiturkelas icon={<HiUserGroup size={50} />} label="Daftar Siswa" />
           </div>
         </Link>
-        <Link to="tugas">
+        <Link to={`tugas`}>
           {" "}
           <div>
             <Fiturkelas
@@ -61,7 +72,7 @@ function DetailKelas() {
             />
           </div>
         </Link>
-        <Link to="/siswa/kelas/mapel/ujian">
+        <Link to="ujian">
           {" "}
           <div>
             <Fiturkelas

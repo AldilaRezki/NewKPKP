@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('subjects', function (Blueprint $table) {
             $table->id('id');
             $table->string('nama_matpel');
-            $table->dateTime('jadwal')->nullable();
+            $table->string('jadwal');
             $table->timestamps();
             $table->unsignedBigInteger('id_kelas');
             $table->string('id_guru');
+            // $table->string('jadwal');
             // $table->unsignedBigInteger('id_packages');
 
             $table->foreign('id_kelas')->references('id')->on('classess')->onDelete('cascade');

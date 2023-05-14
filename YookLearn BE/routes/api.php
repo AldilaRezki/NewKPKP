@@ -95,7 +95,8 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'student'], function
     Route::get('/tugas', [StudentController::class, 'getAllTugas']);
     Route::get('/kelas', [StudentController::class, 'getKelas']);
     Route::get('/kelas/{id_kelas}', [StudentController::class, 'getMapel']);
-    Route::get('/kelas/{id_kelas}/siswa', [StudentController::class, 'getSiswa']);
+    Route::get('/mapel/{id_mapel}', [StudentController::class, 'getMapelById']);
+    Route::get('/mapel/{id_mapel}/siswa', [StudentController::class, 'getSiswa']);
 
     Route::get('/matpel/{id_matpel}/tugas', [StudentController::class, 'getTugas']);
     Route::get('/tugas/{idTugas}', [StudentController::class, 'getDetailTugas']);

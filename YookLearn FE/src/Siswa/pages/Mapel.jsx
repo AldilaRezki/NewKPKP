@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { isAuthenticated } from "../../Common/functions/Auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { useState } from "react";
 import Header from "../components/Header";
@@ -8,16 +8,27 @@ import Nav from "../components/Nav";
 import { BsList } from "react-icons/bs";
 import { FaSearch } from "react-icons/fa";
 import MapelCard from "../components/MapelCard";
+import { fetchKelasMapel } from "../services/api";
 
 const Mapel = () => {
   const navigate = useNavigate();
   const login = isAuthenticated("siswa");
+  const [mapel, setMapel] = useState([]);
+  const { idKelas } = useParams();
 
   useEffect(() => {
     if (!login) {
       navigate("/");
     }
   }, [login, navigate]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchKelasMapel(idKelas);
+      setMapel(data);
+    }
+    fetchData();
+  }, [idKelas]);
 
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -63,14 +74,18 @@ const Mapel = () => {
         </div>
       </div>
       <div className="grid grid-cols-3 gap-4 mt-10 mx-10">
-        <div>
-          <MapelCard
-            namaMapel="Bahasa Indonesia"
-            namaPengajar="Lorem Ipsum S.Pd"
-            jadwal="Selasa, 09.00 - 11.00"
-          />
-        </div>
-        <div>
+        {mapel.map((item, i) => (
+          <div key={i}>
+            <MapelCard
+              namaMapel={item.nama_matpel}
+              namaPengajar={item.nama_guru}
+              jadwal={item.jadwal}
+              idMapel={item.id}
+            />
+          </div>
+        ))}
+      </div>
+      {/* <div>
           <MapelCard
             namaMapel="Matematika"
             namaPengajar="Lorem Ipsum S.Pd"
@@ -104,8 +119,8 @@ const Mapel = () => {
             namaPengajar="Lorem Ipsum S.Pd"
             jadwal="Selasa, 09.00 - 11.00"
           />
-        </div>
-      </div>
+        </div> */}
+      {/* </div > */}
     </>
   );
 };

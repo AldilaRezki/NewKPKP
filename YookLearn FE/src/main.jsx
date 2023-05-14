@@ -79,47 +79,47 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/siswa/kelas/mapel",
+    path: "/siswa/kelas/:idKelas",
     element: <Mapel />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/siswa/kelas/mapel/detailkelas",
+    path: "/siswa/kelas/:idKelas/detailkelas/:idMapel",
     element: <DetailKelas />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/siswa/kelas/mapel/detailkelas/tugas",
-    element: <Tugas />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/siswa/kelas/mapel/detailkelas/materi",
-    element: <Materi />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/siswa/kelas/mapel/detailkelas/detailmateri",
-    element: <Detailmateri />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/siswa/kelas/mapel/daftarsiswa",
+    path: "/siswa/kelas/:idKelas/detailkelas/:idMapel/daftarsiswa",
     element: <DaftarSiswa />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/siswa/kelas/mapel/tugas/detailtugas",
+    path: "/siswa/kelas/:idKelas/detailkelas/:idMapel/tugas",
+    element: <Tugas />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/siswa/kelas/:idKelas/detailkelas/:idMapel/tugas/:idTugas/detail",
     element: <DetailTugas />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/siswa/kelas/mapel/ujian",
+    path: "/siswa/kelas/:idKelas/detailkelas/:idMapel/materi/",
+    element: <Materi />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/siswa/kelas/:idKelas/detailkelas/:idMapel/materi/:idMateri/detailmateri",
+    element: <Detailmateri />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/siswa/kelas/:idKelas/detailkelas/:idMapel/ujian",
     element: <Ujian />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/siswa/kelas/mapel/ujian/detailujian",
+    path: "/siswa/kelas/:idKelas/detailkelas/:idMapel/ujian/detailujian",
     element: <DetailUjianSiswa />,
     errorElement: <ErrorPage />,
   },
