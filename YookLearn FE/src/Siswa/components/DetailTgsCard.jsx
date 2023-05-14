@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { MdTask } from "react-icons/md";
+import FileUploadButton from "./FileUploadButton";
 import { fetchCurrentTugas } from "../services/api";
 
 function DetailTgsCard({ idTugas }) {
@@ -14,6 +15,11 @@ function DetailTgsCard({ idTugas }) {
     fetchData(idTugas);
   }, []);
 
+function DetailTgsCard() {
+  const handleFileUpload = (file) => {
+    // Handle the uploaded file
+    console.log(file);
+  };
   return (
     <>
       <div>
@@ -37,9 +43,7 @@ function DetailTgsCard({ idTugas }) {
         <hr className="border-t border-[#1A1F5A] w-[798px] ml-[103px] mt-6"></hr>
       </div>
       <div className="flex justify-center mt-6">
-        <button className="bg-[#1A1F5A] text-white py-5 px-10 rounded-md hover:bg-[#303371]">
-          + Upload Tugas
-        </button>
+        <FileUploadButton onFileUpload={handleFileUpload} />
       </div>
     </>
   );

@@ -1,17 +1,17 @@
 // src/pages/LoginPage.jsx
 import LoginForm from "../components/LoginForm";
 import { useNavigate } from "react-router-dom";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { isAuthenticated } from "../functions/Auth";
 
 export default function LoginPage() {
   const navigate = useNavigate();
 
-  const login = isAuthenticated('siswa');
+  const login = isAuthenticated("siswa");
 
   useEffect(() => {
     if (login) {
-      navigate('/siswa/homepage');
+      navigate("/siswa/homepage");
     }
   }, [login, navigate]);
 

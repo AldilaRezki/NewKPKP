@@ -2,7 +2,8 @@ function Header() {
   return (
     <header className="flex justify-between bg-biru h-14">
       <div className="header_left flex gap-x-4 ml-10">
-        <button className="logo text-white">LOGO</button>
+        <a className="logo text-white my-auto"
+        href="/guru/homepage">LOGO</a>
       </div>
 
       <div className="header_right flex gap-x-4 mr-10 items-center">
@@ -52,7 +53,7 @@ function Header() {
         </button>
         <a
           className="header_profile flex bg-tosca items-center rounded-full w-10 h-10"
-          href="/profil"
+          href="/guru/profil"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

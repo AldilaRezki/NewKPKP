@@ -4,6 +4,9 @@ import Nav from "../components/Nav";
 import { BsFillJournalBookmarkFill } from "react-icons/bs";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import TabelSiswa from "../components/TabelSiswa";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+
 import { fetchCurrentMapel } from "../services/api";
 import { isAuthenticated } from "../../Common/functions/Auth";
 
@@ -48,10 +51,11 @@ function DaftarSiswa() {
               {mapel.nama_matpel}
             </h1>{" "}
           </Link>
-          <h1 className="text-xl ml-5 text-slate-400 font-bold"> > </h1>
+
           <h1 className="text-xl ml-5 text-slate-400 font-bold">
-            Daftar Siswa
+            <FontAwesomeIcon icon={faAngleRight} className="text-slate-400" />
           </h1>
+          <h1 className="text-xl ml-5 text-slate-400 font-bold">Daftar Siswa</h1>
         </div>
       </div>
       <div>

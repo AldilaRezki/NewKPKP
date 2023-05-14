@@ -9,7 +9,7 @@ function BoxDaftarForum() {
   return (
     <a
       className="flex border-[0.3px] my-10 py-5 shadow-md"
-      href="/xipa1/forum/diskusi-pekan-1"
+      href="/guru/xipa1/forum/diskusi-pekan-1"
     >
       <div className="logoBoxDaftarForum text-2xl bg-tosca p-2 rounded-full mx-5 w-fit h-fit">
         <MdOutlineForum></MdOutlineForum>

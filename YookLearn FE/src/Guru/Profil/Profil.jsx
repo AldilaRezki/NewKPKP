@@ -43,7 +43,7 @@ function Profil() {
           <p className="border-[0.1px] shadow-md p-3">Guru Bahasa Indonesia</p>
         </div>
         <a
-          href="/profil/ubah-password"
+          href="/guru/profil/ubah-password"
           className="tombolUbahPassword  flex flex-col gap-y-2 bg-biru text-white shadow-xl border-[0.1px] py-3 px-8 rounded-full mb-10"
         >
           Ubah Password

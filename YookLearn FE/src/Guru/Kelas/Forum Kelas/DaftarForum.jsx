@@ -9,7 +9,10 @@ function DaftarForum() {
       <Header></Header>
       <HeaderKelas></HeaderKelas>
       <div className="flex justify-end">
-        <a className="tombolTambahForum  flex flex-row justify-between mr-10 my-10 text-white bg-biru w-fit rounded-full py-3">
+        <a
+          className="tombolTambahForum  flex flex-row justify-between mr-10 my-10 text-white bg-biru w-fit rounded-full py-3"
+          href="/xipa1/forum/tambah-forum"
+        >
           <span className="px-5">+</span>
           <span className="pr-6"> Tambah Forum</span>
         </a>

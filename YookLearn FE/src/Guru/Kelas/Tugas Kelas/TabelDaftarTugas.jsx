@@ -26,7 +26,9 @@ function TabelDaftarTugas() {
           <tbody>
             <tr className="border-[0.3px] shadow-md">
               <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                Tugas Lorem Ipsum
+                <a href="/guru/xipa1/detail-tugas" className="block">
+                  Tugas Lorem Ipsum
+                </a>
               </td>
               <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
                 12-03-2023 23:59:59

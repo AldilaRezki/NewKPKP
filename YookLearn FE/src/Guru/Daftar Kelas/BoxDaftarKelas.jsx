@@ -52,7 +52,7 @@ function BoxDaftarKelas(props) {
   if (kelas === "X") {
     dropdownContent = (
       <div className="ml-20 mt-2">
-        <BoxKelas namaKelas={`${kelas} IPA 1`} href="/xipa1" />
+        <BoxKelas namaKelas={`${kelas} IPA 1`} href="/guru/xipa1" />
         <BoxKelas namaKelas={`${kelas} IPA 2`} />
       </div>
     );

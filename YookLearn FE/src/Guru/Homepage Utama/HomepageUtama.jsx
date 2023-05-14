@@ -27,7 +27,7 @@ function HomepageUtama() {
 
           <div className="buttonKelas bg-tosca mb-20">
             <a
-              href="/daftarkelas"
+              href="/guru/daftarkelas"
               className="flex text-2xl bg-white my-7 py-5 px-20 shadow-md justify-center item-center m-auto mx-5"
             >
               Lihat Daftar Kelas
