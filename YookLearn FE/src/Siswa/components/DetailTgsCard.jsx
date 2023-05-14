@@ -3,7 +3,7 @@ import { MdTask } from "react-icons/md";
 import FileUploadButton from "./FileUploadButton";
 import { fetchCurrentTugas } from "../services/api";
 
-function DetailTgsCard({ idTugas }) {
+export default function DetailTgsCard({ idTugas }) {
   const [dataTugas, setDataTugas] = useState([]);
 
   useEffect(() => {
@@ -15,11 +15,11 @@ function DetailTgsCard({ idTugas }) {
     fetchData(idTugas);
   }, []);
 
-function DetailTgsCard() {
   const handleFileUpload = (file) => {
     // Handle the uploaded file
     console.log(file);
   };
+
   return (
     <>
       <div>
@@ -48,5 +48,3 @@ function DetailTgsCard() {
     </>
   );
 }
-
-export default DetailTgsCard;

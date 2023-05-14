@@ -5,6 +5,7 @@ import { RiFilePaperLine } from "react-icons/ri";
 import { BsFillJournalBookmarkFill } from "react-icons/bs";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { isAuthenticated } from "../../Common/functions/Auth";
+import { fetchCurrentMapel } from "../services/api";
 
 function Ujian() {
   const navigate = useNavigate();

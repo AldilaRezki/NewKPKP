@@ -5,6 +5,7 @@ import DetailUjianCard from "../components/DetailUjianCard";
 import { BsFillJournalBookmarkFill } from "react-icons/bs";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { isAuthenticated } from "../../Common/functions/Auth";
+import { fetchCurrentMapel } from "../services/api";
 
 function DetailUjianSiswa() {
   const navigate = useNavigate();
