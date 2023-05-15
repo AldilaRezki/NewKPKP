@@ -60,6 +60,7 @@ import AdTest from "./admin/pages/test";
 import DetailTugasGuru from "./Guru/Kelas/Tugas Kelas/DetailTugasGuru";
 
 
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -131,6 +132,7 @@ const router = createBrowserRouter([
     element: <DetailUjianSiswa />,
     errorElement: <ErrorPage />,
   },
+  
 
   // Guru
   {

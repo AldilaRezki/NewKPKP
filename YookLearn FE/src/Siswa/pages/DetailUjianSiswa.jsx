@@ -4,6 +4,8 @@ import Nav from "../components/Nav";
 import DetailUjianCard from "../components/DetailUjianCard";
 import { BsFillJournalBookmarkFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 function DetailUjianSiswa() {
   return (
@@ -21,7 +23,9 @@ function DetailUjianSiswa() {
               Bahasa Indonesia
             </h1>{" "}
           </Link>
-          <h1 className="text-xl ml-5 text-slate-400 font-bold"> > </h1>
+          <h1 className="text-xl ml-5 text-slate-400 font-bold">
+            <FontAwesomeIcon icon={faAngleRight} className="text-slate-400" />
+          </h1>
           <h1 className="text-xl ml-5 text-slate-400 font-bold">Ujian</h1>
         </div>
       </div>
