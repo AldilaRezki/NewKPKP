@@ -63,8 +63,9 @@ import AdListSiswaPaketKelas from "./admin/pages/ListSiswaPaketKelas";
 import AdTest from "./admin/pages/test";
 import DetailTugasGuru from "./Guru/Kelas/Tugas Kelas/DetailTugasGuru";
 import TambahSoal from "./Guru/Kelas/Ujian Kelas/Menambahkan Soal/TambahSoal";
-
-
+import ExamPage from "./Siswa/pages/ExamPage";
+import IsiMateri from "./Guru/Kelas/Materi Kelas/IsiMateri";
+import HasilUjianSiswa from "./Guru/Kelas/Ujian Kelas/Hasil Ujian Siswa/HasilUjianSiswa";
 
 const router = createBrowserRouter([
   {
@@ -137,7 +138,11 @@ const router = createBrowserRouter([
     element: <DetailUjianSiswa />,
     errorElement: <ErrorPage />,
   },
-  
+  {
+    path: "/siswa/exam",
+    element: <ExamPage />,
+    errorElement: <ErrorPage />,
+  },
 
   // Guru
   {
@@ -201,6 +206,10 @@ const router = createBrowserRouter([
     element: <HasilUjianPeserta />,
   },
   {
+    path: "/guru/xipa1/ujian/ujian-pekan-1/hasil-ujian-siswa",
+    element: <HasilUjianSiswa />,
+  },
+  {
     path: "/guru/xipa1/ujian/ujian-pekan-1/hasil-ujian-kelas",
     element: <HasilUjianKelas />,
   },
@@ -211,6 +220,10 @@ const router = createBrowserRouter([
   {
     path: "/guru/xipa1/tambah-materi",
     element: <TambahMateri />,
+  },
+  {
+    path: "/guru/xipa1/isi-materi",
+    element: <IsiMateri />,
   },
   {
     path: "/guru/xipa1/daftar-anggota-kelas",
@@ -226,7 +239,12 @@ const router = createBrowserRouter([
   },
   //Admin
   {
-    path: '/admin/homepage',
+    path: "/admin/berhasil",
+    element: <AdBerhasil />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/admin/homepage",
     element: <AdAdminHomepage />,
     errorElement: <ErrorPage />,
   },
@@ -241,27 +259,27 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: '/admin/daftarguru',
+    path: "/admin/daftarguru",
     element: <AdDaftarGuru />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/admin/daftarsiswa',
+    path: "/admin/daftarsiswa",
     element: <AdDaftarSiswa />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/admin/listakun',
+    path: "/admin/listakun",
     element: <AdListAkun />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/admin/listguru',
+    path: "/admin/listguru",
     element: <AdListGuru />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/admin/listsiswa',
+    path: "/admin/listsiswa",
     element: <AdListSiswa />,
     errorElement: <ErrorPage />,
   },

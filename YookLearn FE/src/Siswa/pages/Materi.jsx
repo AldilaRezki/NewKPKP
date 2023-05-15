@@ -11,7 +11,6 @@ import { fetchCurentMapelMateri, fetchCurrentMapel } from "../services/SiswaAPI"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
-
 function Materi() {
   const navigate = useNavigate();
   const login = isAuthenticated("siswa");

@@ -5,7 +5,7 @@ import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 
 function simpan() {
   return (
-    <div className=' bg-white max-h-screen'>
+    <div className=" bg-white max-h-screen">
       <Header />
       <main className='container items-center justify-center max-w-7xl mx-auto flex py-10 flex-col'>
           <h1 className='pb-10 text-3xl text-[#1A1F5A]'>Data Berhasil Disimpan!</h1>

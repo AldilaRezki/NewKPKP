@@ -46,8 +46,8 @@ function DetailTugas() {
           </h1>{" "}
         </Link>
         <h1 className="text-xl ml-5 text-slate-400 font-bold">
-            <FontAwesomeIcon icon={faAngleRight} className="text-slate-400" />
-          </h1>
+          <FontAwesomeIcon icon={faAngleRight} className="text-slate-400" />
+        </h1>
         <h1 className="text-xl ml-5 text-slate-400 font-bold">Tugas</h1>
       </div>
       <div>
