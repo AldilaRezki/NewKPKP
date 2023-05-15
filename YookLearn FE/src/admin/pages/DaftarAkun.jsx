@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Header from "../pages/Header";
+import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
 import { isAuthenticated } from "../../Common/services/Auth";
 import { addAkun } from "../services/AdminAPI";

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { MdTask } from "react-icons/md";
 import FileUploadButton from "./FileUploadButton";
-import { fetchCurrentTugas } from "../services/SiswaAPI";
+import { fetchCurrentTugas, uploadFile } from "../services/SiswaAPI";
 
 export default function DetailTgsCard({ idTugas }) {
   const [dataTugas, setDataTugas] = useState([]);
@@ -10,13 +10,16 @@ export default function DetailTgsCard({ idTugas }) {
     async function fetchData() {
       const data = await fetchCurrentTugas(idTugas);
       setDataTugas(data);
-      setIsLoading(false);
+      // setIsLoading(false);
     }
     fetchData(idTugas);
   }, []);
 
   const handleFileUpload = (file) => {
-    // Handle the uploaded file
+    uploadFile(file, idTugas);
+    if (onFileUpload) {
+      onFileUpload();
+    }
     console.log(file);
   };
 
@@ -43,7 +46,7 @@ export default function DetailTgsCard({ idTugas }) {
         <hr className="border-t border-[#1A1F5A] w-[798px] ml-[103px] mt-6"></hr>
       </div>
       <div className="flex justify-center mt-6">
-        <FileUploadButton onFileUpload={handleFileUpload} />
+        <FileUploadButton onFileUpload={handleFileUpload}/>
       </div>
     </>
   );

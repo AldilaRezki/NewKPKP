@@ -72,8 +72,8 @@ function Detailmateri() {
           <h1 className="mx-4 text-[#1A1F5A]">{dataMateri.filename}</h1>
         </div>
         <a href="/path/to/BahanAjar1.pdf" download>
-    <MdDownloadForOffline className="mt-2 ml-2 flex-shrink-0 text-4xl" />
-  </a>
+          <MdDownloadForOffline className="mt-2 ml-2 flex-shrink-0 text-4xl" />
+        </a>
       </div>
     </>
   );

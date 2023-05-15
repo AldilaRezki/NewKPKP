@@ -550,6 +550,43 @@ class AdminController extends Controller
         return response()->json($class);
     }
 
+    public function getSiswaByKelas($classID)
+    {
+        $user = auth()->user();
+
+        if ($user['role'] != 'admin') {
+            return response()->json([
+                'success' => false,
+                'massage' => 'Tidak memiliki otoritas',
+            ]);
+        }
+
+        $students = DB::table('students')->get()->where('id_kelas', $classID);
+
+        return response()->json($students);
+    }
+
+    public function getMapelByKelas($classID)
+    {
+        $user = auth()->user();
+
+        if ($user['role'] != 'admin') {
+            return response()->json([
+                'success' => false,
+                'massage' => 'Tidak memiliki otoritas',
+            ]);
+        }
+
+        $mapel = DB::table('subjects')->get()->where('id_kelas', $classID);
+
+        foreach ($mapel as $i) {
+            $lecture = DB::table('lecturers')->get()->where('id', $i->id_guru)->first();
+            $i->nama_guru = $lecture->nama_lengkap;
+        }
+
+        return $mapel;
+    }
+
     public function getKelasById($id)
     {
         $user = auth()->user();

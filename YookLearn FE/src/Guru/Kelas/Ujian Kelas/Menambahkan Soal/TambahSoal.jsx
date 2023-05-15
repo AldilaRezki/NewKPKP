@@ -3,7 +3,7 @@ import HeaderGuru from '../../../HeaderGuru'
 import HeaderKelas from '../../HeaderKelas'
 import Form from '../../../Form'
 import Opsi from './Opsi'
-import Header from '../../../../admin/pages/Header'
+import Header from '../../../../Admin/components/Header'
 
 function TambahSoal() {
     const [opsiList, setOpsiList] = useState([]);

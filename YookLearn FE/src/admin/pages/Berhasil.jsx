@@ -10,7 +10,7 @@ function simpan() {
       <main className='container items-center justify-center max-w-7xl mx-auto flex py-10 flex-col'>
           <h1 className='pb-10 text-3xl text-[#1A1F5A]'>Data Berhasil Disimpan!</h1>
           <button type="submit" className="bg-gradient-to-r from-[#1A1F5A] via-[#203da7] to-[#1c63cf] text-white p-4 rounded-lg">
-            <a href="/admin/listsiswa" className='flex'>
+            <a href="/admin/homepage" className='flex'>
                 <FontAwesomeIcon icon={faCircleCheck} className=' text-white text-5xl' />
                 <h1 className=' text-xl p-2'>Simpan</h1>
             </a>

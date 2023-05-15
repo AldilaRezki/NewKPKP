@@ -18,5 +18,7 @@ class VerifyCsrfToken extends Middleware
         'http://localhost:8000/api/admin/siswa/add',
         'http://localhost:8000/api/admin/guru/add',
         'http://localhost:8000/api/admin/account/add',
+        'http://localhost:8000/api/admin/kelas/add',
+        'http://localhost:8000/api/admin/matpel/add',
     ];
 }

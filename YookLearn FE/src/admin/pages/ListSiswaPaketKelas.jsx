@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAddressCard, faAngleLeft, faBook, faFileImport, faGreaterThan, faLessThan, faMagnifyingGlass, faPen, faPersonChalkboard, faPlus, faTrash, faUserTie } from '@fortawesome/free-solid-svg-icons';
-import Header from '../components/Header';
+import {
+  faAddressCard,
+  faAngleLeft,
+  faBook,
+  faFileImport,
+  faGreaterThan,
+  faLessThan,
+  faMagnifyingGlass,
+  faPen,
+  faPersonChalkboard,
+  faPlus,
+  faTrash,
+  faUserTie,
+} from "@fortawesome/free-solid-svg-icons";
+import Header from "../components/Header";
+import { useNavigate, useParams } from "react-router-dom";
+import { isAuthenticated } from "../../Common/services/Auth";
+import { fetchSiswaByKelas } from "../services/AdminAPI";
 
 function Daftar() {
   const students = [
@@ -31,13 +47,35 @@ function Daftar() {
     },
   ];
 
+  const navigate = useNavigate();
+  const login = isAuthenticated("admin");
+  const [ dataSiswa, setSiswa] = useState([]);
+  const { idKelas } = useParams();
+
+  useEffect(() => {
+    if (!login) {
+      navigate("/");
+    }
+  }, [login, navigate]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchSiswaByKelas(idKelas);
+      setSiswa(data);
+    }
+    fetchData(idKelas);
+  }, []);
+
   return (
     <div className="bg-white min-h-screen">
-      <Header/>
+      <Header />
       <div className="container mx-auto px-4 py-6">
-        <div className='flex'>
+        <div className="flex">
           <a href="/admin/listpaketkelas">
-            <FontAwesomeIcon icon={faAngleLeft} className='text-[#1A1F5A] text-3xl ml-2 pr-3' />
+            <FontAwesomeIcon
+              icon={faAngleLeft}
+              className="text-[#1A1F5A] text-3xl ml-2 pr-3"
+            />
           </a>
           <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">
             Detail Paket Kelas
@@ -55,10 +93,15 @@ function Daftar() {
                 Siswa
               </span>
             </div>
-            <div className='p-4 rounded-t-md'>
-              <a href="/admin/listmatapelajaranpaketkelas">
-              <FontAwesomeIcon icon={faBook} className='text-gray-500 text-2xl' />
-              <span className=' ml-2 font-bold text-lg text-gray-500'>Mata Pelajaran</span>
+            <div className="p-4 rounded-t-md">
+              <a href={`/admin/ListPaketKelas/${idKelas}/matapelajaran`}>
+                <FontAwesomeIcon
+                  icon={faBook}
+                  className="text-gray-500 text-2xl"
+                />
+                <span className=" ml-2 font-bold text-lg text-gray-500">
+                  Mata Pelajaran
+                </span>
               </a>
             </div>
           </span>
@@ -74,10 +117,15 @@ function Daftar() {
                 </span>
               </a>
             </div>
-            <div className='bg-gray-200 p-2 rounded-md'>
+            <div className="bg-gray-200 p-2 rounded-md">
               <a href="/admin/daftarsiswa">
-              <FontAwesomeIcon icon={faPlus} className='text-[#1A1F5A] text-3xl ml-2' />
-              <span className=' ml-2 mr-4 font-bold text-xl text-[#1A1F5A]'>Tambahkan Siswa</span>
+                <FontAwesomeIcon
+                  icon={faPlus}
+                  className="text-[#1A1F5A] text-3xl ml-2"
+                />
+                <span className=" ml-2 mr-4 font-bold text-xl text-[#1A1F5A]">
+                  Tambahkan Siswa
+                </span>
               </a>
             </div>
           </span>
@@ -128,37 +176,37 @@ function Daftar() {
                 >
                   Nama Lengkap
                 </th>
-                <th
+                {/* <th
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
                   Username
-                </th>
+                </th> */}
                 <th></th>
                 <th></th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {students.map((student) => (
+              {dataSiswa.map((student,i) => (
                 <tr key={student.id}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    {student.id}
+                    {i+1}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {student.nisn}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {student.gender}
+                    {student.jenis_kelamin}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {student.agama}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {student.name}
+                    {student.nama_lengkap}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {/* <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {student.username}
-                  </td>
+                  </td> */}
                   <td className="pl-2 pr-1">
                     <FontAwesomeIcon icon={faPen} className="text-[#1A1F5A]" />
                   </td>

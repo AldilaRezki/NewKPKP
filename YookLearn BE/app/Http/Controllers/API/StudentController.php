@@ -18,6 +18,9 @@ use App\Models\Material;
 use App\Models\Student_Assigment;
 use Illuminate\Support\Facades\Redis;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\File;
 
 class StudentController extends Controller
 {
@@ -225,6 +228,8 @@ class StudentController extends Controller
 
     }
 
+    
+
     public function getMateri($idMatpel)
     {
         $user = auth()->user();
@@ -242,4 +247,32 @@ class StudentController extends Controller
 
         return $materi;
     }
+
+    
+    // public function downloadMateri($fileId)
+    // {
+    //     // Retrieve the file name based on the fileId
+    //     $file = DB::table('materials')->get('filename')->where('id', $fileId)->first();
+    
+    //     if ($file->filename) {
+    //         $filePath = public_path('upload/' . $file->filename);
+    
+    //         // Check if the file exists in the public/upload directory
+    //         if (File::exists($filePath)) {
+    //             // Get the file's content type
+    //             $contentType = File::mimeType($filePath);
+    
+    //             // Generate the response with the file content
+    //             $response = response()->download($filePath, null, [
+    //                 'Content-Type' => $contentType,
+    //             ]);
+    
+    //             return $response;
+    //         }
+    //     }
+    
+    //     // File not found, return an error response
+    //     return response()->json(['message' => 'File not found'], Response::HTTP_NOT_FOUND);
+    // }
+    
 }

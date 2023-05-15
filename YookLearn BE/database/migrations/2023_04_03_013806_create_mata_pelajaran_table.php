@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('subjects', function (Blueprint $table) {
             $table->id('id');
             $table->string('nama_matpel');
-            $table->string('jadwal');
+            $table->string('jadwal')->nullable();
             $table->timestamps();
             $table->unsignedBigInteger('id_kelas');
             $table->string('id_guru');

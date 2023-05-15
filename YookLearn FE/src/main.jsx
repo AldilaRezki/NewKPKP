@@ -271,22 +271,22 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
+    path: '/admin/ListPaketKelas/:idKelas/siswa',
+    element: <AdListSiswaPaketKelas />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/admin/ListPaketKelas/:idKelas/matapelajaran',
+    element: <AdListMataPelajaranPaketKelas />,
+    errorElement: <ErrorPage />,
+  },
+  {
     path: '/admin/test',
     element: <AdTest />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/admin/listmatapelajaranpaketkelas',
-    element: <AdListMataPelajaranPaketKelas />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: '/admin/listsiswapaketkelas',
-    element: <AdListSiswaPaketKelas />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: '/admin/daftarmapel',
+    path: '/admin/daftarmapel/:idKelas',
     element: <AdDaftarMapel />,
     errorElement: <ErrorPage />,
   },

@@ -237,3 +237,42 @@ export async function fetchCurrentMateri(idMateri) {
     console.error(error);
   }
 }
+
+export async function logOut() {
+  try {
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}
+
+export async function uploadFile(file, idTugas) {
+  try {
+    const token = localStorage.getItem("token");
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const response = await fetch(`${BASE_URL}/tugas/${idTugas}/add`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+    return data;
+    
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
