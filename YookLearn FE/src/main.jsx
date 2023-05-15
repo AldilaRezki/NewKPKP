@@ -58,6 +58,7 @@ import AdListGuru from "./admin/pages/ListGuru";
 import AdListSiswa from "./admin/pages/ListSiswa";
 import AdTest from "./admin/pages/test";
 import DetailTugasGuru from "./Guru/Kelas/Tugas Kelas/DetailTugasGuru";
+import TambahSoal from "./Guru/Kelas/Ujian Kelas/Menambahkan Soal/TambahSoal";
 
 
 
@@ -178,6 +179,10 @@ const router = createBrowserRouter([
   {
     path: "/guru/xipa1/ujian/tambah-ujian",
     element: <TambahUjian />,
+  },
+  {
+    path: "/guru/xipa1/ujian/tambah-ujian",
+    element: <TambahSoal />,
   },
   {
     path: "/guru/xipa1/ujian/ujian-pekan-1",
