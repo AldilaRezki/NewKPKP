@@ -4,13 +4,13 @@ import { faAddressCard, faAngleLeft, faFileImport, faGreaterThan, faLessThan, fa
 import Header from './Header';
 
 function Daftar3() {
-  const students = [
-    { id: 1, name: "Harper Lee", status: "Guru" },
-    { id: 2, name: "Logan Cole", status: "Guru" },
-    { id: 3, name: "Ava Grace", status: "Murid" },
-    { id: 4, name: "Lily Grace", status: "Murid" },
-    { id: 5, name: "Ethan James", status: "Admin" },
-    { id: 6, name: "Olivia Mae", status: "Admin" },
+  const accounts = [
+    { id: 1, name: "Harper Lee", username: "Lee", status: "Guru" },
+    { id: 2, name: "Logan Cole", username: "Cole", status: "Guru" },
+    { id: 3, name: "Ava Grace", username: "Grace", status: "Murid" },
+    { id: 4, name: "Lily Grace", username: "Lily", status: "Murid" },
+    { id: 5, name: "Ethan James", username: "James", status: "Admin" },
+    { id: 6, name: "Olivia Mae", username: "Mae", status: "Admin" },
   ];
 
   return (
@@ -102,6 +102,12 @@ function Daftar3() {
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
+                  Username
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
                   Status
                 </th>
                 <th></th>
@@ -109,16 +115,19 @@ function Daftar3() {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {students.map((student) => (
-                <tr key={student.id}>
+              {accounts.map((account) => (
+                <tr key={account.id}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    {student.id}
+                    {account.id}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {student.name}
+                    {account.name}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {student.status}
+                    {account.username}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {account.status}
                   </td>
                   <td className="pl-2 pr-1">
                     <FontAwesomeIcon icon={faPen} className="text-[#1A1F5A]" />
