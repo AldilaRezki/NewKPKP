@@ -50,7 +50,10 @@ function TambahUjian() {
         <a href="/guru/xipa1/ujian" className="text-biru py-2">
           Batal
         </a>
-        <a href="/guru/xipa1/ujian/tambah-ujian" className="text-white bg-biru py-2 px-5 rounded-md">
+        <a
+          href="/guru/xipa1/ujian/tambah-ujian"
+          className="text-white bg-biru py-2 px-5 rounded-md"
+        >
           Kirim
         </a>
       </div>

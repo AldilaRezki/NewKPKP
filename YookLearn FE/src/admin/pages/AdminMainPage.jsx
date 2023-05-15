@@ -31,12 +31,17 @@ function AdminHomepage() {
   return (
     <div className="bg-white min-h-screen">
       <Header />
-      <div className="container mx-auto px-4 py-6">        
-        <div className='flex justify-between'>
-          <span className='flex items-center'>
-            <div className='bg-gray-200 p-4 rounded-t-md'>
-              <FontAwesomeIcon icon={faHome} className='text-[#1A1F5A] text-3xl pr-3 pb-1' />
-              <span className=' mr-4 font-bold text-xl text-[#1A1F5A]'>Home</span>
+      <div className="container mx-auto px-4 py-6">
+        <div className="flex justify-between">
+          <span className="flex items-center">
+            <div className="bg-gray-200 p-4 rounded-t-md">
+              <FontAwesomeIcon
+                icon={faHome}
+                className="text-[#1A1F5A] text-3xl pr-3 pb-1"
+              />
+              <span className=" mr-4 font-bold text-xl text-[#1A1F5A]">
+                Home
+              </span>
             </div>
           </span>
           <span className='flex items-center'>
@@ -46,7 +51,7 @@ function AdminHomepage() {
               <span className=' ml-2 mr-4 font-bold text-xl text-[#1A1F5A]'>List Paket Kelas</span>
               </a>
             </div>
-            <div className='bg-gray-200 p-2 rounded-md'>
+            <div className="bg-gray-200 p-2 rounded-md">
               <a href="/admin/listsiswa">
               <FontAwesomeIcon icon={faAddressBook} className='text-[#1A1F5A] text-3xl ml-2' />
               <span className=' ml-2 mr-4 font-bold text-xl text-[#1A1F5A]'>List Akun</span>

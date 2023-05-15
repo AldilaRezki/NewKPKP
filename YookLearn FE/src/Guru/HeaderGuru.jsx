@@ -2,8 +2,9 @@ function HeaderGuru() {
   return (
     <header className="flex justify-between bg-biru h-14">
       <div className="header_left flex gap-x-4 ml-10">
-        <a className="logo text-white my-auto"
-        href="/guru/homepage">LOGO</a>
+        <a className="logo text-white my-auto" href="/guru/homepage">
+          LOGO
+        </a>
       </div>
 
       <div className="header_right flex gap-x-4 mr-10 items-center">

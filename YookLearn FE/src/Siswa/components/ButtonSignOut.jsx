@@ -17,7 +17,10 @@ const ButtonSignOut = () => {
           <div className="bg-white  shadow-lg absolute top-35 right-[20px]">
             <ul>
               {Menus.map((menu) => (
-                <li className="py-2 px-4 text-lg cursor-pointer rounded hover:bg-tosca" key={menu}>
+                <li
+                  className="py-2 px-4 text-lg cursor-pointer rounded hover:bg-tosca"
+                  key={menu}
+                >
                   {menu}
                 </li>
               ))}

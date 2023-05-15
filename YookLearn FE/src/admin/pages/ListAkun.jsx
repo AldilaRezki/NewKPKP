@@ -15,29 +15,42 @@ function Daftar3() {
 
   return (
     <div className="bg-white min-h-screen">
-      <Header/>
+      <Header />
       <div className="container mx-auto px-4 py-6">
-        <div className='flex'>
+        <div className="flex">
           <a href="/admin/homepage">
-            <FontAwesomeIcon icon={faAngleLeft} className='text-[#1A1F5A] text-3xl ml-2 pr-3' />
+            <FontAwesomeIcon
+              icon={faAngleLeft}
+              className="text-[#1A1F5A] text-3xl ml-2 pr-3"
+            />
           </a>
           <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">
             List Akun
           </h1>
         </div>
-        
-        <div className='flex justify-between'>
-          <span className='flex items-center'>
-            <div className='p-3 rounded-t-md'>
+
+        <div className="flex justify-between">
+          <span className="flex items-center">
+            <div className="p-3 rounded-t-md">
               <a href="/admin/listsiswa">
-              <FontAwesomeIcon icon={faUserTie} className='text-gray-500 text-2xl' />
-              <span className=' ml-2 font-bold text-lg text-gray-500'>Siswa</span>
+                <FontAwesomeIcon
+                  icon={faUserTie}
+                  className="text-gray-500 text-2xl"
+                />
+                <span className=" ml-2 font-bold text-lg text-gray-500">
+                  Siswa
+                </span>
               </a>
             </div>
-            <div className='p-3 rounded-t-md'>
+            <div className="p-3 rounded-t-md">
               <a href="/admin/listguru">
-              <FontAwesomeIcon icon={faPersonChalkboard} className='text-gray-500 text-2xl' />
-              <span className=' ml-2 font-bold text-lg text-gray-500'>Guru</span>
+                <FontAwesomeIcon
+                  icon={faPersonChalkboard}
+                  className="text-gray-500 text-2xl"
+                />
+                <span className=" ml-2 font-bold text-lg text-gray-500">
+                  Guru
+                </span>
               </a>
             </div>
             <div className="bg-gray-200 p-4 rounded-t-md">
@@ -62,10 +75,15 @@ function Daftar3() {
                 </span>
               </a>
             </div>
-            <div className='bg-gray-200 p-2 rounded-md'>
+            <div className="bg-gray-200 p-2 rounded-md">
               <a href="/admin/daftarakun">
-              <FontAwesomeIcon icon={faPlus} className='text-[#1A1F5A] text-3xl ml-2' />
-              <span className=' ml-2 mr-4 font-bold text-xl text-[#1A1F5A]'>Tambahkan Admin</span>
+                <FontAwesomeIcon
+                  icon={faPlus}
+                  className="text-[#1A1F5A] text-3xl ml-2"
+                />
+                <span className=" ml-2 mr-4 font-bold text-xl text-[#1A1F5A]">
+                  Tambahkan Admin
+                </span>
               </a>
             </div>
           </span>

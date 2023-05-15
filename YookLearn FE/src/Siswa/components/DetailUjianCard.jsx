@@ -1,5 +1,6 @@
 import React from "react";
 import { RiFilePaperLine } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 function DetailUjianCard() {
   return (
@@ -25,9 +26,12 @@ function DetailUjianCard() {
         <h1 className="ml-[206px] text-[#1A1F5A] "> 20 Maret 2023 </h1>
       </div>
       <div className="flex justify-center mt-10">
-        <button className="bg-[#1A1F5A] text-white py-5 px-10 rounded-md hover:bg-[#303371]">
-          Mulai
-        </button>
+        <Link to="/siswa/exam">
+          {" "}
+          <button className="bg-[#1A1F5A] text-white py-5 px-10 rounded-md hover:bg-[#303371]">
+            Mulai
+          </button>
+        </Link>
       </div>
     </>
   );
