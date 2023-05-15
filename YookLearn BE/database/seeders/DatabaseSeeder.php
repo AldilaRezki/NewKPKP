@@ -48,7 +48,7 @@ class DatabaseSeeder extends Seeder
             'id' => 'guruuuid',
             'nip' => 'niptesting',
             'nama_lengkap' => 'Guru Sistem',
-            'jenis_kelamin' => 'Laki-Laki',
+            // 'jenis_kelamin' => 'Laki-Laki',
             'golongan' => 'Golongan II a',
             'pangkat' => 'Pembina',
             'matpel' => 'Matematika',

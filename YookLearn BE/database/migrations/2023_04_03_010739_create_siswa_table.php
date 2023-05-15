@@ -16,7 +16,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('nisn',10);
             $table->string('nama_lengkap');
-            $table->char('jenis_kelamin');
+            $table->string('jenis_kelamin');
             $table->char('agama',18);
             $table->timestamps();
 

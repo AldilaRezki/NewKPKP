@@ -185,12 +185,12 @@ function Daftar() {
                 >
                   Nama Lengkap
                 </th>
-                <th
+                {/* <th
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
                   Username
-                </th>
+                </th> */}
                 <th></th>
                 <th></th>
               </tr>
@@ -213,9 +213,9 @@ function Daftar() {
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {student.nama_lengkap}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {/* <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {student.username}
-                  </td>
+                  </td> */}
                   <td className="pl-2 pr-1">
                     <FontAwesomeIcon icon={faPen} className="text-[#1A1F5A]" />
                   </td>

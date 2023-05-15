@@ -43,12 +43,13 @@ export async function fetchAllKelas() {
 }
 
 export async function addGuru(
-  nip = "",
-  namaLengkap = "",
-  jenisKelamin = "",
-  golongan = "",
-  pangkat = "",
-  matpel = ""
+  nip,
+  nama,
+  golongan,
+  pangkat,
+  mapel,
+  username,
+  password
 ) {
   try {
     const token = localStorage.getItem("token");
@@ -59,12 +60,13 @@ export async function addGuru(
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
+        username: username,
+        password: password,
+        nama_lengkap: nama,
         nip: nip,
-        nama_lengkap: namaLengkap,
-        jenis_kelamin: jenisKelamin,
         golongan: golongan,
         pangkat: pangkat,
-        matpel: matpel,
+        matpel: mapel,
       }),
     });
 
@@ -73,7 +75,6 @@ export async function addGuru(
     if (!response.ok) {
       throw new Error(data.message);
     }
-
     return true;
   } catch (error) {
     console.log(error);
@@ -82,28 +83,30 @@ export async function addGuru(
 }
 
 export async function addSiswa(
-  nip = "",
-  namaLengkap = "",
-  jenisKelamin = "",
-  golongan = "",
-  pangkat = "",
-  matpel = ""
+  nama,
+  username,
+  nisn,
+  jenisKelamin,
+  agama,
+  password,
+  kelas
 ) {
   try {
     const token = localStorage.getItem("token");
-    const response = await fetch(`${BASE_URL}/guru/add`, {
+    const response = await fetch(`${BASE_URL}/siswa/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        nip: nip,
-        nama_lengkap: namaLengkap,
+        username: username,
+        password: password,
+        nisn: nisn,
+        nama_lengkap: nama,
         jenis_kelamin: jenisKelamin,
-        golongan: golongan,
-        pangkat: pangkat,
-        matpel: matpel,
+        agama: agama,
+        id_kelas: kelas,
       }),
     });
 
@@ -112,7 +115,35 @@ export async function addSiswa(
     if (!response.ok) {
       throw new Error(data.message);
     }
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
 
+export async function addAkun(username, password, status, nama_user) {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${BASE_URL}/account/add`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+        role: status,
+        nama_user: nama_user,
+      }),
+    });
+
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
     return true;
   } catch (error) {
     console.log(error);

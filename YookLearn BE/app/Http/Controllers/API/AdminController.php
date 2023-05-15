@@ -44,15 +44,15 @@ class AdminController extends Controller
 
         $akun = Account::create($input);
 
-        $success['token'] = $akun->createToken('auth_token')->plainTextToken;
-        $succes['name'] = $akun->nama_user;
-        $succes['role'] = $akun->role;
-        $succes['id'] = $akun->id;
+        // $success['token'] = $akun->createToken('auth_token')->plainTextToken;
+        // $succes['name'] = $akun->nama_user;
+        // $succes['role'] = $akun->role;
+        // $succes['id'] = $akun->id;
 
         $res = [
             'succes' => true,
             'massage' => 'Akun berhasil dibuat',
-            'data' => $succes
+            // 'data' => $succes
         ];
 
         return response()->json($res);
@@ -165,7 +165,7 @@ class AdminController extends Controller
 
         $user = auth()->user();
 
-        if (!$user['role'] == 'admin') {
+        if ($user['role'] != 'admin') {
             return response()->json([
                 'success' => false,
                 'massage' => 'Tidak memiliki otoritas',
@@ -176,12 +176,11 @@ class AdminController extends Controller
             'username' => 'required',
             'password' => 'required',
             'nama_lengkap' => 'required',
-            'jenis_kelamin' => 'required',
         ]);
 
         if ($validator->fails()) {
             return response()->json([
-                'success' => true,
+                'success' => false,
                 'message' => 'Ada Kesalahan',
                 'data' => $validator->errors(),
             ]);

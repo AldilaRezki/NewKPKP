@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../pages/Header";
 import { useNavigate } from "react-router-dom";
 import { isAuthenticated } from "../../Common/services/Auth";
+import { addAkun } from "../services/AdminAPI";
 
 function tadmin() {
   const navigate = useNavigate();
@@ -17,8 +18,11 @@ function tadmin() {
     }
   }, [login, navigate]);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = async () => {
+    const isSuccess = await addAkun(username, password, status, nama);
+    if (isSuccess) {
+      navigate("/admin/berhasil");
+    }
   };
 
   return (
@@ -28,10 +32,7 @@ function tadmin() {
         <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">
           Daftar Akun Admin
         </h1>
-        <form
-          onSubmit={handleSubmit}
-          className="bg-white rounded-lg shadow-md p-6"
-        >
+        <form className="bg-white rounded-lg shadow-md p-6">
           <div className="mb-4">
             <label
               htmlFor="nama"
@@ -49,21 +50,21 @@ function tadmin() {
             />
           </div>
           <div className="mb-4">
-              <label
-                htmlFor="username"
-                className="block text-gray-700 font-bold mb-2"
-              >
-                Username
-              </label>
-              <input
-                type="text"
-                id="username"
-                className="w-full border rounded-lg px-4 py-2"
-                placeholder="Masukkan username"
-                value={username}
-                onChange={(e) => setUserName(e.target.value)}
-              />
-            </div>
+            <label
+              htmlFor="username"
+              className="block text-gray-700 font-bold mb-2"
+            >
+              Username
+            </label>
+            <input
+              type="text"
+              id="username"
+              className="w-full border rounded-lg px-4 py-2"
+              placeholder="Masukkan username"
+              value={username}
+              onChange={(e) => setUserName(e.target.value)}
+            />
+          </div>
           <div className="mb-4">
             <label
               htmlFor="status"
@@ -97,10 +98,11 @@ function tadmin() {
             />
           </div>
           <button
-            type="submit"
+            type="button"
+            onClick={handleSubmit}
             className="bg-[#1A1F5A] text-white px-4 py-2 rounded-lg"
           >
-            <a href="/admin/berhasil">Simpan</a>
+            Simpan
           </button>
         </form>
       </main>

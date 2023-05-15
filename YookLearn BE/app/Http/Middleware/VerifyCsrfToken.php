@@ -14,6 +14,9 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         //
         'http://localhost:8000/api/login',
-        'http://localhost:8000/api/student/editpassword'
+        'http://localhost:8000/api/student/editpassword',
+        'http://localhost:8000/api/admin/siswa/add',
+        'http://localhost:8000/api/admin/guru/add',
+        'http://localhost:8000/api/admin/account/add',
     ];
 }

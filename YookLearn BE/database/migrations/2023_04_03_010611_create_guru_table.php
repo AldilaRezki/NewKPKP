@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('id')->primary();
             $table->string('nip',21)->nullable();
             $table->string('nama_lengkap');
-            $table->char('jenis_kelamin');
+            // $table->char('jenis_kelamin');
             $table->string('golongan',50)->nullable();
             $table->string('pangkat')->nullable();
             $table->string('matpel')->nullable();

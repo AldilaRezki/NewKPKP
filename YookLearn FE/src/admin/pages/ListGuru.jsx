@@ -188,12 +188,12 @@ function Daftar2() {
                 >
                   Nama Lengkap
                 </th>
-                <th
+                {/* <th
                   scope="col"
                   className="pr-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
                   Username
-                </th>
+                </th> */}
                 <th
                   scope="col"
                   className="pr-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
