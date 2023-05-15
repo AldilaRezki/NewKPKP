@@ -53,11 +53,10 @@ import AdDaftarAkun from "./admin/pages/DaftarAkun";
 import AdDaftarGuru from "./admin/pages/DaftarGuru";
 import AdDaftarPaketKelas from "./admin/pages/DaftarPaketKelas";
 import AdDaftarSiswa from "./admin/pages/DaftarSiswa";
-import AdDaftarSiswaMapel from "./admin/pages/DaftarSiswaMapel";
 import AdListAkun from "./admin/pages/ListAkun";
 import AdListGuru from "./admin/pages/ListGuru";
 import AdListSiswa from "./admin/pages/ListSiswa";
-import AdTest from "./admin/pages/Header"
+import AdTest from "./admin/pages/test";
 import DetailTugasGuru from "./Guru/Kelas/Tugas Kelas/DetailTugasGuru";
 
 
@@ -238,11 +237,6 @@ const router = createBrowserRouter([
   {
     path: '/admin/daftarsiswa',
     element: <AdDaftarSiswa />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: '/admin/daftarsiswamapel',
-    element: <AdDaftarSiswaMapel />,
     errorElement: <ErrorPage />,
   },
   {

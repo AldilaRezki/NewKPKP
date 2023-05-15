@@ -8,6 +8,7 @@ function tguru() {
   const navigate = useNavigate();
   const login = isAuthenticated("admin");
   const [nama, setNama] = useState("");
+  const [username, setUserName] = useState("");
   const [nip, setNIP] = useState("");
   const [pangkat, setPangkat] = useState("");
   const [golongan, setGolongan] = useState("");
@@ -58,6 +59,22 @@ function tguru() {
               onChange={(e) => setNama(e.target.value)}
             />
           </div>
+          <div className="mb-4">
+              <label
+                htmlFor="username"
+                className="block text-gray-700 font-bold mb-2"
+              >
+                Username
+              </label>
+              <input
+                type="text"
+                id="username"
+                className="w-full border rounded-lg px-4 py-2"
+                placeholder="Masukkan username"
+                value={username}
+                onChange={(e) => setUserName(e.target.value)}
+              />
+            </div>
           <div className="mb-4">
             <label htmlFor="nip" className="block text-gray-700 font-bold mb-2">
               NIP

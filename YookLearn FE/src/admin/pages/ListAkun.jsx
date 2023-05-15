@@ -19,13 +19,13 @@ import { useNavigate } from "react-router-dom";
 import { isAuthenticated } from "../../Common/services/Auth";
 
 function Daftar3() {
-  const students = [
-    { id: 1, name: "Harper Lee", status: "Guru" },
-    { id: 2, name: "Logan Cole", status: "Guru" },
-    { id: 3, name: "Ava Grace", status: "Murid" },
-    { id: 4, name: "Lily Grace", status: "Murid" },
-    { id: 5, name: "Ethan James", status: "Admin" },
-    { id: 6, name: "Olivia Mae", status: "Admin" },
+  const accounts = [
+    { id: 1, name: "Harper Lee", username: "Lee", status: "Guru" },
+    { id: 2, name: "Logan Cole", username: "Cole", status: "Guru" },
+    { id: 3, name: "Ava Grace", username: "Grace", status: "Murid" },
+    { id: 4, name: "Lily Grace", username: "Lily", status: "Murid" },
+    { id: 5, name: "Ethan James", username: "James", status: "Admin" },
+    { id: 6, name: "Olivia Mae", username: "Mae", status: "Admin" },
   ];
 
   const navigate = useNavigate();
@@ -148,6 +148,12 @@ function Daftar3() {
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
                   Nama Lengkap
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Username
                 </th>
                 <th
                   scope="col"

@@ -40,7 +40,8 @@ function Daftar2() {
   const students = [
     {
       id: 1,
-      name: "Susi",
+      name: "Phoenix Wells",
+      username: "Phoenix",
       nip: "197410052007011006",
       pangkat: "Pembina",
       golongan: "Golongan II a",
@@ -48,7 +49,8 @@ function Daftar2() {
     },
     {
       id: 2,
-      name: "Budi",
+      name: "Luna Frost",
+      username: "Luna",
       nip: "198501102016011003",
       pangkat: "Penata Muda",
       golongan: "Golongan I a",
@@ -56,7 +58,8 @@ function Daftar2() {
     },
     {
       id: 3,
-      name: "Ratna",
+      name: "Orion Blackwood",
+      username: "Blackwood",
       nip: "197907012009011005",
       pangkat: "Penata Tingkat Satu",
       golongan: "Golongan III a",
@@ -163,7 +166,7 @@ function Daftar2() {
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  className="pr-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
                   NIP
                 </th>
@@ -175,19 +178,25 @@ function Daftar2() {
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  className="pr-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
                   Golongan
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  className="pr-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
                   Nama Lengkap
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  className="pr-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Username
+                </th>
+                <th
+                  scope="col"
+                  className="pr-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
                   Mata Pelajaran
                 </th>
@@ -216,10 +225,10 @@ function Daftar2() {
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {lecture.matpel}
                   </td>
-                  <td className="pl-2 pr-1">
+                  <td className="pr-3">
                     <FontAwesomeIcon icon={faPen} className="text-[#1A1F5A]" />
                   </td>
-                  <td className="pr-2">
+                  <td className="pr-3">
                     <FontAwesomeIcon
                       icon={faTrash}
                       className="text-[#1A1F5A]"

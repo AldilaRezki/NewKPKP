@@ -97,7 +97,7 @@ function Daftar3() {
           <div>
             <div className="flex justify-evenly p-10">
               {dataKelas.map((kelas) => (
-                <div key={kelas.id}>
+                <div className=" w-3/12" key={kelas.id}>
                   <div className="bg-[#1A1F5A] text-white rounded-t-md font-bold py-3 pl-12">
                     {kelas.nama_kelas}
                     <FontAwesomeIcon
@@ -125,7 +125,7 @@ function Daftar3() {
                   </div>
                 </div>
               ))}
-              {/* <div>
+              {/* <div className=" w-3/12">
                 <div className="bg-[#1A1F5A] text-white rounded-t-md font-bold py-3 pl-12">
                   XI IPA 2
                   <FontAwesomeIcon icon={faPen} className="text-white pl-14" />
@@ -146,7 +146,7 @@ function Daftar3() {
                   30 Siswa
                 </div>
               </div>
-              <div>
+              <div className=" w-3/12">
                 <div className="bg-[#1A1F5A] text-white rounded-t-md font-bold py-3 pl-12">
                   XI IPS
                   <FontAwesomeIcon icon={faPen} className="text-white pl-14" />
@@ -169,9 +169,9 @@ function Daftar3() {
               </div>
             </div>
             <div className="flex justify-evenly p-10">
-              <div>
+              <div className=" w-3/12">
                 <div className="bg-[#1A1F5A] text-white rounded-t-md font-bold py-3 pl-12">
-                  XII IPA 1
+                  XI IPA 1
                   <FontAwesomeIcon icon={faPen} className="text-white pl-14" />
                   <FontAwesomeIcon icon={faTrash} className="text-white px-4" />
                 </div>
@@ -190,9 +190,9 @@ function Daftar3() {
                   30 Siswa
                 </div>
               </div>
-              <div>
+              <div className=" w-3/12">
                 <div className="bg-[#1A1F5A] text-white rounded-t-md font-bold py-3 pl-12">
-                  XII IPA 2
+                  XI IPA 2
                   <FontAwesomeIcon icon={faPen} className="text-white pl-14" />
                   <FontAwesomeIcon icon={faTrash} className="text-white px-4" />
                 </div>
@@ -211,9 +211,9 @@ function Daftar3() {
                   30 Siswa
                 </div>
               </div>
-              <div>
+              <div className=" w-3/12">
                 <div className="bg-[#1A1F5A] text-white rounded-t-md font-bold py-3 pl-12">
-                  XII IPS
+                  XI IPS
                   <FontAwesomeIcon icon={faPen} className="text-white pl-14" />
                   <FontAwesomeIcon icon={faTrash} className="text-white px-4" />
                 </div>

@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
 import { isAuthenticated } from "../../Common/services/Auth";
-
+  
 function tsiswa() {
   const navigate = useNavigate();
   const login = isAuthenticated("admin");
   const [nama, setNama] = useState("");
+  const [username, setUserName] = useState("");
   const [nisn, setNISN] = useState("");
   const [jeniskelamin, setJenisKelamin] = useState("");
   const [agama, setAgama] = useState("");
+  const [kelas, setKelas] = useState("");
   const [password, setPassword] = useState("");
 
   useEffect(() => {
@@ -29,18 +31,6 @@ function tsiswa() {
         <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">
           Daftar Akun Siswa
         </h1>
-        <div className="flex justify-evenly">
-          <div className="flex flex-col w-2/5 items-start justify-center">
-            <div className="border-l-4 border-[#1A1F5A] pl-4 my-4">
-              Isi Data Diri Siswa
-            </div>
-            <div className="border-l-4 border-gray-500 text-gray-500 pl-4 my-4">
-              Pilihan Kelas
-            </div>
-            <div className="border-l-4 border-gray-500 text-gray-500 pl-4 my-4">
-              Pendaftaran Akun Selesai
-            </div>
-          </div>
           <form
             onSubmit={handleSubmit}
             className="bg-white rounded-lg shadow-md p-6 w-3/5"
@@ -59,6 +49,22 @@ function tsiswa() {
                 placeholder="Masukkan nama lengkap"
                 value={nama}
                 onChange={(e) => setNama(e.target.value)}
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="username"
+                className="block text-gray-700 font-bold mb-2"
+              >
+                Username
+              </label>
+              <input
+                type="text"
+                id="username"
+                className="w-full border rounded-lg px-4 py-2"
+                placeholder="Masukkan username"
+                value={username}
+                onChange={(e) => setUserName(e.target.value)}
               />
             </div>
             <div className="mb-4">
@@ -111,6 +117,29 @@ function tsiswa() {
             </div>
             <div className="mb-4">
               <label
+                htmlFor="kelas"
+                className="block text-gray-700 font-bold mb-2"
+              >
+                Pilih Kelas
+              </label>
+              <select 
+                id="kelas" 
+                className="w-full border rounded-lg px-4 py-2" 
+                value={kelas} onChange={(e) => setKelas(e.target.value)}>
+                <option value=""></option>
+                <option value="option1">X-1</option>
+                <option value="option2">X-2</option>
+                <option value="option3">X-3</option>
+                <option value="option4">XI-IPA-1</option>
+                <option value="option5">XI-IPA-2</option>
+                <option value="option6">XI-IPS</option>
+                <option value="option7">XII-IPA-1</option>
+                <option value="option8">XII-IPA-2</option>
+                <option value="option9">XII-IPS</option>
+              </select>
+            </div>
+            <div className="mb-4">
+              <label
                 htmlFor="password"
                 className="block text-gray-700 font-bold mb-2"
               >
@@ -125,14 +154,12 @@ function tsiswa() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <button
-              type="submit"
-              className="bg-[#1A1F5A] text-white px-4 py-2 rounded-lg"
-            >
-              <a href="/admin/daftarsiswamapel">Berikutnya</a>
+            <button type="submit" className="bg-[#1A1F5A] text-white px-4 py-2 rounded-lg">
+              <a href="/admin/berhasil">
+                  Berikutnya
+              </a>
             </button>
           </form>
-        </div>
       </main>
     </div>
   );
