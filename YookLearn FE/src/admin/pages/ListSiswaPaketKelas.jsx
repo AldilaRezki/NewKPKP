@@ -1,16 +1,34 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAddressCard, faAngleLeft, faFileImport, faGreaterThan, faLessThan, faMagnifyingGlass, faPen, faPersonChalkboard, faPlus, faTrash, faUserTie } from '@fortawesome/free-solid-svg-icons';
+import { faAddressCard, faAngleLeft, faBook, faFileImport, faGreaterThan, faLessThan, faMagnifyingGlass, faPen, faPersonChalkboard, faPlus, faTrash, faUserTie } from '@fortawesome/free-solid-svg-icons';
 import Header from '../components/Header';
 
-function Daftar3() {
-  const accounts = [
-    { id: 1, name: "Harper Lee", username: "Lee", status: "Guru" },
-    { id: 2, name: "Logan Cole", username: "Cole", status: "Guru" },
-    { id: 3, name: "Ava Grace", username: "Grace", status: "Murid" },
-    { id: 4, name: "Lily Grace", username: "Lily", status: "Murid" },
-    { id: 5, name: "Ethan James", username: "James", status: "Admin" },
-    { id: 6, name: "Olivia Mae", username: "Mae", status: "Admin" },
+function Daftar() {
+  const students = [
+    {
+      id: 1,
+      name: "John Doe",
+      username: "John",
+      nisn: "1234567890",
+      gender: "L",
+      agama: "Islam",
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      username: "Jane",
+      nisn: "1234567890",
+      gender: "P",
+      agama: "Protestan",
+    },
+    {
+      id: 3,
+      name: "Bob Johnson",
+      username: "Bob",
+      nisn: "1234567890",
+      gender: "L",
+      agama: "Hindu",
+    },
   ];
 
   return (
@@ -18,36 +36,30 @@ function Daftar3() {
       <Header/>
       <div className="container mx-auto px-4 py-6">
         <div className='flex'>
-          <a href="/admin/homepage">
+          <a href="/admin/listpaketkelas">
             <FontAwesomeIcon icon={faAngleLeft} className='text-[#1A1F5A] text-3xl ml-2 pr-3' />
           </a>
           <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">
-            List Akun
+            Detail Paket Kelas
           </h1>
         </div>
-        
-        <div className='flex justify-between'>
-          <span className='flex items-center'>
-            <div className='p-3 rounded-t-md'>
-              <a href="/admin/listsiswa">
-              <FontAwesomeIcon icon={faUserTie} className='text-gray-500 text-2xl' />
-              <span className=' ml-2 font-bold text-lg text-gray-500'>Siswa</span>
-              </a>
-            </div>
-            <div className='p-3 rounded-t-md'>
-              <a href="/admin/listguru">
-              <FontAwesomeIcon icon={faPersonChalkboard} className='text-gray-500 text-2xl' />
-              <span className=' ml-2 font-bold text-lg text-gray-500'>Guru</span>
-              </a>
-            </div>
+
+        <div className="flex justify-between">
+          <span className="flex items-center">
             <div className="bg-gray-200 p-4 rounded-t-md">
               <FontAwesomeIcon
-                icon={faAddressCard}
+                icon={faUserTie}
                 className="text-[#1A1F5A] text-3xl ml-2"
               />
               <span className=" ml-2 mr-4 font-bold text-xl text-[#1A1F5A]">
-                Akun
+                Siswa
               </span>
+            </div>
+            <div className='p-4 rounded-t-md'>
+              <a href="/admin/listmatapelajaranpaketkelas">
+              <FontAwesomeIcon icon={faBook} className='text-gray-500 text-2xl' />
+              <span className=' ml-2 font-bold text-lg text-gray-500'>Mata Pelajaran</span>
+              </a>
             </div>
           </span>
           <span className="flex items-center">
@@ -63,9 +75,9 @@ function Daftar3() {
               </a>
             </div>
             <div className='bg-gray-200 p-2 rounded-md'>
-              <a href="/admin/daftarakun">
+              <a href="/admin/daftarsiswa">
               <FontAwesomeIcon icon={faPlus} className='text-[#1A1F5A] text-3xl ml-2' />
-              <span className=' ml-2 mr-4 font-bold text-xl text-[#1A1F5A]'>Tambahkan Admin</span>
+              <span className=' ml-2 mr-4 font-bold text-xl text-[#1A1F5A]'>Tambahkan Siswa</span>
               </a>
             </div>
           </span>
@@ -80,7 +92,7 @@ function Daftar3() {
             <input
               type="text"
               className="w-11/12 border rounded-lg px-4 py-2"
-              placeholder="Cari Akun"
+              placeholder="Cari Siswa"
             />
           </div>
           <table className="min-w-full divide-y divide-gray-200">
@@ -96,6 +108,24 @@ function Daftar3() {
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
+                  NISN Peserta
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  L/P
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Agama
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
                   Nama Lengkap
                 </th>
                 <th
@@ -104,30 +134,30 @@ function Daftar3() {
                 >
                   Username
                 </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Status
-                </th>
                 <th></th>
                 <th></th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {accounts.map((account) => (
-                <tr key={account.id}>
+              {students.map((student) => (
+                <tr key={student.id}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    {account.id}
+                    {student.id}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {account.name}
+                    {student.nisn}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {account.username}
+                    {student.gender}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {account.status}
+                    {student.agama}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {student.name}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {student.username}
                   </td>
                   <td className="pl-2 pr-1">
                     <FontAwesomeIcon icon={faPen} className="text-[#1A1F5A]" />
@@ -165,4 +195,4 @@ function Daftar3() {
   );
 }
 
-export default Daftar3;
+export default Daftar;

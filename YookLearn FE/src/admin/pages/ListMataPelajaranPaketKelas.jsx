@@ -1,16 +1,16 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAddressCard, faAngleLeft, faFileImport, faGreaterThan, faLessThan, faMagnifyingGlass, faPen, faPersonChalkboard, faPlus, faTrash, faUserTie } from '@fortawesome/free-solid-svg-icons';
+import { faAddressCard, faAngleLeft, faBook, faFileImport, faGreaterThan, faLessThan, faMagnifyingGlass, faPen, faPersonChalkboard, faPlus, faTrash, faUserTie } from '@fortawesome/free-solid-svg-icons';
 import Header from '../components/Header';
 
 function Daftar3() {
-  const accounts = [
-    { id: 1, name: "Harper Lee", username: "Lee", status: "Guru" },
-    { id: 2, name: "Logan Cole", username: "Cole", status: "Guru" },
-    { id: 3, name: "Ava Grace", username: "Grace", status: "Murid" },
-    { id: 4, name: "Lily Grace", username: "Lily", status: "Murid" },
-    { id: 5, name: "Ethan James", username: "James", status: "Admin" },
-    { id: 6, name: "Olivia Mae", username: "Mae", status: "Admin" },
+  const mapels = [
+    { id: 1, guru: "Harper Lee", mapel: "Matematika"},
+    { id: 2, guru: "Logan Cole", mapel: "Bahasa Inggris" },
+    { id: 3, guru: "Ava Grace", mapel: "Bahasa Indonesia" },
+    { id: 4, guru: "Lily Grace", mapel: "Fisika" },
+    { id: 5, guru: "Ethan James", mapel: "Biologi" },
+    { id: 6, guru: "Olivia Mae", mapel: "Kimia" },
   ];
 
   return (
@@ -22,31 +22,25 @@ function Daftar3() {
             <FontAwesomeIcon icon={faAngleLeft} className='text-[#1A1F5A] text-3xl ml-2 pr-3' />
           </a>
           <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">
-            List Akun
+            List Mata Pelajaran
           </h1>
         </div>
         
         <div className='flex justify-between'>
           <span className='flex items-center'>
             <div className='p-3 rounded-t-md'>
-              <a href="/admin/listsiswa">
+              <a href="/admin/listsiswapaketkelas">
               <FontAwesomeIcon icon={faUserTie} className='text-gray-500 text-2xl' />
               <span className=' ml-2 font-bold text-lg text-gray-500'>Siswa</span>
               </a>
             </div>
-            <div className='p-3 rounded-t-md'>
-              <a href="/admin/listguru">
-              <FontAwesomeIcon icon={faPersonChalkboard} className='text-gray-500 text-2xl' />
-              <span className=' ml-2 font-bold text-lg text-gray-500'>Guru</span>
-              </a>
-            </div>
             <div className="bg-gray-200 p-4 rounded-t-md">
               <FontAwesomeIcon
-                icon={faAddressCard}
+                icon={faBook}
                 className="text-[#1A1F5A] text-3xl ml-2"
               />
               <span className=" ml-2 mr-4 font-bold text-xl text-[#1A1F5A]">
-                Akun
+                Mata Pelajaran
               </span>
             </div>
           </span>
@@ -63,9 +57,9 @@ function Daftar3() {
               </a>
             </div>
             <div className='bg-gray-200 p-2 rounded-md'>
-              <a href="/admin/daftarakun">
+              <a href="/admin/daftarmapel">
               <FontAwesomeIcon icon={faPlus} className='text-[#1A1F5A] text-3xl ml-2' />
-              <span className=' ml-2 mr-4 font-bold text-xl text-[#1A1F5A]'>Tambahkan Admin</span>
+              <span className=' ml-2 mr-4 font-bold text-xl text-[#1A1F5A]'>Tambahkan Mata Pelajaran</span>
               </a>
             </div>
           </span>
@@ -80,7 +74,7 @@ function Daftar3() {
             <input
               type="text"
               className="w-11/12 border rounded-lg px-4 py-2"
-              placeholder="Cari Akun"
+              placeholder="Cari Mata Pelajaran"
             />
           </div>
           <table className="min-w-full divide-y divide-gray-200">
@@ -96,38 +90,29 @@ function Daftar3() {
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  Nama Lengkap
+                  Mata Pelajaran
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  Username
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Status
+                  Guru
                 </th>
                 <th></th>
                 <th></th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {accounts.map((account) => (
-                <tr key={account.id}>
+              {mapels.map((mapel) => (
+                <tr key={mapel.id}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    {account.id}
+                    {mapel.id}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {account.name}
+                    {mapel.mapel}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {account.username}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {account.status}
+                    {mapel.guru}
                   </td>
                   <td className="pl-2 pr-1">
                     <FontAwesomeIcon icon={faPen} className="text-[#1A1F5A]" />
