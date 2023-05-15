@@ -8,6 +8,9 @@ import Nav from "../components/Nav";
 import MateriTitle from "../components/MateriTitle";
 import { Link } from "react-router-dom";
 import { fetchCurentMapelMateri, fetchCurrentMapel } from "../services/SiswaAPI";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+
 
 function Materi() {
   const navigate = useNavigate();
@@ -55,7 +58,9 @@ function Materi() {
               {mapel.nama_matpel}
             </h1>{" "}
           </Link>
-          <h1 className="text-xl ml-5 text-slate-400 font-bold"> > </h1>
+          <h1 className="text-xl ml-5 text-slate-400 font-bold">
+            <FontAwesomeIcon icon={faAngleRight} className="text-slate-400" />
+          </h1>
           <h1 className="text-xl ml-5 text-slate-400 font-bold">Materi</h1>
         </div>
       </div>

@@ -51,13 +51,19 @@ import AdBerhasil from "./admin/pages/Berhasil";
 import AdAdminHomepage from "./admin/pages/AdminMainPage";
 import AdDaftarAkun from "./admin/pages/DaftarAkun";
 import AdDaftarGuru from "./admin/pages/DaftarGuru";
-import AdDaftarPaketKelas from "./admin/pages/DaftarPaketKelas";
+import AdListPaketKelas from "./admin/pages/ListPaketKelas";
 import AdDaftarSiswa from "./admin/pages/DaftarSiswa";
+import AdDaftarMapel from "./admin/pages/DaftarMapel";
+import AdDaftarPaket from "./admin/pages/DaftarPaket";
 import AdListAkun from "./admin/pages/ListAkun";
 import AdListGuru from "./admin/pages/ListGuru";
 import AdListSiswa from "./admin/pages/ListSiswa";
+import AdListMataPelajaranPaketKelas from "./admin/pages/ListMataPelajaranPaketKelas";
+import AdListSiswaPaketKelas from "./admin/pages/ListSiswaPaketKelas";
 import AdTest from "./admin/pages/test";
 import DetailTugasGuru from "./Guru/Kelas/Tugas Kelas/DetailTugasGuru";
+import TambahSoal from "./Guru/Kelas/Ujian Kelas/Menambahkan Soal/TambahSoal";
+
 
 
 const router = createBrowserRouter([
@@ -131,6 +137,7 @@ const router = createBrowserRouter([
     element: <DetailUjianSiswa />,
     errorElement: <ErrorPage />,
   },
+  
 
   // Guru
   {
@@ -176,6 +183,10 @@ const router = createBrowserRouter([
   {
     path: "/guru/xipa1/ujian/tambah-ujian",
     element: <TambahUjian />,
+  },
+  {
+    path: "/guru/xipa1/ujian/tambah-ujian",
+    element: <TambahSoal />,
   },
   {
     path: "/guru/xipa1/ujian/ujian-pekan-1",
@@ -255,13 +266,33 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: '/admin/daftarpaketkelas',
-    element: <AdDaftarPaketKelas />,
+    path: '/admin/ListPaketKelas',
+    element: <AdListPaketKelas />,
     errorElement: <ErrorPage />,
   },
   {
     path: '/admin/test',
     element: <AdTest />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/admin/listmatapelajaranpaketkelas',
+    element: <AdListMataPelajaranPaketKelas />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/admin/listsiswapaketkelas',
+    element: <AdListSiswaPaketKelas />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/admin/daftarmapel',
+    element: <AdDaftarMapel />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/admin/daftarpaket',
+    element: <AdDaftarPaket />,
     errorElement: <ErrorPage />,
   },
 ]);

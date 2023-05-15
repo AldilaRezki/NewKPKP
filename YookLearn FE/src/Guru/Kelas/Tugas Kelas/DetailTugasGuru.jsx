@@ -1,12 +1,14 @@
 import React from "react";
-import Header from "../../Header";
+import HeaderGuru from "../../HeaderGuru";
 import HeaderKelas from "../HeaderKelas";
 import TabelDetailTugas from "./TabelDetailTugas";
+import Header from "../../Header";
 
 function DetailTugasGuru() {
   return (
     <div>
       <Header></Header>
+      <HeaderGuru></HeaderGuru>
       <HeaderKelas></HeaderKelas>
       <div className="flex mt-10 mx-10 justify-between">
         <h1 className="my-auto text-xl font-medium text-biru">Detail Tugas</h1>

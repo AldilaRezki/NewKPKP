@@ -1,12 +1,14 @@
-import Header from "../Header";
+import HeaderGuru from "../HeaderGuru";
 import HomepageKelas from "./ListKelasAjar.jsx";
 import JadwalHari from "./JadwalHari.jsx";
 import KelasJadwalAjar from "./KelasJadwalAjar.jsx";
+import Header from "../Header";
 
 function HomepageUtama() {
   return (
     <div>
       <Header></Header>
+      <HeaderGuru></HeaderGuru>
 
       <div className="flex justify-between">
         <div className="flex mt-16 ml-10 flex-col gap-y-8 w-3/5">

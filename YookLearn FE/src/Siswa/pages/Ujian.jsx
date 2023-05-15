@@ -4,6 +4,9 @@ import Nav from "../components/Nav";
 import { RiFilePaperLine } from "react-icons/ri";
 import { BsFillJournalBookmarkFill } from "react-icons/bs";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+
 import { isAuthenticated } from "../../Common/services/Auth";
 import { fetchCurrentMapel } from "../services/SiswaAPI";
 
@@ -44,7 +47,9 @@ function Ujian() {
               {mapel.nama_matpel}
             </h1>{" "}
           </Link>
-          <h1 className="text-xl ml-5 text-slate-400 font-bold"> > </h1>
+          <h1 className="text-xl ml-5 text-slate-400 font-bold">
+            <FontAwesomeIcon icon={faAngleRight} className="text-slate-400" />
+          </h1>
           <h1 className="text-xl ml-5 text-slate-400 font-bold">Ujian</h1>
         </div>
       </div>

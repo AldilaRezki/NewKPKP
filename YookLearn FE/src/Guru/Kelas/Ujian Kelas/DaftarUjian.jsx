@@ -1,12 +1,14 @@
 import React from "react";
-import Header from "../../Header";
+import HeaderGuru from "../../HeaderGuru";
 import HeaderKelas from "../HeaderKelas";
 import BoxDaftarUjian from "./BoxDaftarUjian";
+import Header from "../../Header";
 
 function DaftarUjian() {
   return (
     <div>
       <Header></Header>
+      <HeaderGuru></HeaderGuru>
       <HeaderKelas></HeaderKelas>
       <div className="flex justify-end">
         <a

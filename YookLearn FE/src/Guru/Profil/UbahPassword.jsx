@@ -1,11 +1,13 @@
 import React from 'react'
-import Header from '../Header'
+import HeaderGuru from '../HeaderGuru'
 import { BsEye } from 'react-icons/bs'
+import Header from '../Header'
 
 function UbahPassword() {
   return (
     <div>
-        <Header></Header>
+      <Header></Header>
+        <HeaderGuru></HeaderGuru>
         <div className='flex justify-center items-center h-screen flex-col'>
           <div className='flex gap-y-2 flex-col'>
             <span>Password Lama</span>

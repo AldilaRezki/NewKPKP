@@ -58,7 +58,9 @@ function Detailmateri() {
               {mapel.nama_matpel}
             </h1>
           </Link>
-          <h1 className="text-xl ml-5 text-slate-400 font-bold"></h1>
+          <h1 className="text-xl ml-5 text-slate-400 font-bold">
+            <FontAwesomeIcon icon={faAngleRight} className="text-slate-400" />
+          </h1>
           <h1 className="text-xl ml-5 text-slate-400 font-bold">Materi</h1>
         </div>
       </div>
@@ -69,7 +71,9 @@ function Detailmateri() {
         <div className="h-[49px] bg-[#EEF4FA] flex items-center rounded-lg">
           <h1 className="mx-4 text-[#1A1F5A]">{dataMateri.filename}</h1>
         </div>
-        <MdDownloadForOffline className="bg-[#EEF4FA] ml-2 flex-shrink-0 text-4xl" />
+        <a href="/path/to/BahanAjar1.pdf" download>
+    <MdDownloadForOffline className="mt-2 ml-2 flex-shrink-0 text-4xl" />
+  </a>
       </div>
     </>
   );

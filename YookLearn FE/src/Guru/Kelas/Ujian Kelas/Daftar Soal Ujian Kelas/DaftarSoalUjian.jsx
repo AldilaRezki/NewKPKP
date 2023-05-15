@@ -1,15 +1,17 @@
 import React from "react";
-import Header from "../../../Header";
+import HeaderGuru from "../../../HeaderGuru";
 import HeaderKelas from "../../HeaderKelas";
 import { BiArrowBack } from "react-icons/bi";
 import BoxDaftarSoalPilihanGanda from "./BoxDaftarSoalPilihanGanda";
 import BoxDaftarSoalKotakCentang from "./BoxDaftarSoalKotakCentang";
 import BoxDaftarSoalEssay from "./BoxDaftarSoalEssay";
+import Header from "../../../Header";
 
 function DaftarSoalUjian() {
   return (
     <div className="mb-20">
       <Header></Header>
+      <HeaderGuru></HeaderGuru>
       <HeaderKelas></HeaderKelas>
       <div className="bg-tosca mt-10 mx-10 p-2">
         <a href="/guru/xipa1/ujian/ujian-pekan-1">

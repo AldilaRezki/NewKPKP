@@ -13,7 +13,7 @@ import {
   faTrash,
   faUserTie,
 } from "@fortawesome/free-solid-svg-icons";
-import Header from "./Header";
+import Header from "../components/Header";
 import { fetchAll } from "../../Admin/services/AdminAPI";
 import { useNavigate } from "react-router-dom";
 import { isAuthenticated } from "../../Common/services/Auth";
@@ -76,7 +76,7 @@ function Daftar() {
             />
           </a>
           <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">
-            Daftar Siswa
+            List Siswa
           </h1>
         </div>
 

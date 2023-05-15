@@ -1,12 +1,14 @@
 import React from "react";
-import Header from "../Header";
+import HeaderGuru from "../HeaderGuru";
 import { BiArrowBack } from "react-icons/bi";
 import { BsPersonFill } from "react-icons/bs";
+import Header from "../Header";
 
 function Profil() {
   return (
     <div>
       <Header></Header>
+      <HeaderGuru></HeaderGuru>
       <div className="bg-tosca mt-10 mx-10 p-2">
         <a href="/">
           <BiArrowBack className="bg-white text-xl"></BiArrowBack>

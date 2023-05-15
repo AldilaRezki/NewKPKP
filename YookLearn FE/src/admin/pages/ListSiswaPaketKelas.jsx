@@ -1,119 +1,64 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faAddressCard,
-  faAngleLeft,
-  faFileImport,
-  faGreaterThan,
-  faLessThan,
-  faMagnifyingGlass,
-  faPen,
-  faPersonChalkboard,
-  faPlus,
-  faTrash,
-  faUserTie,
-} from "@fortawesome/free-solid-svg-icons";
-import Header from "../components/Header";
-import { fetchAll } from "../../Admin/services/AdminAPI";
-import { useNavigate } from "react-router-dom";
-import { isAuthenticated } from "../../Common/services/Auth";
+import { faAddressCard, faAngleLeft, faBook, faFileImport, faGreaterThan, faLessThan, faMagnifyingGlass, faPen, faPersonChalkboard, faPlus, faTrash, faUserTie } from '@fortawesome/free-solid-svg-icons';
+import Header from '../components/Header';
 
-function Daftar2() {
-  const navigate = useNavigate();
-  const login = isAuthenticated("admin");
-  const [dataGuru, setDataGuru] = useState([]);
-
-  useEffect(() => {
-    if (!login) {
-      navigate("/");
-    }
-  }, [login, navigate]);
-
-  useEffect(() => {
-    async function fetchData() {
-      const data = await fetchAll("guru");
-      setDataGuru(data);
-    }
-    fetchData();
-  }, []);
-
+function Daftar() {
   const students = [
     {
       id: 1,
-      name: "Phoenix Wells",
-      username: "Phoenix",
-      nip: "197410052007011006",
-      pangkat: "Pembina",
-      golongan: "Golongan II a",
-      mapel: "Matematika",
+      name: "John Doe",
+      username: "John",
+      nisn: "1234567890",
+      gender: "L",
+      agama: "Islam",
     },
     {
       id: 2,
-      name: "Luna Frost",
-      username: "Luna",
-      nip: "198501102016011003",
-      pangkat: "Penata Muda",
-      golongan: "Golongan I a",
-      mapel: "Bahasa Indonesia",
+      name: "Jane Smith",
+      username: "Jane",
+      nisn: "1234567890",
+      gender: "P",
+      agama: "Protestan",
     },
     {
       id: 3,
-      name: "Orion Blackwood",
-      username: "Blackwood",
-      nip: "197907012009011005",
-      pangkat: "Penata Tingkat Satu",
-      golongan: "Golongan III a",
-      mapel: "Bahasa Inggris",
+      name: "Bob Johnson",
+      username: "Bob",
+      nisn: "1234567890",
+      gender: "L",
+      agama: "Hindu",
     },
   ];
 
   return (
     <div className="bg-white min-h-screen">
-      <Header />
+      <Header/>
       <div className="container mx-auto px-4 py-6">
-        <div className="flex">
-          <a href="/admin/homepage">
-            <FontAwesomeIcon
-              icon={faAngleLeft}
-              className="text-[#1A1F5A] text-3xl ml-2 pr-3"
-            />
+        <div className='flex'>
+          <a href="/admin/listpaketkelas">
+            <FontAwesomeIcon icon={faAngleLeft} className='text-[#1A1F5A] text-3xl ml-2 pr-3' />
           </a>
           <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">
-            List Guru
+            Detail Paket Kelas
           </h1>
         </div>
 
         <div className="flex justify-between">
           <span className="flex items-center">
-            <div className="p-3 rounded-t-md">
-              <a href="/admin/listsiswa">
-                <FontAwesomeIcon
-                  icon={faUserTie}
-                  className="text-gray-500 text-2xl"
-                />
-                <span className=" ml-2 font-bold text-lg text-gray-500">
-                  Siswa
-                </span>
-              </a>
-            </div>
             <div className="bg-gray-200 p-4 rounded-t-md">
               <FontAwesomeIcon
-                icon={faPersonChalkboard}
+                icon={faUserTie}
                 className="text-[#1A1F5A] text-3xl ml-2"
               />
               <span className=" ml-2 mr-4 font-bold text-xl text-[#1A1F5A]">
-                Guru
+                Siswa
               </span>
             </div>
-            <div className="p-4 rounded-t-md">
-              <a href="/admin/listakun">
-                <FontAwesomeIcon
-                  icon={faAddressCard}
-                  className="text-gray-500 text-2xl"
-                />
-                <span className=" ml-2 font-bold text-lg text-gray-500">
-                  Akun
-                </span>
+            <div className='p-4 rounded-t-md'>
+              <a href="/admin/listmatapelajaranpaketkelas">
+              <FontAwesomeIcon icon={faBook} className='text-gray-500 text-2xl' />
+              <span className=' ml-2 font-bold text-lg text-gray-500'>Mata Pelajaran</span>
               </a>
             </div>
           </span>
@@ -129,15 +74,10 @@ function Daftar2() {
                 </span>
               </a>
             </div>
-            <div className="bg-gray-200 p-2 rounded-md">
-              <a href="/admin/daftarguru">
-                <FontAwesomeIcon
-                  icon={faPlus}
-                  className="text-[#1A1F5A] text-3xl ml-2"
-                />
-                <span className=" ml-2 mr-4 font-bold text-xl text-[#1A1F5A]">
-                  Tambahkan Guru
-                </span>
+            <div className='bg-gray-200 p-2 rounded-md'>
+              <a href="/admin/daftarsiswa">
+              <FontAwesomeIcon icon={faPlus} className='text-[#1A1F5A] text-3xl ml-2' />
+              <span className=' ml-2 mr-4 font-bold text-xl text-[#1A1F5A]'>Tambahkan Siswa</span>
               </a>
             </div>
           </span>
@@ -152,7 +92,7 @@ function Daftar2() {
             <input
               type="text"
               className="w-11/12 border rounded-lg px-4 py-2"
-              placeholder="Cari Guru"
+              placeholder="Cari Siswa"
             />
           </div>
           <table className="min-w-full divide-y divide-gray-200">
@@ -166,69 +106,63 @@ function Daftar2() {
                 </th>
                 <th
                   scope="col"
-                  className="pr-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  NIP
+                  NISN Peserta
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  Pangkat
+                  L/P
                 </th>
                 <th
                   scope="col"
-                  className="pr-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  Golongan
+                  Agama
                 </th>
                 <th
                   scope="col"
-                  className="pr-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
                   Nama Lengkap
                 </th>
-                {/* <th
-                  scope="col"
-                  className="pr-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Username
-                </th> */}
                 <th
                   scope="col"
-                  className="pr-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  Mata Pelajaran
+                  Username
                 </th>
                 <th></th>
                 <th></th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {dataGuru.map((lecture, i) => (
-                <tr key={i}>
+              {students.map((student) => (
+                <tr key={student.id}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    {i + 1}
+                    {student.id}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {lecture.nip}
+                    {student.nisn}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {lecture.pangkat}
+                    {student.gender}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {lecture.golongan}
+                    {student.agama}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {lecture.nama_lengkap}
+                    {student.name}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {lecture.matpel}
+                    {student.username}
                   </td>
-                  <td className="pr-3">
+                  <td className="pl-2 pr-1">
                     <FontAwesomeIcon icon={faPen} className="text-[#1A1F5A]" />
                   </td>
-                  <td className="pr-3">
+                  <td className="pr-2">
                     <FontAwesomeIcon
                       icon={faTrash}
                       className="text-[#1A1F5A]"
@@ -261,4 +195,4 @@ function Daftar2() {
   );
 }
 
-export default Daftar2;
+export default Daftar;

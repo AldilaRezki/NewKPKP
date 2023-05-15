@@ -1,13 +1,15 @@
 import React from "react";
-import Header from "../../Header";
+import HeaderGuru from "../../HeaderGuru";
 import HeaderKelas from "../HeaderKelas";
 import Form from "../../Form";
 import { BiArrowBack } from "react-icons/bi";
+import Header from "../../Header";
 
 function TambahUjian() {
   return (
     <div>
       <Header></Header>
+      <HeaderGuru></HeaderGuru>
       <HeaderKelas></HeaderKelas>
       <div className="bg-tosca mt-10 mx-10 p-2">
         <a href="/guru/xipa1/ujian">
@@ -48,7 +50,7 @@ function TambahUjian() {
         <a href="/guru/xipa1/ujian" className="text-biru py-2">
           Batal
         </a>
-        <a href="" className="text-white bg-biru py-2 px-5 rounded-md">
+        <a href="/guru/xipa1/ujian/tambah-ujian" className="text-white bg-biru py-2 px-5 rounded-md">
           Kirim
         </a>
       </div>
