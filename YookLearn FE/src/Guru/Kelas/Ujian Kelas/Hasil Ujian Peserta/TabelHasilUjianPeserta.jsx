@@ -27,7 +27,9 @@ function TabelHasilUjianPeserta() {
                 XXXXXXXX
               </td>
               <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru">
-                Lorem Ipsum
+                <a className="block" href="/guru/xipa1/ujian/ujian-pekan-1/hasil-ujian-siswa">
+                  Lorem Ipsum
+                </a>
               </td>
               <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
                 Ujian Sedang Berlangsung
