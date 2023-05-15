@@ -1,13 +1,15 @@
 import React from "react";
-import Header from "../../Header";
+import HeaderGuru from "../../HeaderGuru";
 import HeaderKelas from "../HeaderKelas";
 import { BiArrowBack } from "react-icons/bi";
 import TabelAnggotaKelas from "./TabelAnggotaKelas";
+import Header from "../../Header";
 
 function DaftarAnggotaKelas() {
   return (
     <div>
       <Header></Header>
+      <HeaderGuru></HeaderGuru>
       <HeaderKelas></HeaderKelas>
       <div className="bg-tosca mt-10 mx-10 p-2">
         <a href="/guru/xipa1">

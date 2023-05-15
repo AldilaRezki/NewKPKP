@@ -1,12 +1,14 @@
 import React from "react";
-import Header from "../../Header";
+import HeaderGuru from "../../HeaderGuru";
 import HeaderKelas from "../HeaderKelas";
 import BoxDaftarMateri from "./BoxDaftarMateri";
+import Header from "../../Header";
 
 function DaftarMateri() {
   return (
     <div>
       <Header></Header>
+      <HeaderGuru></HeaderGuru>
       <HeaderKelas></HeaderKelas>
       <div className="flex mt-10 mx-10 p-2 justify-between">
         <h1 className="my-auto text-xl font-medium text-biru">Daftar Materi</h1>

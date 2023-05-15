@@ -1,4 +1,5 @@
 import Header from "../Header";
+import HeaderGuru from "../HeaderGuru";
 import BoxDaftarKelas from "./BoxDaftarKelas";
 import BoxKelas from "./BoxKelas";
 
@@ -6,6 +7,7 @@ function DaftarKelas() {
   return (
     <div>
       <Header></Header>
+      <HeaderGuru></HeaderGuru>
 
       <h1 className="text-biru mt-10 ml-10 text-xl font-semibold ">
         Daftar Kelas
@@ -96,7 +98,7 @@ export default DaftarKelas;
 
 //   return (
 //     <div>
-//       <Header></Header>
+//       <HeaderGuru></HeaderGuru>
 
 //       <h1 className='text-biru mt-10 ml-10 text-xl font-semibold '>Daftar Kelas</h1>
 
@@ -170,7 +172,7 @@ export default DaftarKelas;
 
 //   return (
 //     <div>
-//       <Header></Header>
+//       <HeaderGuru></HeaderGuru>
 
 //       <h1 className='text-biru mt-10 ml-10 text-xl font-semibold '>Daftar Kelas</h1>
 
