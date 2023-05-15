@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { isAuthenticated } from "../../Common/functions/Auth";
+import { isAuthenticated } from "../../Common/services/Auth";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Nav from "../components/Nav";
 import FormUbahPass from "../components/FormUbahPass";
+import { resetPassword } from "../services/SiswaAPI";
 
 export default function UbahPass() {
   const navigate = useNavigate();
@@ -20,32 +21,9 @@ export default function UbahPass() {
   }, [login, navigate]);
 
   const handleResetPassword = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      const response = await fetch(
-        "http://localhost:8000/api/student/editpassword",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            new_password,
-            old_password,
-          }),
-        }
-      );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message);
-      }
-
+    const isSuccess = await resetPassword(new_password, old_password);
+    if (isSuccess) {
       setShowFormUbahPass(true);
-    } catch (error) {
-      console.log(error);
     }
   };
 

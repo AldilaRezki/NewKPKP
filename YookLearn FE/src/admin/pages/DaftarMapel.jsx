@@ -1,12 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
-  
+import { useNavigate, useParams } from "react-router-dom";
+import { addMapel, fetchAll } from "../services/AdminAPI";
+
 function tadmin() {
+  const navigate = useNavigate();
+  const { idKelas } = useParams();
   const [mapel, setMapel] = useState("");
   const [guru, setGuru] = useState("");
+  const [daftarGuru, setDaftarGuru] = useState([]);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchAll("guru");
+      setDaftarGuru(data);
+    }
+    fetchData();
+  }, []);
+
+  const handleSubmit = async () => {
+    const isSuccess = await addMapel(mapel, guru, idKelas);
+    if (isSuccess) {
+      navigate("/admin/berhasil");
+    }
   };
 
   return (
@@ -16,10 +32,7 @@ function tadmin() {
         <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">
           Daftar Mata Pelajaran
         </h1>
-        <form
-          onSubmit={handleSubmit}
-          className="bg-white rounded-lg shadow-md p-6"
-        >
+        <form className="bg-white rounded-lg shadow-md p-6">
           <div className="mb-4">
             <label
               htmlFor="mapel"
@@ -37,25 +50,32 @@ function tadmin() {
             />
           </div>
           <div className="mb-4">
-              <label
-                htmlFor="guru"
-                className="block text-gray-700 font-bold mb-2"
-              >
-                Guru Mata Pelajaran
-              </label>
-              <input
-                type="text"
-                id="username"
-                className="w-full border rounded-lg px-4 py-2"
-                placeholder="Masukkan username"
-                value={guru}
-                onChange={(e) => setGuru(e.target.value)}
-            />
-            </div>
-          <button type="submit" className="bg-[#1A1F5A] text-white px-4 py-2 rounded-lg">
-              <a href="/admin/berhasil">
-                  Simpan
-              </a>
+            <label
+              htmlFor="guru"
+              className="block text-gray-700 font-bold mb-2"
+            >
+              Guru Mata Pelajaran
+            </label>
+            <select
+              id="guru"
+              className="w-full border rounded-lg px-4 py-2"
+              value={guru}
+              onChange={(e) => setGuru(e.target.value)}
+            >
+              <option value=""></option>
+              {daftarGuru.map((guru) => (
+                <option key={guru.id} value={guru.id}>
+                  {guru.nama_lengkap}
+                </option>
+              ))}
+            </select>
+          </div>
+          <button
+            type="button"
+            onClick={handleSubmit}
+            className="bg-[#1A1F5A] text-white px-4 py-2 rounded-lg"
+          >
+            Simpan
           </button>
         </form>
       </main>

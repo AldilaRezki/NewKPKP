@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAddressCard, faAngleLeft, faFileImport, faGreaterThan, faLessThan, faMagnifyingGlass, faPen, faPersonChalkboard, faPlus, faTrash, faUserTie } from '@fortawesome/free-solid-svg-icons';
-import Header from '../components/Header';
+import {
+  faAddressCard,
+  faAngleLeft,
+  faFileImport,
+  faGreaterThan,
+  faLessThan,
+  faMagnifyingGlass,
+  faPen,
+  faPersonChalkboard,
+  faPlus,
+  faTrash,
+  faUserTie,
+} from "@fortawesome/free-solid-svg-icons";
+import Header from "../components/Header";
+import { fetchAll } from "../../Admin/services/AdminAPI";
+import { useNavigate } from "react-router-dom";
+import { isAuthenticated } from "../../Common/services/Auth";
 
 function Daftar3() {
   const accounts = [
@@ -12,6 +27,24 @@ function Daftar3() {
     { id: 5, name: "Ethan James", username: "James", status: "Admin" },
     { id: 6, name: "Olivia Mae", username: "Mae", status: "Admin" },
   ];
+
+  const navigate = useNavigate();
+  const login = isAuthenticated("admin");
+  const [dataAccount, setDataAccount] = useState([]);
+
+  useEffect(() => {
+    if (!login) {
+      navigate("/");
+    }
+  }, [login, navigate]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchAll("account");
+      setDataAccount(data);
+    }
+    fetchData();
+  }, []);
 
   return (
     <div className="bg-white min-h-screen">
@@ -133,19 +166,16 @@ function Daftar3() {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {accounts.map((account) => (
-                <tr key={account.id}>
+              {dataAccount.map((account, i) => (
+                <tr key={i}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    {account.id}
+                    {i + 1}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {account.name}
+                    {account.nama_user}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {account.username}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {account.status}
+                    {account.role}
                   </td>
                   <td className="pl-2 pr-1">
                     <FontAwesomeIcon icon={faPen} className="text-[#1A1F5A]" />
