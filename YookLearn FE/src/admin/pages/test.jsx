@@ -1,40 +1,29 @@
-import React, { useState } from 'react';
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 
-const Dropdown = () => {
-  const [selectedOption, setSelectedOption] = useState('');
-  const [agama, setAgama] = useState("");
-
-  const handleChange = (event) => {
-    setSelectedOption(event.target.value);
+export default function FormUbahPass({ visible, onClose }) {
+  const handleOnClose = () => {
+    onClose();
   };
 
+  if (!visible) return null;
   return (
-    <><div className="mb-4">
-          <label
-              htmlFor="agama"
-              className="block text-gray-700 font-bold mb-2"
-          >
-              Agama
-          </label>
-          <input
-              type="text"
-              id="agama"
-              className="w-full border rounded-lg px-4 py-2"
-              placeholder="Masukkan Agama"
-              value={agama}
-              onChange={(e) => setAgama(e.target.value)} />
-      </div><div>
-              <label htmlFor="options">Pilih opsi:</label>
-              <select id="options" value={selectedOption} onChange={handleChange}>
-                  <option value="">Pilih...</option>
-                  <option value="option1">Opsi 1</option>
-                  <option value="option2">Opsi 2</option>
-                  <option value="option3">Opsi 3</option>
-              </select>
-              <p>Anda memilih: {selectedOption}</p>
-          </div></>
-    
+    <div
+      onClick={handleOnClose}
+      className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center"
+    >
+      <div className=' bg-white max-h-screen'>
+      <main className='container items-center justify-center max-w-7xl mx-auto flex py-10 flex-col'>
+          <h1 className='pb-10 text-3xl text-[#1A1F5A]'>Data Berhasil Disimpan!</h1>
+          <button type="submit" className="bg-gradient-to-r from-[#1A1F5A] via-[#203da7] to-[#1c63cf] text-white p-4 rounded-lg">
+            <a href="/admin/listsiswa" className='flex'>
+                <FontAwesomeIcon icon={faCircleCheck} className=' text-white text-5xl' />
+                <h1 className=' text-xl p-2'>Simpan</h1>
+            </a>
+          </button>
+      </main>
+    </div>
+    </div>
   );
-};
-
-export default Dropdown;
+}

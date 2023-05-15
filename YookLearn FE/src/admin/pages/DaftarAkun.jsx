@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Header from "../pages/Header";
+import Header from "../components/Header";
   
 function tadmin() {
   const [nama, setNama] = useState("");
