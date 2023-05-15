@@ -1,19 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faAddressCard,
-  faAngleLeft,
-  faFileImport,
-  faGreaterThan,
-  faLessThan,
-  faMagnifyingGlass,
-  faPen,
-  faPersonChalkboard,
-  faPlus,
-  faTrash,
-  faUserTie,
-} from "@fortawesome/free-solid-svg-icons";
-import Header from "./Header";
+import { faAddressCard, faAngleLeft, faFileImport, faGreaterThan, faLessThan, faMagnifyingGlass, faPen, faPersonChalkboard, faPlus, faTrash, faUserTie } from '@fortawesome/free-solid-svg-icons';
+import Header from '../components/Header';
 
 function Daftar3() {
   const accounts = [
@@ -37,7 +25,7 @@ function Daftar3() {
             />
           </a>
           <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">
-            Daftar Akun
+            List Akun
           </h1>
         </div>
 

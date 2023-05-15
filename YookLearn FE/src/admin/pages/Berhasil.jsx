@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import Header from "../pages/Header";
+import React, { useState } from 'react';
+import Header from "../components/Header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 

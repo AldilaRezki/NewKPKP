@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import Header from "../pages/Header";
-
+import React, { useState } from 'react';
+import Header from "../components/Header";
+  
 function tguru() {
   const [nama, setNama] = useState("");
   const [username, setUserName] = useState("");
