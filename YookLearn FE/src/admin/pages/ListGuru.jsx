@@ -4,10 +4,11 @@ import { faAddressCard, faAngleLeft, faFileImport, faGreaterThan, faLessThan, fa
 import Header from './Header';
 
 function Daftar2() {
-  const students = [
+  const teachers = [
     {
       id: 1,
-      name: "Susi",
+      name: "Phoenix Wells",
+      username: "Phoenix",
       nip: "197410052007011006",
       pangkat: "Pembina",
       golongan: "Golongan II a",
@@ -15,7 +16,8 @@ function Daftar2() {
     },
     {
       id: 2,
-      name: "Budi",
+      name: "Luna Frost",
+      username: "Luna",
       nip: "198501102016011003",
       pangkat: "Penata Muda",
       golongan: "Golongan I a",
@@ -23,7 +25,8 @@ function Daftar2() {
     },
     {
       id: 3,
-      name: "Ratna",
+      name: "Orion Blackwood",
+      username: "Blackwood",
       nip: "197907012009011005",
       pangkat: "Penata Tingkat Satu",
       golongan: "Golongan III a",
@@ -112,7 +115,7 @@ function Daftar2() {
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  className="pr-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
                   NIP
                 </th>
@@ -124,19 +127,25 @@ function Daftar2() {
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  className="pr-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
                   Golongan
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  className="pr-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
                   Nama Lengkap
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  className="pr-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Username
+                </th>
+                <th
+                  scope="col"
+                  className="pr-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
                   Mata Pelajaran
                 </th>
@@ -145,30 +154,33 @@ function Daftar2() {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {students.map((student) => (
-                <tr key={student.id}>
+              {teachers.map((teacher) => (
+                <tr key={teacher.id}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    {student.id}
+                    {teacher.id}
+                  </td>
+                  <td className="pr-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {teacher.nip}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {student.nip}
+                    {teacher.pangkat}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {student.pangkat}
+                  <td className="pr-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {teacher.golongan}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {student.golongan}
+                  <td className="pr-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {teacher.name}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {student.name}
+                  <td className="pr-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {teacher.username}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {student.mapel}
+                  <td className="pr-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {teacher.mapel}
                   </td>
-                  <td className="pl-2 pr-1">
+                  <td className="pr-3">
                     <FontAwesomeIcon icon={faPen} className="text-[#1A1F5A]" />
                   </td>
-                  <td className="pr-2">
+                  <td className="pr-3">
                     <FontAwesomeIcon
                       icon={faTrash}
                       className="text-[#1A1F5A]"

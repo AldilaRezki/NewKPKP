@@ -8,6 +8,7 @@ function Daftar() {
     {
       id: 1,
       name: "John Doe",
+      username: "John",
       nisn: "1234567890",
       gender: "L",
       agama: "Islam",
@@ -15,6 +16,7 @@ function Daftar() {
     {
       id: 2,
       name: "Jane Smith",
+      username: "Jane",
       nisn: "1234567890",
       gender: "P",
       agama: "Protestan",
@@ -22,6 +24,7 @@ function Daftar() {
     {
       id: 3,
       name: "Bob Johnson",
+      username: "Bob",
       nisn: "1234567890",
       gender: "L",
       agama: "Hindu",
@@ -131,6 +134,12 @@ function Daftar() {
                 >
                   Nama Lengkap
                 </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Username
+                </th>
                 <th></th>
                 <th></th>
               </tr>
@@ -152,6 +161,9 @@ function Daftar() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {student.name}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {student.username}
                   </td>
                   <td className="pl-2 pr-1">
                     <FontAwesomeIcon icon={faPen} className="text-[#1A1F5A]" />

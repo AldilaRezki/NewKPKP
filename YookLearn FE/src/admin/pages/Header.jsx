@@ -5,8 +5,8 @@ import { faAddressBook, faAddressCard, faBookOpen, faFileImport, faGreaterThan, 
 function Header() {
     
   return (
-    <header class="relative bg-gradient-to-r from-[#1A1F5A] via-[#2f14de] to-[#41a3ff] text-white">
-  <div class="absolute inset-0 opacity-75 bg-[#1A1F5A]"></div>
+    <header class="relative bg-gradient-to-r from-[#1A1F5A] via-[#203da7] to-[#1c63cf] text-white">
+  <div class="absolute inset-0 opacity-75"></div>
   <nav class="relative z-10 flex justify-between items-center max-w-7xl mx-auto px-4 py-6 lg:px-8">
       <a href="/" class=" flex items-center">
       <FontAwesomeIcon icon={faPenNib} className='text-white text-4xl p-3' />
