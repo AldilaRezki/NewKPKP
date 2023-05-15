@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { isAuthenticated } from "../../Common/functions/Auth";
+import { isAuthenticated } from "../../Common/services/Auth";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { BsFillJournalBookmarkFill } from "react-icons/bs";
@@ -7,7 +7,7 @@ import Header from "../components/Header";
 import Nav from "../components/Nav";
 import MateriTitle from "../components/MateriTitle";
 import { Link } from "react-router-dom";
-import { fetchCurentMapelMateri, fetchCurrentMapel } from "../services/api";
+import { fetchCurentMapelMateri, fetchCurrentMapel } from "../services/SiswaAPI";
 
 function Materi() {
   const navigate = useNavigate();

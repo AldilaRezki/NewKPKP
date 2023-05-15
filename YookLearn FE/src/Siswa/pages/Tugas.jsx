@@ -5,8 +5,8 @@ import { IoMdPaper } from "react-icons/io";
 import { MdTask } from "react-icons/md";
 import { BsFillJournalBookmarkFill } from "react-icons/bs";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { fetchAllTugasMapel, fetchCurrentMapel } from "../services/api";
-import { isAuthenticated } from "../../Common/functions/Auth";
+import { fetchAllTugasMapel, fetchCurrentMapel } from "../services/SiswaAPI";
+import { isAuthenticated } from "../../Common/services/Auth";
 
 const Tugas = () => {
   const navigate = useNavigate();

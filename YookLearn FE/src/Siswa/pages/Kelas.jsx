@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { isAuthenticated } from "../../Common/functions/Auth";
+import { isAuthenticated } from "../../Common/services/Auth";
 import { useNavigate, Link } from "react-router-dom";
 import { MdOutlineDriveFileMove, MdGroups } from "react-icons/md";
 import { SiGoogleclassroom } from "react-icons/si";
@@ -10,7 +10,7 @@ import Nav from "../components/Nav";
 import ListTugas from "../components/ListTugas";
 import EditAkun from "../components/EditAkun";
 
-import { fecthKelas } from "../services/api";
+import { fecthKelas } from "../services/SiswaAPI";
 
 function Kelas() {
   const navigate = useNavigate();

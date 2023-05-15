@@ -1,12 +1,22 @@
-import React, { useState } from 'react';
-import Header from './Header';
-  
+import React, { useEffect, useState } from "react";
+import Header from "./Header";
+import { useNavigate } from "react-router-dom";
+import { isAuthenticated } from "../../Common/services/Auth";
+
 function tsiswa() {
+  const navigate = useNavigate();
+  const login = isAuthenticated("admin");
   const [nama, setNama] = useState("");
   const [nisn, setNISN] = useState("");
   const [jeniskelamin, setJenisKelamin] = useState("");
   const [agama, setAgama] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    if (!login) {
+      navigate("/");
+    }
+  }, [login, navigate]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -115,10 +125,11 @@ function tsiswa() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <button type="submit" className="bg-[#1A1F5A] text-white px-4 py-2 rounded-lg">
-              <a href="/admin/daftarsiswamapel">
-                  Berikutnya
-              </a>
+            <button
+              type="submit"
+              className="bg-[#1A1F5A] text-white px-4 py-2 rounded-lg"
+            >
+              <a href="/admin/daftarsiswamapel">Berikutnya</a>
             </button>
           </form>
         </div>

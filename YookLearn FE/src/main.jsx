@@ -216,13 +216,13 @@ const router = createBrowserRouter([
   },
   //Admin
   {
-    path: '/admin/berhasil',
-    element: <AdBerhasil />,
+    path: '/admin/homepage',
+    element: <AdAdminHomepage />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/admin/homepage',
-    element: <AdAdminHomepage />,
+    path: '/admin/berhasil',
+    element: <AdBerhasil />,
     errorElement: <ErrorPage />,
   },
   {

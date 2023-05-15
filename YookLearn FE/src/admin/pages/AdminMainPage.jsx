@@ -1,32 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Header from "../pages/Header";
 import { faAddressBook, faAddressCard, faBookOpen, faFileImport, faGreaterThan, faHome, faLessThan, faMagnifyingGlass, faPen, faPersonChalkboard, faPlus, faTrash, faUserTie } from '@fortawesome/free-solid-svg-icons';
+import { isAuthenticated } from "../../Common/services/Auth";
+import { useNavigate } from "react-router-dom";
 
 function AdminHomepage() {
-  const students = [
-    {
-      id: 1,
-      name: "John Doe",
-      nisn: "1234567890",
-      gender: "L",
-      agama: "Islam",
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      nisn: "1234567890",
-      gender: "P",
-      agama: "Protestan",
-    },
-    {
-      id: 3,
-      name: "Bob Johnson",
-      nisn: "1234567890",
-      gender: "L",
-      agama: "Hindu",
-    },
-  ];
+  const navigate = useNavigate();
+  const login = isAuthenticated("admin");
+
+  useEffect(() => {
+    if (!login) {
+      navigate("/");
+    }
+  }, [login, navigate]);
 
   return (
     <div className="bg-white min-h-screen">

@@ -103,43 +103,9 @@ class AdminController extends Controller
             'massage' => 'Akun berhasil di hapus'
         ];
 
-        if ($account = Account::where('id', $id)->delete()) {
-            $res = [
-                'success' => true,
-                'massage' => 'Akun berhasil di hapus'
-            ];
-        }
+        Account::where('id', $id)->delete();
 
         return response()->json($res);
-
-
-        // if (Lecturer::find($id)->delete()) {
-        //     if (Account::find($id)->delete()) {
-        //         return response()->json([
-        //             'success' => true,
-        //             'message' => 'Guru berhasil dihapus'
-        //         ]);
-        //     } else {
-        //         return response()->json([
-        //             'success' => false,
-        //             'message' => 'Guru gagal dihapus dihapus'
-        //         ]);
-        //     }
-        // }
-
-        // if (Student::find($id)->delete()) {
-        //     if (Account::find($id)->delete()) {
-        //         return response()->json([
-        //             'success' => true,
-        //             'message' => 'Siswa berhasil dihapus'
-        //         ]);
-        //     } else {
-        //         return response()->json([
-        //             'success' => false,
-        //             'message' => 'Siswa gagal dihapus dihapus'
-        //         ]);
-        //     }
-        // }
     }
 
     public function editAccount(Request $request, $id)
@@ -344,8 +310,7 @@ class AdminController extends Controller
             'message' => 'Guru berhasil dihapus'
         ];
 
-        if (!$affected) 
-        {
+        if (!$affected) {
             $res = [
                 'success' => false,
                 'message' => 'Guru gagal dihapus'
@@ -563,16 +528,27 @@ class AdminController extends Controller
             ]);
         }
 
-        $class = Classes::get();
-        $subjects = DB::table('subjects')->get()->where('id', $$class['id']);
+        $class = DB::table('classess')->get();
+        $students = DB::table('students')->get();
+        $lecturers = DB::table('lecturers')->get();
 
-        $res = [
-            'success' => true,
-            'Class' => $class,
-            'Subjects' => $subjects
-        ];
+        foreach ($class as $i) {
+            $total = 0;
+            foreach ($students as $student) {
+                if ($student->id_kelas === $i->id) {
+                    $total += 1;
+                }
+            }
+            foreach ($lecturers as $lecturer) {
+                if ($lecturer->id === $i->id_guru) {
+                    $nama_guru = $lecturer->nama_lengkap;
+                }
+            }
+            $i->nama_guru = $nama_guru;
+            $i->jumlah_siswa = $total;
+        }
 
-        return response()->json($res);
+        return response()->json($class);
     }
 
     public function getKelasById($id)
@@ -585,9 +561,17 @@ class AdminController extends Controller
             ]);
         }
 
-        $class = DB::table('classess')->get()->where('id', $id);
+        $class = DB::table('classess')->get()->where('id', $id)->first();
+        $subjects = DB::table('subjects')->get()->where('id', $class->id);
 
-        return response()->json($class);
+        $class->subjects = $subjects;
+
+        $res = [
+            'success' => true,
+            'class' => $class,
+        ];
+
+        return response()->json($res);
     }
 
     public function editKelas(Request $request, $id)
@@ -650,8 +634,7 @@ class AdminController extends Controller
             'message' => 'Kelas berhasil dihapus'
         ];
 
-        if (!$affected) 
-        {
+        if (!$affected) {
             $res = [
                 'success' => false,
                 'message' => 'Kelas gagal dihapus'
@@ -721,8 +704,6 @@ class AdminController extends Controller
         $subjects = Subject::get();
 
         return response()->json($subjects);
-
-
     }
 
     public function getMatpelById($id)
@@ -802,8 +783,7 @@ class AdminController extends Controller
             'message' => 'mata pelajaran berhasil dihapus'
         ];
 
-        if (!$affected) 
-        {
+        if (!$affected) {
             $res = [
                 'success' => false,
                 'message' => 'mata pelajaran gagal dihapus'
@@ -812,6 +792,4 @@ class AdminController extends Controller
 
         return response()->json($res);
     }
-
-
 }

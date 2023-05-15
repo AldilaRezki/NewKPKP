@@ -48,8 +48,10 @@ class DatabaseSeeder extends Seeder
             'id' => 'guruuuid',
             'nip' => 'niptesting',
             'nama_lengkap' => 'Guru Sistem',
-            'jenis_kelamin' => 'L',
-            'golongan' => 'V',
+            'jenis_kelamin' => 'Laki-Laki',
+            'golongan' => 'Golongan II a',
+            'pangkat' => 'Pembina',
+            'matpel' => 'Matematika',
         ]);
 
         DB::table('classess')->insert([
@@ -94,7 +96,7 @@ class DatabaseSeeder extends Seeder
             'id' => 'siswauuid',
             'nisn' => 'nisntest',
             'nama_lengkap' => 'Siswa Sistem',
-            'jenis_kelamin' => 'L',
+            'jenis_kelamin' => 'Laki - Laki',
             'agama' => 'Islam',
             'id_kelas' => 1,
         ]);
@@ -111,7 +113,7 @@ class DatabaseSeeder extends Seeder
             'id' => 'siswauuid2',
             'nisn' => 'nisntest2',
             'nama_lengkap' => 'Siswa Sistem 2',
-            'jenis_kelamin' => 'L',
+            'jenis_kelamin' => 'Perempuan',
             'agama' => 'Kristen Protestan',
             'id_kelas' => 1,
         ]);

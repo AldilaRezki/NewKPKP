@@ -4,8 +4,8 @@ import Nav from "../components/Nav";
 import { RiFilePaperLine } from "react-icons/ri";
 import { BsFillJournalBookmarkFill } from "react-icons/bs";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { isAuthenticated } from "../../Common/functions/Auth";
-import { fetchCurrentMapel } from "../services/api";
+import { isAuthenticated } from "../../Common/services/Auth";
+import { fetchCurrentMapel } from "../services/SiswaAPI";
 
 function Ujian() {
   const navigate = useNavigate();

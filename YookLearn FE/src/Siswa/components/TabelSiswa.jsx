@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { fetchSiswa } from "../services/api";
+import { fetchSiswa } from "../services/SiswaAPI";
 
 function TabelSiswa({ idkelas, idMapel }) {
 

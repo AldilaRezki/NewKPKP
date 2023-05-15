@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { isAuthenticated } from "../../Common/functions/Auth";
+import { isAuthenticated } from "../../Common/services/Auth";
 import { useNavigate, useParams } from "react-router-dom";
 
 import Header from "../components/Header";
@@ -11,7 +11,7 @@ import { IoMdPaper } from "react-icons/io";
 import { RiFilePaperLine } from "react-icons/ri";
 import Fiturkelas from "../components/Fiturkelas";
 import { Link } from "react-router-dom";
-import { fetchCurrentMapel } from "../services/api";
+import { fetchCurrentMapel } from "../services/SiswaAPI";
 
 function DetailKelas() {
   const navigate = useNavigate();

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
 
-import { fetchStudentAssignment } from "../services/api";
+import { fetchStudentAssignment } from "../services/SiswaAPI";
 
 function ListTugas() {
   const [isOpen, setIsOpen] = useState(false);

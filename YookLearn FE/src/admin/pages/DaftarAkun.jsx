@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
 import Header from "../pages/Header";
-  
+import { useNavigate } from "react-router-dom";
+import { isAuthenticated } from "../../Common/services/Auth";
+
 function tadmin() {
+  const navigate = useNavigate();
+  const login = isAuthenticated("admin");
   const [nama, setNama] = useState("");
   const [status, setStatus] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    if (!login) {
+      navigate("/");
+    }
+  }, [login, navigate]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -69,10 +79,11 @@ function tadmin() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <button type="submit" className="bg-[#1A1F5A] text-white px-4 py-2 rounded-lg">
-              <a href="/admin/berhasil">
-                  Simpan
-              </a>
+          <button
+            type="submit"
+            className="bg-[#1A1F5A] text-white px-4 py-2 rounded-lg"
+          >
+            <a href="/admin/berhasil">Simpan</a>
           </button>
         </form>
       </main>

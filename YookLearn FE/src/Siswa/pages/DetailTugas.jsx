@@ -4,8 +4,8 @@ import Nav from "../components/Nav";
 import DetailTgsCard from "../components/DetailTgsCard";
 import { BsFillJournalBookmarkFill } from "react-icons/bs";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { fetchCurrentMapel, fetchCurrentTugas } from "../services/api";
-import { isAuthenticated } from "../../Common/functions/Auth";
+import { fetchCurrentMapel, fetchCurrentTugas } from "../services/SiswaAPI";
+import { isAuthenticated } from "../../Common/services/Auth";
 
 function DetailTugas() {
   const navigate = useNavigate();

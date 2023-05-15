@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { isAuthenticated } from "../../Common/functions/Auth";
+import { isAuthenticated } from "../../Common/services/Auth";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { BsFillJournalBookmarkFill } from "react-icons/bs";
 import { MdDownloadForOffline } from "react-icons/md";
@@ -8,7 +8,7 @@ import Header from "../components/Header";
 import Nav from "../components/Nav";
 import MateriTitle from "../components/MateriTitle";
 
-import { fetchCurrentMapel, fetchCurrentMateri } from "../services/api";
+import { fetchCurrentMapel, fetchCurrentMateri } from "../services/SiswaAPI";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 

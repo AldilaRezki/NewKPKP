@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { isAuthenticated } from "../../Common/functions/Auth";
+import { isAuthenticated } from "../../Common/services/Auth";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Nav from "../components/Nav";
 import FormUbahPass from "../components/FormUbahPass";
-import { resetPassword } from "../services/api";
+import { resetPassword } from "../services/SiswaAPI";
 
 export default function UbahPass() {
   const navigate = useNavigate();

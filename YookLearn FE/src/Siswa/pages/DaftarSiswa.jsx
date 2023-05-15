@@ -7,8 +7,8 @@ import TabelSiswa from "../components/TabelSiswa";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
-import { fetchCurrentMapel } from "../services/api";
-import { isAuthenticated } from "../../Common/functions/Auth";
+import { fetchCurrentMapel } from "../services/SiswaAPI";
+import { isAuthenticated } from "../../Common/services/Auth";
 
 function DaftarSiswa() {
   const navigate = useNavigate();

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { isAuthenticated } from "../../Common/functions/Auth";
+import { isAuthenticated } from "../../Common/services/Auth";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { useState } from "react";
@@ -8,7 +8,7 @@ import Nav from "../components/Nav";
 import { BsList } from "react-icons/bs";
 import { FaSearch } from "react-icons/fa";
 import MapelCard from "../components/MapelCard";
-import { fetchKelasMapel } from "../services/api";
+import { fetchKelasMapel } from "../services/SiswaAPI";
 
 const Mapel = () => {
   const navigate = useNavigate();

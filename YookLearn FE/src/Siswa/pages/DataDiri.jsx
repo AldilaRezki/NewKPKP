@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { isAuthenticated } from "../../Common/functions/Auth";
+import { isAuthenticated } from "../../Common/services/Auth";
 import { useNavigate } from "react-router-dom";
-import { fetchSiswaProfile } from "../services/api";
+import { fetchSiswaProfile } from "../services/SiswaAPI";
 
 import Header from "../components/Header";
 import Nav from "../components/Nav";
