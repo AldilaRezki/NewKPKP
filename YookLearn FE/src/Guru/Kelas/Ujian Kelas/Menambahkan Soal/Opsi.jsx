@@ -46,4 +46,3 @@ const Opsi = ({ value, onChange }) => {
 };
 
 export default Opsi;
-

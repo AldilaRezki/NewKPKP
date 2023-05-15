@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import Header from "../pages/Header";
-  
+
 function tadmin() {
   const [nama, setNama] = useState("");
   const [username, setUserName] = useState("");
@@ -39,21 +39,21 @@ function tadmin() {
             />
           </div>
           <div className="mb-4">
-              <label
-                htmlFor="username"
-                className="block text-gray-700 font-bold mb-2"
-              >
-                Username
-              </label>
-              <input
-                type="text"
-                id="username"
-                className="w-full border rounded-lg px-4 py-2"
-                placeholder="Masukkan username"
-                value={username}
-                onChange={(e) => setUserName(e.target.value)}
-              />
-            </div>
+            <label
+              htmlFor="username"
+              className="block text-gray-700 font-bold mb-2"
+            >
+              Username
+            </label>
+            <input
+              type="text"
+              id="username"
+              className="w-full border rounded-lg px-4 py-2"
+              placeholder="Masukkan username"
+              value={username}
+              onChange={(e) => setUserName(e.target.value)}
+            />
+          </div>
           <div className="mb-4">
             <label
               htmlFor="status"
@@ -86,10 +86,11 @@ function tadmin() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <button type="submit" className="bg-[#1A1F5A] text-white px-4 py-2 rounded-lg">
-              <a href="/admin/berhasil">
-                  Simpan
-              </a>
+          <button
+            type="submit"
+            className="bg-[#1A1F5A] text-white px-4 py-2 rounded-lg"
+          >
+            <a href="/admin/berhasil">Simpan</a>
           </button>
         </form>
       </main>
