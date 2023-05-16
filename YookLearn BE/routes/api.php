@@ -19,6 +19,7 @@ use App\Http\Controllers\API\StudentController;
 */
 
 Route::post('login', [AuthController::class, 'login']);
+Route::get('materi/{idMateri}/download', [StudentController::class, 'downloadMateri']);
 Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
 
 // Admin Routes
@@ -45,8 +46,11 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'admin'], function (
     Route::post('kelas/add', [AdminController::class, 'addKelas']);
     Route::get('kelas/', [AdminController::class, 'getKelas']);
     Route::get('kelas/{id}', [AdminController::class, 'getKelasById']);
+    Route::get('kelas/{id}/siswa', [AdminController::class, 'getSiswaByKelas']);
+    Route::get('kelas/{id}/mapel', [AdminController::class, 'getMapelByKelas']);
     Route::post('kelas/edit/{id}', [AdminController::class, 'updateKelas']);
     Route::delete('kelas/delete/{id}', [AdminController::class, 'deleteKelas']);
+    Route::get('/mapel/{id_mapel}/siswa', [StudentController::class, 'getSiswa']);
 
     Route::post('matpel/add', [AdminController::class, 'addMatpel']);
     Route::get('matpel/', [AdminController::class, 'getMatpel']);
@@ -95,7 +99,7 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'student'], function
     Route::get('/tugas', [StudentController::class, 'getAllTugas']);
     Route::get('/kelas', [StudentController::class, 'getKelas']);
     Route::get('/kelas/{id_kelas}', [StudentController::class, 'getMapel']);
-    Route::get('/kelas/{id_kelas}/siswa', [StudentController::class, 'getSiswa']);
+    Route::get('/mapel/{id_mapel}', [StudentController::class, 'getMapelById']);
 
     Route::get('/matpel/{id_matpel}/tugas', [StudentController::class, 'getTugas']);
     Route::get('/tugas/{idTugas}', [StudentController::class, 'getDetailTugas']);

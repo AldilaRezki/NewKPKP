@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
-  
+import { useNavigate } from "react-router-dom";
+import { isAuthenticated } from "../../Common/services/Auth";
+import { addGuru } from "../services/AdminAPI";
+
 function tguru() {
+  const navigate = useNavigate();
+  const login = isAuthenticated("admin");
   const [nama, setNama] = useState("");
   const [username, setUserName] = useState("");
   const [nip, setNIP] = useState("");
@@ -10,8 +15,25 @@ function tguru() {
   const [mapel, setMapel] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  useEffect(() => {
+    if (!login) {
+      navigate("/");
+    }
+  }, [login, navigate]);
+
+  const handleAddGuru = async () => {
+    const isSuccess = await addGuru(
+      username,
+      password,
+      nama,
+      nip,
+      golongan,
+      pangkat,
+      mapel
+    );
+    if (isSuccess) {
+      navigate("/admin/berhasil");
+    }
   };
 
   return (
@@ -21,10 +43,7 @@ function tguru() {
         <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">
           Daftar Akun Guru
         </h1>
-        <form
-          onSubmit={handleSubmit}
-          className="bg-white rounded-lg shadow-md p-6"
-        >
+        <form className="bg-white rounded-lg shadow-md p-6">
           <div className="mb-4">
             <label
               htmlFor="nama"
@@ -135,10 +154,11 @@ function tguru() {
             />
           </div>
           <button
-            type="submit"
+            type="button"
+            onClick={handleAddGuru}
             className="bg-[#1A1F5A] text-white px-4 py-2 rounded-lg"
           >
-            <a href="/admin/berhasil">Simpan</a>
+            Simpan
           </button>
         </form>
       </main>

@@ -48,8 +48,10 @@ class DatabaseSeeder extends Seeder
             'id' => 'guruuuid',
             'nip' => 'niptesting',
             'nama_lengkap' => 'Guru Sistem',
-            'jenis_kelamin' => 'L',
-            'golongan' => 'V',
+            // 'jenis_kelamin' => 'Laki-Laki',
+            'golongan' => 'Golongan II a',
+            'pangkat' => 'Pembina',
+            'matpel' => 'Matematika',
         ]);
 
         DB::table('classess')->insert([
@@ -63,20 +65,23 @@ class DatabaseSeeder extends Seeder
             'nama_matpel' => 'Matematika 12 Test',
             'id_kelas' => '1',
             'id_guru' => 'guruuuid',
+            'jadwal' => 'Selasa, 11.00 - 13.00',
         ]);
-
+        
         DB::table('subjects')->insert([
             'id' => 2,
             'nama_matpel' => 'IPA 12 Test',
             'id_kelas' => '1',
             'id_guru' => 'guruuuid',
+            'jadwal' => 'Rabu, 11.00 - 13.00',
         ]);
-
+        
         DB::table('subjects')->insert([
             'id' => 3,
             'nama_matpel' => 'Bahasa 12 Test',
             'id_kelas' => '1',
             'id_guru' => 'guruuuid',
+            'jadwal' => 'Kamis, 11.00 - 13.00',
         ]);
 
         DB::table('accounts')->insert([
@@ -91,7 +96,7 @@ class DatabaseSeeder extends Seeder
             'id' => 'siswauuid',
             'nisn' => 'nisntest',
             'nama_lengkap' => 'Siswa Sistem',
-            'jenis_kelamin' => 'L',
+            'jenis_kelamin' => 'Laki - Laki',
             'agama' => 'Islam',
             'id_kelas' => 1,
         ]);
@@ -108,7 +113,7 @@ class DatabaseSeeder extends Seeder
             'id' => 'siswauuid2',
             'nisn' => 'nisntest2',
             'nama_lengkap' => 'Siswa Sistem 2',
-            'jenis_kelamin' => 'L',
+            'jenis_kelamin' => 'Perempuan',
             'agama' => 'Kristen Protestan',
             'id_kelas' => 1,
         ]);
@@ -119,14 +124,16 @@ class DatabaseSeeder extends Seeder
             'detail_tugas' => 'Ini adalah tugas test 1',
             'nilai' => 90,
             'tipe_deadline' => 'strict',
+            'deadline' => '2023-05-12 10:30:00',
             'id_matpel' => 1,
         ]);
-
+        
         DB::table('assignments')->insert([
             'id' => 2,
             'judul_tugas' => 'Tugas Test 2',
             'detail_tugas' => 'Ini adalah tugas test 2',
             'nilai' => 100,
+            'deadline' => '2023-05-11 11:30:00',
             'tipe_deadline' => 'unstrict',
             'id_matpel' => 1,
         ]);

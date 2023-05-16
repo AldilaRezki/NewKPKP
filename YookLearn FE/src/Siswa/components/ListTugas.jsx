@@ -1,9 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
-import list from "../../list.json";
+
+import { fetchStudentAssignment } from "../services/SiswaAPI";
 
 function ListTugas() {
   const [isOpen, setIsOpen] = useState(false);
+  const [tugas, setTugas] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchStudentAssignment();
+      setTugas(data);
+    }
+    fetchData();
+  }, []);
+
   return (
     <div className="relative flex flex-col items-center w-[340px] h-[340px] rounded-lg">
       <button
@@ -20,14 +31,14 @@ function ListTugas() {
 
       {isOpen && (
         <div className="bg-[#EEF4FA] absolute top-20 flex flex-col items-start rounded-lg p-2 w-full">
-          {list.map((item, i) => (
+          {tugas.map((item, i) => (
             <div
               className=" flex w-full justify-between cursor-pointer rounded-r-lg border-l-transparent flex-col"
               key={i}
             >
-              <h1 className="font-bold text-[#1A1F5A]"> {item.tugas} </h1>
-              <p className="text-[#1A1F5A] flex-row"> {item.dl} </p>
-              <p className="text-[#1A1F5A] flex-row"> {item.detail} </p>
+              <h1 className="font-bold text-[#1A1F5A]"> {item.judul_tugas} </h1>
+              <p className="text-[#1A1F5A] flex-row"> {item.deadline} </p>
+              <p className="text-[#1A1F5A] flex-row"> {item.detail_tugas} </p>
             </div>
           ))}
         </div>

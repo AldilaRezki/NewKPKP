@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Subject extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    use Uuids;
 
     /**
      * The attributes that are mass assignable.
@@ -24,7 +23,7 @@ class Subject extends Authenticatable
         'jadwal',
         'id_kelas',
         'id_guru',
-        'id_packages'
+        'nama_matpel'
     ];
 
     /**

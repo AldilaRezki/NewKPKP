@@ -1,9 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAddressCard, faAngleLeft, faFileImport, faGreaterThan, faLessThan, faMagnifyingGlass, faPen, faPersonChalkboard, faPlus, faTrash, faUserTie } from '@fortawesome/free-solid-svg-icons';
-import Header from '../components/Header';
+import {
+  faAddressCard,
+  faAngleLeft,
+  faFileImport,
+  faGreaterThan,
+  faLessThan,
+  faMagnifyingGlass,
+  faPen,
+  faPersonChalkboard,
+  faPlus,
+  faTrash,
+  faUserTie,
+} from "@fortawesome/free-solid-svg-icons";
+import Header from "../components/Header";
+import { fetchAll } from "../../Admin/services/AdminAPI";
+import { useNavigate } from "react-router-dom";
+import { isAuthenticated } from "../../Common/services/Auth";
 
 function Daftar() {
+  const navigate = useNavigate();
+  const login = isAuthenticated("admin");
+  const [dataSiswa, setSiswa] = useState([]);
+
+  useEffect(() => {
+    if (!login) {
+      navigate("/");
+    }
+  }, [login, navigate]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchAll("siswa");
+      setSiswa(data);
+    }
+    fetchData();
+  }, []);
+
   const students = [
     {
       id: 1,
@@ -152,37 +185,37 @@ function Daftar() {
                 >
                   Nama Lengkap
                 </th>
-                <th
+                {/* <th
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
                   Username
-                </th>
+                </th> */}
                 <th></th>
                 <th></th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {students.map((student) => (
-                <tr key={student.id}>
+              {dataSiswa.map((student, i) => (
+                <tr key={i}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    {student.id}
+                    {i + 1}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {student.nisn}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {student.gender}
+                    {student.jenis_kelamin}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {student.agama}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {student.name}
+                    {student.nama_lengkap}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {/* <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {student.username}
-                  </td>
+                  </td> */}
                   <td className="pl-2 pr-1">
                     <FontAwesomeIcon icon={faPen} className="text-[#1A1F5A]" />
                   </td>

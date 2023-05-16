@@ -17,6 +17,10 @@ use App\Models\Lecturer;
 use App\Models\Material;
 use App\Models\Student_Assigment;
 use Illuminate\Support\Facades\Redis;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\File;
 
 class StudentController extends Controller
 {
@@ -96,6 +100,12 @@ class StudentController extends Controller
 
         $tugas = reset($tugas);
 
+        foreach ($tugas as $x) {
+            $carbon = new Carbon($x->deadline);
+            $date = $carbon->format('Y-m-d');
+            $x->deadline = $date;
+        }
+
         return $tugas;
     }
 
@@ -106,6 +116,7 @@ class StudentController extends Controller
 
         $kelas = DB::table('classess')->get()->where('id', $userAccount->id_kelas)->first();
         $students = DB::table('students')->get()->where('id_kelas', $kelas->id);
+        $guru = DB::table('lecturers')->get()->where('id', $kelas->id_guru)->first();
         $total = 0;
 
         foreach ($students as $student) {
@@ -115,6 +126,7 @@ class StudentController extends Controller
         }
 
         $kelas->jumlah_siswa = $total;
+        $kelas->guru = $guru->nama_lengkap;
 
         return $kelas;
     }
@@ -125,8 +137,22 @@ class StudentController extends Controller
 
         $kelas = DB::table('classess')->get()->where('id', $idKelas)->first();
         $subjects = DB::table('subjects')->get()->where('id_kelas', $kelas->id);
+        $guru = DB::table('lecturers')->get()->where('id', $kelas->id_guru)->first();
+
+        foreach ($subjects as $subject) {
+            $subject->nama_guru = $guru->nama_lengkap;
+        }
 
         return $subjects;
+    }
+
+    public function getMapelById($idMapel)
+    {
+        $user = auth()->user();
+
+        $subject = DB::table('subjects')->get()->where('id', $idMapel)->first();
+
+        return $subject;
     }
 
     public function getSiswa($idKelas)
@@ -151,7 +177,7 @@ class StudentController extends Controller
     {
         $user = auth()->user();
 
-        $tugas = DB::table('assignments')->get()->where('id', $idTugas);
+        $tugas = DB::table('assignments')->get()->where('id', $idTugas)->first();
 
         return $tugas;
     }
@@ -202,6 +228,8 @@ class StudentController extends Controller
 
     }
 
+    
+
     public function getMateri($idMatpel)
     {
         $user = auth()->user();
@@ -215,8 +243,36 @@ class StudentController extends Controller
     {
         $user = auth()->user();
 
-        $materi = DB::table('materials')->get()->where('id', $idMateri);
+        $materi = DB::table('materials')->get()->where('id', $idMateri)->first();
 
         return $materi;
     }
+
+    
+    // public function downloadMateri($fileId)
+    // {
+    //     // Retrieve the file name based on the fileId
+    //     $file = DB::table('materials')->get('filename')->where('id', $fileId)->first();
+    
+    //     if ($file->filename) {
+    //         $filePath = public_path('upload/' . $file->filename);
+    
+    //         // Check if the file exists in the public/upload directory
+    //         if (File::exists($filePath)) {
+    //             // Get the file's content type
+    //             $contentType = File::mimeType($filePath);
+    
+    //             // Generate the response with the file content
+    //             $response = response()->download($filePath, null, [
+    //                 'Content-Type' => $contentType,
+    //             ]);
+    
+    //             return $response;
+    //         }
+    //     }
+    
+    //     // File not found, return an error response
+    //     return response()->json(['message' => 'File not found'], Response::HTTP_NOT_FOUND);
+    // }
+    
 }

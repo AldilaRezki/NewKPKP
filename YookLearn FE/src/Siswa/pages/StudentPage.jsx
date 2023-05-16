@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { isAuthenticated } from "../../Common/functions/Auth";
+import { isAuthenticated } from "../../Common/services/Auth";
 import { useNavigate } from "react-router-dom";
 
 import Header from "../components/Header";

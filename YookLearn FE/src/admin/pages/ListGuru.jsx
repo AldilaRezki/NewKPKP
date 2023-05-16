@@ -1,10 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAddressCard, faAngleLeft, faFileImport, faGreaterThan, faLessThan, faMagnifyingGlass, faPen, faPersonChalkboard, faPlus, faTrash, faUserTie } from '@fortawesome/free-solid-svg-icons';
-import Header from '../components/Header';
+import {
+  faAddressCard,
+  faAngleLeft,
+  faFileImport,
+  faGreaterThan,
+  faLessThan,
+  faMagnifyingGlass,
+  faPen,
+  faPersonChalkboard,
+  faPlus,
+  faTrash,
+  faUserTie,
+} from "@fortawesome/free-solid-svg-icons";
+import Header from "../components/Header";
+import { fetchAll } from "../../Admin/services/AdminAPI";
+import { useNavigate } from "react-router-dom";
+import { isAuthenticated } from "../../Common/services/Auth";
 
 function Daftar2() {
-  const teachers = [
+  const navigate = useNavigate();
+  const login = isAuthenticated("admin");
+  const [dataGuru, setDataGuru] = useState([]);
+
+  useEffect(() => {
+    if (!login) {
+      navigate("/");
+    }
+  }, [login, navigate]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchAll("guru");
+      setDataGuru(data);
+    }
+    fetchData();
+  }, []);
+
+  const students = [
     {
       id: 1,
       name: "Phoenix Wells",
@@ -155,12 +188,12 @@ function Daftar2() {
                 >
                   Nama Lengkap
                 </th>
-                <th
+                {/* <th
                   scope="col"
                   className="pr-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
                   Username
-                </th>
+                </th> */}
                 <th
                   scope="col"
                   className="pr-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
@@ -172,28 +205,25 @@ function Daftar2() {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {teachers.map((teacher) => (
-                <tr key={teacher.id}>
+              {dataGuru.map((lecture, i) => (
+                <tr key={i}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    {teacher.id}
-                  </td>
-                  <td className="pr-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {teacher.nip}
+                    {i + 1}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {teacher.pangkat}
+                    {lecture.nip}
                   </td>
-                  <td className="pr-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {teacher.golongan}
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {lecture.pangkat}
                   </td>
-                  <td className="pr-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {teacher.name}
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {lecture.golongan}
                   </td>
-                  <td className="pr-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {teacher.username}
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {lecture.nama_lengkap}
                   </td>
-                  <td className="pr-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {teacher.mapel}
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {lecture.matpel}
                   </td>
                   <td className="pr-3">
                     <FontAwesomeIcon icon={faPen} className="text-[#1A1F5A]" />

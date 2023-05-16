@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAddressCard, faAngleLeft, faBook, faFileImport, faGreaterThan, faLessThan, faMagnifyingGlass, faPen, faPersonChalkboard, faPlus, faTrash, faUserTie } from '@fortawesome/free-solid-svg-icons';
-import Header from '../components/Header';
+import {
+  faAddressCard,
+  faAngleLeft,
+  faBook,
+  faFileImport,
+  faGreaterThan,
+  faLessThan,
+  faMagnifyingGlass,
+  faPen,
+  faPersonChalkboard,
+  faPlus,
+  faTrash,
+  faUserTie,
+} from "@fortawesome/free-solid-svg-icons";
+import Header from "../components/Header";
+import { useNavigate, useParams } from "react-router-dom";
+import { isAuthenticated } from "../../Common/services/Auth";
+import { fetchMapelByKelas } from "../services/AdminAPI";
 
 function Daftar3() {
   const mapels = [
-    { id: 1, guru: "Harper Lee", mapel: "Matematika"},
+    { id: 1, guru: "Harper Lee", mapel: "Matematika" },
     { id: 2, guru: "Logan Cole", mapel: "Bahasa Inggris" },
     { id: 3, guru: "Ava Grace", mapel: "Bahasa Indonesia" },
     { id: 4, guru: "Lily Grace", mapel: "Fisika" },
@@ -13,25 +29,52 @@ function Daftar3() {
     { id: 6, guru: "Olivia Mae", mapel: "Kimia" },
   ];
 
+  const navigate = useNavigate();
+  const login = isAuthenticated("admin");
+  const [dataMapel, setMapel] = useState([]);
+  const { idKelas } = useParams();
+
+  useEffect(() => {
+    if (!login) {
+      navigate("/");
+    }
+  }, [login, navigate]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchMapelByKelas(idKelas);
+      setMapel(data);
+    }
+    fetchData(idKelas);
+  }, []);
+
   return (
     <div className="bg-white min-h-screen">
-      <Header/>
+      <Header />
       <div className="container mx-auto px-4 py-6">
-        <div className='flex'>
+        <div className="flex">
           <a href="/admin/homepage">
-            <FontAwesomeIcon icon={faAngleLeft} className='text-[#1A1F5A] text-3xl ml-2 pr-3' />
+            <FontAwesomeIcon
+              icon={faAngleLeft}
+              className="text-[#1A1F5A] text-3xl ml-2 pr-3"
+            />
           </a>
           <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">
             List Mata Pelajaran
           </h1>
         </div>
-        
-        <div className='flex justify-between'>
-          <span className='flex items-center'>
-            <div className='p-3 rounded-t-md'>
-              <a href="/admin/listsiswapaketkelas">
-              <FontAwesomeIcon icon={faUserTie} className='text-gray-500 text-2xl' />
-              <span className=' ml-2 font-bold text-lg text-gray-500'>Siswa</span>
+
+        <div className="flex justify-between">
+          <span className="flex items-center">
+            <div className="p-3 rounded-t-md">
+              <a href={`/admin/ListPaketKelas/${idKelas}/siswa`}>
+                <FontAwesomeIcon
+                  icon={faUserTie}
+                  className="text-gray-500 text-2xl"
+                />
+                <span className=" ml-2 font-bold text-lg text-gray-500">
+                  Siswa
+                </span>
               </a>
             </div>
             <div className="bg-gray-200 p-4 rounded-t-md">
@@ -56,10 +99,15 @@ function Daftar3() {
                 </span>
               </a>
             </div>
-            <div className='bg-gray-200 p-2 rounded-md'>
-              <a href="/admin/daftarmapel">
-              <FontAwesomeIcon icon={faPlus} className='text-[#1A1F5A] text-3xl ml-2' />
-              <span className=' ml-2 mr-4 font-bold text-xl text-[#1A1F5A]'>Tambahkan Mata Pelajaran</span>
+            <div className="bg-gray-200 p-2 rounded-md">
+              <a href={`/admin/daftarmapel/${idKelas}`}>
+                <FontAwesomeIcon
+                  icon={faPlus}
+                  className="text-[#1A1F5A] text-3xl ml-2"
+                />
+                <span className=" ml-2 mr-4 font-bold text-xl text-[#1A1F5A]">
+                  Tambahkan Mata Pelajaran
+                </span>
               </a>
             </div>
           </span>
@@ -103,16 +151,16 @@ function Daftar3() {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {mapels.map((mapel) => (
+              {dataMapel.map((mapel, i) => (
                 <tr key={mapel.id}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    {mapel.id}
+                    {i + 1}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {mapel.mapel}
+                    {mapel.nama_matpel}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {mapel.guru}
+                    {mapel.nama_guru}
                   </td>
                   <td className="pl-2 pr-1">
                     <FontAwesomeIcon icon={faPen} className="text-[#1A1F5A]" />

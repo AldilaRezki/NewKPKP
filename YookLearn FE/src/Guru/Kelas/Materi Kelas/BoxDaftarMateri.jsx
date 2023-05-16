@@ -3,7 +3,7 @@ import { GrDocumentText } from "react-icons/gr";
 
 function BoxDaftarMateri() {
   return (
-    <a href="">
+    <a href="/guru/xipa1/isi-materi">
       <div className="flex justify-between border-[0.3px] my-10 p-8 shadow-md mx-40">
         <div className="flex gap-x-4 px-8">
           <div className="bg-tosca text-xl p-3 rounded-full my-auto">

@@ -1,17 +1,48 @@
-import React, { useState } from 'react';
-import Header from '../components/Header';
-  
+import React, { useEffect, useState } from "react";
+import Header from "../components/Header";
+import { useNavigate } from "react-router-dom";
+import { isAuthenticated } from "../../Common/services/Auth";
+import { addSiswa, fetchAllKelas } from "../services/AdminAPI";
+
 function tsiswa() {
+  const navigate = useNavigate();
+  const login = isAuthenticated("admin");
   const [nama, setNama] = useState("");
   const [username, setUserName] = useState("");
   const [nisn, setNISN] = useState("");
-  const [jeniskelamin, setJenisKelamin] = useState("");
+  const [jenisKelamin, setJenisKelamin] = useState("");
   const [agama, setAgama] = useState("");
   const [kelas, setKelas] = useState("");
   const [password, setPassword] = useState("");
+  const [daftarKelas, setDaftarKelas] = useState([]);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  useEffect(() => {
+    if (!login) {
+      navigate("/");
+    }
+  }, [login, navigate]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchAllKelas();
+      setDaftarKelas(data);
+    }
+    fetchData();
+  }, []);
+
+  const handleAddSiswa = async () => {
+    const isSuccess = await addSiswa(
+      nama,
+      username,
+      nisn,
+      jenisKelamin,
+      agama,
+      password,
+      kelas
+    );
+    if (isSuccess) {
+      navigate("/admin/berhasil");
+    }
   };
 
   return (
@@ -21,10 +52,7 @@ function tsiswa() {
         <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">
           Daftar Akun Siswa
         </h1>
-        <form
-          onSubmit={handleSubmit}
-          className="bg-white rounded-lg shadow-md p-6 w-3/5"
-        >
+        <form className="bg-white rounded-lg shadow-md p-6 w-3/5">
           <div className="mb-4">
             <label
               htmlFor="nama"
@@ -85,7 +113,7 @@ function tsiswa() {
               id="jeniskelamin"
               className="w-full border rounded-lg px-4 py-2"
               placeholder="Masukkan Jenis Kelamin"
-              value={jeniskelamin}
+              value={jenisKelamin}
               onChange={(e) => setJenisKelamin(e.target.value)}
             />
           </div>
@@ -119,15 +147,11 @@ function tsiswa() {
               onChange={(e) => setKelas(e.target.value)}
             >
               <option value=""></option>
-              <option value="option1">X-1</option>
-              <option value="option2">X-2</option>
-              <option value="option3">X-3</option>
-              <option value="option4">XI-IPA-1</option>
-              <option value="option5">XI-IPA-2</option>
-              <option value="option6">XI-IPS</option>
-              <option value="option7">XII-IPA-1</option>
-              <option value="option8">XII-IPA-2</option>
-              <option value="option9">XII-IPS</option>
+              {daftarKelas.map((kelas) => (
+                <option key={kelas.id} value={kelas.id}>
+                  {kelas.nama_kelas}
+                </option>
+              ))}
             </select>
           </div>
           <div className="mb-4">
@@ -147,10 +171,11 @@ function tsiswa() {
             />
           </div>
           <button
-            type="submit"
+            type="button"
+            onClick={handleAddSiswa}
             className="bg-[#1A1F5A] text-white px-4 py-2 rounded-lg"
           >
-            <a href="/admin/berhasil">Berikutnya</a>
+            Berikutnya
           </button>
         </form>
       </main>
