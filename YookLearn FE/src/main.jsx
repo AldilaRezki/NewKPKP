@@ -190,7 +190,7 @@ const router = createBrowserRouter([
     element: <TambahUjian />,
   },
   {
-    path: "/guru/xipa1/ujian/tambah-ujian",
+    path: "/guru/xipa1/ujian/tambah-soal-ujian",
     element: <TambahSoal />,
   },
   {

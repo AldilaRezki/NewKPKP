@@ -51,10 +51,10 @@ function TambahUjian() {
           Batal
         </a>
         <a
-          href="/guru/xipa1/ujian/tambah-ujian"
+          href="/guru/xipa1/ujian/tambah-soal-ujian"
           className="text-white bg-biru py-2 px-5 rounded-md"
         >
-          Kirim
+          Tambah Soal
         </a>
       </div>
     </div>
