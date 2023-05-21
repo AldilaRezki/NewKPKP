@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Header from "../components/Header";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import { addKelas, fetchAll } from "../services/AdminAPI";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 function tadmin() {
   const navigate = useNavigate();

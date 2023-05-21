@@ -270,7 +270,6 @@ export async function uploadFile(file, idTugas) {
       throw new Error(data.message);
     }
     return data;
-    
   } catch (error) {
     console.log(error);
     return false;

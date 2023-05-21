@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { fetchSiswa } from "../services/SiswaAPI";
 
 function TabelSiswa({ idkelas, idMapel }) {
-
   const [siswa, setSiswa] = useState([]);
 
   useEffect(() => {
@@ -30,7 +29,10 @@ function TabelSiswa({ idkelas, idMapel }) {
             </thead>
             <tbody>
               {siswa.map((item) => (
-                <tr key={item.id} className="border-[0.3px] shadow-md bg-[#EEF4FA]">
+                <tr
+                  key={item.id}
+                  className="border-[0.3px] shadow-md bg-[#EEF4FA]"
+                >
                   <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] border-biru text-center">
                     {item.nisn}
                   </td>

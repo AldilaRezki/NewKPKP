@@ -249,12 +249,12 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: '/admin/berhasil',
+    path: "/admin/berhasil",
     element: <AdBerhasil />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/admin/daftarakun',
+    path: "/admin/daftarakun",
     element: <AdDaftarAkun />,
     errorElement: <ErrorPage />,
   },
@@ -284,32 +284,32 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: '/admin/ListPaketKelas',
+    path: "/admin/ListPaketKelas",
     element: <AdListPaketKelas />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/admin/ListPaketKelas/:idKelas/siswa',
+    path: "/admin/ListPaketKelas/:idKelas/siswa",
     element: <AdListSiswaPaketKelas />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/admin/ListPaketKelas/:idKelas/matapelajaran',
+    path: "/admin/ListPaketKelas/:idKelas/matapelajaran",
     element: <AdListMataPelajaranPaketKelas />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/admin/test',
+    path: "/admin/test",
     element: <AdTest />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/admin/daftarmapel/:idKelas',
+    path: "/admin/daftarmapel/:idKelas",
     element: <AdDaftarMapel />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/admin/daftarpaket',
+    path: "/admin/daftarpaket",
     element: <AdDaftarPaket />,
     errorElement: <ErrorPage />,
   },

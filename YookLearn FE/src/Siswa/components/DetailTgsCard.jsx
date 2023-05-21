@@ -46,7 +46,7 @@ export default function DetailTgsCard({ idTugas }) {
         <hr className="border-t border-[#1A1F5A] w-[798px] ml-[103px] mt-6"></hr>
       </div>
       <div className="flex justify-center mt-6">
-        <FileUploadButton onFileUpload={handleFileUpload}/>
+        <FileUploadButton onFileUpload={handleFileUpload} />
       </div>
     </>
   );
