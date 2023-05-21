@@ -87,7 +87,10 @@ function Daftar3() {
             <div className="flex justify-evenly p-10">
               <div className=" w-3/12">
                 {dataKelas.map((kelas) => (
-                  <a href={`/admin/ListPaketKelas/${kelas.id}/siswa`} key={kelas.id}>
+                  <a
+                    href={`/admin/ListPaketKelas/${kelas.id}/siswa`}
+                    key={kelas.id}
+                  >
                     <div className="bg-[#1A1F5A] text-white rounded-t-md font-bold py-3 pl-12">
                       {kelas.nama_kelas}
                       <FontAwesomeIcon

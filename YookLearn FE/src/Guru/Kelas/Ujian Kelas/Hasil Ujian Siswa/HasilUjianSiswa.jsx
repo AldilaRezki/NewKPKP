@@ -22,10 +22,11 @@ function HasilUjianSiswa() {
         <h1 className="text-xl font-medium text-biru">Daftar Soal</h1>
         <div className="mr-16 gap-y-5 flex flex-col">
           <span>Poin yang diperoleh</span>
-          <span className="text-md py-2 px-3 border-[0,3px] shadow-md text-biru">90/100</span>
+          <span className="text-md py-2 px-3 border-[0,3px] shadow-md text-biru">
+            90/100
+          </span>
         </div>
       </div>
-      
 
       <div className="pilihanGanda">
         <span className="flex mt-6 ml-10 text-lg font-semibold text-biru">
