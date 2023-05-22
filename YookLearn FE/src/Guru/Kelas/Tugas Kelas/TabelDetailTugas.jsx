@@ -42,7 +42,10 @@ function TabelDetailTugas() {
                 placeholder="Masukkan poin"/>
               </td>
               <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] shadow-md border-biru text-center">
-                <MdSave className="text-2xl mr-2 inline-block"></MdSave>
+                <a href="/path/to/tugas1.pdf" download>
+                  <MdSave className="text-2xl mr-2 inline-block" />
+                </a>
+                <BiCommentDetail className="text-2xl inline-block mb-[1px]" />
               </td>
             </tr>
             <tr className="border-[0.3px] shadow-md">

@@ -46,7 +46,7 @@ function TambahUjian({ onFileUpload }) {
       <div>
         <h2 className="text-md mt-8 ml-10 font-normal text-biru">Lampiran</h2>
         <div className="flex">
-        <div>
+          <div>
             <ButtonTambahMateri onFileUpload={handleFileUpload} />
           </div>
           <span className="ml-5 my-auto ">Tidak ada file yang dipilih</span>

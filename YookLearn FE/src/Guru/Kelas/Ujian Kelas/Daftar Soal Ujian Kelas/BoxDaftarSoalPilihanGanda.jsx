@@ -17,18 +17,18 @@ function BoxDaftarSoalPilihanGanda() {
         </div>
         <div className="detailSoalPilihanGanda flex flex-col gap-y-6 w-[250px]">
           <div className="jenisPertanyaanSoalPilihanGanda flex flex-col gap-y-2">
-                <form>
-                  <label htmlFor="">Jenis Pertanyaan</label>
-                  <select
-                    name=""
-                    id=""
-                    className="bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 w-[250px] border-[0.3px] shadow-md mt-4"
-                  >
-                    <option value="">Pilihan Ganda</option>
-                    <option value="">Kotak Centang</option>
-                    <option value="">Essai</option>
-                  </select>
-                </form>
+            <form>
+              <label htmlFor="">Jenis Pertanyaan</label>
+              <select
+                name=""
+                id=""
+                className="bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 w-[250px] border-[0.3px] shadow-md mt-4"
+              >
+                <option value="">Pilihan Ganda</option>
+                <option value="">Kotak Centang</option>
+                <option value="">Essai</option>
+              </select>
+            </form>
           </div>
           <div className="poinSoalPilihanGanda flex flex-col">
             {/* <span className="bg-white border-[0.3px] py-2 pl-3 shadow-md">
@@ -42,9 +42,15 @@ function BoxDaftarSoalPilihanGanda() {
       <div className="pilihanSoalPilihanGanda">
         <span>Jawaban</span>
         <div className="flex flex-col gap-y-2">
-          <DaftarPilihanSoalPilihanGanda labelTextPilihanGanda={"Lorem Ipsum"}></DaftarPilihanSoalPilihanGanda>
-          <DaftarPilihanSoalPilihanGanda labelTextPilihanGanda={"Lorem Ipsum"}></DaftarPilihanSoalPilihanGanda>
-          <DaftarPilihanSoalPilihanGanda labelTextPilihanGanda={"Lorem Ipsum"}></DaftarPilihanSoalPilihanGanda>
+          <DaftarPilihanSoalPilihanGanda
+            labelTextPilihanGanda={"Lorem Ipsum"}
+          ></DaftarPilihanSoalPilihanGanda>
+          <DaftarPilihanSoalPilihanGanda
+            labelTextPilihanGanda={"Lorem Ipsum"}
+          ></DaftarPilihanSoalPilihanGanda>
+          <DaftarPilihanSoalPilihanGanda
+            labelTextPilihanGanda={"Lorem Ipsum"}
+          ></DaftarPilihanSoalPilihanGanda>
         </div>
       </div>
     </div>

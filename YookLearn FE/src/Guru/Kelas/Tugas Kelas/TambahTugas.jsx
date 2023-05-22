@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useState, useRef } from "react";
 import HeaderGuru from "../../HeaderGuru";
 import HeaderKelas from "../HeaderKelas";
 import Form from "../../Form";
@@ -10,9 +10,13 @@ import ButtonTambahMateri from "../Materi Kelas/ButtonTambahMateri";
 function TambahTugas({ onFileUpload }) {
   const fileInputRef = useRef(null);
 
-  const handleFileUpload = () => {
-    const file = fileInputRef.current.files[0];
-    onFileUpload(file);
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      setGambar(file);
+    };
+    reader.readAsDataURL(file);
   };
   return (
     <div>
@@ -44,15 +48,25 @@ function TambahTugas({ onFileUpload }) {
         <Form></Form>
       </div>
 
-      <div>
+      <div className="form-input-row mt-5">
+        <label
+          className="text-md mt-10 ml-10 font-normal text-biru"
+          htmlFor="fileInput"
+        >
+          Lampiran
+        </label>
+        <input id="fileInput" type="file" onChange={handleFileChange} />
+      </div>
+
+      {/* <div>
         <h2 className="text-md mt-8 ml-10 font-normal text-biru">Lampiran</h2>
         <div className="flex">
-        <div>
+          <div>
             <ButtonTambahMateri onFileUpload={handleFileUpload} />
           </div>
           <span className="ml-5 my-auto ">Tidak ada file yang dipilih</span>
         </div>
-      </div>
+      </div> */}
 
       <div className="flex ml-10 gap-x-9">
         <div>
