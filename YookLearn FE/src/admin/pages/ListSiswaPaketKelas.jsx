@@ -49,7 +49,7 @@ function Daftar() {
 
   const navigate = useNavigate();
   const login = isAuthenticated("admin");
-  const [ dataSiswa, setSiswa] = useState([]);
+  const [dataSiswa, setSiswa] = useState([]);
   const { idKelas } = useParams();
 
   useEffect(() => {
@@ -187,10 +187,10 @@ function Daftar() {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {dataSiswa.map((student,i) => (
+              {dataSiswa.map((student, i) => (
                 <tr key={student.id}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    {i+1}
+                    {i + 1}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {student.nisn}

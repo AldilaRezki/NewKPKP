@@ -7,7 +7,10 @@ import Header from "../components/Header";
 import Nav from "../components/Nav";
 import MateriTitle from "../components/MateriTitle";
 import { Link } from "react-router-dom";
-import { fetchCurentMapelMateri, fetchCurrentMapel } from "../services/SiswaAPI";
+import {
+  fetchCurentMapelMateri,
+  fetchCurrentMapel,
+} from "../services/SiswaAPI";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 

@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useRef } from "react";
 import HeaderGuru from "../../HeaderGuru";
 import HeaderKelas from "../HeaderKelas";
 import Form from "../../Form";
 import { BiArrowBack } from "react-icons/bi";
 import Header from "../../Header";
 import { useParams } from 'react-router-dom';
+import ButtonTambahMateri from "./ButtonTambahMateri";
 
-function TambahMateri() {
+function TambahMateri({ onFileUpload }) {
+  const fileInputRef = useRef(null);
+
+  const handleFileUpload = () => {
   const {idMapel} = useParams();
+    const file = fileInputRef.current.files[0];
+    onFileUpload(file);
+  };
   return (
     <div>
       <Header></Header>
@@ -43,9 +50,9 @@ function TambahMateri() {
       <div>
         <h2 className="text-md mt-8 ml-10 font-normal text-biru">Lampiran</h2>
         <div className="flex">
-          <button className="py-2 px-10 w-fit border-[0.3px] shadow-md ml-10 mt-4">
-            Pilih File
-          </button>
+          <div>
+            <ButtonTambahMateri onFileUpload={handleFileUpload} />
+          </div>
           <span className="ml-5 my-auto ">Tidak ada file yang dipilih</span>
         </div>
       </div>

@@ -75,9 +75,7 @@ function Daftar() {
               className="text-[#1A1F5A] text-3xl ml-2 pr-3"
             />
           </a>
-          <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">
-            List Siswa
-          </h1>
+          <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">List Siswa</h1>
         </div>
 
         <div className="flex justify-between">
