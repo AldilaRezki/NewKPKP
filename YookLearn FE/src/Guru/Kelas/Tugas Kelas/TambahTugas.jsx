@@ -48,15 +48,17 @@ function TambahTugas({ onFileUpload }) {
         <Form></Form>
       </div>
 
-      <div className="form-input-row mt-5">
+      <div className="form-input-row mt-8">
         <label
           className="text-md mt-10 ml-10 font-normal text-biru"
           htmlFor="fileInput"
         >
           Lampiran
         </label>
-        <input id="fileInput" type="file" onChange={handleFileChange} />
-      </div>
+        <div className="flex mt-4 ml-10">
+          <input id="fileInput" type="file" onChange={handleFileChange} />
+        </div>
+        </div>
 
       {/* <div>
         <h2 className="text-md mt-8 ml-10 font-normal text-biru">Lampiran</h2>
@@ -67,48 +69,6 @@ function TambahTugas({ onFileUpload }) {
           <span className="ml-5 my-auto ">Tidak ada file yang dipilih</span>
         </div>
       </div> */}
-
-      <div className="flex ml-10 gap-x-9">
-        <div>
-          <h2 className="text-md mt-8 font-normal text-biru">Tenggat</h2>
-          <div className="flex gap-x-8">
-            <button className="flex justify-between py-2 pl-5 w-[130px] border-[0.3px] shadow-md mt-4">
-              Tanggal
-              <AiFillCaretDown className="my-auto mr-5"></AiFillCaretDown>
-            </button>
-            <button className="flex justify-between py-2 pl-5 w-[130px] border-[0.3px] shadow-md mt-4">
-              Bulan
-              <AiFillCaretDown className="my-auto mr-5"></AiFillCaretDown>
-            </button>
-            <button className="flex justify-between py-2 pl-5 w-[130px] border-[0.3px] shadow-md mt-4">
-              Tahun
-              <AiFillCaretDown className="my-auto mr-5"></AiFillCaretDown>
-            </button>
-          </div>
-        </div>
-
-        <div>
-          <h2 className="text-md mt-8 font-normal text-biru">(Opsional)</h2>
-          <div className="flex gap-x-8">
-            <button className="flex justify-between py-2 pl-5 w-[130px] border-[0.3px] shadow-md mt-4">
-              Jam
-              <AiFillCaretDown className="my-auto mr-5"></AiFillCaretDown>
-            </button>
-            <button className="flex justify-between py-2 pl-5 w-[130px] border-[0.3px] shadow-md mt-4">
-              Bulan
-              <AiFillCaretDown className="my-auto mr-5"></AiFillCaretDown>
-            </button>
-          </div>
-        </div>
-
-        <div>
-          <h2 className="text-md mt-8 ml-10 font-normal text-biru">Lampiran</h2>
-          <div className="flex">
-            <form className="py-2 w-fit ml-10 mt-4">
-              <input type="file" />
-            </form>
-          </div>
-        </div>
 
         <div className="flex ml-10 gap-x-9">
           <div>
@@ -142,10 +102,10 @@ function TambahTugas({ onFileUpload }) {
           <div>
             <h2 className="text-md mt-8 font-normal text-biru">Poin</h2>
             <div className="flex">
-              <button className="flex justify-between py-2 pl-5 w-[110px] border-[0.3px] shadow-md mt-4">
-                100
-                <AiFillCaretDown className="my-auto mr-5"></AiFillCaretDown>
-              </button>
+              <input type="number" name="" id="" 
+              min={0}
+              max={100}
+              className="flex justify-between py-2 pl-5 w-[110px] border-[0.3px] shadow-md mt-4"/>
             </div>
           </div>
 
@@ -165,19 +125,6 @@ function TambahTugas({ onFileUpload }) {
             </div>
           </div>
         </div>
-
-        <div>
-          <h2 className="text-md mt-8 font-normal text-biru">
-            Setelah melewati tenggat waktu
-          </h2>
-          <div className="flex">
-            <button className="flex justify-between py-2 pl-5 w-[360px] border-[0.3px] shadow-md mt-4">
-              Tidak dapat mengumpulkan tugas
-              <AiFillCaretDown className="my-auto mr-5"></AiFillCaretDown>
-            </button>
-          </div>
-        </div>
-      </div>
 
       <div className="mt-20 flex justify-end mr-10 gap-x-10 mb-20">
         <a href="/guru/xipa1/daftar-tugas" className="text-biru py-2">
