@@ -66,6 +66,7 @@ import TambahSoal from "./Guru/Kelas/Ujian Kelas/Menambahkan Soal/TambahSoal";
 import ExamPage from "./Siswa/pages/ExamPage";
 import IsiMateri from "./Guru/Kelas/Materi Kelas/IsiMateri";
 import HasilUjianSiswa from "./Guru/Kelas/Ujian Kelas/Hasil Ujian Siswa/HasilUjianSiswa";
+import InputFormBerita from "./Siswa/pages/InputFormBerita";
 
 import EditPaket from "./Admin/pages/EditPaket";
 import EditSiswa from "./Admin/pages/EditSiswa";
@@ -147,6 +148,11 @@ const router = createBrowserRouter([
   {
     path: "/siswa/exam",
     element: <ExamPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/siswa/test",
+    element: <InputFormBerita />,
     errorElement: <ErrorPage />,
   },
 

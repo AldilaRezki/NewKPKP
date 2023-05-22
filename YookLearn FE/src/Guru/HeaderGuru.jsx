@@ -3,7 +3,7 @@ function HeaderGuru() {
     <header className="flex justify-between bg-biru h-14">
       <div className="header_left flex gap-x-4 ml-10">
         <a className="logo text-white my-auto" href="/guru/homepage">
-          LOGO
+          YookLearn
         </a>
       </div>
 

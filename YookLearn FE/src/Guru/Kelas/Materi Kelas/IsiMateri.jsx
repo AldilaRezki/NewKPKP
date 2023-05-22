@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import Header from "../../Header";
 import HeaderKelas from "../HeaderKelas";
 import { BiArrowBack, BiBook } from "react-icons/bi";
-import { AiOutlineArrowDown } from "react-icons/ai";
+import { BsSaveFill } from "react-icons/bs";
+import HeaderGuru from "../../HeaderGuru";
 import { useNavigate, useParams } from "react-router-dom";
 import { isAuthenticated } from "../../../Common/services/Auth";
 import { fetchAllMateri, fetchCurrentMateri } from "../../services/GuruAPI";
@@ -51,7 +52,7 @@ function IsiMateri() {
 
       <div className="flex ml-[110px] mt-10 gap-x-5 text-biru">
         <span className="bg-tosca p-3 rounded-lg">{dataMateri.filename}</span>
-        <AiOutlineArrowDown className="bg-tosca p-2 my-auto text-[2.7rem] rounded-lg"></AiOutlineArrowDown>
+        <BsSaveFill className="bg-tosca p-[0.6rem] my-auto text-[2.5rem] rounded-lg"></BsSaveFill>
       </div>
     </div>
   );
