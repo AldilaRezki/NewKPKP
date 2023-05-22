@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import { BsTypeBold } from "react-icons/bs";
 import { BsTypeItalic } from "react-icons/bs";
 import { BsTypeUnderline } from "react-icons/bs";
@@ -10,7 +10,12 @@ import { MdFormatClear } from "react-icons/md";
 import { MdOutlineImage } from "react-icons/md";
 import { MdAddLink } from "react-icons/md";
 
-function Form({ mx = 'mx-10', width = ''}) {
+function Form({ mx = "mx-10", width = "" }) {
+  const [isi, setIsi] = useState("");
+
+  const handleIsiChange = (event) => {
+    setIsi(event.target.value);
+  };
   return (
     <div className={`border-[0.3px] shadow-md ${mx} mt-3 ${width}`}>
       <div className="flex bg-tosca border-[0.3px] shadow-md py-1">
@@ -61,6 +66,16 @@ function Form({ mx = 'mx-10', width = ''}) {
           <textarea
             type="text"
             className="py-1 px-2 w-[100%] focus:outline-none focus:ring-1"
+            id="isi"
+            value={isi}
+            onChange={handleIsiChange}
+            style={{
+              minHeight: "20px",
+              maxHeight: "200px",
+              height: "auto",
+              resize: "vertical",
+            }}
+            rows={Math.min(20, isi.split("\n").length)}
           />
         </form>
       </div>

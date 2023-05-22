@@ -16,22 +16,29 @@ function BoxDaftarSoalEssay() {
         </div>
         <div className="detailSoalEssai flex flex-col gap-y-6 w-[250px]">
           <div className="jenisPertanyaanSoalEssai flex flex-col gap-y-2">
-                <form>
-                  <label htmlFor="">Jenis Pertanyaan</label>
-                  <select
-                    name=""
-                    id=""
-                    className="bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 w-[250px] border-[0.3px] shadow-md mt-4"
-                  >
-                    <option value="">Pilihan Ganda</option>
-                    <option value="">Kotak Centang</option>
-                    <option value="">Essai</option>
-                  </select>
-                </form>
+            <form>
+              <label htmlFor="">Jenis Pertanyaan</label>
+              <select
+                name=""
+                id=""
+                className="bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 w-[250px] border-[0.3px] shadow-md mt-4"
+              >
+                <option value="">Pilihan Ganda</option>
+                <option value="">Kotak Centang</option>
+                <option value="">Essai</option>
+              </select>
+            </form>
           </div>
           <div className="poinSoalEssay flex flex-col">
             <label for="">Poin Soal</label>
-            <input type="" id="" name="" min="0" max="100" className="bg-white border-[0.3px] py-2 pl-3 shadow-md"></input>
+            <input
+              type=""
+              id=""
+              name=""
+              min="0"
+              max="100"
+              className="bg-white border-[0.3px] py-2 pl-3 shadow-md"
+            ></input>
           </div>
         </div>
       </div>

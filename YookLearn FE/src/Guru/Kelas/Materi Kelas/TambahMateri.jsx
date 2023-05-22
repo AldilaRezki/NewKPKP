@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useState, useRef } from "react";
 import HeaderGuru from "../../HeaderGuru";
 import HeaderKelas from "../HeaderKelas";
 import Form from "../../Form";
@@ -7,11 +7,15 @@ import Header from "../../Header";
 import ButtonTambahMateri from "./ButtonTambahMateri";
 
 function TambahMateri({ onFileUpload }) {
-  const fileInputRef = useRef(null);
+  const [judul, setJudul] = useState("");
 
-  const handleFileUpload = () => {
-    const file = fileInputRef.current.files[0];
-    onFileUpload(file);
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      setGambar(file);
+    };
+    reader.readAsDataURL(file);
   };
   return (
     <div>
@@ -29,7 +33,22 @@ function TambahMateri({ onFileUpload }) {
       </h1>
 
       <div>
-        <h2 className="text-md mt-8 ml-10 font-normal text-biru">
+        <div className="form-input-row">
+          <label
+            htmlFor="judul"
+            className="text-md mt-8 ml-10 font-normal text-biru"
+          >
+            Judul
+          </label>
+          <input
+            className="bg-white mx-10 mt-3 h-8 border-[0.3px] shadow-md w-[95%] py-1 px-2 focus:outline-none focus:ring-1"
+            id="judul"
+            type="text"
+            value={judul}
+            onChange={(e) => setJudul(e.target.value)}
+          />
+        </div>
+        {/* <h2 className="text-md mt-8 ml-10 font-normal text-biru">
           Judul Materi
         </h2>
         <form>
@@ -37,15 +56,35 @@ function TambahMateri({ onFileUpload }) {
             type="text"
             className="bg-white mx-10 mt-3 h-8 border-[0.3px] shadow-md w-[95%] py-1 px-2 focus:outline-none focus:ring-1"
           />
-        </form>
+        </form> */}
       </div>
 
-      <div>
-        <h2 className="text-md mt-8 ml-10 font-normal text-biru">Isi Materi</h2>
+      <div className="form-input-row">
+        <label
+          htmlFor="isi"
+          className="text-md mt-8 ml-10 font-normal text-biru"
+        >
+          Isi
+        </label>
         <Form></Form>
       </div>
 
-      <div>
+      {/* <div>
+        <h2 className="text-md mt-8 ml-10 font-normal text-biru">Isi Materi</h2>
+        <Form></Form>
+      </div> */}
+
+      <div className="form-input-row mt-5">
+        <label
+          className="text-md mt-10 ml-10 font-normal text-biru"
+          htmlFor="fileInput"
+        >
+          Lampiran
+        </label>
+        <input id="fileInput" type="file" onChange={handleFileChange} />
+      </div>
+
+      {/* <div>
         <h2 className="text-md mt-8 ml-10 font-normal text-biru">Lampiran</h2>
         <div className="flex">
           <div>
@@ -53,7 +92,7 @@ function TambahMateri({ onFileUpload }) {
           </div>
           <span className="ml-5 my-auto ">Tidak ada file yang dipilih</span>
         </div>
-      </div>
+      </div> */}
 
       <div className="mt-20 flex justify-end mr-10 gap-x-10 mb-20">
         <a href="/guru/xipa1/daftar-materi" className="text-biru py-2">
