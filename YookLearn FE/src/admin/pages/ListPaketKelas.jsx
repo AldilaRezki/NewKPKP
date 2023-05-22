@@ -28,6 +28,12 @@ function Daftar3() {
     fetchData();
   }, []);
 
+  const handleEdit = async (idKelas) => {
+    if (idKelas) {
+      navigate(`/admin/edit/kelas/${idKelas}`);
+    }
+  };
+
   return (
     <div className="bg-white min-h-screen">
       <Header />
@@ -93,14 +99,24 @@ function Daftar3() {
                   >
                     <div className="bg-[#1A1F5A] text-white rounded-t-md font-bold py-3 pl-12">
                       {kelas.nama_kelas}
-                      <FontAwesomeIcon
-                        icon={faPen}
-                        className="text-white pl-14"
-                      />
-                      <FontAwesomeIcon
-                        icon={faTrash}
-                        className="text-white px-4"
-                      />
+                      <a
+                        href={`/admin/edit/kelas/${kelas.id}`}
+                        className=""
+                      >
+                        <FontAwesomeIcon
+                          icon={faPen}
+                          className="text-white pl-14"
+                        />
+                      </a>
+                      <a
+                        href={`/admin/hapus/kelas/${kelas.id}`}
+                        className=""
+                      >
+                        <FontAwesomeIcon
+                          icon={faTrash}
+                          className="text-white px-4"
+                        />
+                      </a>
                     </div>
                     <div className="text-[#1A1F5A] font-bold py-3 pl-2">
                       <FontAwesomeIcon

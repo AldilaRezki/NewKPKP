@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { MdTask } from "react-icons/md";
 import FileUploadButton from "./FileUploadButton";
 import { fetchCurrentTugas, uploadFile } from "../services/SiswaAPI";
+import { useNavigate } from "react-router-dom";
 
-export default function DetailTgsCard({ idTugas }) {
+export default function DetailTgsCard({ idKelas, idMapel, idTugas }) {
+  const navigate = useNavigate();
   const [dataTugas, setDataTugas] = useState([]);
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -15,12 +18,13 @@ export default function DetailTgsCard({ idTugas }) {
     fetchData(idTugas);
   }, []);
 
-  const handleFileUpload = (file) => {
-    uploadFile(file, idTugas);
-    if (onFileUpload) {
-      onFileUpload();
+  const handleFileUpload = async () => {
+    const file = fileInputRef.current.files[0];
+    const result = await uploadFile(file, idTugas);
+
+    if (result.success) {
+      navigate(`/siswa/kelas/${idKelas}/detailkelas/${idMapel}/tugas`);
     }
-    console.log(file);
   };
 
   return (
@@ -46,7 +50,22 @@ export default function DetailTgsCard({ idTugas }) {
         <hr className="border-t border-[#1A1F5A] w-[798px] ml-[103px] mt-6"></hr>
       </div>
       <div className="flex justify-center mt-6">
-        <FileUploadButton onFileUpload={handleFileUpload} />
+        <div>
+          <input
+            type="file"
+            ref={fileInputRef}
+            className="hidden"
+            onChange={handleFileUpload}
+          />
+
+          <button
+            type="button"
+            className="bg-[#1A1F5A] text-white py-5 px-10 rounded-md hover:bg-[#303371]"
+            onClick={() => fileInputRef.current.click()}
+          >
+            + Upload Tugas
+          </button>
+        </div>
       </div>
     </>
   );

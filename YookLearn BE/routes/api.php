@@ -48,14 +48,14 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'admin'], function (
     Route::get('kelas/{id}', [AdminController::class, 'getKelasById']);
     Route::get('kelas/{id}/siswa', [AdminController::class, 'getSiswaByKelas']);
     Route::get('kelas/{id}/mapel', [AdminController::class, 'getMapelByKelas']);
-    Route::post('kelas/edit/{id}', [AdminController::class, 'updateKelas']);
+    Route::post('kelas/edit/{id}', [AdminController::class, 'editKelas']);
     Route::delete('kelas/delete/{id}', [AdminController::class, 'deleteKelas']);
     Route::get('/mapel/{id_mapel}/siswa', [StudentController::class, 'getSiswa']);
 
     Route::post('matpel/add', [AdminController::class, 'addMatpel']);
     Route::get('matpel/', [AdminController::class, 'getMatpel']);
     Route::get('matpel/{id}', [AdminController::class, 'getMatpelById']);
-    Route::post('matpel/edit/{id}', [AdminController::class, 'updateMatpel']);
+    Route::post('matpel/edit/{id}', [AdminController::class, 'editMatpel']);
     Route::delete('matpel/delete/{id}', [AdminController::class, 'deleteMatpel']);
 });
 

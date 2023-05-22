@@ -1,4 +1,5 @@
-const BASE_URL = "http://localhost:8000/api/lecture";
+// const BASE_URL = "http://localhost:8000/api/lecture";
+const BASE_URL = import.meta.env.VITE_GURU_API;
 
 export async function fetchProfile() {
   try {

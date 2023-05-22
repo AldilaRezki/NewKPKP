@@ -30,7 +30,7 @@ class AuthController extends Controller
         }
 
         $token = $user->createToken('auth_token')->plainTextToken;
-        $token = substr($token, 2);
+        $token = explode("|", $token)[1];
 
         $res = [
             'success' => true,

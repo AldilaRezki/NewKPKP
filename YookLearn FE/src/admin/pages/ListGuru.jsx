@@ -223,15 +223,22 @@ function Daftar2() {
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {lecture.matpel}
                   </td>
-                  <td className="pr-3">
-                    <FontAwesomeIcon icon={faPen} className="text-[#1A1F5A]" />
-                  </td>
-                  <td className="pr-3">
-                    <FontAwesomeIcon
-                      icon={faTrash}
-                      className="text-[#1A1F5A]"
-                    />
-                  </td>
+                  <a href={`/admin/guru/edit/${lecture.id}`}>
+                    <td className="pr-3">
+                      <FontAwesomeIcon
+                        icon={faPen}
+                        className="text-[#1A1F5A]"
+                      />
+                    </td>
+                  </a>
+                  <a href="">
+                    <td className="pr-3">
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        className="text-[#1A1F5A]"
+                      />
+                    </td>
+                  </a>
                 </tr>
               ))}
             </tbody>

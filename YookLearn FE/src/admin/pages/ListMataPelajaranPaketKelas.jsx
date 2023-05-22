@@ -162,15 +162,22 @@ function Daftar3() {
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {mapel.nama_guru}
                   </td>
-                  <td className="pl-2 pr-1">
-                    <FontAwesomeIcon icon={faPen} className="text-[#1A1F5A]" />
-                  </td>
-                  <td className="pr-2">
-                    <FontAwesomeIcon
-                      icon={faTrash}
-                      className="text-[#1A1F5A]"
-                    />
-                  </td>
+                  <a href={`/admin/ListPaketKelas/${idKelas}/matapelajaran/edit/${mapel.id}`}>
+                    <td className="pl-2 pr-1">
+                      <FontAwesomeIcon
+                        icon={faPen}
+                        className="text-[#1A1F5A]"
+                      />
+                    </td>
+                  </a>
+                  <a href="">
+                    <td className="pr-2">
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        className="text-[#1A1F5A]"
+                      />
+                    </td>
+                  </a>
                 </tr>
               ))}
             </tbody>

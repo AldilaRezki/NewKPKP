@@ -1,4 +1,6 @@
-const BASE_URL = "http://localhost:8000/api/student";
+// const BASE_URL = "http://localhost:8000/api/student";
+
+const BASE_URL = import.meta.env.VITE_SISWA_API;
 
 export async function fetchCurrentMapel(idMapel) {
   try {

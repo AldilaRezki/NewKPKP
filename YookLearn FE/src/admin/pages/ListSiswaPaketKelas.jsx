@@ -207,15 +207,22 @@ function Daftar() {
                   {/* <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {student.username}
                   </td> */}
-                  <td className="pl-2 pr-1">
-                    <FontAwesomeIcon icon={faPen} className="text-[#1A1F5A]" />
-                  </td>
-                  <td className="pr-2">
-                    <FontAwesomeIcon
-                      icon={faTrash}
-                      className="text-[#1A1F5A]"
-                    />
-                  </td>
+                  <a href={`/admin/siswa/edit/${student.id}`}>
+                    <td className="pl-2 pr-1">
+                      <FontAwesomeIcon
+                        icon={faPen}
+                        className="text-[#1A1F5A]"
+                      />
+                    </td>
+                  </a>
+                  <a href="">
+                    <td className="pr-2">
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        className="text-[#1A1F5A]"
+                      />
+                    </td>
+                  </a>
                 </tr>
               ))}
             </tbody>

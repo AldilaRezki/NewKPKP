@@ -67,6 +67,12 @@ import ExamPage from "./Siswa/pages/ExamPage";
 import IsiMateri from "./Guru/Kelas/Materi Kelas/IsiMateri";
 import HasilUjianSiswa from "./Guru/Kelas/Ujian Kelas/Hasil Ujian Siswa/HasilUjianSiswa";
 
+import EditPaket from "./Admin/pages/EditPaket";
+import EditSiswa from "./Admin/pages/EditSiswa";
+import EditGuru from "./Admin/pages/EditGuru";
+import AdminEditAkun from "./Admin/pages/EditAkun";
+import EditMapel from "./Admin/pages/EditMapel";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -275,8 +281,18 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
+    path: "/admin/akun/edit/:idAkun",
+    element: <AdminEditAkun />,
+    errorElement: <ErrorPage />,
+  },
+  {
     path: "/admin/listguru",
     element: <AdListGuru />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/admin/guru/edit/:idGuru",
+    element: <EditGuru />,
     errorElement: <ErrorPage />,
   },
   {
@@ -285,8 +301,18 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
+    path: "/admin/siswa/edit/:idSiswa",
+    element: <EditSiswa />,
+    errorElement: <ErrorPage />,
+  },
+  {
     path: "/admin/ListPaketKelas",
     element: <AdListPaketKelas />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/admin/edit/kelas/:idKelas",
+    element: <EditPaket />,
     errorElement: <ErrorPage />,
   },
   {
@@ -297,6 +323,11 @@ const router = createBrowserRouter([
   {
     path: "/admin/ListPaketKelas/:idKelas/matapelajaran",
     element: <AdListMataPelajaranPaketKelas />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/admin/ListPaketKelas/:idKelas/matapelajaran/edit/:idMapel",
+    element: <EditMapel />,
     errorElement: <ErrorPage />,
   },
   {

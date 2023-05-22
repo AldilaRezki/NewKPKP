@@ -15,7 +15,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Header from "../components/Header";
 import { fetchAll } from "../../Admin/services/AdminAPI";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { isAuthenticated } from "../../Common/services/Auth";
 
 function Daftar3() {
@@ -28,6 +28,7 @@ function Daftar3() {
     { id: 6, name: "Olivia Mae", username: "Mae", status: "Admin" },
   ];
 
+  const { idAkun } = useParams();
   const navigate = useNavigate();
   const login = isAuthenticated("admin");
   const [dataAccount, setDataAccount] = useState([]);
@@ -173,17 +174,27 @@ function Daftar3() {
                     {account.nama_user}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {account.username}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {account.role}
                   </td>
-                  <td className="pl-2 pr-1">
-                    <FontAwesomeIcon icon={faPen} className="text-[#1A1F5A]" />
-                  </td>
-                  <td className="pr-2">
-                    <FontAwesomeIcon
-                      icon={faTrash}
-                      className="text-[#1A1F5A]"
-                    />
-                  </td>
+                  <a href={`/admin/akun/edit/${account.id}`}>
+                    <td className="pl-2 pr-1">
+                      <FontAwesomeIcon
+                        icon={faPen}
+                        className="text-[#1A1F5A]"
+                      />
+                    </td>
+                  </a>
+                  <a href="">
+                    <td className="pr-2">
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        className="text-[#1A1F5A]"
+                      />
+                    </td>
+                  </a>
                 </tr>
               ))}
             </tbody>
