@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import HeaderGuru from "../HeaderGuru";
 import { BsEye } from "react-icons/bs";
 import Header from "../Header";
+import { useNavigate } from "react-router-dom";
+import { resetPassword } from "../services/GuruAPI";
 
 function UbahPassword() {
+  const navigate = useNavigate();
+  const [new_password, setnew_password] = useState("");
+  const [old_password, setold_password] = useState("");
+
+  const handleResetPassword = async () => {
+    const isSuccess = await resetPassword(new_password, old_password);
+    if (isSuccess) {
+      navigate("/guru/profil");
+    }
+  };
+
   return (
     <div>
       <Header></Header>
@@ -15,6 +28,8 @@ function UbahPassword() {
             <input
               type="text"
               placeholder="Masukkan password lama"
+              value={old_password}
+              onChange={(e) => setold_password(e.target.value)}
               className="flex py-3 pl-3 focus:outline-none w-[80%]"
             />
             <BsEye className="opacity-75 my-auto"></BsEye>
@@ -27,6 +42,8 @@ function UbahPassword() {
               type="text"
               placeholder="Masukkan password baru"
               className="flex py-3 pl-3 focus:outline-none w-[80%]"
+              value={new_password}
+              onChange={(e) => setnew_password(e.target.value)}
             />
             <BsEye className="opacity-75 my-auto"></BsEye>
           </form>
@@ -35,9 +52,10 @@ function UbahPassword() {
           <a className="text-biru text-md my-auto" href="/guru/profil">
             Batal
           </a>
-          <a className="text-white text-md bg-biru py-3 px-3 rounded-md">
+          <button className="text-white text-md bg-biru py-3 px-3 rounded-md"
+          onClick={handleResetPassword}>
             Ubah Password
-          </a>
+          </button>
         </div>
       </div>
     </div>

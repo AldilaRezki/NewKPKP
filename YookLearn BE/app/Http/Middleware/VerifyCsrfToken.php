@@ -20,5 +20,6 @@ class VerifyCsrfToken extends Middleware
         'http://localhost:8000/api/admin/account/add',
         'http://localhost:8000/api/admin/kelas/add',
         'http://localhost:8000/api/admin/matpel/add',
+        'http://localhost:8000/api/lecture/profile/editpassword',
     ];
 }

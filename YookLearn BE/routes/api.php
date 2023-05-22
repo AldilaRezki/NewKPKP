@@ -82,6 +82,7 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'lecture'], function
     Route::post('matpel/{id_matpel}/tugas/add', [LectureController::class, 'addTugas']);
     Route::get('matpel/{id_matpel}/tugas/', [LectureController::class, 'getTugas']);
     Route::get('matpel/{id_matpel}/tugas/{id_tugas}', [LectureController::class, 'getDetailTugas']);
+    Route::get('matpel/{id_matpel}/tugas/{id_tugas}/kumpul', [LectureController::class, 'getStudentSubmit']);
     Route::post('matpel/{id_matpel}/tugas/{id_tugas}/edit', [LectureController::class, 'updateTugas']);
     Route::delete('matpel/{id_matpel}/tugas/{id_tugas}/delete', [LectureController::class, 'deleteTugas']);
     Route::get('matpel/{id_matpel}/tugas/{id_tugas}/submit/{id_kumpul}', [LectureController::class, 'getDetailIndividuTugas']);

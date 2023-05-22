@@ -3,8 +3,21 @@ import HomepageKelas from "./ListKelasAjar.jsx";
 import JadwalHari from "./JadwalHari.jsx";
 import KelasJadwalAjar from "./KelasJadwalAjar.jsx";
 import Header from "../Header";
+import { useNavigate } from 'react-router-dom';
+import { isAuthenticated } from "../../Common/services/Auth";
+import { useEffect } from "react";
 
 function HomepageUtama() {
+
+  const navigate = useNavigate();
+  const login = isAuthenticated("guru");
+
+  useEffect(() => {
+    if (!login) {
+      navigate("/");
+    }
+  }, [login, navigate]);
+
   return (
     <div>
       <Header></Header>

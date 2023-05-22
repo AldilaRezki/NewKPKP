@@ -4,15 +4,17 @@ import HeaderKelas from "../HeaderKelas";
 import Form from "../../Form";
 import { BiArrowBack } from "react-icons/bi";
 import Header from "../../Header";
+import { useParams } from 'react-router-dom';
 
 function TambahMateri() {
+  const {idMapel} = useParams();
   return (
     <div>
       <Header></Header>
       <HeaderGuru></HeaderGuru>
-      <HeaderKelas></HeaderKelas>
+      <HeaderKelas idMapel = {idMapel}></HeaderKelas>
       <div className="bg-tosca mt-10 mx-10 p-2">
-        <a href="/guru/xipa1/daftar-materi">
+        <a href={`/guru/mapel/${idMapel}/daftar-materi`}>
           <BiArrowBack className="bg-white text-xl"></BiArrowBack>
         </a>
       </div>

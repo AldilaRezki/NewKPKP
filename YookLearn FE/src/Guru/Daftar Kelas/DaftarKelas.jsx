@@ -1,9 +1,20 @@
+import { useNavigate } from "react-router-dom";
 import Header from "../Header";
 import HeaderGuru from "../HeaderGuru";
 import BoxDaftarKelas from "./BoxDaftarKelas";
 import BoxKelas from "./BoxKelas";
+import { isAuthenticated } from "../../Common/services/Auth";
 
 function DaftarKelas() {
+  const navigate = useNavigate();
+  const login = isAuthenticated("guru");
+
+  useEffect(() => {
+    if (!login) {
+      navigate("/");
+    }
+  }, [login, navigate]);
+
   return (
     <div>
       <Header></Header>
@@ -22,18 +33,18 @@ function DaftarKelas() {
       <BoxDaftarKelas
         className="mb-5"
         kelas="X"
-        options={["IPA 1", "IPA 2"]}
-        onClick="/guru/xipa1"
+        // options={["IPA 1", "IPA 2"]}
+        // onClick="/guru/xipa1"
       />
       <BoxDaftarKelas
         className="mb-5"
         kelas="XI"
-        options={["IPA 1", "IPA 2", "IPS 1", "IPS 2"]}
+        // options={["IPA 1", "IPA 2", "IPS 1", "IPS 2"]}
       />
       <BoxDaftarKelas
         className="mb-5"
         kelas="XII"
-        options={["IPS 1", "IPS 2"]}
+        // options={["IPS 1", "IPS 2"]}
       />
     </div>
   );
@@ -119,6 +130,8 @@ export default DaftarKelas;
 // import Header from '../Header';
 // import BoxDaftarKelas from './BoxDaftarKelas';
 // import BoxKelas from './BoxKelas';
+import { useEffect, useState } from 'react';
+import { fetchMapel } from "../services/GuruAPI";
 
 // function DaftarKelas() {
 //   const daftarKelasItems = [

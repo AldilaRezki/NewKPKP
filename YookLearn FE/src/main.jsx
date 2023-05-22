@@ -154,31 +154,31 @@ const router = createBrowserRouter([
     element: <DaftarKelas />,
   },
   {
-    path: "/guru/xipa1",
+    path: "/guru/mapel/:idMapel",
     element: <HomepageKelas />,
   },
   {
-    path: "/xipa1/forum/tambah-forum",
-    element: <TambahForum />,
+    path: "/guru/mapel/:idMapel/daftar-materi",
+    element: <DaftarMateri />,
   },
   {
-    path: "/guru/xipa1/forum",
-    element: <DaftarForum />,
+    path: "/guru/mapel/:idMapel/materi/:idMateri/isi-materi",
+    element: <IsiMateri />,
   },
   {
-    path: "/guru/xipa1/forum/diskusi-pekan-1",
-    element: <IsiForum />,
+    path: "/guru/mapel/:idMapel/materi/tambah-materi",
+    element: <TambahMateri />,
   },
   {
-    path: "/guru/xipa1/tambah-tugas",
-    element: <TambahTugas />,
-  },
-  {
-    path: "/guru/xipa1/daftar-tugas",
+    path: "/guru/mapel/:idMapel/daftar-tugas",
     element: <DaftarTugas />,
   },
   {
-    path: "/guru/xipa1/detail-tugas",
+    path: "/guru/mapel/:idMapel/tambah-tugas",
+    element: <TambahTugas />,
+  },
+  {
+    path: "/guru/mapel/:idMapel/tugas/:idTugas/detail-tugas",
     element: <DetailTugasGuru />,
   },
   {
@@ -214,19 +214,7 @@ const router = createBrowserRouter([
     element: <HasilUjianKelas />,
   },
   {
-    path: "/guru/xipa1/daftar-materi",
-    element: <DaftarMateri />,
-  },
-  {
-    path: "/guru/xipa1/tambah-materi",
-    element: <TambahMateri />,
-  },
-  {
-    path: "/guru/xipa1/isi-materi",
-    element: <IsiMateri />,
-  },
-  {
-    path: "/guru/xipa1/daftar-anggota-kelas",
+    path: "/guru/mapel/:idMapel/daftar-anggota-kelas",
     element: <DaftarAnggotaKelas />,
   },
   {
@@ -237,6 +225,19 @@ const router = createBrowserRouter([
     path: "/guru/profil/ubah-password",
     element: <UbahPassword />,
   },
+  {
+    path: "/xipa1/forum/tambah-forum",
+    element: <TambahForum />,
+  },
+  {
+    path: "/guru/xipa1/forum",
+    element: <DaftarForum />,
+  },
+  {
+    path: "/guru/xipa1/forum/diskusi-pekan-1",
+    element: <IsiForum />,
+  },
+
   //Admin
   {
     path: "/admin/berhasil",
@@ -249,12 +250,12 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: '/admin/berhasil',
+    path: "/admin/berhasil",
     element: <AdBerhasil />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/admin/daftarakun',
+    path: "/admin/daftarakun",
     element: <AdDaftarAkun />,
     errorElement: <ErrorPage />,
   },
@@ -284,32 +285,32 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: '/admin/ListPaketKelas',
+    path: "/admin/ListPaketKelas",
     element: <AdListPaketKelas />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/admin/ListPaketKelas/:idKelas/siswa',
+    path: "/admin/ListPaketKelas/:idKelas/siswa",
     element: <AdListSiswaPaketKelas />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/admin/ListPaketKelas/:idKelas/matapelajaran',
+    path: "/admin/ListPaketKelas/:idKelas/matapelajaran",
     element: <AdListMataPelajaranPaketKelas />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/admin/test',
+    path: "/admin/test",
     element: <AdTest />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/admin/daftarmapel/:idKelas',
+    path: "/admin/daftarmapel/:idKelas",
     element: <AdDaftarMapel />,
     errorElement: <ErrorPage />,
   },
   {
-    path: '/admin/daftarpaket',
+    path: "/admin/daftarpaket",
     element: <AdDaftarPaket />,
     errorElement: <ErrorPage />,
   },
