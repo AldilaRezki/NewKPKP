@@ -10,9 +10,9 @@ import { MdFormatClear } from "react-icons/md";
 import { MdOutlineImage } from "react-icons/md";
 import { MdAddLink } from "react-icons/md";
 
-function Form() {
+function Form({ mx = 'mx-10', width = ''}) {
   return (
-    <div className="border-[0.3px] shadow-md mx-10 mt-3">
+    <div className={`border-[0.3px] shadow-md ${mx} mt-3 ${width}`}>
       <div className="flex bg-tosca border-[0.3px] shadow-md py-1">
         <div className="mx-2 text-lg bg-white w-fit">
           <button className="p-1 mx-0.5 border-r-[2px] border-r-slate-500">
