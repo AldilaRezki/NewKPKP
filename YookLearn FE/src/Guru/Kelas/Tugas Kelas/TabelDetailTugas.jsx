@@ -22,7 +22,7 @@ function TabelDetailTugas() {
                 Poin
               </th>
               <th className="py-2 border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] shadow-md border-biru">
-                Save/Detail
+                Simpan File
               </th>
             </tr>
           </thead>
@@ -38,7 +38,8 @@ function TabelDetailTugas() {
                 Lorem Ipsum.pdf
               </td>
               <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                100/100
+                <input type="number" min={0} max={100} className="bg-white outline-none appearance-none border-[0.1px] flex py-2 pl-5 w-[72%] mx-auto"
+                placeholder="Masukkan poin"/>
               </td>
               <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] shadow-md border-biru text-center">
                 <a href="/path/to/tugas1.pdf" download>
@@ -47,7 +48,42 @@ function TabelDetailTugas() {
                 <BiCommentDetail className="text-2xl inline-block mb-[1px]" />
               </td>
             </tr>
-            {/* ... */}
+            <tr className="border-[0.3px] shadow-md">
+              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
+                Lorem Ipsum
+              </td>
+              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
+                12-03-2023 23:59:59
+              </td>
+              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
+                Lorem Ipsum.pdf
+              </td>
+              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
+                <input type="number" min={0} max={100} className="bg-white outline-none appearance-none border-[0.1px] flex py-2 pl-5 w-[72%] mx-auto"
+                placeholder="Masukkan poin"/>
+              </td>
+              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] shadow-md border-biru text-center">
+                <MdSave className="text-2xl mr-2 inline-block"></MdSave>
+              </td>
+            </tr>
+            <tr className="border-[0.3px] shadow-md">
+              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
+                Lorem Ipsum
+              </td>
+              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
+                12-03-2023 23:59:59
+              </td>
+              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
+                Lorem Ipsum.pdf
+              </td>
+              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
+                <input type="number" min={0} max={100} className="bg-white outline-none appearance-none border-[0.1px] flex py-2 pl-5 w-[72%] mx-auto"
+                placeholder="Masukkan poin"/>
+              </td>
+              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] shadow-md border-biru text-center">
+                <MdSave className="text-2xl mr-2 inline-block"></MdSave>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>

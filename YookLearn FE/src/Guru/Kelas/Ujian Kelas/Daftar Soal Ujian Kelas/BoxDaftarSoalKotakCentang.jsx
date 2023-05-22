@@ -31,15 +31,8 @@ function BoxDaftarSoalKotakCentang() {
             </form>
           </div>
           <div className="poinSoalKotakCentang flex flex-col">
-            <label for="">Poin Soal</label>
-            <input
-              type=""
-              id=""
-              name=""
-              min="0"
-              max="100"
-              className="bg-white border-[0.3px] py-2 pl-3 shadow-md"
-            ></input>
+          <label for="">Poin Soal</label>
+              <input type="" id="" name="" min={0} max={100} className="bg-white border-[0.3px] py-2 pl-3 shadow-md"></input>
           </div>
         </div>
       </div>
