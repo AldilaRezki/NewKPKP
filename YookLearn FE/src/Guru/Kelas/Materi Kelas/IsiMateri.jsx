@@ -2,12 +2,14 @@ import React from "react";
 import Header from "../../Header";
 import HeaderKelas from "../HeaderKelas";
 import { BiArrowBack, BiBook } from "react-icons/bi";
-import { AiOutlineArrowDown } from "react-icons/ai";
+import { BsSaveFill } from "react-icons/bs";
+import HeaderGuru from "../../HeaderGuru";
 
 function IsiMateri() {
   return (
     <div>
       <Header></Header>
+      <HeaderGuru></HeaderGuru>
       <HeaderKelas></HeaderKelas>
 
       <div className="bg-tosca mt-10 mx-10 p-2">
@@ -30,7 +32,7 @@ function IsiMateri() {
         <span className="bg-tosca p-3 rounded-lg">
           Bahan Ajar Pertemuan 1.pdf
         </span>
-        <AiOutlineArrowDown className="bg-tosca p-2 my-auto text-[2.7rem] rounded-lg"></AiOutlineArrowDown>
+        <BsSaveFill className="bg-tosca p-[0.6rem] my-auto text-[2.5rem] rounded-lg"></BsSaveFill>
       </div>
     </div>
   );

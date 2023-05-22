@@ -1,8 +1,8 @@
+import React, { useState } from 'react';
 import HeaderGuru from "../HeaderGuru";
 import HomepageKelas from "./ListKelasAjar.jsx";
-import JadwalHari from "./JadwalHari.jsx";
-import KelasJadwalAjar from "./KelasJadwalAjar.jsx";
 import Header from "../Header";
+import IsiCarouselJadwal from "./IsiCarouselJadwal";
 
 function HomepageUtama() {
   return (
@@ -39,14 +39,7 @@ function HomepageUtama() {
 
         <div className="flex flex-col jadwalAjarKelas mt-16 mr-10 bg-tosca px-10 pt-8 mb-20">
           <h1 className="text-xl mb-10">Jadwal Hari Ini</h1>
-
-          <div className="hari">
-            <JadwalHari></JadwalHari>
-          </div>
-          <div className="my-4">
-            <KelasJadwalAjar></KelasJadwalAjar>
-            <KelasJadwalAjar></KelasJadwalAjar>
-          </div>
+          <IsiCarouselJadwal></IsiCarouselJadwal>
         </div>
       </div>
     </div>
