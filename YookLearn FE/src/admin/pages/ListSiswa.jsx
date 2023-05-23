@@ -14,7 +14,7 @@ import {
   faUserTie,
 } from "@fortawesome/free-solid-svg-icons";
 import Header from "../components/Header";
-import { fetchAll } from "../../Admin/services/AdminAPI";
+import { fetchAll, removeAccount } from "../../Admin/services/AdminAPI";
 import { useNavigate } from "react-router-dom";
 import { isAuthenticated } from "../../Common/services/Auth";
 
@@ -22,6 +22,9 @@ function Daftar() {
   const navigate = useNavigate();
   const login = isAuthenticated("admin");
   const [dataSiswa, setSiswa] = useState([]);
+  const [isRemoving, setIsRemoving] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
     if (!login) {
@@ -36,6 +39,36 @@ function Daftar() {
     }
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const filteredSiswa = dataSiswa.filter((siswa) =>
+      Object.values(siswa).some(
+        (value) =>
+          value &&
+          value.toString().toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    );
+    setSearchResults(filteredSiswa);
+  }, [dataSiswa, searchQuery]);
+
+  const handleRemove = async (id) => {
+    try {
+      setIsRemoving(true);
+
+      const isSuccess = await removeAccount(id);
+
+      if (isSuccess) {
+        console.log("Siswa removed successfully");
+        setSiswa((prevSiswa) => prevSiswa.filter((siswa) => siswa.id !== id));
+      } else {
+        console.log("Failed to remove siswa");
+      }
+    } catch (error) {
+      console.log("Error removing siswa:", error);
+    } finally {
+      setIsRemoving(false);
+    }
+  };
 
   const students = [
     {
@@ -145,9 +178,11 @@ function Daftar() {
               className="text-[#1A1F5A] px-2 pr-4"
             />
             <input
-              type="text"
               className="w-11/12 border rounded-lg px-4 py-2"
+              type="text"
               placeholder="Cari Siswa"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
           <table className="min-w-full divide-y divide-gray-200">
@@ -194,7 +229,7 @@ function Daftar() {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {dataSiswa.map((student, i) => (
+              {searchResults.map((student, i) => (
                 <tr key={i}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                     {i + 1}
@@ -215,13 +250,23 @@ function Daftar() {
                     {student.username}
                   </td> */}
                   <td className="pl-2 pr-1">
-                    <FontAwesomeIcon icon={faPen} className="text-[#1A1F5A]" />
+                    <a href={`/admin/siswa/edit/${student.id}`}>
+                      <FontAwesomeIcon
+                        icon={faPen}
+                        className="text-[#1A1F5A]"
+                      />
+                    </a>
                   </td>
-                  <td className="pr-2">
-                    <FontAwesomeIcon
-                      icon={faTrash}
-                      className="text-[#1A1F5A]"
-                    />
+                  <td>
+                    <button
+                      onClick={() => handleRemove(student.id)}
+                      disabled={isRemoving}
+                    >
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        className="text-[#1A1F5A]"
+                      />
+                    </button>
                   </td>
                 </tr>
               ))}

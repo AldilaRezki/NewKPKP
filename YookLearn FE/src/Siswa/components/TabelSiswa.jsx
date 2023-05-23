@@ -9,7 +9,7 @@ function TabelSiswa({ idkelas, idMapel }) {
       const data = await fetchSiswa(idMapel);
       setSiswa(data);
     }
-    fetchData(idMapel);
+    fetchData();
   }, []);
 
   return (

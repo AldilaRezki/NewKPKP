@@ -1,19 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../Header";
 import HeaderKelas from "../HeaderKelas";
 import { BiArrowBack, BiBook } from "react-icons/bi";
 import { BsSaveFill } from "react-icons/bs";
 import HeaderGuru from "../../HeaderGuru";
+import { useNavigate, useParams } from "react-router-dom";
+import { isAuthenticated } from "../../../Common/services/Auth";
+import { fetchAllMateri, fetchCurrentMateri } from "../../services/GuruAPI";
 
 function IsiMateri() {
+  const BASE_URL = import.meta.env.VITE_BASE_DOWNLOAD_URL;
+  const { idMapel, idMateri } = useParams();
+  const navigate = useNavigate();
+  const login = isAuthenticated("guru");
+  const [dataMateri, setMateri] = useState([]);
+
+  useEffect(() => {
+    if (!login) {
+      navigate("/");
+    }
+  }, [login, navigate]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchCurrentMateri(idMapel, idMateri);
+      setMateri(data);
+      // setIsLoading(false);
+    }
+    fetchData();
+  }, []);
+
   return (
     <div>
       <Header></Header>
-      <HeaderGuru></HeaderGuru>
-      <HeaderKelas></HeaderKelas>
+      <HeaderKelas idMapel={idMapel}></HeaderKelas>
 
       <div className="bg-tosca mt-10 mx-10 p-2">
-        <a href="/xipa1/daftar-materi">
+        <a href={`/guru/mapel/${idMapel}/daftar-materi`}>
           <BiArrowBack className="bg-white text-xl"></BiArrowBack>
         </a>
       </div>
@@ -24,15 +47,15 @@ function IsiMateri() {
         text-biru text-5xl rounded-full p-2"
         ></BiBook>
         <span className="text-biru text-xl my-auto font-medium">
-          Materi Pekan 1
+          {dataMateri.judul_materi}
         </span>
       </div>
 
       <div className="flex ml-[110px] mt-10 gap-x-5 text-biru">
-        <span className="bg-tosca p-3 rounded-lg">
-          Bahan Ajar Pertemuan 1.pdf
-        </span>
-        <BsSaveFill className="bg-tosca p-[0.6rem] my-auto text-[2.5rem] rounded-lg"></BsSaveFill>
+        <span className="bg-tosca p-3 rounded-lg">{dataMateri.filename}</span>
+        <a href={`${BASE_URL}/${dataMateri.filename}`} download>
+          <BsSaveFill className="bg-tosca p-[0.6rem] my-auto text-[2.5rem] rounded-lg"></BsSaveFill>
+        </a>
       </div>
     </div>
   );

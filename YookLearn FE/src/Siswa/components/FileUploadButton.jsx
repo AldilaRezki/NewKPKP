@@ -1,11 +1,11 @@
 import React, { useRef } from "react";
 
-function FileUploadButton({ onFileUpload }) {
+function FileUploadButton({ uploadFile }) {
   const fileInputRef = useRef(null);
 
   const handleFileUpload = () => {
     const file = fileInputRef.current.files[0];
-    onFileUpload(file);
+    uploadFile(file, );
   };
 
   return (

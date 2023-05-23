@@ -13,6 +13,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 function Detailmateri() {
+  const BASE_URL = import.meta.env.VITE_BASE_DOWNLOAD_URL;
+  
   const navigate = useNavigate();
   const login = isAuthenticated("siswa");
   const { idKelas, idMapel, idMateri } = useParams();
@@ -43,6 +45,8 @@ function Detailmateri() {
     fetchData(idMateri);
   }, []);
 
+  const downloadUrl = `${BASE_URL}/${dataMateri.filename}`;
+
   return (
     <>
       <div>
@@ -71,7 +75,7 @@ function Detailmateri() {
         <div className="h-[49px] bg-[#EEF4FA] flex items-center rounded-lg">
           <h1 className="mx-4 text-[#1A1F5A]">{dataMateri.filename}</h1>
         </div>
-        <a href="/path/to/BahanAjar1.pdf" download>
+        <a href={downloadUrl} download>
           <MdDownloadForOffline className="mt-2 ml-2 flex-shrink-0 text-4xl" />
         </a>
       </div>

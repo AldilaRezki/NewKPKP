@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { isAuthenticated } from "../../Common/services/Auth";
-import { addAkun } from "../services/AdminAPI";
+import { addAkun, editAkun, fetchCurrentAkun } from "../services/AdminAPI";
 
-function tadmin() {
+function AdminEditAkun() {
   const navigate = useNavigate();
   const login = isAuthenticated("admin");
-  const [nama, setNama] = useState("");
-  const [username, setUserName] = useState("");
+  const { idAkun } = useParams();
+
+  const [userName, setUserName] = useState("");
   const [status, setStatus] = useState("");
+  const [role, setRole] = useState("");
   const [password, setPassword] = useState("");
 
   useEffect(() => {
@@ -18,8 +20,18 @@ function tadmin() {
     }
   }, [login, navigate]);
 
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchCurrentAkun(idAkun);
+      setUserName(data.username);
+      setStatus(data.role);
+      setRole(data.role);
+    }
+    fetchData();
+  }, []);
+
   const handleSubmit = async () => {
-    const isSuccess = await addAkun(username, password, status, nama);
+    const isSuccess = await editAkun(userName, password, status, idAkun);
     if (isSuccess) {
       navigate("/admin/berhasil");
     }
@@ -33,7 +45,7 @@ function tadmin() {
           Daftar Akun Admin
         </h1>
         <form className="bg-white rounded-lg shadow-md p-6">
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label
               htmlFor="nama"
               className="block text-gray-700 font-bold mb-2"
@@ -48,7 +60,7 @@ function tadmin() {
               value={nama}
               onChange={(e) => setNama(e.target.value)}
             />
-          </div>
+          </div> */}
           <div className="mb-4">
             <label
               htmlFor="username"
@@ -61,7 +73,7 @@ function tadmin() {
               id="username"
               className="w-full border rounded-lg px-4 py-2"
               placeholder="Masukkan username"
-              value={username}
+              value={userName}
               onChange={(e) => setUserName(e.target.value)}
             />
           </div>
@@ -78,6 +90,7 @@ function tadmin() {
               value={status}
               onChange={(e) => setStatus(e.target.value)}
             >
+              <option value={status}>{status}</option>
               <option value="siswa">Siswa</option>
               <option value="guru">Guru</option>
               <option value="admin">Admin</option>
@@ -112,4 +125,4 @@ function tadmin() {
   );
 }
 
-export default tadmin;
+export default AdminEditAkun;

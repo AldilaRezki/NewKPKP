@@ -14,8 +14,8 @@ import {
   faUserTie,
 } from "@fortawesome/free-solid-svg-icons";
 import Header from "../components/Header";
-import { fetchAll } from "../../Admin/services/AdminAPI";
-import { useNavigate } from "react-router-dom";
+import { fetchAll, removeAccount } from "../../Admin/services/AdminAPI";
+import { useNavigate, useParams } from "react-router-dom";
 import { isAuthenticated } from "../../Common/services/Auth";
 
 function Daftar3() {
@@ -31,6 +31,9 @@ function Daftar3() {
   const navigate = useNavigate();
   const login = isAuthenticated("admin");
   const [dataAccount, setDataAccount] = useState([]);
+  const [isRemoving, setIsRemoving] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
     if (!login) {
@@ -45,6 +48,36 @@ function Daftar3() {
     }
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const filteredAccount = dataAccount.filter((account) =>
+      Object.values(account).some(
+        (value) =>
+          value &&
+          value.toString().toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    );
+    setSearchResults(filteredAccount);
+  }, [dataAccount, searchQuery]);
+
+  const handleRemove = async (id) => {
+    try {
+      setIsRemoving(true);
+
+      const isSuccess = await removeAccount(id);
+
+      if (isSuccess) {
+        console.log("Siswa removed successfully");
+        setDataAccount((prevAccount) => prevAccount.filter((account) => account.id !== id));
+      } else {
+        console.log("Failed to remove siswa");
+      }
+    } catch (error) {
+      console.log("Error removing siswa:", error);
+    } finally {
+      setIsRemoving(false);
+    }
+  };
 
   return (
     <div className="bg-white min-h-screen">
@@ -129,7 +162,9 @@ function Daftar3() {
             <input
               type="text"
               className="w-11/12 border rounded-lg px-4 py-2"
-              placeholder="Cari Akun"
+              placeholder="Cari Siswa"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
           <table className="min-w-full divide-y divide-gray-200">
@@ -164,7 +199,7 @@ function Daftar3() {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {dataAccount.map((account, i) => (
+              {searchResults.map((account, i) => (
                 <tr key={i}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                     {i + 1}
@@ -173,16 +208,29 @@ function Daftar3() {
                     {account.nama_user}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {account.username}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {account.role}
                   </td>
                   <td className="pl-2 pr-1">
-                    <FontAwesomeIcon icon={faPen} className="text-[#1A1F5A]" />
+                    <a href={`/admin/akun/edit/${account.id}`}>
+                      <FontAwesomeIcon
+                        icon={faPen}
+                        className="text-[#1A1F5A]"
+                      />
+                    </a>
                   </td>
                   <td className="pr-2">
-                    <FontAwesomeIcon
-                      icon={faTrash}
-                      className="text-[#1A1F5A]"
-                    />
+                    <button
+                      onClick={() => handleRemove(student.id)}
+                      disabled={isRemoving}
+                    >
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        className="text-[#1A1F5A]"
+                      />
+                    </button>
                   </td>
                 </tr>
               ))}

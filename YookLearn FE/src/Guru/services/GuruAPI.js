@@ -1,56 +1,11 @@
-// const BASE_URL = "http://localhost:8000/api/student";
+// const BASE_URL = "http://localhost:8000/api/lecture";
+const BASE_URL = import.meta.env.VITE_GURU_API;
 
-const BASE_URL = import.meta.env.VITE_SISWA_API;
-const BASE_URL_GURU = import.meta.env.VITE_GURU_API;
-
-export async function fetchCurrentMapel(idMapel) {
-  try {
-    const token = localStorage.getItem("token");
-    const response = await fetch(`${BASE_URL}/mapel/${idMapel}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.message);
-    }
-
-    return data;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-export async function fetchStudentAssignment() {
-  try {
-    const token = localStorage.getItem("token");
-    const response = await fetch(`${BASE_URL}/tugas`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.message);
-    }
-
-    return data;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-export async function fetchSiswaProfile() {
+export async function fetchProfile() {
   try {
     const token = localStorage.getItem("token");
     const response = await fetch(`${BASE_URL}/profile`, {
       headers: {
-        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
@@ -60,7 +15,8 @@ export async function fetchSiswaProfile() {
     if (!response.ok) {
       throw new Error(data.message);
     }
-    return data.student;
+
+    return data;
   } catch (error) {
     console.error(error);
   }
@@ -69,7 +25,7 @@ export async function fetchSiswaProfile() {
 export async function resetPassword(newPassword, oldPassword) {
   try {
     const token = localStorage.getItem("token");
-    const response = await fetch(`${BASE_URL}/editpassword`, {
+    const response = await fetch(`${BASE_URL}/profile/editpassword`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -94,10 +50,10 @@ export async function resetPassword(newPassword, oldPassword) {
   }
 }
 
-export async function fetchAllTugasMapel(idMapel) {
+export async function fetchMapel() {
   try {
     const token = localStorage.getItem("token");
-    const response = await fetch(`${BASE_URL}/matpel/${idMapel}/tugas`, {
+    const response = await fetch(`${BASE_URL}/matpel`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -115,14 +71,17 @@ export async function fetchAllTugasMapel(idMapel) {
   }
 }
 
-export async function fetchKelasMapel(idKelas) {
+export async function fetchCurrentMapel(idMapel) {
   try {
     const token = localStorage.getItem("token");
-    const response = await fetch(`${BASE_URL}/kelas/${idKelas}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await fetch(
+      `http://localhost:8000/api/student/mapel/${idMapel}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
     const data = await response.json();
 
@@ -136,70 +95,7 @@ export async function fetchKelasMapel(idKelas) {
   }
 }
 
-export async function fecthKelas() {
-  try {
-    const token = localStorage.getItem("token");
-    const response = await fetch(`${BASE_URL}/kelas`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.message);
-    }
-
-    return data;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-export async function fetchSiswa(idMapel) {
-  try {
-    const token = localStorage.getItem("token");
-    const response = await fetch(`${BASE_URL_GURU}/anggota/${idMapel}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.message);
-    }
-
-    return data;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-export async function fetchCurrentTugas(idTugas) {
-  try {
-    const token = localStorage.getItem("token");
-    const response = await fetch(`${BASE_URL}/tugas/${idTugas}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.message);
-    }
-
-    return data;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-export async function fetchCurentMapelMateri(idMapel) {
+export async function fetchAllMateri(idMapel) {
   try {
     const token = localStorage.getItem("token");
     const response = await fetch(`${BASE_URL}/matpel/${idMapel}/materi`, {
@@ -220,10 +116,34 @@ export async function fetchCurentMapelMateri(idMapel) {
   }
 }
 
-export async function fetchCurrentMateri(idMateri) {
+export async function fetchCurrentMateri(idMapel, idMateri) {
   try {
     const token = localStorage.getItem("token");
-    const response = await fetch(`${BASE_URL}/materi/${idMateri}`, {
+    const response = await fetch(
+      `${BASE_URL}/matpel/${idMapel}/materi/${idMateri}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function fetchTugas(idMapel) {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${BASE_URL}/matpel/${idMapel}/tugas`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -241,25 +161,84 @@ export async function fetchCurrentMateri(idMateri) {
   }
 }
 
-export async function logOut() {
+export async function fetchCurrentTugas(idMapel, idTugas) {
   try {
-    localStorage.removeItem("token");
-    localStorage.removeItem("role");
-    return true;
+    const token = localStorage.getItem("token");
+    const response = await fetch(
+      `${BASE_URL}/matpel/${idMapel}/tugas/${idTugas}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+
+    return data;
   } catch (error) {
     console.error(error);
-    return false;
   }
 }
 
-export async function uploadFile(file, idTugas) {
+export async function fetchStudentSubmit(idMapel, idTugas) {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(
+      `${BASE_URL}/matpel/${idMapel}/tugas/${idTugas}/kumpul`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function fetchStudent(idMapel) {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${BASE_URL}/anggota/${idMapel}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function addMateri(idMapel, judul, file) {
   try {
     const token = localStorage.getItem("token");
 
     const formData = new FormData();
+    formData.append("judul_materi", judul);
     formData.append("file", file);
 
-    const response = await fetch(`${BASE_URL}/tugas/${idTugas}/add`, {
+    const response = await fetch(`${BASE_URL}/matpel/${idMapel}/materi/add`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -272,7 +251,66 @@ export async function uploadFile(file, idTugas) {
     if (!response.ok) {
       throw new Error(data.message);
     }
-    return data;
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
+
+export async function addTugas(idMapel, judul, file) {
+  try {
+    const token = localStorage.getItem("token");
+
+    const formData = new FormData();
+    formData.append("judul_tugas", judul);
+    formData.append("file", file);
+
+    const response = await fetch(`${BASE_URL}/matpel/${idMapel}/tugas/add`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
+
+export async function updateTugas(idMapel, idTugas, judul, file) {
+  try {
+    const token = localStorage.getItem("token");
+
+    const formData = new FormData();
+    formData.append("judul_tugas", judul);
+    formData.append("file", file);
+
+    const response = await fetch(
+      `${BASE_URL}/matpel/${idMapel}/tugas/${idTugas}/edit`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+    return true;
   } catch (error) {
     console.log(error);
     return false;

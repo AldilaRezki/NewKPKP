@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { isAuthenticated } from "../../Common/services/Auth";
-import { addAkun } from "../services/AdminAPI";
+import { addGuru, editGuru, fetchCurrentGuru } from "../services/AdminAPI";
 
-function tadmin() {
+function EditGuru() {
   const navigate = useNavigate();
+  const { idGuru } = useParams();
   const login = isAuthenticated("admin");
   const [nama, setNama] = useState("");
-  const [username, setUserName] = useState("");
-  const [status, setStatus] = useState("");
-  const [password, setPassword] = useState("");
+  const [nip, setNIP] = useState("");
+  const [pangkat, setPangkat] = useState("");
+  const [golongan, setGolongan] = useState("");
+  const [mapel, setMapel] = useState("");
 
   useEffect(() => {
     if (!login) {
@@ -18,8 +20,20 @@ function tadmin() {
     }
   }, [login, navigate]);
 
-  const handleSubmit = async () => {
-    const isSuccess = await addAkun(username, password, status, nama);
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchCurrentGuru(idGuru);
+      setNama(data.nama_lengkap);
+      setNIP(data.nip);
+      setPangkat(data.pangkat);
+      setGolongan(data.golongan);
+      setMapel(data.matpel);
+    }
+    fetchData();
+  }, []);
+
+  const handleAddGuru = async () => {
+    const isSuccess = await editGuru(nama, nip, golongan, pangkat, mapel, idGuru);
     if (isSuccess) {
       navigate("/admin/berhasil");
     }
@@ -30,7 +44,7 @@ function tadmin() {
       <Header />
       <main className="container mx-auto px-4 py-6">
         <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">
-          Daftar Akun Admin
+          Daftar Akun Guru
         </h1>
         <form className="bg-white rounded-lg shadow-md p-6">
           <div className="mb-4">
@@ -50,58 +64,69 @@ function tadmin() {
             />
           </div>
           <div className="mb-4">
-            <label
-              htmlFor="username"
-              className="block text-gray-700 font-bold mb-2"
-            >
-              Username
+            <label htmlFor="nip" className="block text-gray-700 font-bold mb-2">
+              NIP
             </label>
             <input
               type="text"
-              id="username"
+              id="NIP"
               className="w-full border rounded-lg px-4 py-2"
-              placeholder="Masukkan username"
-              value={username}
-              onChange={(e) => setUserName(e.target.value)}
+              placeholder="Masukkan NIP"
+              value={nip}
+              onChange={(e) => setNIP(e.target.value)}
             />
           </div>
           <div className="mb-4">
             <label
-              htmlFor="status"
+              htmlFor="pangkat"
               className="block text-gray-700 font-bold mb-2"
             >
-              Status
+              Pangkat
             </label>
-            <select
-              id="status"
+            <input
+              type="text"
+              id="pangkat"
               className="w-full border rounded-lg px-4 py-2"
-              value={status}
-              onChange={(e) => setStatus(e.target.value)}
-            >
-              <option value="siswa">Siswa</option>
-              <option value="guru">Guru</option>
-              <option value="admin">Admin</option>
-            </select>
+              placeholder="Masukkan Pangkat"
+              value={pangkat}
+              onChange={(e) => setPangkat(e.target.value)}
+            />
           </div>
           <div className="mb-4">
             <label
-              htmlFor="password"
+              htmlFor="golongan"
               className="block text-gray-700 font-bold mb-2"
             >
-              Buat Password
+              Golongan
             </label>
             <input
-              type="password"
-              id="password"
+              type="text"
+              id="golongan"
               className="w-full border rounded-lg px-4 py-2"
-              placeholder="*******************"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Masukkan Golongan"
+              value={golongan}
+              onChange={(e) => setGolongan(e.target.value)}
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="mapel"
+              className="block text-gray-700 font-bold mb-2"
+            >
+              Mata Pelajaran
+            </label>
+            <input
+              type="text"
+              id="mapel"
+              className="w-full border rounded-lg px-4 py-2"
+              placeholder="Masukkan Mata Pelajaran"
+              value={mapel}
+              onChange={(e) => setMapel(e.target.value)}
             />
           </div>
           <button
             type="button"
-            onClick={handleSubmit}
+            onClick={handleAddGuru}
             className="bg-[#1A1F5A] text-white px-4 py-2 rounded-lg"
           >
             Simpan
@@ -112,4 +137,4 @@ function tadmin() {
   );
 }
 
-export default tadmin;
+export default EditGuru;

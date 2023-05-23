@@ -16,10 +16,24 @@ import {
   faUserTie,
 } from "@fortawesome/free-solid-svg-icons";
 import Header from "../components/Header";
-import { fetchAllKelas } from "../services/AdminAPI";
+import { fetchAllKelas, removeClass } from "../services/AdminAPI";
+import { useNavigate } from "react-router-dom";
+import { isAuthenticated } from "../../Common/services/Auth";
 
 function Daftar3() {
+  const navigate = useNavigate();
+  const login = isAuthenticated("admin");
   const [dataKelas, setKelas] = useState([]);
+  const [isRemoving, setIsRemoving] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
+  useEffect(() => {
+    if (!login) {
+      navigate("/");
+    }
+  }, [login, navigate]);
+
   useEffect(() => {
     async function fetchData() {
       const data = await fetchAllKelas();
@@ -27,6 +41,42 @@ function Daftar3() {
     }
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const filteredKelas = dataKelas.filter((kelas) =>
+      Object.values(kelas).some(
+        (value) =>
+          value &&
+          value.toString().toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    );
+    setSearchResults(filteredKelas);
+  }, [dataKelas, searchQuery]);
+
+  const handleRemove = async (id) => {
+    try {
+      setIsRemoving(true);
+
+      const isSuccess = await removeClass(id);
+
+      if (isSuccess) {
+        console.log("Kelas removed successfully");
+        setKelas((prevKelas) => prevKelas.filter((kelas) => kelas.id !== id));
+      } else {
+        console.log("Failed to remove Kelas");
+      }
+    } catch (error) {
+      console.log("Error removing Kelas:", error);
+    } finally {
+      setIsRemoving(false);
+    }
+  };
+
+  const handleEdit = async (idKelas) => {
+    if (idKelas) {
+      navigate(`/admin/edit/kelas/${idKelas}`);
+    }
+  };
 
   return (
     <div className="bg-white min-h-screen">
@@ -80,28 +130,37 @@ function Daftar3() {
             <input
               type="text"
               className="w-11/12 border rounded-lg px-4 py-2"
-              placeholder="Cari Paket"
+              placeholder="Cari Siswa"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
           <div>
             <div className="flex justify-evenly p-10">
-              <div className=" w-3/12">
-                {dataKelas.map((kelas) => (
-                  <a
-                    href={`/admin/ListPaketKelas/${kelas.id}/siswa`}
-                    key={kelas.id}
-                  >
-                    <div className="bg-[#1A1F5A] text-white rounded-t-md font-bold py-3 pl-12">
-                      {kelas.nama_kelas}
+              {searchResults.map((kelas) => (
+                <div className=" w-3/12" key={kelas.id}>
+                  <div className="bg-[#1A1F5A] text-white rounded-t-md font-bold py-3 pl-12">
+                    {kelas.nama_kelas}
+                    <a href={`/admin/edit/kelas/${kelas.id}`} className="">
                       <FontAwesomeIcon
                         icon={faPen}
-                        className="text-white pl-14"
+                        className="text-white pl-12"
                       />
+                    </a>
+                    <button
+                      onClick={() => handleRemove(kelas.id)}
+                      disabled={isRemoving}
+                    >
                       <FontAwesomeIcon
                         icon={faTrash}
                         className="text-white px-4"
                       />
-                    </div>
+                    </button>
+                  </div>
+                  <a
+                    href={`/admin/ListPaketKelas/${kelas.id}/siswa`}
+                    key={kelas.id}
+                  >
                     <div className="text-[#1A1F5A] font-bold py-3 pl-2">
                       <FontAwesomeIcon
                         icon={faChalkboardTeacher}
@@ -117,8 +176,8 @@ function Daftar3() {
                       {kelas.jumlah_siswa} Siswa
                     </div>
                   </a>
-                ))}
-              </div>
+                </div>
+              ))}
               <div className=" w-3/12">
                 <a href="/admin/listsiswapaketkelas">
                   <div className="bg-[#1A1F5A] text-white rounded-t-md font-bold py-3 pl-12">

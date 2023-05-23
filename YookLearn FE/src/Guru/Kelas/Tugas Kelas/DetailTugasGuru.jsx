@@ -1,36 +1,56 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HeaderGuru from "../../HeaderGuru";
 import HeaderKelas from "../HeaderKelas";
 import TabelDetailTugas from "./TabelDetailTugas";
 import Header from "../../Header";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { isAuthenticated } from "./../../../Common/services/Auth";
+import { fetchCurrentTugas } from "../../services/GuruAPI";
 
 function DetailTugasGuru() {
+  const { idMapel, idTugas } = useParams();
+  const navigate = useNavigate();
+  const login = isAuthenticated("guru");
+  const [dataTugas, setTugas] = useState([]);
+
+  useEffect(() => {
+    if (!login) {
+      navigate("/");
+    }
+  }, [login, navigate]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchCurrentTugas(idMapel, idTugas);
+      setTugas(data);
+      // setIsLoading(false);
+    }
+    fetchData();
+  }, []);
+
   return (
     <div>
       <Header></Header>
       <HeaderGuru></HeaderGuru>
-      <HeaderKelas></HeaderKelas>
+      <HeaderKelas idMapel={idMapel}></HeaderKelas>
       <div className="flex mt-10 mx-10 justify-between">
-        <h1 className="my-auto text-xl font-medium text-biru">Detail Tugas</h1>
+        <h1 className="my-auto text-xl font-medium text-biru">
+          {dataTugas.judul_tugas}
+        </h1>
       </div>
       <div className="mx-10 mt-10 border-[0.3px] shadow-md">
         <span className="bg-tosca w-full flex py-2 px-4 text-biru font-medium">
           Detail Tugas
         </span>
-        <p className="w-full flex py-4 px-4">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque
-          voluptatibus facilis qui velit maiores omnis. Odio nulla nesciunt
-          quaerat id eligendi ut praesentium vero corrupti eum dolor? Pariatur
-          amet sed optio nobis veritatis libero porro sapiente et, aliquam
-          similique reprehenderit saepe neque blanditiis earum qui voluptas
-          distinctio reiciendis, aspernatur perferendis natus suscipit? Aliquam
-          magnam, earum doloribus hic nulla ea obcaecati maiores maxime quis
-          aliquid consectetur illum, nisi repellendus eaque minima tempore quo
-          perferendis impedit esse!
-        </p>
+        <p className="w-full flex py-4 px-4">{dataTugas.detail_tugas}</p>
       </div>
       <div className="mb-20">
-        <TabelDetailTugas></TabelDetailTugas>
+        <TabelDetailTugas
+          idMapel={idMapel}
+          idTugas={idTugas}
+          nilai={dataTugas.nilai}
+        ></TabelDetailTugas>
       </div>
     </div>
   );

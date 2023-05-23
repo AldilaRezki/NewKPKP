@@ -2,9 +2,22 @@ import React, { useState } from 'react';
 import HeaderGuru from "../HeaderGuru";
 import HomepageKelas from "./ListKelasAjar.jsx";
 import Header from "../Header";
+import { useNavigate } from 'react-router-dom';
+import { isAuthenticated } from "../../Common/services/Auth";
+import { useEffect } from "react";
 import IsiCarouselJadwal from "./IsiCarouselJadwal";
 
 function HomepageUtama() {
+
+  const navigate = useNavigate();
+  const login = isAuthenticated("guru");
+
+  useEffect(() => {
+    if (!login) {
+      navigate("/");
+    }
+  }, [login, navigate]);
+
   return (
     <div>
       <Header></Header>

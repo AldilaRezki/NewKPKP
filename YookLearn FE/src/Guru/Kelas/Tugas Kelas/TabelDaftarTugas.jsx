@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MdDeleteOutline } from "react-icons/md";
 import { MdModeEditOutline } from "react-icons/md";
+import { fetchTugas } from "../../services/GuruAPI";
 
-function TabelDaftarTugas() {
+function TabelDaftarTugas({ idMapel }) {
+  const [dataTugas, setTugas] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchTugas(idMapel);
+      setTugas(data);
+      // setIsLoading(false);
+    }
+    fetchData();
+  }, []);
+  
   return (
     <div>
       <div className="flex flex-col ml-10 mt-14 mr-10 border-[0.3px] py-2 px-5 shadow-md">
@@ -24,39 +36,33 @@ function TabelDaftarTugas() {
             </tr>
           </thead>
           <tbody>
-            <tr className="border-[0.3px] shadow-md">
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                <a href="/guru/xipa1/detail-tugas" className="block">
-                  Tugas Lorem Ipsum
-                </a>
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                12-03-2023 23:59:59
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                23/35
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] shadow-md border-biru text-center">
-                <MdModeEditOutline className="text-2xl mr-2 inline-block"></MdModeEditOutline>
-                <MdDeleteOutline className="text-2xl inline-block mb-[1px]"></MdDeleteOutline>
-              </td>
-            </tr>
-            <tr className="border-[0.3px] shadow-md">
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                Tugas Lorem Ipsum
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                12-03-2023 23:59:59
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                23/35
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] shadow-md border-biru text-center">
-                <MdModeEditOutline className="text-2xl mr-2 inline-block"></MdModeEditOutline>
-                <MdDeleteOutline className="text-2xl inline-block mb-[1px]"></MdDeleteOutline>
-              </td>
-            </tr>
-            <tr className="border-[0.3px] shadow-md">
+            {dataTugas.map((tugas) => (
+              <tr key={tugas.id} className="border-[0.3px] shadow-md">
+                <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
+                  <a
+                    href={`/guru/mapel/${idMapel}/tugas/${tugas.id}/detail-tugas`}
+                    className="block"
+                  >
+                    {tugas.judul_tugas}
+                  </a>
+                </td>
+                <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
+                  {tugas.deadline}
+                </td>
+                <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
+                  {tugas.total}
+                </td>
+                <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] shadow-md border-biru text-center">
+                  <a href={`/guru/mapel/${idMapel}/edit-tugas/${tugas.id}`}>
+                    <MdModeEditOutline className="text-2xl mr-2 inline-block" />
+                  </a>
+                  <button>
+                    <MdDeleteOutline className="text-2xl inline-block mb-[1px]" />
+                  </button>
+                </td>
+              </tr>
+            ))}
+            {/* <tr className="border-[0.3px] shadow-md">
               <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
                 Tugas Lorem Ipsum
               </td>
@@ -101,6 +107,21 @@ function TabelDaftarTugas() {
                 <MdDeleteOutline className="text-2xl inline-block mb-[1px]"></MdDeleteOutline>
               </td>
             </tr>
+            <tr className="border-[0.3px] shadow-md">
+              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
+                Tugas Lorem Ipsum
+              </td>
+              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
+                12-03-2023 23:59:59
+              </td>
+              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
+                23/35
+              </td>
+              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] shadow-md border-biru text-center">
+                <MdModeEditOutline className="text-2xl mr-2 inline-block"></MdModeEditOutline>
+                <MdDeleteOutline className="text-2xl inline-block mb-[1px]"></MdDeleteOutline>
+              </td>
+            </tr> */}
           </tbody>
         </table>
       </div>
