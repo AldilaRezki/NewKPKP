@@ -9,6 +9,7 @@ import { isAuthenticated } from "../../../Common/services/Auth";
 import { fetchAllMateri, fetchCurrentMateri } from "../../services/GuruAPI";
 
 function IsiMateri() {
+  const BASE_URL = import.meta.env.VITE_BASE_DOWNLOAD_URL;
   const { idMapel, idMateri } = useParams();
   const navigate = useNavigate();
   const login = isAuthenticated("guru");
@@ -52,7 +53,9 @@ function IsiMateri() {
 
       <div className="flex ml-[110px] mt-10 gap-x-5 text-biru">
         <span className="bg-tosca p-3 rounded-lg">{dataMateri.filename}</span>
-        <BsSaveFill className="bg-tosca p-[0.6rem] my-auto text-[2.5rem] rounded-lg"></BsSaveFill>
+        <a href={`${BASE_URL}/${dataMateri.filename}`} download>
+          <BsSaveFill className="bg-tosca p-[0.6rem] my-auto text-[2.5rem] rounded-lg"></BsSaveFill>
+        </a>
       </div>
     </div>
   );

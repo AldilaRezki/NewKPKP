@@ -1,6 +1,7 @@
 // const BASE_URL = "http://localhost:8000/api/student";
 
 const BASE_URL = import.meta.env.VITE_SISWA_API;
+const BASE_URL_GURU = import.meta.env.VITE_GURU_API;
 
 export async function fetchCurrentMapel(idMapel) {
   try {
@@ -159,7 +160,7 @@ export async function fecthKelas() {
 export async function fetchSiswa(idMapel) {
   try {
     const token = localStorage.getItem("token");
-    const response = await fetch(`${BASE_URL}/mapel/${idMapel}/siswa`, {
+    const response = await fetch(`${BASE_URL_GURU}/anggota/${idMapel}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

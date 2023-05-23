@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import HeaderGuru from "../../HeaderGuru";
 import HeaderKelas from "../HeaderKelas";
 import Form from "../../Form";
@@ -7,13 +7,13 @@ import { AiFillCaretDown } from "react-icons/ai";
 import Header from "../../Header";
 import ButtonTambahMateri from "../Materi Kelas/ButtonTambahMateri";
 import { useNavigate, useParams } from "react-router-dom";
-import { addTugas } from "../../services/GuruAPI";
+import { fetchCurrentTugas, updateTugas } from "../../services/GuruAPI";
 import { isAuthenticated } from "../../../Common/services/Auth";
 
-function TambahTugas({ onFileUpload }) {
+function EditTugas({ onFileUpload }) {
   const navigate = useNavigate();
   const login = isAuthenticated("guru");
-  const { idMapel } = useParams();
+  const { idMapel, idTugas } = useParams();
   const [gambar, setGambar] = useState(null);
   const [judul, setJudul] = useState("");
 
@@ -22,6 +22,15 @@ function TambahTugas({ onFileUpload }) {
       navigate("/");
     }
   }, [login, navigate]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchCurrentTugas(idMapel, idTugas);
+      setJudul(data.judul_tugas);
+      // setIsLoading(false);
+    }
+    fetchData();
+  }, []);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -39,7 +48,7 @@ function TambahTugas({ onFileUpload }) {
       return;
     }
     try {
-      const isSuccess = await addTugas(idMapel, judul, gambar);
+      const isSuccess = await updateTugas(idMapel, idTugas, judul, gambar);
       console.log(isSuccess);
       if (isSuccess) {
         console.log("Assigment added successfully");
@@ -120,4 +129,4 @@ function TambahTugas({ onFileUpload }) {
   );
 }
 
-export default TambahTugas;
+export default EditTugas;

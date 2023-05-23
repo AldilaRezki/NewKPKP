@@ -4,11 +4,19 @@ import { BsEye } from "react-icons/bs";
 import Header from "../Header";
 import { useNavigate } from "react-router-dom";
 import { resetPassword } from "../services/GuruAPI";
+import { isAuthenticated } from "../../Common/services/Auth";
 
 function UbahPassword() {
   const navigate = useNavigate();
+  const login = isAuthenticated("guru");
   const [new_password, setnew_password] = useState("");
   const [old_password, setold_password] = useState("");
+
+  useEffect(() => {
+    if (!login) {
+      navigate("/");
+    }
+  }, [login, navigate]);
 
   const handleResetPassword = async () => {
     const isSuccess = await resetPassword(new_password, old_password);
@@ -52,8 +60,10 @@ function UbahPassword() {
           <a className="text-biru text-md my-auto" href="/guru/profil">
             Batal
           </a>
-          <button className="text-white text-md bg-biru py-3 px-3 rounded-md"
-          onClick={handleResetPassword}>
+          <button
+            className="text-white text-md bg-biru py-3 px-3 rounded-md"
+            onClick={handleResetPassword}
+          >
             Ubah Password
           </button>
         </div>

@@ -4,16 +4,18 @@ import { BiCommentDetail } from "react-icons/bi";
 import { fetchStudentSubmit } from "../../services/GuruAPI";
 
 function TabelDetailTugas({ idMapel, idTugas, nilai }) {
-  const [dataSiswa, setSiswa] = useState([]);
+  const BASE_URL = import.meta.env.VITE_BASE_DOWNLOAD_URL;
+  const [dataTugas, setTugas] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
       const data = await fetchStudentSubmit(idMapel, idTugas);
-      setSiswa(data);
+      setTugas(data);
       // setIsLoading(false);
     }
     fetchData();
   }, []);
+
   return (
     <div>
       <div className="flex flex-col ml-10 mt-14 mr-10 border-[0.3px] py-2 px-5 shadow-md">
@@ -38,23 +40,24 @@ function TabelDetailTugas({ idMapel, idTugas, nilai }) {
             </tr>
           </thead>
           <tbody>
-            {dataSiswa.map((siswa) => (
-              <tr className="border-[0.3px] shadow-md" key={siswa.id}>
+            {dataTugas.map((tugas) => (
+              <tr className="border-[0.3px] shadow-md" key={tugas.id}>
                 <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                  {siswa.nama_pengirim}
+                  {tugas.nama_pengirim}
                 </td>
                 <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                  {siswa.created_at}
+                  {tugas.created_at}
                 </td>
                 <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                  {siswa.filename}
+                  {tugas.filename}
                 </td>
                 <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                  {siswa.nilai}/{nilai}
+                  {tugas.nilai}/{nilai}
                 </td>
                 <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] shadow-md border-biru text-center">
-                  <MdSave className="text-2xl mr-2 inline-block"></MdSave>
-                  <BiCommentDetail className="text-2xl inline-block mb-[1px]"></BiCommentDetail>
+                  <a href={`${BASE_URL}/${tugas.filename}`} download>
+                    <MdSave className="text-2xl mr-2 inline-block" />
+                  </a>
                 </td>
               </tr>
             ))}

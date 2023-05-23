@@ -212,14 +212,11 @@ export async function fetchStudentSubmit(idMapel, idTugas) {
 export async function fetchStudent(idMapel) {
   try {
     const token = localStorage.getItem("token");
-    const response = await fetch(
-      `${BASE_URL}/anggota/${idMapel}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const response = await fetch(`${BASE_URL}/anggota/${idMapel}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     const data = await response.json();
 
@@ -230,5 +227,92 @@ export async function fetchStudent(idMapel) {
     return data;
   } catch (error) {
     console.error(error);
+  }
+}
+
+export async function addMateri(idMapel, judul, file) {
+  try {
+    const token = localStorage.getItem("token");
+
+    const formData = new FormData();
+    formData.append("judul_materi", judul);
+    formData.append("file", file);
+
+    const response = await fetch(`${BASE_URL}/matpel/${idMapel}/materi/add`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
+
+export async function addTugas(idMapel, judul, file) {
+  try {
+    const token = localStorage.getItem("token");
+
+    const formData = new FormData();
+    formData.append("judul_tugas", judul);
+    formData.append("file", file);
+
+    const response = await fetch(`${BASE_URL}/matpel/${idMapel}/tugas/add`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
+
+export async function updateTugas(idMapel, idTugas, judul, file) {
+  try {
+    const token = localStorage.getItem("token");
+
+    const formData = new FormData();
+    formData.append("judul_tugas", judul);
+    formData.append("file", file);
+
+    const response = await fetch(
+      `${BASE_URL}/matpel/${idMapel}/tugas/${idTugas}/edit`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
   }
 }

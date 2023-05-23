@@ -309,6 +309,48 @@ export async function editMapel(namaPaket, idGuru, idMapel, idKelas) {
   }
 }
 
+export async function removeMapel(id) {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${BASE_URL}/matpel/delete/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+    return true;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function removeClass(id) {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${BASE_URL}/kelas/delete/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+    return true;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export async function addAkun(username, password, status, nama_user) {
   try {
     const token = localStorage.getItem("token");
@@ -391,6 +433,7 @@ export async function fetchCurrentSiswa(idSiswa) {
     const token = localStorage.getItem("token");
     const response = await fetch(`${BASE_URL}/siswa/${idSiswa}`, {
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
@@ -401,6 +444,27 @@ export async function fetchCurrentSiswa(idSiswa) {
       throw new Error(data.message);
     }
     return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function removeAccount(id) {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${BASE_URL}/account/delete/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+    return true;
   } catch (error) {
     console.error(error);
   }

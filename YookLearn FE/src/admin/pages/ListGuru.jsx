@@ -14,7 +14,7 @@ import {
   faUserTie,
 } from "@fortawesome/free-solid-svg-icons";
 import Header from "../components/Header";
-import { fetchAll } from "../../Admin/services/AdminAPI";
+import { fetchAll, removeAccount } from "../../Admin/services/AdminAPI";
 import { useNavigate } from "react-router-dom";
 import { isAuthenticated } from "../../Common/services/Auth";
 
@@ -22,6 +22,9 @@ function Daftar2() {
   const navigate = useNavigate();
   const login = isAuthenticated("admin");
   const [dataGuru, setDataGuru] = useState([]);
+  const [isRemoving, setIsRemoving] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
     if (!login) {
@@ -36,6 +39,36 @@ function Daftar2() {
     }
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const filteredGuru = dataGuru.filter((guru) =>
+      Object.values(guru).some(
+        (value) =>
+          value &&
+          value.toString().toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    );
+    setSearchResults(filteredGuru);
+  }, [dataGuru, searchQuery]);
+
+  const handleRemove = async (id) => {
+    try {
+      setIsRemoving(true);
+
+      const isSuccess = await removeAccount(id);
+
+      if (isSuccess) {
+        console.log("Guru removed successfully");
+        setDataGuru((prevGuru) => prevGuru.filter((guru) => guru.id !== id));
+      } else {
+        console.log("Failed to remove Guru");
+      }
+    } catch (error) {
+      console.log("Error removing Guru:", error);
+    } finally {
+      setIsRemoving(false);
+    }
+  };
 
   const students = [
     {
@@ -150,7 +183,9 @@ function Daftar2() {
             <input
               type="text"
               className="w-11/12 border rounded-lg px-4 py-2"
-              placeholder="Cari Guru"
+              placeholder="Cari Siswa"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
           <table className="min-w-full divide-y divide-gray-200">
@@ -203,7 +238,7 @@ function Daftar2() {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {dataGuru.map((lecture, i) => (
+              {searchResults.map((lecture, i) => (
                 <tr key={i}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                     {i + 1}
@@ -223,22 +258,25 @@ function Daftar2() {
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {lecture.matpel}
                   </td>
-                  <a href={`/admin/guru/edit/${lecture.id}`}>
-                    <td className="pr-3">
+                  <td className="pr-3">
+                    <a href={`/admin/guru/edit/${lecture.id}`}>
                       <FontAwesomeIcon
                         icon={faPen}
                         className="text-[#1A1F5A]"
                       />
-                    </td>
-                  </a>
-                  <a href="">
-                    <td className="pr-3">
+                    </a>
+                  </td>
+                  <td className="pr-3">
+                    <button
+                      onClick={() => handleRemove(lecture.id)}
+                      disabled={isRemoving}
+                    >
                       <FontAwesomeIcon
                         icon={faTrash}
                         className="text-[#1A1F5A]"
                       />
-                    </td>
-                  </a>
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>

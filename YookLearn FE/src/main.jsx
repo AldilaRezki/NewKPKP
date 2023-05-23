@@ -66,13 +66,14 @@ import TambahSoal from "./Guru/Kelas/Ujian Kelas/Menambahkan Soal/TambahSoal";
 import ExamPage from "./Siswa/pages/ExamPage";
 import IsiMateri from "./Guru/Kelas/Materi Kelas/IsiMateri";
 import HasilUjianSiswa from "./Guru/Kelas/Ujian Kelas/Hasil Ujian Siswa/HasilUjianSiswa";
-import InputFormBerita from "./Siswa/pages/InputFormBerita";
+// import InputFormBerita from "./Siswa/pages/InputFormBerita";
 
 import EditPaket from "./Admin/pages/EditPaket";
 import EditSiswa from "./Admin/pages/EditSiswa";
 import EditGuru from "./Admin/pages/EditGuru";
 import AdminEditAkun from "./Admin/pages/EditAkun";
 import EditMapel from "./Admin/pages/EditMapel";
+import EditTugas from "./Guru/Kelas/Tugas Kelas/EditTugas";
 
 const router = createBrowserRouter([
   {
@@ -150,11 +151,11 @@ const router = createBrowserRouter([
     element: <ExamPage />,
     errorElement: <ErrorPage />,
   },
-  {
-    path: "/siswa/test",
-    element: <InputFormBerita />,
-    errorElement: <ErrorPage />,
-  },
+  // {
+  //   path: "/siswa/test",
+  //   element: <InputFormBerita />,
+  //   errorElement: <ErrorPage />,
+  // },
 
   // Guru
   {
@@ -188,6 +189,10 @@ const router = createBrowserRouter([
   {
     path: "/guru/mapel/:idMapel/tambah-tugas",
     element: <TambahTugas />,
+  },
+  {
+    path: "/guru/mapel/:idMapel/edit-tugas/:idTugas",
+    element: <EditTugas />,
   },
   {
     path: "/guru/mapel/:idMapel/tugas/:idTugas/detail-tugas",

@@ -13,7 +13,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 function Detailmateri() {
-  const BASE_URL = import.meta.env.VITE_BASE_URL;
+  const BASE_URL = import.meta.env.VITE_BASE_DOWNLOAD_URL;
   
   const navigate = useNavigate();
   const login = isAuthenticated("siswa");
@@ -45,7 +45,7 @@ function Detailmateri() {
     fetchData(idMateri);
   }, []);
 
-  const downloadUrl = `${BASE_URL}/uploads/${dataMateri.filename}`;
+  const downloadUrl = `${BASE_URL}/${dataMateri.filename}`;
 
   return (
     <>

@@ -14,6 +14,7 @@ function TabelDaftarTugas({ idMapel }) {
     }
     fetchData();
   }, []);
+  
   return (
     <div>
       <div className="flex flex-col ml-10 mt-14 mr-10 border-[0.3px] py-2 px-5 shadow-md">
@@ -38,7 +39,10 @@ function TabelDaftarTugas({ idMapel }) {
             {dataTugas.map((tugas) => (
               <tr key={tugas.id} className="border-[0.3px] shadow-md">
                 <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                  <a href={`/guru/mapel/${idMapel}/tugas/${tugas.id}/detail-tugas`} className="block">
+                  <a
+                    href={`/guru/mapel/${idMapel}/tugas/${tugas.id}/detail-tugas`}
+                    className="block"
+                  >
                     {tugas.judul_tugas}
                   </a>
                 </td>
@@ -49,8 +53,12 @@ function TabelDaftarTugas({ idMapel }) {
                   {tugas.total}
                 </td>
                 <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] shadow-md border-biru text-center">
-                  <MdModeEditOutline className="text-2xl mr-2 inline-block" />
-                  <MdDeleteOutline className="text-2xl inline-block mb-[1px]" />
+                  <a href={`/guru/mapel/${idMapel}/edit-tugas/${tugas.id}`}>
+                    <MdModeEditOutline className="text-2xl mr-2 inline-block" />
+                  </a>
+                  <button>
+                    <MdDeleteOutline className="text-2xl inline-block mb-[1px]" />
+                  </button>
                 </td>
               </tr>
             ))}

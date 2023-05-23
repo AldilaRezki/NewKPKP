@@ -11,10 +11,12 @@ import MapelCard from "../components/MapelCard";
 import { fetchKelasMapel } from "../services/SiswaAPI";
 
 const Mapel = () => {
+  const { idKelas } = useParams();
   const navigate = useNavigate();
   const login = isAuthenticated("siswa");
   const [mapel, setMapel] = useState([]);
-  const { idKelas } = useParams();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
     if (!login) {
@@ -30,17 +32,16 @@ const Mapel = () => {
     fetchData();
   }, [idKelas]);
 
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Do something with the search term
-    console.log(searchTerm);
-  };
-
-  const handleChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
+  useEffect(() => {
+    const filteredMapel = mapel.filter((mapel) =>
+      Object.values(mapel).some(
+        (value) =>
+          value &&
+          value.toString().toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    );
+    setSearchResults(filteredMapel);
+  }, [mapel, searchQuery]);
 
   return (
     <>
@@ -56,25 +57,22 @@ const Mapel = () => {
           </h1>
         </div>
         <div className="flex justify-end mr-10">
-          <form onSubmit={handleSubmit} className="flex items-center">
+          <div className="flex items-center">
             <input
-              type="text"
-              placeholder="Cari"
-              value={searchTerm}
-              onChange={handleChange}
               className=" rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              type="text"
+              placeholder="Cari Mata Pelajaran"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
-            <button
-              type="submit"
-              className="px-4 py-2 bg-[#1A1F5A] text-white rounded-r-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-            >
+            <div className="px-4 py-2 bg-[#1A1F5A] text-white rounded-r-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
               <FaSearch />
-            </button>
-          </form>
+            </div>
+          </div>
         </div>
       </div>
       <div className="grid grid-cols-3 gap-4 mt-10 mx-10">
-        {mapel.map((item, i) => (
+        {searchResults.map((item, i) => (
           <div key={i}>
             <MapelCard
               namaMapel={item.nama_matpel}

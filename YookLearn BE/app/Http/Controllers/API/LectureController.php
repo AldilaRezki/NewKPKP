@@ -111,12 +111,12 @@ class LectureController extends Controller
         $subject = DB::table('subjects')->get()->where('id', $id_matpel)->first();
 
 
-        if ($user['id'] != $subject->id_guru) {
-            return response()->json([
-                'success' => false,
-                'massage' => 'Tidak memiliki otoritas',
-            ]);
-        }
+        // if ($user['id'] != $subject->id_guru) {
+        //     return response()->json([
+        //         'success' => false,
+        //         'massage' => 'Tidak memiliki otoritas',
+        //     ]);
+        // }
 
         $class = DB::table('classess')->get()->where('id', $subject->id_kelas)->first();
         $student = DB::table('students')->get(['id', 'nisn', 'jenis_kelamin', 'agama', 'nama_lengkap', 'id_kelas'])->where('id_kelas', $class->id);
@@ -518,8 +518,9 @@ class LectureController extends Controller
 
         $validator = Validator::make($request->all(), [
             'judul_tugas' => 'required',
-            'nilai' => 'required',
-            'tipe_deadline' => 'required',
+            'file' => 'required|file|max:2048',
+            // 'nilai' => 'required',
+            // 'tipe_deadline' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -530,8 +531,19 @@ class LectureController extends Controller
             ]);
         }
 
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $filename);
+        }
+
         $input = $request->all();
+        $input['filename'] = $filename;
         $input['id_matpel'] = $subject->id;
+
+        //Test
+        $input['nilai'] = 100;
+        $input['tipe_deadline'] = 'unstrict';
 
         $affected = Assignment::create($input);
 
@@ -564,7 +576,7 @@ class LectureController extends Controller
         }
 
         // $assigment = DB::table('assignments')->get(['id', 'judul_tugas'])->where('id', $subject->id);
-        $assigment = DB::table('assignments')->get(['id', 'judul_tugas', 'deadline'])->where('id', $subject->id);
+        $assigment = DB::table('assignments')->get(['id', 'judul_tugas', 'deadline', 'id_matpel'])->where('id_matpel', $subject->id);
         foreach ($assigment as $i) {
             $i->total = DB::table('student_assigments')->get()->where('id_tugas', $i->id)->count();
         }
@@ -588,8 +600,7 @@ class LectureController extends Controller
 
         $submit = DB::table('student_assigments')->get(['id', 'id_siswa', 'id_tugas', 'created_at', 'nilai'])->where('id_tugas', $assigment->id);
 
-        foreach ($submit as $i)
-        {
+        foreach ($submit as $i) {
             $student = DB::table("students")->get(['id', 'nama_lengkap', 'id_kelas'])->where('id', $i->id_siswa)->first();
             $i->nama_pengirim = $student->nama_lengkap;
         }
@@ -612,14 +623,15 @@ class LectureController extends Controller
         }
 
         $submit = DB::table('student_assigments')->get(['id', 'id_siswa', 'id_tugas', 'created_at', 'nilai', 'filename'])->where('id_tugas', $assigment->id);
+        $result = [];
 
-        foreach ($submit as $i)
-        {
+        foreach ($submit as $i) {
             $student = DB::table("students")->get(['id', 'nama_lengkap', 'id_kelas'])->where('id', $i->id_siswa)->first();
             $i->nama_pengirim = $student->nama_lengkap;
+            $result[] = $i;
         }
 
-        return response()->json($submit);
+        return response()->json($result);
     }
 
     public function getDetailIndividuTugas($id_matpel, $id_tugas, $id_kumpul)
@@ -698,7 +710,7 @@ class LectureController extends Controller
     {
         $user = auth()->user();
         $subject = DB::table('subjects')->get()->where('id', $id_matpel)->first();
-        $assigment = DB::table('assigments')->get()->where('id', $id_tugas)->first();
+        $assigment = DB::table('assignments')->get()->where('id', $id_tugas)->first();
 
 
         if ($user['id'] != $subject->id_guru) {
@@ -710,8 +722,9 @@ class LectureController extends Controller
 
         $validator = Validator::make($request->all(), [
             'judul_tugas' => 'required',
-            'nilai' => 'required',
-            'tipe_deadline' => 'required',
+            'file' => 'required|file|max:2048',
+            // 'nilai' => 'required',
+            // 'tipe_deadline' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -722,8 +735,21 @@ class LectureController extends Controller
             ]);
         }
 
-        $input = $request->all();
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $filename);
+        }
+
+        $input = $request->except(['file']);
+        $input['filename'] = $filename;
         $input['id_matpel'] = $subject->id;
+
+        //Test
+        $input['nilai'] = 100;
+        $input['tipe_deadline'] = 'unstrict';
+
+        // return $input;
 
         $affected = Assignment::where('id', $assigment->id)->update($input);
 
@@ -788,7 +814,8 @@ class LectureController extends Controller
 
         $validator = Validator::make($request->all(), [
             'judul_materi' => 'required',
-            'isi_materi' => 'required',
+            // 'isi_materi' => 'required',
+            'file' => 'required|file|max:2048',
         ]);
 
         if ($validator->fails()) {
@@ -799,8 +826,16 @@ class LectureController extends Controller
             ]);
         }
 
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $filename);
+        }
+
         $input = $request->all();
+        $input['filename'] = $filename;
         $input['id_matpel'] = $subject->id;
+        $input['isi_materi'] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed diam";
 
         $affected = Material::create($input);
 

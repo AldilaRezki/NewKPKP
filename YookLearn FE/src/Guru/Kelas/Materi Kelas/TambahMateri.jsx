@@ -4,14 +4,25 @@ import HeaderKelas from "../HeaderKelas";
 import Form from "../../Form";
 import { BiArrowBack } from "react-icons/bi";
 import Header from "../../Header";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from "react-router-dom";
 import ButtonTambahMateri from "./ButtonTambahMateri";
+import { addMateri } from "../../services/GuruAPI";
+import { isAuthenticated } from "../../../Common/services/Auth";
 
 function TambahMateri({ onFileUpload }) {
+  const navigate = useNavigate();
+  const login = isAuthenticated("guru");
+  const { idMapel } = useParams();
   const [judul, setJudul] = useState("");
+  const [gambar, setGambar] = useState(null);
+
+  useEffect(() => {
+    if (!login) {
+      navigate("/");
+    }
+  }, [login, navigate]);
 
   const handleFileChange = (e) => {
-  const {idMapel} = useParams();
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.onload = () => {
@@ -19,11 +30,30 @@ function TambahMateri({ onFileUpload }) {
     };
     reader.readAsDataURL(file);
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!gambar) {
+      console.log("No file selected");
+      return;
+    }
+    try {
+      const isSuccess = await addMateri(idMapel, judul, gambar);
+      console.log(isSuccess);
+      if (isSuccess) {
+        console.log("Materi added successfully");
+        navigate(`/guru/mapel/${idMapel}/daftar-materi`);
+      }
+    } catch (error) {
+      console.log("Error adding materi:", error);
+    }
+  };
+
   return (
     <div>
       <Header></Header>
       <HeaderGuru></HeaderGuru>
-      <HeaderKelas idMapel = {idMapel}></HeaderKelas>
+      <HeaderKelas idMapel={idMapel}></HeaderKelas>
       <div className="bg-tosca mt-10 mx-10 p-2">
         <a href={`/guru/mapel/${idMapel}/daftar-materi`}>
           <BiArrowBack className="bg-white text-xl"></BiArrowBack>
@@ -34,23 +64,24 @@ function TambahMateri({ onFileUpload }) {
         Tambah Materi
       </h1>
 
-      <div>
-        <div className="form-input-row">
-          <label
-            htmlFor="judul"
-            className="text-md mt-8 ml-10 font-normal text-biru"
-          >
-            Judul
-          </label>
-          <input
-            className="bg-white mx-10 mt-3 h-8 border-[0.3px] shadow-md w-[95%] py-1 px-2 focus:outline-none focus:ring-1"
-            id="judul"
-            type="text"
-            value={judul}
-            onChange={(e) => setJudul(e.target.value)}
-          />
-        </div>
-        {/* <h2 className="text-md mt-8 ml-10 font-normal text-biru">
+      <form onSubmit={handleSubmit}>
+        <div>
+          <div className="form-input-row">
+            <label
+              htmlFor="judul"
+              className="text-md mt-8 ml-10 font-normal text-biru"
+            >
+              Judul
+            </label>
+            <input
+              className="bg-white mx-10 mt-3 h-8 border-[0.3px] shadow-md w-[95%] py-1 px-2 focus:outline-none focus:ring-1"
+              id="judul"
+              type="text"
+              value={judul}
+              onChange={(e) => setJudul(e.target.value)}
+            />
+          </div>
+          {/* <h2 className="text-md mt-8 ml-10 font-normal text-biru">
           Judul Materi
         </h2>
         <form>
@@ -59,9 +90,9 @@ function TambahMateri({ onFileUpload }) {
             className="bg-white mx-10 mt-3 h-8 border-[0.3px] shadow-md w-[95%] py-1 px-2 focus:outline-none focus:ring-1"
           />
         </form> */}
-      </div>
+        </div>
 
-      <div className="form-input-row">
+        {/* <div className="form-input-row">
         <label
           htmlFor="isi"
           className="text-md mt-8 ml-10 font-normal text-biru"
@@ -69,24 +100,24 @@ function TambahMateri({ onFileUpload }) {
           Isi
         </label>
         <Form></Form>
-      </div>
+      </div> */}
 
-      {/* <div>
+        {/* <div>
         <h2 className="text-md mt-8 ml-10 font-normal text-biru">Isi Materi</h2>
         <Form></Form>
       </div> */}
 
-      <div className="form-input-row mt-5">
-        <label
-          className="text-md mt-10 ml-10 font-normal text-biru"
-          htmlFor="fileInput"
-        >
-          Lampiran
-        </label>
-        <input id="fileInput" type="file" onChange={handleFileChange} />
-      </div>
+        <div className="form-input-row mt-5">
+          <label
+            className="text-md mt-10 ml-10 font-normal text-biru"
+            htmlFor="fileInput"
+          >
+            Lampiran
+          </label>
+          <input id="fileInput" type="file" onChange={handleFileChange} />
+        </div>
 
-      {/* <div>
+        {/* <div>
         <h2 className="text-md mt-8 ml-10 font-normal text-biru">Lampiran</h2>
         <div className="flex">
           <div>
@@ -96,14 +127,21 @@ function TambahMateri({ onFileUpload }) {
         </div>
       </div> */}
 
-      <div className="mt-20 flex justify-end mr-10 gap-x-10 mb-20">
-        <a href="/guru/xipa1/daftar-materi" className="text-biru py-2">
-          Batal
-        </a>
-        <a href="" className="text-white bg-biru py-2 px-5 rounded-md">
-          Kirim
-        </a>
-      </div>
+        <div className="mt-20 flex justify-end mr-10 gap-x-10 mb-20">
+          <a
+            href={`/guru/mapel/${idMapel}/daftar-materi`}
+            className="text-biru py-2"
+          >
+            Batal
+          </a>
+          <button
+            className="text-white bg-biru py-2 px-5 rounded-md"
+            type="submit"
+          >
+            Kirim
+          </button>
+        </div>
+      </form>
     </div>
   );
 }
