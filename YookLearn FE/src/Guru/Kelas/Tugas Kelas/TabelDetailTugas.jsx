@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { MdSave } from "react-icons/md";
-import { BiCommentDetail } from "react-icons/bi";
+import { BiPencil } from "react-icons/bi";
+import TambahPoin from "./TambahPoin";
 import { fetchStudentSubmit } from "../../services/GuruAPI";
 
 function TabelDetailTugas({ idMapel, idTugas, nilai }) {
@@ -16,6 +17,10 @@ function TabelDetailTugas({ idMapel, idTugas, nilai }) {
     fetchData();
   }, []);
 
+function TabelDetailTugas() {
+  const [showMyModal, setShowMyModal] = useState(false);
+
+  const handleOnClose = () => setShowMyModal(false)
   return (
     <div>
       <div className="flex flex-col ml-10 mt-14 mr-10 border-[0.3px] py-2 px-5 shadow-md">
@@ -35,7 +40,7 @@ function TabelDetailTugas({ idMapel, idTugas, nilai }) {
                 Poin
               </th>
               <th className="py-2 border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] shadow-md border-biru">
-                Simpan File
+                Save/Detail
               </th>
             </tr>
           </thead>
@@ -72,11 +77,14 @@ function TabelDetailTugas({ idMapel, idTugas, nilai }) {
                 Lorem Ipsum.pdf
               </td>
               <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                <input type="number" min={0} max={100} className="bg-white outline-none appearance-none border-[0.1px] flex py-2 pl-5 w-[72%] mx-auto"
-                placeholder="Masukkan poin"/>
+                100/100
               </td>
               <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] shadow-md border-biru text-center">
                 <MdSave className="text-2xl mr-2 inline-block"></MdSave>
+                <button onClick={() => setShowMyModal(true)}>
+                  <BiPencil className="text-2xl inline-block mb-[1px]"></BiPencil>
+                </button>
+                <TambahPoin onClose={handleOnClose} visible={showMyModal}></TambahPoin>
               </td>
             </tr>
             <tr className="border-[0.3px] shadow-md">
@@ -90,11 +98,14 @@ function TabelDetailTugas({ idMapel, idTugas, nilai }) {
                 Lorem Ipsum.pdf
               </td>
               <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                <input type="number" min={0} max={100} className="bg-white outline-none appearance-none border-[0.1px] flex py-2 pl-5 w-[72%] mx-auto"
-                placeholder="Masukkan poin"/>
+                100/100
               </td>
               <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] shadow-md border-biru text-center">
                 <MdSave className="text-2xl mr-2 inline-block"></MdSave>
+                <button onClick={() => setShowMyModal(true)}>
+                  <BiPencil className="text-2xl inline-block mb-[1px]"></BiPencil>
+                </button>
+                <TambahPoin onClose={handleOnClose} visible={showMyModal}></TambahPoin>
               </td>
             </tr> */}
           </tbody>
