@@ -16,6 +16,7 @@ function TabelDetailTugas({ idMapel, idTugas, nilai }) {
     }
     fetchData();
   }, []);
+}
 
 function TabelDetailTugas() {
   const [showMyModal, setShowMyModal] = useState(false);
