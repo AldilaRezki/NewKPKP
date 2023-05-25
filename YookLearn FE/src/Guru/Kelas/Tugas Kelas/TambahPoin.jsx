@@ -1,6 +1,7 @@
 import React from 'react'
 import { RxCross2 } from "react-icons/rx"
 
+
 function TambahPoin({ visible, onClose }) {
 
     if(!visible) return null;
