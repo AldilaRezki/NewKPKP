@@ -11,6 +11,7 @@ use App\Models\Account;
 use App\Models\Student;
 use App\Models\Classes;
 use App\Models\Subject;
+use stdClass;
 
 class AdminController extends Controller
 {
@@ -83,7 +84,7 @@ class AdminController extends Controller
             ]);
         }
 
-        $account = DB::table('accounts')->get()->where('id', $id);
+        $account = DB::table('accounts')->get(['id', 'role', 'username'])->where('id', $id)->first();
 
         return response()->json($account);
     }
@@ -239,7 +240,7 @@ class AdminController extends Controller
             ]);
         }
 
-        $lecture = DB::table('lecturers')->get()->where('id', $id);
+        $lecture = DB::table('lecturers')->get()->where('id', $id)->first();
 
         return response()->json($lecture);
     }
@@ -247,10 +248,11 @@ class AdminController extends Controller
     public function updateGuru(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'username' => 'required',
-            'password' => 'required',
             'nama_lengkap' => 'required',
-            'jenis_kelamin' => 'required',
+            'nip' => 'required',
+            'golongan' => 'required',
+            'pangkat' => 'required',
+            'matpel' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -283,9 +285,9 @@ class AdminController extends Controller
         $affected = DB::table('lecturers')->where('id', $id)->update($input);
 
         if ($affected) {
-            $akun = $affected;
+            $input = [];
+            $input['nama_user'] = $request->nama_lengkap;
             DB::table('accounts')->where('id', $id)->update($input);
-
             $res = [
                 'success' => true,
                 'message' => 'guru berhasil di update'
@@ -392,7 +394,9 @@ class AdminController extends Controller
             ]);
         }
 
-        $student = DB::table('student')->get()->where('id', $id);
+        $student = DB::table('students')->get()->where('id', $id)->first();
+        $class = DB::table('classess')->get(['id', 'nama_kelas'])->where('id', $student->id_kelas)->first();
+        $student->nama_kelas = $class->nama_kelas;
 
         return response()->json($student);
     }
@@ -426,7 +430,7 @@ class AdminController extends Controller
         if (!$student = DB::table('students')->get()->where('id', $id)) {
             $res = [
                 'success' => false,
-                'message' => 'guru tidak ditemukan'
+                'message' => 'siswa tidak ditemukan'
             ];
 
             return response()->json($res);
@@ -437,7 +441,8 @@ class AdminController extends Controller
         $affected = DB::table('students')->where('id', $id)->update($input);
 
         if ($affected) {
-            $akun = $affected;
+            $input = [];
+            $input['nama_user'] = $request->nama_lengkap;
             DB::table('accounts')->where('id', $id)->update($input);
 
             $res = [
@@ -598,16 +603,19 @@ class AdminController extends Controller
         }
 
         $class = DB::table('classess')->get()->where('id', $id)->first();
-        $subjects = DB::table('subjects')->get()->where('id', $class->id);
+        $lecture = DB::table('lecturers')->get(['id', 'nama_lengkap'])->where('id', $class->id_guru)->first();
+        $class->nama_guru = $lecture->nama_lengkap;
 
-        $class->subjects = $subjects;
+        // $subjects = DB::table('subjects')->get()->where('id', $class->id);
 
-        $res = [
-            'success' => true,
-            'class' => $class,
-        ];
+        // $class->subjects = $subjects;
 
-        return response()->json($res);
+        // $res = [
+        //     'success' => true,
+        //     'class' => $class,
+        // ];
+
+        return response()->json($class);
     }
 
     public function editKelas(Request $request, $id)
@@ -752,7 +760,9 @@ class AdminController extends Controller
             ]);
         }
 
-        $subject = DB::table('subjects')->get()->where('id', $id);
+        $subject = DB::table('subjects')->get(['id', 'nama_matpel', 'id_guru', 'id_kelas'])->where('id', $id)->first();
+        $lecture = DB::table('lecturers')->get(['id', 'nama_lengkap'])->where('id', $subject->id_guru)->first();
+        $subject->nama_guru = $lecture->nama_lengkap;
 
         return response()->json($subject);
     }
@@ -761,7 +771,7 @@ class AdminController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_matpel' => 'required',
-            'jadwal' => 'required',
+            // 'jadwal' => 'required',
             'id_kelas' => 'required',
             'id_guru' => 'required',
         ]);

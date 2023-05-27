@@ -1,10 +1,11 @@
 import { TbEdit } from "react-icons/tb";
 
-function BoxDeskripsi() {
+function BoxDeskripsi({nama_matpel}) {
+
   return (
     <div className="flex flex-col mx-10 px-8 py-8 my-10 bg-tosca text-biru font-medium shadow-xl">
       <div className="flex justify-between pb-8 text-xl">
-        <h1>Bahasa Indonesia</h1>
+        <h1>{nama_matpel}</h1>
         <TbEdit></TbEdit>
       </div>
       <p>

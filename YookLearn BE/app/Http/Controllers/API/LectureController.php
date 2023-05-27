@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\API;
+
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\Assigment_Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Forum;
 use App\Models\Forum_Comment;
@@ -19,15 +21,14 @@ class LectureController extends Controller
     public function getProfile()
     {
         $user = auth()->user();
-        $lecture = DB::table('lecturers')->get()->where('id', $user['id']);
+        $lecture = DB::table('lecturers')->get()->where('id', $user['id'])->first();
 
         $res = [
             'success' => true,
-            'user' => $user,
             'lecturer' => $lecture
         ];
 
-        return response()->json($res);
+        return response()->json($lecture);
     }
 
     public function editPassword(Request $request)
@@ -35,7 +36,8 @@ class LectureController extends Controller
         $user = auth()->user();
 
         $validator = Validator::make($request->all(), [
-            'new_password' => 'required'
+            'new_password' => 'required',
+            'old_password' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -48,8 +50,17 @@ class LectureController extends Controller
 
         $input = $request->all();
 
+        if (!Hash::check($request['old_password'], $user['password'])) {
+            $res = [
+                'success' => false,
+                'message' => 'password lama tidak sama dengan yang dimasukkan'
+            ];
+
+            return response()->json($res);
+        }
+
         $input['new_password'] = bcrypt($input['new_password']);
-        $affected = Account::where('id', $user['id']) ->update(['password' => $input['new_password']]);
+        $affected = Account::where('id', $user['id'])->update(['password' => $input['new_password']]);
 
         $res = [
             'success' => true,
@@ -72,12 +83,26 @@ class LectureController extends Controller
 
         $matpel = DB::table('subjects')->get()->where('id_guru', $user['id']);
 
+        $X = [];
+        $XI = [];
+        $XII = [];
+
+        foreach ($matpel as $i) {
+            if (preg_match('/^(10|X)$/', $i->nama_matpel)) {
+                $X[] = $i;
+            } elseif (preg_match('/^(11|XI)$/', $i->nama_matpel)) {
+                $XI[] = $i;
+            } elseif (preg_match('/^(12|XII)$/', $i->nama_matpel)) {
+                $XII[] = $i;
+            }
+        }
+
         $res = [
             'success' => true,
             'matpel' => $matpel
         ];
 
-        return response()->json($res);
+        return response()->json($matpel);
     }
 
     public function getAnggotaKelas($id_matpel)
@@ -86,24 +111,19 @@ class LectureController extends Controller
         $subject = DB::table('subjects')->get()->where('id', $id_matpel)->first();
 
 
-        if ($user['id'] != $subject->id_guru) {
-            return response()->json([
-                'success' => false,
-                'massage' => 'Tidak memiliki otoritas',
-            ]);
-        }
+        // if ($user['id'] != $subject->id_guru) {
+        //     return response()->json([
+        //         'success' => false,
+        //         'massage' => 'Tidak memiliki otoritas',
+        //     ]);
+        // }
 
         $class = DB::table('classess')->get()->where('id', $subject->id_kelas)->first();
-        $student = DB::table('students')->get()->where('id_kelas', $class->id);
+        $student = DB::table('students')->get(['id', 'nisn', 'jenis_kelamin', 'agama', 'nama_lengkap', 'id_kelas'])->where('id_kelas', $class->id);
 
-        $res = [
-            'success' => true,
-            'student' => $student
-        ];
-
-        return response()->json($res);
+        return response()->json($student);
     }
-    
+
     public function addForum(Request $request, $id_matpel)
     {
         $user = auth()->user();
@@ -149,7 +169,6 @@ class LectureController extends Controller
         }
 
         return response()->json($res);
-
     }
 
     public function getForum($id_matpel)
@@ -171,8 +190,7 @@ class LectureController extends Controller
             'forum' => $forums
         ];
 
-        if (!$forums)
-        {
+        if (!$forums) {
             $res = [
                 'success' => true,
                 'forum' => null
@@ -182,14 +200,13 @@ class LectureController extends Controller
         return response()->json($res);
     }
 
-    public function getForumById($id_matpel,$id_forum)
+    public function getForumById($id_matpel, $id_forum)
     {
         $user = auth()->user();
         $subject = DB::table('subjects')->get()->where('id', $id_matpel)->first();
         $comments = DB::table('forum_comments')->get()->where('id_forum', $id_forum)->sortBy('created_at', false);;
-        
-        foreach ($comments as $comment)
-        {
+
+        foreach ($comments as $comment) {
             $comment->reply = DB::table('forum_comments')->get()->where('id_reply', $comment->id);
         }
 
@@ -208,8 +225,7 @@ class LectureController extends Controller
             'comment' => $comments,
         ];
 
-        if (!$forum)
-        {
+        if (!$forum) {
             $res = [
                 'success' => false,
                 'forum' => null
@@ -253,8 +269,7 @@ class LectureController extends Controller
             'massage' => 'Forum berhasil diedit',
         ];
 
-        if(!$affected)
-        {
+        if (!$affected) {
             $res = [
                 'success' => false,
                 'massage' => 'forum gagal diedit'
@@ -283,8 +298,7 @@ class LectureController extends Controller
             'message' => 'Forum berhasil dihapus'
         ];
 
-        if(!$affected)
-        {
+        if (!$affected) {
             $res = [
                 'success' => false,
                 'message' => 'Forum gagal dihapus'
@@ -294,7 +308,7 @@ class LectureController extends Controller
         return response()->json($res);
     }
 
-    public function addForumComment(Request $request,$id_matpel,$id_forum)
+    public function addForumComment(Request $request, $id_matpel, $id_forum)
     {
         $user = auth()->user();
         $subject = DB::table('subjects')->get()->where('id', $id_matpel)->first();
@@ -330,7 +344,7 @@ class LectureController extends Controller
             'massaged' => 'berhasil menambahkan komentar'
         ];
 
-        if(!$affected) {
+        if (!$affected) {
             $res = [
                 'success' => false,
                 'massage' => 'gagal menambahkan komentar'
@@ -338,8 +352,6 @@ class LectureController extends Controller
         }
 
         return response()->json($res);
-
-
     }
 
     public function replyCommnent(Request $request, $id_matpel, $id_forum, $id_comment)
@@ -381,7 +393,7 @@ class LectureController extends Controller
             'massaged' => 'berhasil menambahkan balasan'
         ];
 
-        if(!$affected) {
+        if (!$affected) {
             $res = [
                 'success' => false,
                 'massage' => 'gagal menambahkan balasan'
@@ -410,8 +422,7 @@ class LectureController extends Controller
             'comments' => $comments
         ];
 
-        if (!$comments)
-        {
+        if (!$comments) {
             $res['comments'] = null;
         }
 
@@ -444,14 +455,14 @@ class LectureController extends Controller
 
         $input = $request->all();
 
-        $affected = Forum_Comment::where('id', $comment->id) ->update(['komentar' => $input['komentar']]);
+        $affected = Forum_Comment::where('id', $comment->id)->update(['komentar' => $input['komentar']]);
 
         $res = [
             'success' => true,
             'massage' => 'Komentar berhasil di edit'
         ];
 
-        if(!$affected) {
+        if (!$affected) {
             $res = [
                 'success' => false,
                 'massage' => 'Komentar gagal di edit'
@@ -459,7 +470,6 @@ class LectureController extends Controller
         }
 
         return response()->json($res);
-
     }
 
     public function deleteForumComment($id_matpel, $id_forum, $id_comment)
@@ -483,8 +493,7 @@ class LectureController extends Controller
             'massage' => 'Komentar berhasil dihapus'
         ];
 
-        if(!$affected)
-        {
+        if (!$affected) {
             $res = [
                 'success' => false,
                 'message' => 'Komentar gagal dihapus'
@@ -492,7 +501,6 @@ class LectureController extends Controller
         }
 
         return response()->json($res);
-
     }
 
     public function addTugas(Request $request, $id_matpel)
@@ -510,8 +518,9 @@ class LectureController extends Controller
 
         $validator = Validator::make($request->all(), [
             'judul_tugas' => 'required',
-            'nilai' => 'required',
-            'tipe_deadline' => 'required',
+            'file' => 'required|file|max:2048',
+            // 'nilai' => 'required',
+            // 'tipe_deadline' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -522,8 +531,19 @@ class LectureController extends Controller
             ]);
         }
 
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $filename);
+        }
+
         $input = $request->all();
+        $input['filename'] = $filename;
         $input['id_matpel'] = $subject->id;
+
+        //Test
+        $input['nilai'] = 100;
+        $input['tipe_deadline'] = 'unstrict';
 
         $affected = Assignment::create($input);
 
@@ -532,8 +552,7 @@ class LectureController extends Controller
             'massage' => 'Tugas berhasil ditambah',
         ];
 
-        if (!$affected)
-        {
+        if (!$affected) {
             $res = [
                 'success' => false,
                 'massage' => 'Tugas gagal ditambah',
@@ -541,7 +560,6 @@ class LectureController extends Controller
         }
 
         return response()->json($res);
-
     }
 
     public function getTugas($id_matpel)
@@ -557,21 +575,20 @@ class LectureController extends Controller
             ]);
         }
 
-        $assigment = DB::table('assignments')->get(['id', 'judul_tugas'])->where('id', $subject->id);
+        // $assigment = DB::table('assignments')->get(['id', 'judul_tugas'])->where('id', $subject->id);
+        $assigment = DB::table('assignments')->get(['id', 'judul_tugas', 'deadline', 'id_matpel'])->where('id_matpel', $subject->id);
+        foreach ($assigment as $i) {
+            $i->total = DB::table('student_assigments')->get()->where('id_tugas', $i->id)->count();
+        }
 
-        $res = [
-            'success' => true,
-            'assigment' => $assigment
-        ];
-
-        return response()->json($res);
+        return response()->json($assigment);
     }
 
-    public function getDetailTugas($id_matpel,$id_tugas)
+    public function getDetailTugas($id_matpel, $id_tugas)
     {
         $user = auth()->user();
         $subject = DB::table('subjects')->get()->where('id', $id_matpel)->first();
-        $assigment = DB::table('assignments')->get(['id', 'judul_tugas', 'detail_tugas'])->where('id', $id_tugas)->first();
+        $assigment = DB::table('assignments')->get(['id', 'judul_tugas', 'detail_tugas', 'nilai'])->where('id', $id_tugas)->first();
 
 
         if ($user['id'] != $subject->id_guru) {
@@ -581,15 +598,40 @@ class LectureController extends Controller
             ]);
         }
 
-        $submit = DB::table('student_assigments')->get()->where('id_tugas', $assigment->id);
+        $submit = DB::table('student_assigments')->get(['id', 'id_siswa', 'id_tugas', 'created_at', 'nilai'])->where('id_tugas', $assigment->id);
 
-        $res = [
-            'success' => true,
-            'tugas' => $assigment,
-            'pengumpul' => $submit
-        ];
+        foreach ($submit as $i) {
+            $student = DB::table("students")->get(['id', 'nama_lengkap', 'id_kelas'])->where('id', $i->id_siswa)->first();
+            $i->nama_pengirim = $student->nama_lengkap;
+        }
 
-        return response()->json($res);
+        return response()->json($assigment);
+    }
+
+    public function getStudentSubmit($id_matpel, $id_tugas)
+    {
+        $user = auth()->user();
+        $subject = DB::table('subjects')->get()->where('id', $id_matpel)->first();
+        $assigment = DB::table('assignments')->get(['id', 'judul_tugas', 'detail_tugas', 'nilai'])->where('id', $id_tugas)->first();
+
+
+        if ($user['id'] != $subject->id_guru) {
+            return response()->json([
+                'success' => false,
+                'massage' => 'Tidak memiliki otoritas',
+            ]);
+        }
+
+        $submit = DB::table('student_assigments')->get(['id', 'id_siswa', 'id_tugas', 'created_at', 'nilai', 'filename'])->where('id_tugas', $assigment->id);
+        $result = [];
+
+        foreach ($submit as $i) {
+            $student = DB::table("students")->get(['id', 'nama_lengkap', 'id_kelas'])->where('id', $i->id_siswa)->first();
+            $i->nama_pengirim = $student->nama_lengkap;
+            $result[] = $i;
+        }
+
+        return response()->json($result);
     }
 
     public function getDetailIndividuTugas($id_matpel, $id_tugas, $id_kumpul)
@@ -654,7 +696,7 @@ class LectureController extends Controller
             'massage' => 'Komentar berhasil ditambahkan'
         ];
 
-        if(!$affected){
+        if (!$affected) {
             $res = [
                 'suuccess' => false,
                 'massage' => 'Komentar gagal ditambahkan'
@@ -668,7 +710,7 @@ class LectureController extends Controller
     {
         $user = auth()->user();
         $subject = DB::table('subjects')->get()->where('id', $id_matpel)->first();
-        $assigment = DB::table('assigments')->get()->where('id', $id_tugas)->first();
+        $assigment = DB::table('assignments')->get()->where('id', $id_tugas)->first();
 
 
         if ($user['id'] != $subject->id_guru) {
@@ -680,8 +722,9 @@ class LectureController extends Controller
 
         $validator = Validator::make($request->all(), [
             'judul_tugas' => 'required',
-            'nilai' => 'required',
-            'tipe_deadline' => 'required',
+            'file' => 'required|file|max:2048',
+            // 'nilai' => 'required',
+            // 'tipe_deadline' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -692,18 +735,30 @@ class LectureController extends Controller
             ]);
         }
 
-        $input = $request->all();
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $filename);
+        }
+
+        $input = $request->except(['file']);
+        $input['filename'] = $filename;
         $input['id_matpel'] = $subject->id;
 
-        $affected = Assignment::where('id', $assigment->id) ->update($input);
+        //Test
+        $input['nilai'] = 100;
+        $input['tipe_deadline'] = 'unstrict';
+
+        // return $input;
+
+        $affected = Assignment::where('id', $assigment->id)->update($input);
 
         $res = [
             'success' => true,
             'massage' => 'Tugas berhasil diedit',
         ];
 
-        if (!$affected)
-        {
+        if (!$affected) {
             $res = [
                 'success' => false,
                 'massage' => 'Tugas gagal diedit',
@@ -734,8 +789,7 @@ class LectureController extends Controller
             'message' => 'Tugas berhasil dihapus'
         ];
 
-        if(!$affected)
-        {
+        if (!$affected) {
             $res = [
                 'success' => false,
                 'message' => 'Tugas gagal dihapus'
@@ -744,7 +798,7 @@ class LectureController extends Controller
 
         return response()->json($res);
     }
-    
+
     public function addMateri(Request $request, $id_matpel)
     {
         $user = auth()->user();
@@ -760,7 +814,8 @@ class LectureController extends Controller
 
         $validator = Validator::make($request->all(), [
             'judul_materi' => 'required',
-            'isi_materi' => 'required',
+            // 'isi_materi' => 'required',
+            'file' => 'required|file|max:2048',
         ]);
 
         if ($validator->fails()) {
@@ -770,9 +825,17 @@ class LectureController extends Controller
                 'data' => $validator->errors(),
             ]);
         }
-        
+
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $filename);
+        }
+
         $input = $request->all();
+        $input['filename'] = $filename;
         $input['id_matpel'] = $subject->id;
+        $input['isi_materi'] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed diam";
 
         $affected = Material::create($input);
 
@@ -781,8 +844,7 @@ class LectureController extends Controller
             'massage' => 'materi berhasil ditambahkan'
         ];
 
-        if(!$affected)
-        {
+        if (!$affected) {
             $res = [
                 'success' => false,
                 'massage' => 'materi gagal ditambahkan'
@@ -807,12 +869,12 @@ class LectureController extends Controller
 
         $materials = DB::table('materials')->get()->where('id_matpel', $id_matpel);
 
-        $res = [
-            'success' => true,
-            'materi' => $materials
-        ];
+        // $res = [
+        //     'success' => true,
+        //     'materi' => $materials
+        // ];
 
-        return response()->json($res);
+        return response()->json($materials);
     }
 
     public function getDetailMateri($id_matpel, $id_materi)
@@ -839,21 +901,13 @@ class LectureController extends Controller
 
     public function addUjian()
     {
-
     }
 
     public function getUjian()
     {
-
     }
 
     public function getDetailUjian()
     {
-
     }
-
-
-
-
-
 }

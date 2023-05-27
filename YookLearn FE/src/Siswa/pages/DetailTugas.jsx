@@ -51,7 +51,7 @@ function DetailTugas() {
         <h1 className="text-xl ml-5 text-slate-400 font-bold">Tugas</h1>
       </div>
       <div>
-        <DetailTgsCard idTugas={idTugas} />
+        <DetailTgsCard idKelas={idKelas} idTugas={idTugas} idMapel={idMapel} />
       </div>
     </>
   );

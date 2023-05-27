@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Material extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    use Uuids;
+    // use Uuids;
 
     /**
      * The attributes that are mass assignable.
