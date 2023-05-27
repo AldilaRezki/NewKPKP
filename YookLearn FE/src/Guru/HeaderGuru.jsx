@@ -1,3 +1,5 @@
+import ButtonSignOutGuru from "./ButtonSignOutGuru";
+
 function HeaderGuru() {
   return (
     <header className="flex justify-between bg-biru h-14">
@@ -52,9 +54,9 @@ function HeaderGuru() {
             ></path>
           </svg>
         </button>
-        <a
+        <ButtonSignOutGuru
           className="header_profile flex bg-tosca items-center rounded-full w-10 h-10"
-          href="/guru/profil"
+          
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +75,7 @@ function HeaderGuru() {
             <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
             <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855"></path>
           </svg>
-        </a>
+        </ButtonSignOutGuru>
       </div>
     </header>
   );

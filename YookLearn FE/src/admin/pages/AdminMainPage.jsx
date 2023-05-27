@@ -18,6 +18,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { isAuthenticated } from "../../Common/services/Auth";
 import { useNavigate } from "react-router-dom";
+import NavGuru from "../components/NavGuru";
 
 function AdminHomepage() {
   const navigate = useNavigate();
@@ -32,6 +33,7 @@ function AdminHomepage() {
   return (
     <div className="bg-white min-h-screen">
       <Header />
+      <NavGuru />
       <div className="container mx-auto px-4 py-6">
         <div className="flex justify-between">
           <span className="flex items-center">

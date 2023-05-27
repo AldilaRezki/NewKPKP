@@ -17,6 +17,7 @@ import Header from "../components/Header";
 import { fetchAll, removeAccount } from "../../Admin/services/AdminAPI";
 import { useNavigate } from "react-router-dom";
 import { isAuthenticated } from "../../Common/services/Auth";
+import NavGuru from "../components/NavGuru";
 
 function Daftar() {
   const navigate = useNavigate();
@@ -100,6 +101,7 @@ function Daftar() {
   return (
     <div className="bg-white min-h-screen">
       <Header />
+      <NavGuru />
       <div className="container mx-auto px-4 py-6">
         <div className="flex">
           <a href="/admin/homepage">
