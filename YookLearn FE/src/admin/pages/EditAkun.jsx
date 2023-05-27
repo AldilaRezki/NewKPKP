@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import { useNavigate, useParams } from "react-router-dom";
 import { isAuthenticated } from "../../Common/services/Auth";
 import { addAkun, editAkun, fetchCurrentAkun } from "../services/AdminAPI";
+import NavGuru from "../components/NavGuru";
 
 function AdminEditAkun() {
   const navigate = useNavigate();
@@ -40,6 +41,7 @@ function AdminEditAkun() {
   return (
     <div className="bg-white min-h-screen">
       <Header />
+      <NavGuru />
       <main className="container mx-auto px-4 py-6">
         <h1 className="text-2xl font-bold text-[#1A1F5A] mb-4">
           Daftar Akun Admin

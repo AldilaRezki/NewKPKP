@@ -18,6 +18,7 @@ import Header from "../components/Header";
 import { useNavigate, useParams } from "react-router-dom";
 import { isAuthenticated } from "../../Common/services/Auth";
 import { fetchMapelByKelas, removeMapel } from "../services/AdminAPI";
+import NavGuru from "../components/NavGuru";
 
 function Daftar3() {
   const mapels = [
@@ -84,6 +85,7 @@ function Daftar3() {
   return (
     <div className="bg-white min-h-screen">
       <Header />
+      <NavGuru />
       <div className="container mx-auto px-4 py-6">
         <div className="flex">
           <a href="/admin/homepage">
