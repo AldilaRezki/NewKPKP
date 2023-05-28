@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { MdSave } from "react-icons/md";
 import { BiPencil } from "react-icons/bi";
-// import TambahPoin from "./TambahPoin";
+import TambahPoin from "./TambahPoin";
 import { fetchStudentSubmit } from "../../services/GuruAPI";
 
 function TabelDetailTugas({ idMapel, idTugas, nilai }) {
@@ -9,20 +9,33 @@ function TabelDetailTugas({ idMapel, idTugas, nilai }) {
   const [dataTugas, setTugas] = useState([]);
   const [showMyModal, setShowMyModal] = useState(false);
 
+  const handleOnClose = () => setShowMyModal(false);
+
   useEffect(() => {
     async function fetchData() {
       const data = await fetchStudentSubmit(idMapel, idTugas);
       setTugas(data);
+      setUpdatedNilai(data); // Menyimpan data awal sebelum diupdate
       // setIsLoading(false);
     }
     fetchData();
   }, []);
 
+  const updateNilaiSiswa = (idSubmit, poin) => {
+    setTugas((prevData) => {
+      const updatedData = prevData.map((tugas) => {
+        if (tugas.id === idSubmit) {
+          return {
+            ...tugas,
+            nilai: poin,
+          };
+        }
+        return tugas;
+      });
+      return updatedData;
+    });
+  };
 
-function TabelDetailTugas() {
-  const [showMyModal, setShowMyModal] = useState(false);
-
-  const handleOnClose = () => setShowMyModal(false)
   return (
     <div>
       <div className="flex flex-col ml-10 mt-14 mr-10 border-[0.3px] py-2 px-5 shadow-md">
@@ -65,6 +78,18 @@ function TabelDetailTugas() {
                   <a href={`${BASE_URL}/${tugas.filename}`} download>
                     <MdSave className="text-2xl mr-2 inline-block" />
                   </a>
+                  <button onClick={() => setShowMyModal(true)}>
+                    <BiPencil className="text-2xl inline-block mb-[1px]"></BiPencil>
+                  </button>
+                  <TambahPoin
+                    onClose={handleOnClose}
+                    visible={showMyModal}
+                    idSubmit={tugas.id}
+                    idMapel={idMapel}
+                    idTugas={idTugas}
+                    dataTugas={dataTugas}
+                    updateDataTugas={updateNilaiSiswa}
+                  ></TambahPoin>
                 </td>
               </tr>
             ))}
@@ -137,6 +162,5 @@ function TabelDetailTugas() {
     </div>
   );
 }
-
 
 export default TabelDetailTugas;

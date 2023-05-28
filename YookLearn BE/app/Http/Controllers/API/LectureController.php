@@ -110,14 +110,6 @@ class LectureController extends Controller
         $user = auth()->user();
         $subject = DB::table('subjects')->get()->where('id', $id_matpel)->first();
 
-
-        // if ($user['id'] != $subject->id_guru) {
-        //     return response()->json([
-        //         'success' => false,
-        //         'massage' => 'Tidak memiliki otoritas',
-        //     ]);
-        // }
-
         $class = DB::table('classess')->get()->where('id', $subject->id_kelas)->first();
         $student = DB::table('students')->get(['id', 'nisn', 'jenis_kelamin', 'agama', 'nama_lengkap', 'id_kelas'])->where('id_kelas', $class->id);
 
@@ -519,8 +511,9 @@ class LectureController extends Controller
         $validator = Validator::make($request->all(), [
             'judul_tugas' => 'required',
             'file' => 'required|file|max:2048',
-            // 'nilai' => 'required',
-            // 'tipe_deadline' => 'required',
+            'deadline' => 'required',
+            'nilai' => 'required',
+            'tipe_deadline' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -540,10 +533,6 @@ class LectureController extends Controller
         $input = $request->all();
         $input['filename'] = $filename;
         $input['id_matpel'] = $subject->id;
-
-        //Test
-        $input['nilai'] = 100;
-        $input['tipe_deadline'] = 'unstrict';
 
         $affected = Assignment::create($input);
 
@@ -638,10 +627,12 @@ class LectureController extends Controller
     {
         $user = auth()->user();
         $subject = DB::table('subjects')->get()->where('id', $id_matpel)->first();
-        $assigment = DB::table('assignments')->get(['id', 'judul_tugas', 'detail_tugas'])->where('id', $id_tugas)->first();
-        $submit = DB::table('student_assigments')->get()->where('id', $id_kumpul)->first();
+        $assigment = DB::table('assignments')->get(['id', 'nilai'])->where('id', $id_tugas)->first();
+        $submit = DB::table('student_assigments')->get(['id', 'nilai', 'id_siswa'])->where('id', $id_kumpul)->first();
+        $siswa = DB::table('students')->get(['id', 'nama_lengkap'])->where('id', $submit->id_siswa)->first();
 
-        $submit->comments = DB::table('assigment_comments')->get()->where('id_kumpul', $assigment->id);
+        $submit->nama_pengirim = $siswa->nama_lengkap;
+        $submit->maks_nilai = $assigment->nilai;
 
 
         if ($user['id'] != $subject->id_guru) {
@@ -651,12 +642,36 @@ class LectureController extends Controller
             ]);
         }
 
-        $res = [
-            'success' => true,
-            'tugas' => $submit
-        ];
+        return response()->json($submit);
+    }
 
-        return response()->json($res);
+    public function submitNilai(Request $request, $id_matpel, $id_kumpul)
+    {
+        $user = auth()->user();
+        $subject = DB::table('subjects')->get()->where('id', $id_matpel)->first();
+
+        $validator = Validator::make($request->all(), [
+            'nilai' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Terjadi Kesalahan',
+                'data' => $validator->errors(),
+            ]);
+        }
+
+        if ($user['id'] != $subject->id_guru) {
+            return response()->json([
+                'success' => false,
+                'massage' => 'Tidak memiliki otoritas',
+            ]);
+        }
+
+        $success = DB::table('student_assigments')->where('id', $id_kumpul)->update(['nilai' => $request->nilai]);
+
+        return $success;
     }
 
     public function addKomentarTugas(Request $request, $id_matpel, $id_tugas, $id_kumpul)

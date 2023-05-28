@@ -4,8 +4,10 @@ import HeaderKelas from "../../HeaderKelas";
 import Form from "../../../Form";
 import Opsi from "./Opsi";
 import Header from "../../../Header";
+import { useParams } from "react-router-dom";
 
 function TambahSoal() {
+  const { idMapel } = useParams();
   const [opsiList, setOpsiList] = useState([]);
   const [kotakCentangList, setKotakCentangList] = useState([]);
 
@@ -35,7 +37,7 @@ function TambahSoal() {
     <div>
       <Header></Header>
       <HeaderGuru></HeaderGuru>
-      <HeaderKelas></HeaderKelas>
+      <HeaderKelas idMapel={idMapel}></HeaderKelas>
 
       <h1 className="text-xl mt-8 ml-10 font-medium text-biru">Tambah Soal</h1>
 

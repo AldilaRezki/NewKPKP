@@ -6,15 +6,17 @@ import BoxDaftarSoalPilihanGanda from "./BoxDaftarSoalPilihanGanda";
 import BoxDaftarSoalKotakCentang from "./BoxDaftarSoalKotakCentang";
 import BoxDaftarSoalEssay from "./BoxDaftarSoalEssay";
 import Header from "../../../Header";
+import { useParams } from "react-router-dom";
 
 function DaftarSoalUjian() {
+  const { idMapel } = useParams();
   return (
     <div className="mb-20">
       <Header></Header>
       <HeaderGuru></HeaderGuru>
-      <HeaderKelas></HeaderKelas>
+      <HeaderKelas idMapel={idMapel}></HeaderKelas>
       <div className="bg-tosca mt-10 mx-10 p-2">
-        <a href="/guru/xipa1/ujian/ujian-pekan-1">
+        <a href={`/guru/mapel/${idMapel}/ujian/ujian-pekan-1`}>
           <BiArrowBack className="bg-white text-xl"></BiArrowBack>
         </a>
       </div>
