@@ -88,6 +88,14 @@ function TambahTugas({ onFileUpload }) {
             value={judul}
             onChange={(e) => setJudul(e.target.value)}
           />
+
+          <div className="mt-10 mb-8">
+            <h2 className="text-md mt-8 ml-10 mb-4 font-normal text-biru">
+              Penjelasan
+            </h2>
+            <Form></Form>
+          </div>
+
           <div className="form-input-row mt-5">
             <label
               className="text-md mt-10 ml-10 font-normal text-biru"
