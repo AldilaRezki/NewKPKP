@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import HeaderGuru from "../../../HeaderGuru";
 import HeaderKelas from "../../HeaderKelas";
+import KotakCentang from "./KotakCentang";
 import Form from "../../../Form";
 import Opsi from "./Opsi";
 import Header from "../../../Header";
@@ -41,6 +42,7 @@ function TambahSoal() {
 
       <h1 className="text-xl mt-8 ml-10 font-medium text-biru">Tambah Soal</h1>
 
+      <form>
       <div className="mt-10">
         <div>
           <span className="text-xl ml-10 font-medium text-biru">1.</span>
@@ -58,7 +60,7 @@ function TambahSoal() {
                   <select
                     name=""
                     id=""
-                    className="bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 w-[360px] border-[0.3px] shadow-md mt-4"
+                    className="w-[210px] bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 border-[0.3px] shadow-md mt-4"
                   >
                     <option value="">Pilihan Ganda</option>
                     <option value="">Kotak Centang</option>
@@ -133,7 +135,7 @@ function TambahSoal() {
                   <select
                     name=""
                     id=""
-                    className="bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 w-[360px] border-[0.3px] shadow-md mt-4"
+                    className="bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 w-[210px] border-[0.3px] shadow-md mt-4"
                   >
                     <option value="">Pilihan Ganda</option>
                     <option value="">Kotak Centang</option>
@@ -211,7 +213,7 @@ function TambahSoal() {
                   <select
                     name=""
                     id=""
-                    className="bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 w-[360px] border-[0.3px] shadow-md mt-4"
+                    className="bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 w-[210px] border-[0.3px] shadow-md mt-4"
                   >
                     <option value="">Pilihan Ganda</option>
                     <option value="">Kotak Centang</option>
@@ -228,10 +230,10 @@ function TambahSoal() {
             </div>
           </div>
           <div className="flex gap-x-24 mt-8">
-            <div className="ml-8 flex flex-col gap-y-2 w-[500px]">
+            <div className="ml-8 flex flex-col gap-y-2 w-[600px]">
               <span>Jawaban</span>
-              <div className="container flex gap-x-8 w-[500px]">
-                <Form mx="mx-0" width="w-[500px]"></Form>
+              <div className="container flex gap-x-8 w-[600px]">
+                <Form mx="mx-0" width="w-[600px]"></Form>
               </div>
             </div>
             <div className="flex flex-col gap-y-2">
@@ -254,6 +256,7 @@ function TambahSoal() {
           </div>
         </div>
       </div>
+      </form>
     </div>
   );
 }

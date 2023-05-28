@@ -7,10 +7,9 @@
     border: 1px solid rgb(238, 238, 238);
     outline: none;
     color: #000000;
+    background-color: #FFF;
     font-size: 1rem;
     /* width: 95%; */
-    margin-left: 2.5rem;
-    margin-right: 2.5rem;
     overflow: auto;
     height: 250px;
     --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);

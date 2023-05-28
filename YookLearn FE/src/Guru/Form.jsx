@@ -19,7 +19,7 @@ const MenuBar = ({ editor }) => {
   
     return (
       <>
-      <div className='flex gap-x-5 justify-center ml-10 mr-10 border-[1px] border-[414141] px-2 py-3 shadow-sm'>
+      <div className='flex gap-x-5 justify-center border-[1px] border-[414141] px-2 py-3 shadow-sm bg-white overflow-auto'>
         <button
           onClick={() => editor.chain().focus().toggleBold().run()}
           disabled={
@@ -193,7 +193,7 @@ const MenuBar = ({ editor }) => {
     )
   }
   
-  export default function Form() {
+  export default function Form({ mx = "mx-10", width = "" }) {
     const editor = useEditor({
       extensions: [
         TextStyle.configure({ types: [ListItem.name] }),
@@ -226,7 +226,7 @@ const MenuBar = ({ editor }) => {
     })
   
     return (
-      <div>
+      <div className={`${mx} ${width}`}>
         <MenuBar editor={editor} />
         <EditorContent editor={editor} />
       </div>
