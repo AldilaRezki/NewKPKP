@@ -5,8 +5,10 @@ import Form from "../../Form";
 import { BiArrowBack } from "react-icons/bi";
 import Header from "../../Header";
 import ButtonTambahMateri from "../Materi Kelas/ButtonTambahMateri";
+import { useParams } from "react-router-dom";
 
 function TambahUjian({ onFileUpload }) {
+  const { idMapel } = useParams();
   const fileInputRef = useRef(null);
 
   const handleFileUpload = () => {
@@ -17,9 +19,9 @@ function TambahUjian({ onFileUpload }) {
     <div>
       <Header></Header>
       <HeaderGuru></HeaderGuru>
-      <HeaderKelas></HeaderKelas>
+      <HeaderKelas idMapel={idMapel}></HeaderKelas>
       <div className="bg-tosca mt-10 mx-10 p-2">
-        <a href="/guru/xipa1/ujian">
+        <a href={`/guru/mapel/${idMapel}/tambah-ujian`}>
           <BiArrowBack className="bg-white text-xl"></BiArrowBack>
         </a>
       </div>
@@ -54,11 +56,11 @@ function TambahUjian({ onFileUpload }) {
       </div>
 
       <div className="mt-20 flex justify-end mr-10 gap-x-10 mb-20">
-        <a href="/guru/xipa1/ujian" className="text-biru py-2">
+        <a href={`/guru/mapel/${idMapel}/ujian`} className="text-biru py-2">
           Batal
         </a>
         <a
-          href="/guru/xipa1/ujian/tambah-soal-ujian"
+          href={`/guru/mapel/${idMapel}/tambah-soal-ujian`}
           className="text-white bg-biru py-2 px-5 rounded-md"
         >
           Tambah Soal

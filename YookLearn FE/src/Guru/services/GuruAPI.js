@@ -209,6 +209,30 @@ export async function fetchStudentSubmit(idMapel, idTugas) {
   }
 }
 
+export async function fetchIndividualSubmit(idMapel, idSubmit, idTugas) {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(
+      `${BASE_URL}/matpel/${idMapel}/tugas/${idTugas}/submit/${idSubmit}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export async function fetchStudent(idMapel) {
   try {
     const token = localStorage.getItem("token");
@@ -258,13 +282,23 @@ export async function addMateri(idMapel, judul, file) {
   }
 }
 
-export async function addTugas(idMapel, judul, file) {
+export async function addTugas(
+  idMapel,
+  judul,
+  file,
+  combinedDeadline,
+  nilai,
+  tipeDeadline
+) {
   try {
     const token = localStorage.getItem("token");
 
     const formData = new FormData();
     formData.append("judul_tugas", judul);
     formData.append("file", file);
+    formData.append("deadline", combinedDeadline);
+    formData.append("nilai", nilai);
+    formData.append("tipe_deadline", tipeDeadline);
 
     const response = await fetch(`${BASE_URL}/matpel/${idMapel}/tugas/add`, {
       method: "POST",
@@ -286,13 +320,24 @@ export async function addTugas(idMapel, judul, file) {
   }
 }
 
-export async function updateTugas(idMapel, idTugas, judul, file) {
+export async function updateTugas(
+  idMapel,
+  idTugas,
+  judul,
+  file,
+  combinedDeadline,
+  nilai,
+  tipeDeadline
+) {
   try {
     const token = localStorage.getItem("token");
 
     const formData = new FormData();
     formData.append("judul_tugas", judul);
     formData.append("file", file);
+    formData.append("deadline", combinedDeadline);
+    formData.append("nilai", nilai);
+    formData.append("tipe_deadline", tipeDeadline);
 
     const response = await fetch(
       `${BASE_URL}/matpel/${idMapel}/tugas/${idTugas}/edit`,
@@ -300,6 +345,7 @@ export async function updateTugas(idMapel, idTugas, judul, file) {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
         body: formData,
       }
@@ -314,5 +360,35 @@ export async function updateTugas(idMapel, idTugas, judul, file) {
   } catch (error) {
     console.log(error);
     return false;
+  }
+}
+
+export async function submitNilai(idMapel, idSubmit, nilai) {
+  try {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(
+      `${BASE_URL}/matpel/${idMapel}/kumpul/${idSubmit}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          nilai: nilai,
+        }),
+      }
+    );
+
+    const data = await response.json();
+
+    if (response.ok) {
+      return true;
+    } else {
+      throw new Error("Terjadi kesalahan saat mengirimkan nilai");
+    }
+  } catch (error) {
+    console.error(error);
   }
 }

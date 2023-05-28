@@ -14,8 +14,13 @@ function EditTugas({ onFileUpload }) {
   const navigate = useNavigate();
   const login = isAuthenticated("guru");
   const { idMapel, idTugas } = useParams();
-  const [gambar, setGambar] = useState(null);
+  const [file, setFile] = useState(null);
+
   const [judul, setJudul] = useState("");
+  const [tenggat, setTenggat] = useState(null);
+  const [waktu, setWaktu] = useState(null);
+  const [nilai, setNilai] = useState(0);
+  const [tipeDeadline, setTipeDeadline] = useState("strict");
 
   useEffect(() => {
     if (!login) {
@@ -27,6 +32,7 @@ function EditTugas({ onFileUpload }) {
     async function fetchData() {
       const data = await fetchCurrentTugas(idMapel, idTugas);
       setJudul(data.judul_tugas);
+      
       // setIsLoading(false);
     }
     fetchData();
@@ -36,19 +42,28 @@ function EditTugas({ onFileUpload }) {
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.onload = () => {
-      setGambar(file);
+      setFile(file);
     };
     reader.readAsDataURL(file);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!gambar) {
+    if (!file) {
       console.log("No file selected");
       return;
     }
     try {
-      const isSuccess = await updateTugas(idMapel, idTugas, judul, gambar);
+      const combinedDeadline = waktu ? `${tenggat} ${waktu}` : `${tenggat} 23:59`;
+      const isSuccess = await updateTugas(
+        idMapel,
+        idTugas,
+        judul,
+        file,
+        combinedDeadline,
+        nilai,
+        tipeDeadline
+      );
       console.log(isSuccess);
       if (isSuccess) {
         console.log("Assigment added successfully");
@@ -92,6 +107,68 @@ function EditTugas({ onFileUpload }) {
               Lampiran
             </label>
             <input id="fileInput" type="file" onChange={handleFileChange} />
+          </div>
+
+          <div className="flex ml-10 gap-x-9">
+            <div>
+              <h2 className="text-md mt-8 font-normal text-biru">Tenggat</h2>
+              <div className="flex gap-x-8">
+                <input
+                  type="date"
+                  name=""
+                  id=""
+                  className="mt-4 py-2 px-5 border-[0.3px] shadow-md"
+                  value={tenggat}
+                  onChange={(e) => setTenggat(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div>
+              <h2 className="text-md mt-8 font-normal text-biru">(Opsional)</h2>
+              <div className="flex gap-x-8">
+                <input
+                  type="time"
+                  name=""
+                  id=""
+                  className="mt-4 py-2 px-5 border-[0.3px] shadow-md"
+                  value={waktu}
+                  onChange={(e) => setWaktu(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div>
+              <h2 className="text-md mt-8 font-normal text-biru">Poin</h2>
+              <div className="flex gap-x-8">
+                <input
+                  type="number"
+                  name=""
+                  id=""
+                  min={0}
+                  max={100}
+                  className="mt-4 py-2 px-5 border-[0.3px] shadow-md"
+                  value={nilai}
+                  onChange={(e) => setNilai(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div>
+              <h2 className="text-md mt-8 font-normal text-biru">
+                Setelah melewati tenggat waktu
+              </h2>
+              <div className="flex">
+                <select
+                  className="bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 w-[360px] border-[0.3px] shadow-md mt-4"
+                  value={tipeDeadline}
+                  onChange={(e) => setTipeDeadline(e.target.value)}
+                >
+                  <option value="strict">Tidak dapat mengumpulkan tugas</option>
+                  <option value="unstrict">Dapat mengumpulkan tugas</option>
+                </select>
+              </div>
+            </div>
           </div>
 
           <div className="mt-20 flex justify-end mr-10 gap-x-10 mb-20">

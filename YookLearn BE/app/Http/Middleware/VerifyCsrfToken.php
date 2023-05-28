@@ -33,6 +33,7 @@ class VerifyCsrfToken extends Middleware
         'http://localhost:8000/api/lecture/matpel/*/materi/add',
         'http://localhost:8000/api/lecture/matpel/*/tugas/add',
         'http://localhost:8000/api/lecture/matpel/*/tugas/*/edit',
+        'http://localhost:8000/api/lecture/matpel/*/kumpul/*',
 
         'http://localhost:8000/api/student/editpassword',
         'http://localhost:8000/api/student/tugas/*/add',

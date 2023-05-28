@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlineUser } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import { logOut } from "../../Siswa/services/SiswaAPI";
 
 const ButtonSignOutAdmin = () => {
   const navigate = useNavigate();

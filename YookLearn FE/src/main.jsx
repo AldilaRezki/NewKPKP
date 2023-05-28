@@ -199,35 +199,35 @@ const router = createBrowserRouter([
     element: <DetailTugasGuru />,
   },
   {
-    path: "/guru/xipa1/ujian",
+    path: "/guru/mapel/:idMapel/ujian",
     element: <DaftarUjian />,
   },
   {
-    path: "/guru/xipa1/ujian/tambah-ujian",
+    path: "/guru/mapel/:idMapel/tambah-ujian",
     element: <TambahUjian />,
   },
   {
-    path: "/guru/xipa1/ujian/tambah-soal-ujian",
+    path: "/guru/mapel/:idMapel/tambah-soal-ujian",
     element: <TambahSoal />,
   },
   {
-    path: "/guru/xipa1/ujian/ujian-pekan-1",
+    path: "/guru/mapel/:idMapel/ujian/ujian-pekan-1",
     element: <DetailUjian />,
   },
   {
-    path: "/guru/xipa1/ujian/ujian-pekan-1/daftar-soal",
+    path: "/guru/mapel/:idMapel/ujian/ujian-pekan-1/daftar-soal",
     element: <DaftarSoalUjian />,
   },
   {
-    path: "/guru/xipa1/ujian/ujian-pekan-1/hasil-ujian-peserta",
+    path: "/guru/mapel/:idMapel/ujian/ujian-pekan-1/hasil-ujian-peserta",
     element: <HasilUjianPeserta />,
   },
   {
-    path: "/guru/xipa1/ujian/ujian-pekan-1/hasil-ujian-siswa",
+    path: "/guru/mapel/:idMapel/ujian/ujian-pekan-1/hasil-ujian-siswa",
     element: <HasilUjianSiswa />,
   },
   {
-    path: "/guru/xipa1/ujian/ujian-pekan-1/hasil-ujian-kelas",
+    path: "/guru/mapel/:idMapel/ujian/ujian-pekan-1/hasil-ujian-kelas",
     element: <HasilUjianKelas />,
   },
   {
