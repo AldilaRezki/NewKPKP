@@ -4,18 +4,18 @@ import { BiPencil } from "react-icons/bi";
 import TambahPoin from "./TambahPoin";
 import { fetchStudentSubmit } from "../../services/GuruAPI";
 
-function TabelDetailTugas({ idMapel, idTugas, nilai }) {
-  const BASE_URL = import.meta.env.VITE_BASE_DOWNLOAD_URL;
-  const [dataTugas, setTugas] = useState([]);
+// function TabelDetailTugas({ idMapel, idTugas, nilai }) {
+//   const BASE_URL = import.meta.env.VITE_BASE_DOWNLOAD_URL;
+//   const [dataTugas, setTugas] = useState([]);
 
-  useEffect(() => {
-    async function fetchData() {
-      const data = await fetchStudentSubmit(idMapel, idTugas);
-      setTugas(data);
-      // setIsLoading(false);
-    }
-    fetchData();
-  }, []);
+//   useEffect(() => {
+//     async function fetchData() {
+//       const data = await fetchStudentSubmit(idMapel, idTugas);
+//       setTugas(data);
+//       // setIsLoading(false);
+//     }
+//     fetchData();
+//   }, []);
 
 
 function TabelDetailTugas() {
