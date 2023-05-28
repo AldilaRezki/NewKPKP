@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { MdSave } from "react-icons/md";
 import { BiPencil } from "react-icons/bi";
-import TambahPoin from "./TambahPoin";
+// import TambahPoin from "./TambahPoin";
 import { fetchStudentSubmit } from "../../services/GuruAPI";
 
 function TabelDetailTugas({ idMapel, idTugas, nilai }) {
   const BASE_URL = import.meta.env.VITE_BASE_DOWNLOAD_URL;
   const [dataTugas, setTugas] = useState([]);
+  const [showMyModal, setShowMyModal] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -17,10 +18,7 @@ function TabelDetailTugas({ idMapel, idTugas, nilai }) {
     fetchData();
   }, []);
 
-function TabelDetailTugas() {
-  const [showMyModal, setShowMyModal] = useState(false);
-
-  const handleOnClose = () => setShowMyModal(false)
+  const handleOnClose = () => setShowMyModal(false);
   return (
     <div>
       <div className="flex flex-col ml-10 mt-14 mr-10 border-[0.3px] py-2 px-5 shadow-md">
