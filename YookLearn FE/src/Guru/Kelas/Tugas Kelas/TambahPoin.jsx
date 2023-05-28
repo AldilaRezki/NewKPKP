@@ -1,10 +1,12 @@
 import React from 'react'
 import { RxCross2 } from "react-icons/rx"
 
+
 function TambahPoin({ visible, onClose }) {
 
     if(!visible) return null;
 
+    
     return (
         <div className='fixed inset-0 bg-black bg-opacity-20 backdrop-blur-sm flex justify-center items-center'>
             <div className='bg-white w-[480px] flex flex-col gap-y-7'>
