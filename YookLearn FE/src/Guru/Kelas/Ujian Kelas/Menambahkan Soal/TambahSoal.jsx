@@ -14,7 +14,7 @@ function TambahSoal() {
   const { idMapel } = useParams();
   const [opsiList, setOpsiList] = useState([]);
   const [kotakCentangList, setKotakCentangList] = useState([]);
-  const [selectedOption, setSelectedOption] = useState("pilgan");
+  // const [selectedOption, setSelectedOption] = useState("pilgan");
 
   const [dataMapel, setMapel] = useState([]);
 
@@ -26,6 +26,7 @@ function TambahSoal() {
     }
     fetchData();
   }, []);
+    const [selectedOptions, setSelectedOptions] = useState(['pilgan']);
 
   const handleAddOpsi = () => {
     setOpsiList([...opsiList, ""]);
@@ -57,11 +58,12 @@ function TambahSoal() {
     setFormList(newFormList);
   };
 
-  let addFormList = () => {
-    event.preventDefault();
-    // console.log("Tambah button clicked");
-    setFormList([...formList, { pertanyaan: "" }]);
-  };
+    let addFormList = () => {
+        event.preventDefault();
+        // console.log("Tambah button clicked");
+        setFormList([...formList, {pertanyaan: ''}]);
+        setSelectedOptions([...selectedOptions, 'pilgan']);
+    }
 
   let removeFormList = (i) => {
     let newFormList = [...formList];
@@ -69,76 +71,79 @@ function TambahSoal() {
     setFormList(newFormList);
   };
 
-  const handleSelectChange = (e) => {
-    const value = e.target.value;
-    setSelectedOption(value);
-  };
+    const handleSelectChange = (index, e) => {
+        const value = e.target.value
+        const updatedSelectedOptions = [...selectedOptions];
+        updatedSelectedOptions[index] = value;
+        setSelectedOptions(updatedSelectedOptions);
+    };
 
-  const renderJawabanSection = () => {
-    if (selectedOption == "pilgan") {
-      return (
-        <div className="ml-8 flex flex-col gap-y-3">
-          <span>Jawaban</span>
-          <div className="container flex gap-x-8">
-            <div className="flex flex-col gap-y-5">
-              {opsiList.map((opsi, index) => (
-                <Opsi
-                  key={index}
-                  value={opsi}
-                  onChange={(value) => handleOpsiChange(index, value)}
-                />
-              ))}
-            </div>
-            <p
-              className="text-biru cursor-pointer flex items-end mb-2"
-              onClick={handleAddOpsi}
-            >
-              Tambahkan Opsi
-            </p>
-          </div>
-        </div>
-      );
-    } else if (selectedOption === "kotakcentang") {
-      return (
-        <div className="ml-8 flex flex-col gap-y-3">
-          <span>Jawaban</span>
-          <div className="container flex gap-x-8">
-            <div className="flex flex-col gap-y-5">
-              {kotakCentangList.map((kotakCentang, index) => (
-                <KotakCentang
-                  key={index}
-                  value={kotakCentang.value}
-                  checked={kotakCentang.checked}
-                  onChange={(value, checked) =>
-                    handleKotakCentangChange(index, value, checked)
-                  }
-                />
-              ))}
-            </div>
-            <p
-              className="text-biru cursor-pointer flex items-end mb-2"
-              onClick={handleAddKotakCentang}
-            >
-              Tambahkan Opsi
-            </p>
-          </div>
-        </div>
-      );
-    } else if (selectedOption === "essai") {
-      return (
-        <div className="ml-8 flex flex-col gap-y-2 w-[600px]">
-          <span>Jawaban</span>
-          <div className="flex gap-x-8 w-[600px] overflow-hidden">
-            <ReactQuill
-              className=" h-30 w-[600px] bg-white"
-              value=""
-              onChange=""
-            />
-          </div>
-        </div>
-      );
-    }
-  };
+    const renderJawabanSection = (index) => {
+        const selectedOption = selectedOptions[index]
+        if (selectedOption == 'pilgan') {
+            return (
+                <div className="ml-8 flex flex-col gap-y-3">
+                    <span>Jawaban</span>
+                    <div className="container flex gap-x-8">
+                        <div className="flex flex-col gap-y-5">
+                        {opsiList.map((opsi, index) => (
+                            <Opsi
+                            key={index}
+                            value={opsi}
+                            onChange={(value) => handleOpsiChange(index, value)}
+                            />
+                        ))}
+                        </div>
+                        <p
+                        className="text-biru cursor-pointer flex items-end mb-2"
+                        onClick={handleAddOpsi}
+                        >
+                        Tambahkan Opsi
+                        </p>
+                    </div>
+                    </div>
+            );
+        } else if (selectedOption === "kotakcentang") {
+            return (
+                <div className="ml-8 flex flex-col gap-y-3">
+                  <span>Jawaban</span>
+                  <div className="container flex gap-x-8">
+                        <div className="flex flex-col gap-y-5">
+                            {kotakCentangList.map((kotakCentang, index) => (
+                                <KotakCentang
+                                key={index}
+                                value={kotakCentang.value}
+                                checked={kotakCentang.checked}
+                                onChange={(value, checked) =>
+                                handleKotakCentangChange(index, value, checked)
+                                }
+                                />
+                            ))}
+                        </div>
+                        <p
+                        className="text-biru cursor-pointer flex items-end mb-2"
+                        onClick={handleAddKotakCentang}
+                        >
+                        Tambahkan Opsi
+                        </p>
+                    </div>
+                </div>
+            );
+        } else if (selectedOption === "essai") {
+            return (
+                <div className="ml-8 flex flex-col gap-y-2 w-[600px]">
+                    <span>Jawaban</span>
+                    <div className="flex gap-x-8 w-[600px] overflow-hidden">
+                        <ReactQuill
+                            className=" h-30 w-[600px] bg-white"
+                            value=""
+                            onChange=""
+                        />
+                    </div>
+                </div>
+            );
+        }
+    };
 
   const [isLoading, setIsLoading] = useState(true);
   if (isLoading) {
@@ -175,8 +180,8 @@ function TambahSoal() {
                       name=""
                       id=""
                       className="w-[210px] bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 border-[0.3px] shadow-md mt-4"
-                      onChange={handleSelectChange}
-                      defaultValue={selectedOption}
+                      onChange={(e) => handleSelectChange(index, e)}
+                      value={selectedOptions[index]}
                     >
                       <option value="pilgan">Pilihan Ganda</option>
                       <option value="kotakcentang">Kotak Centang</option>
@@ -193,7 +198,7 @@ function TambahSoal() {
               </div>
               <div className="flex gap-x-24 mt-8">
                 <div className="flex flex-col gap-y-3">
-                  <div className=" flex gap-x-8">{renderJawabanSection()}</div>
+                  <div className=" flex gap-x-8">{renderJawabanSection(index)}</div>
                 </div>
                 <div className="flex flex-col gap-y-2">
                   <span>Poin Soal</span>
