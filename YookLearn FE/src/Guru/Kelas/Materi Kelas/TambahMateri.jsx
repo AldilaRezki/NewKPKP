@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import HeaderGuru from "../../HeaderGuru";
 import HeaderKelas from "../HeaderKelas";
-import Form from "../../Form";
 import { BiArrowBack } from "react-icons/bi";
 import Header from "../../Header";
 import { useNavigate, useParams } from "react-router-dom";
@@ -60,13 +59,13 @@ function TambahMateri({ onFileUpload }) {
         </a>
       </div>
 
-      <h1 className="text-xl mt-8 ml-10 font-medium text-biru">
+      <h1 className="text-xl mt-8 mb-10 ml-10 font-medium text-biru">
         Tambah Materi
       </h1>
 
       <form onSubmit={handleSubmit}>
         <div>
-          <div className="form-input-row">
+          <div className="form-input-row mb-8">
             <label
               htmlFor="judul"
               className="text-md mt-8 ml-10 font-normal text-biru"

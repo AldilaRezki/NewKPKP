@@ -3,9 +3,10 @@ import { useParams } from "react-router-dom";
 import Header from "../../../Header";
 import HeaderGuru from "../../../HeaderGuru";
 import HeaderKelas from "../../HeaderKelas";
-import Form from "../../../Form";
 import Opsi from "./Opsi";
 import KotakCentang from "./KotakCentang";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 function TambahSoal() {
     const { idMapel } = useParams();
@@ -114,8 +115,12 @@ function TambahSoal() {
             return (
                 <div className="ml-8 flex flex-col gap-y-2 w-[600px]">
                     <span>Jawaban</span>
-                    <div className="container flex gap-x-8 w-[600px]">
-                        <Form mx="mx-0" width="w-[600px]"></Form>
+                    <div className="flex gap-x-8 w-[600px] overflow-hidden">
+                        <ReactQuill
+                            className=" h-30 w-[600px] bg-white"
+                            value=""
+                            onChange=""
+                        />
                     </div>
                 </div>
             );
@@ -137,10 +142,11 @@ function TambahSoal() {
                     <div className="flex justify-between">
                         <div className="w-full ml-8 mr-16 mt-8">
                             <span>Pertanyaan</span>
-                            <Form 
-                            onChange={e => handleChange(index, e)}
-                            value={element.pertanyaan}
-                            mx="mx-0"></Form>
+                            <ReactQuill
+                                className="mt-8 mx-0 h-30 bg-white"
+                                value={element.pertanyaan}
+                                onChange={e => handleChange(index, e)}
+                            />
                         </div>
                         <div className="mr-10 flex flex-col gap-y-5 mt-8">
                             <div>
@@ -168,7 +174,7 @@ function TambahSoal() {
                     </div>
                     <div className="flex gap-x-24 mt-8">
                         <div className="flex flex-col gap-y-3">
-                            <div className="container flex gap-x-8">
+                            <div className=" flex gap-x-8">
                                 {renderJawabanSection()}
                             </div>
                         </div>
