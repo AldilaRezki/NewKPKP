@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { isAuthenticated } from "../../Common/services/Auth";
 import { useNavigate } from "react-router-dom";
 
@@ -8,16 +8,33 @@ import Editakun from "../components/EditAkun";
 import Listtugas from "../components/ListTugas";
 
 import { CgProfile } from "react-icons/cg";
+import LoadingPage from "./LoadingPage";
+import { fetchStudentAssignment } from "../services/SiswaAPI";
 
 function StudentPage() {
   const navigate = useNavigate();
   const login = isAuthenticated("siswa");
+  const [isLoading, setIsLoading] = useState(true);
+  const [tugas, setTugas] = useState([]);
 
   useEffect(() => {
     if (!login) {
       navigate("/");
     }
   }, [login, navigate]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchStudentAssignment();
+      setTugas(data);
+      setIsLoading(false);
+    }
+    fetchData();
+  }, []);
+
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <div>
@@ -39,7 +56,7 @@ function StudentPage() {
         <Editakun />
       </div>
       <div className="flex justify-end mt-1.5 mr-10 px-10 mb-20">
-        <Listtugas />
+        <Listtugas dataTugas={tugas} />
       </div>
     </div>
   );

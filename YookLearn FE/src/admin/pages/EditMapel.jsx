@@ -7,6 +7,8 @@ import {
   fetchAll,
   fetchCurrentMapel,
 } from "../services/AdminAPI";
+import LoadingPage from "../../Siswa/pages/LoadingPage";
+import NavGuru from "../components/NavGuru";
 
 function EditMapel() {
   const navigate = useNavigate();
@@ -30,6 +32,7 @@ function EditMapel() {
       setMapel(data.nama_matpel);
       setGuru(data.id_guru);
       setGuruLama(data.nama_guru);
+      setIsLoading(false);
     }
     fetchData();
   }, []);
@@ -40,6 +43,11 @@ function EditMapel() {
       navigate("/admin/berhasil");
     }
   };
+
+  const [isLoading, setIsLoading] = useState(true);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <div className="bg-white min-h-screen">

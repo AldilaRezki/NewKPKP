@@ -6,6 +6,7 @@ import HeaderKelas from "../HeaderKelas";
 import BoxDeskripsi from "./BoxDeskripsi";
 import { useNavigate, useParams } from "react-router-dom";
 import { isAuthenticated } from "../../../Common/services/Auth";
+import LoadingPage from "../../../Siswa/pages/LoadingPage";
 
 function KelasJadwalAjar() {
   const navigate = useNavigate();
@@ -28,11 +29,16 @@ function KelasJadwalAjar() {
     fetchData();
   }, []);
 
+  const [isLoading, setIsLoading] = useState(true);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+
   return (
     <div>
       <Header></Header>
       <HeaderGuru></HeaderGuru>
-      <HeaderKelas idMapel={idMapel}></HeaderKelas>
+      <HeaderKelas dataMapel={dataMapel}></HeaderKelas>
       <BoxDeskripsi nama_matpel={dataMapel.nama_matpel}></BoxDeskripsi>
     </div>
   );

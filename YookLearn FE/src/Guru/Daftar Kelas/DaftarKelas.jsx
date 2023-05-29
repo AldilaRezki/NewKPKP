@@ -8,12 +8,27 @@ import { isAuthenticated } from "../../Common/services/Auth";
 function DaftarKelas() {
   const navigate = useNavigate();
   const login = isAuthenticated("guru");
+  const [daftarKelas, setKelas] = useState([]);
 
   useEffect(() => {
     if (!login) {
       navigate("/");
     }
   }, [login, navigate]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchMapel();
+      setKelas(data);
+      setIsLoading(false);
+    }
+    fetchData();
+  }, []);
+
+  const [isLoading, setIsLoading] = useState(true);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <div>
@@ -132,6 +147,7 @@ export default DaftarKelas;
 // import BoxKelas from './BoxKelas';
 import { useEffect, useState } from 'react';
 import { fetchMapel } from "../services/GuruAPI";
+import LoadingPage from "../../Siswa/pages/LoadingPage";
 
 // function DaftarKelas() {
 //   const daftarKelasItems = [

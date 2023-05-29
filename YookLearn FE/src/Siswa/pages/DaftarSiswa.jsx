@@ -7,14 +7,16 @@ import TabelSiswa from "../components/TabelSiswa";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
-import { fetchCurrentMapel } from "../services/SiswaAPI";
+import { fetchCurrentMapel, fetchSiswa } from "../services/SiswaAPI";
 import { isAuthenticated } from "../../Common/services/Auth";
+import LoadingPage from "./LoadingPage";
 
 function DaftarSiswa() {
+  const { idKelas, idMapel } = useParams();
   const navigate = useNavigate();
   const login = isAuthenticated("siswa");
   const [mapel, setMapel] = useState([]);
-  const { idKelas, idMapel } = useParams();
+  const [siswa, setSiswa] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -25,15 +27,19 @@ function DaftarSiswa() {
 
   useEffect(() => {
     async function fetchData() {
-      const data = await fetchCurrentMapel(idMapel);
-      setMapel(data);
+      const [mapelData, siswaData] = await Promise.all([
+        fetchCurrentMapel(idMapel),
+        fetchSiswa(idMapel),
+      ]);
+      setMapel(mapelData);
+      setSiswa(siswaData);
       setIsLoading(false);
     }
-    fetchData(idMapel);
-  }, []);
+    fetchData();
+  }, [idMapel]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingPage />;
   }
 
   return (
@@ -64,7 +70,7 @@ function DaftarSiswa() {
         <h1 className="text-xl mt-8 ml-10 font-medium text-[#1A1F5A]">
           Daftar Anggota Kelas
         </h1>
-        {mapel && <TabelSiswa idKelas={idKelas} idMapel={idMapel} />}
+        {mapel && <TabelSiswa dataSiswa={siswa} />}
       </div>
     </>
   );

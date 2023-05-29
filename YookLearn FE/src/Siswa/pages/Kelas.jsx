@@ -10,12 +10,14 @@ import Nav from "../components/Nav";
 import ListTugas from "../components/ListTugas";
 import EditAkun from "../components/EditAkun";
 
-import { fecthKelas } from "../services/SiswaAPI";
+import { fecthKelas, fetchStudentAssignment } from "../services/SiswaAPI";
+import LoadingPage from "./LoadingPage";
 
 function Kelas() {
   const navigate = useNavigate();
   const login = isAuthenticated("siswa");
   const [kelas, setKelas] = useState([]);
+  const [tugas, setTugas] = useState([]);
 
   useEffect(() => {
     if (!login) {
@@ -25,11 +27,21 @@ function Kelas() {
 
   useEffect(() => {
     async function fetchData() {
-      const data = await fecthKelas();
-      setKelas(data);
+      const [kelasData, tugasData] = await Promise.all([
+        fecthKelas(),
+        fetchStudentAssignment(),
+      ]);
+      setKelas(kelasData);
+      setTugas(tugasData);
+      setIsLoading(false);
     }
     fetchData();
   }, []);
+
+  const [isLoading, setIsLoading] = useState(true);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <>
@@ -65,7 +77,7 @@ function Kelas() {
         <EditAkun />
       </div>
       <div className="flex justify-end mt-1.5 mr-10 px-10 mb-20">
-        <ListTugas />
+        <ListTugas dataTugas={tugas} />
       </div>
     </>
   );

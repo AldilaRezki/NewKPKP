@@ -1,16 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { fetchSiswa } from "../services/SiswaAPI";
+import React from "react";
 
-function TabelSiswa({ idkelas, idMapel }) {
-  const [siswa, setSiswa] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      const data = await fetchSiswa(idMapel);
-      setSiswa(data);
-    }
-    fetchData();
-  }, []);
+function TabelSiswa({ dataSiswa }) {
 
   return (
     <>
@@ -28,7 +18,7 @@ function TabelSiswa({ idkelas, idMapel }) {
               </tr>
             </thead>
             <tbody>
-              {siswa.map((item) => (
+              {dataSiswa.map((item) => (
                 <tr
                   key={item.id}
                   className="border-[0.3px] shadow-md bg-[#EEF4FA]"

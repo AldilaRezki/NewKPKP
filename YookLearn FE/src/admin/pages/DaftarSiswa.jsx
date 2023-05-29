@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
 import { isAuthenticated } from "../../Common/services/Auth";
 import { addSiswa, fetchAllKelas } from "../services/AdminAPI";
+import NavGuru from "../components/NavGuru";
 
 function tsiswa() {
   const navigate = useNavigate();

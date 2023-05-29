@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import HeaderGuru from "../../HeaderGuru";
 import HeaderKelas from "../HeaderKelas";
 import { BiArrowBack } from "react-icons/bi";
@@ -6,14 +6,26 @@ import Header from "../../Header";
 import { useNavigate, useParams } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { addUjian } from "../../services/GuruAPI";
+import { addUjian, fetchCurrentMapel } from "../../services/GuruAPI";
+import LoadingPage from "../../../Siswa/pages/LoadingPage";
 
 function TambahUjian() {
   const { idMapel } = useParams();
   const navigate = useNavigate();
   const [judul, setJudul] = useState("");
+  const [waktu, setWaktu] = useState(0);
   const [file, setFile] = useState(null);
   const [isiUjian, setIsiUjian] = useState("");
+  const [dataMapel, setMapel] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchCurrentMapel(idMapel);
+      setMapel(data);
+      setIsLoading(false);
+    }
+    fetchData();
+  }, []);
 
   const handleEditorChange = (value) => {
     setIsiUjian(value);
@@ -31,20 +43,27 @@ function TambahUjian() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const isSuccess = await addUjian(idMapel, judul, isiUjian, file);
+      const isSuccess = await addUjian(idMapel, judul, isiUjian, waktu, file);
       if (isSuccess) {
-        navigate(`/guru/mapel/${idMapel}/ujian/${isSuccess.id}/tambah-soal-ujian`);
+        navigate(
+          `/guru/mapel/${idMapel}/ujian/${isSuccess.id}/tambah-soal-ujian`
+        );
       }
     } catch (error) {
       console.log("Error adding assigment:", error);
     }
   };
 
+  const [isLoading, setIsLoading] = useState(true);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+
   return (
     <div>
       <Header></Header>
       <HeaderGuru></HeaderGuru>
-      <HeaderKelas idMapel={idMapel}></HeaderKelas>
+      <HeaderKelas dataMapel={dataMapel}></HeaderKelas>
       <div className="bg-tosca mt-10 mx-10 p-2">
         <a href={`/guru/mapel/${idMapel}/tambah-ujian`}>
           <BiArrowBack className="bg-white text-xl"></BiArrowBack>
@@ -77,20 +96,22 @@ function TambahUjian() {
           />
         </div>
 
-       <div className="flex gap-x-10 ml-10">
+        <div className="flex gap-x-10 ml-10">
           <div>
             <h2 className="text-md mt-8 font-normal text-biru">Waktu Ujian</h2>
             <div className="flex gap-x-8">
               <input
                 type="time"
-                name=""
-                id=""
                 className="mt-4 py-2 px-5 border-[0.3px] shadow-md"
+                value={waktu}
+                onChange={(e) => setWaktu(e.target.value)}
               />
             </div>
           </div>
           <div>
-            <h2 className="text-md mt-8 ml-10 font-normal text-biru">Lampiran</h2>
+            <h2 className="text-md mt-8 ml-10 font-normal text-biru">
+              Lampiran
+            </h2>
             <div className="flex">
               <input
                 className="mt-5 ml-10"
@@ -101,7 +122,6 @@ function TambahUjian() {
             </div>
           </div>
         </div>
-
 
         <div className="mt-20 flex justify-end mr-10 gap-x-10 mb-20">
           <a href={`/guru/mapel/${idMapel}/ujian`} className="text-biru py-2">

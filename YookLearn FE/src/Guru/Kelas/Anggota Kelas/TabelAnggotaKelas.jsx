@@ -1,17 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { fetchStudent } from "../../services/GuruAPI";
 
-function TabelAnggotaKelas({ idMapel }) {
-  const [dataSiswa, setSiswa] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      const data = await fetchStudent(idMapel);
-      setSiswa(data);
-      // setIsLoading(false);
-    }
-    fetchData();
-  }, []);
+function TabelAnggotaKelas({ dataSiswa }) {
   return (
     <div>
       <div className="flex flex-col ml-10 mt-10 mr-10 border-[0.3px] py-2 px-5 shadow-md">

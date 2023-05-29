@@ -6,8 +6,13 @@ import { AiFillCaretDown } from "react-icons/ai";
 import Header from "../../Header";
 import ButtonTambahMateri from "../Materi Kelas/ButtonTambahMateri";
 import { useNavigate, useParams } from "react-router-dom";
-import { fetchCurrentTugas, updateTugas } from "../../services/GuruAPI";
+import {
+  fetchCurrentMapel,
+  fetchCurrentTugas,
+  updateTugas,
+} from "../../services/GuruAPI";
 import { isAuthenticated } from "../../../Common/services/Auth";
+import LoadingPage from "../../../Siswa/pages/LoadingPage";
 
 function EditTugas({ onFileUpload }) {
   const navigate = useNavigate();
@@ -20,6 +25,7 @@ function EditTugas({ onFileUpload }) {
   const [waktu, setWaktu] = useState(null);
   const [nilai, setNilai] = useState(0);
   const [tipeDeadline, setTipeDeadline] = useState("strict");
+  const [dataMapel, setMapel] = useState([]);
 
   useEffect(() => {
     if (!login) {
@@ -29,10 +35,13 @@ function EditTugas({ onFileUpload }) {
 
   useEffect(() => {
     async function fetchData() {
-      const data = await fetchCurrentTugas(idMapel, idTugas);
-      setJudul(data.judul_tugas);
-      
-      // setIsLoading(false);
+      const [tugasData, mapelData] = await Promise.all([
+        fetchCurrentTugas(idMapel, idTugas),
+        fetchCurrentMapel(idMapel),
+      ]);
+      setJudul(tugasData.judul_tugas);
+      setMapel(mapelData);
+      setIsLoading(false);
     }
     fetchData();
   }, []);
@@ -53,7 +62,9 @@ function EditTugas({ onFileUpload }) {
       return;
     }
     try {
-      const combinedDeadline = waktu ? `${tenggat} ${waktu}` : `${tenggat} 23:59`;
+      const combinedDeadline = waktu
+        ? `${tenggat} ${waktu}`
+        : `${tenggat} 23:59`;
       const isSuccess = await updateTugas(
         idMapel,
         idTugas,
@@ -73,19 +84,22 @@ function EditTugas({ onFileUpload }) {
     }
   };
 
+  const [isLoading, setIsLoading] = useState(true);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+
   return (
     <div>
       <Header></Header>
       <HeaderGuru></HeaderGuru>
-      <HeaderKelas idMapel={idMapel}></HeaderKelas>
+      <HeaderKelas dataMapel={dataMapel}></HeaderKelas>{" "}
       <div className="bg-tosca mt-10 mx-10 p-2">
         <a href={`/guru/mapel/${idMapel}/daftar-tugas`}>
           <BiArrowBack className="bg-white text-xl"></BiArrowBack>
         </a>
       </div>
-
-      <h1 className="text-xl mt-8 ml-10 font-medium text-biru">Tambah Tugas</h1>
-
+      <h1 className="text-xl mt-8 ml-10 font-medium text-biru">Edit Tugas</h1>
       <div>
         <form onSubmit={handleSubmit}>
           <h2 className="text-md mt-8 ml-10 font-normal text-biru">
@@ -105,7 +119,9 @@ function EditTugas({ onFileUpload }) {
             >
               Lampiran
             </label>
-            <input id="fileInput" type="file" onChange={handleFileChange} />
+            <div>
+              <input className="ml-10" id="fileInput" type="file" onChange={handleFileChange} />
+            </div>
           </div>
 
           <div className="flex ml-10 gap-x-9">
@@ -186,12 +202,10 @@ function EditTugas({ onFileUpload }) {
           </div>
         </form>
       </div>
-
       {/* <div>
         <h2 className="text-md mt-8 ml-10 font-normal text-biru">Isi Tugas</h2>
         <Form></Form>
       </div> */}
-
       {/* <div>
         <h2 className="text-md mt-8 ml-10 font-normal text-biru">Lampiran</h2>
         <div className="flex">

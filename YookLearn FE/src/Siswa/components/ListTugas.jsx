@@ -1,19 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
 
-import { fetchStudentAssignment } from "../services/SiswaAPI";
-
-function ListTugas() {
+function ListTugas({ dataTugas }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [tugas, setTugas] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      const data = await fetchStudentAssignment();
-      setTugas(data);
-    }
-    fetchData();
-  }, []);
 
   return (
     <div className="relative flex flex-col items-center w-[340px] h-[340px] rounded-lg">
@@ -31,7 +20,7 @@ function ListTugas() {
 
       {isOpen && (
         <div className="bg-[#EEF4FA] absolute top-20 flex flex-col items-start rounded-lg p-2 w-full">
-          {tugas.map((item, i) => (
+          {dataTugas.map((item, i) => (
             <div
               className=" flex w-full justify-between cursor-pointer rounded-r-lg border-l-transparent flex-col"
               key={i}
