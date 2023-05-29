@@ -58,7 +58,17 @@ const TambahSoal = () => {
 
   const handleKunciChange = (index, jawabanIndex, value) => {
     const newList = [...formList];
-    newList[index].kunci[jawabanIndex] = value;
+    if (newList[index].jenis === "kotakcentang") {
+      const kunci = newList[index].kunci.slice(); // Copy array kunci menggunakan slice()
+      if (value) {
+        kunci[jawabanIndex] = true; // Set nilai kunci[jawabanIndex] menjadi true
+      } else {
+        kunci[jawabanIndex] = false; // Set nilai kunci[jawabanIndex] menjadi false
+      }
+      newList[index].kunci = kunci;
+    } else {
+      newList[index].kunci = jawabanIndex;
+    }
     setFormList(newList);
   };
 
@@ -84,6 +94,18 @@ const TambahSoal = () => {
   const handleRemoveQuestion = (index) => {
     const newList = [...formList];
     newList.splice(index, 1);
+    setFormList(newList);
+  };
+
+  const handleAddOption = (index) => {
+    const newList = [...formList];
+    newList[index].jawaban.push("");
+    setFormList(newList);
+  };
+
+  const handleRemoveOption = (index, optionIndex) => {
+    const newList = [...formList];
+    newList[index].jawaban.splice(optionIndex, 1);
     setFormList(newList);
   };
 
@@ -128,19 +150,33 @@ const TambahSoal = () => {
               <div>
                 <label>Jawaban:</label>
                 {question.jawaban.map((jawaban, jawabanIndex) => (
-                  <input
-                    key={jawabanIndex}
-                    type="text"
-                    value={jawaban}
-                    onChange={(e) =>
-                      handleJawabanChange(index, jawabanIndex, e.target.value)
-                    }
-                  />
+                  <div key={jawabanIndex}>
+                    <input
+                      type="text"
+                      value={jawaban}
+                      onChange={(e) =>
+                        handleJawabanChange(index, jawabanIndex, e.target.value)
+                      }
+                    />
+                    {question.jawaban.length > 1 && (
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveOption(index, jawabanIndex)}
+                      >
+                        Hapus Opsi
+                      </button>
+                    )}
+                  </div>
                 ))}
+                <button type="button" onClick={() => handleAddOption(index)}>
+                  Tambah Opsi
+                </button>
                 <label>Jawaban Benar:</label>
                 <select
                   value={question.kunci}
-                  onChange={(e) => handleKunciChange(index, e.target.value)}
+                  onChange={(e) =>
+                    handleKunciChange(index, e.target.value, true)
+                  }
                 >
                   {question.jawaban.map((jawaban, jawabanIndex) => (
                     <option key={jawabanIndex} value={jawabanIndex}>
@@ -155,21 +191,33 @@ const TambahSoal = () => {
               <div>
                 <label>Opsi:</label>
                 {question.jawaban.map((jawaban, jawabanIndex) => (
-                  <input
-                    key={jawabanIndex}
-                    type="text"
-                    value={jawaban}
-                    onChange={(e) =>
-                      handleJawabanChange(index, jawabanIndex, e.target.value)
-                    }
-                  />
+                  <div key={jawabanIndex}>
+                    <input
+                      type="text"
+                      value={jawaban}
+                      onChange={(e) =>
+                        handleJawabanChange(index, jawabanIndex, e.target.value)
+                      }
+                    />
+                    {question.jawaban.length > 1 && (
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveOption(index, jawabanIndex)}
+                      >
+                        Hapus Opsi
+                      </button>
+                    )}
+                  </div>
                 ))}
+                <button type="button" onClick={() => handleAddOption(index)}>
+                  Tambah Opsi
+                </button>
                 <label>Opsi Benar:</label>
                 {question.jawaban.map((jawaban, jawabanIndex) => (
                   <div key={jawabanIndex}>
                     <input
                       type="checkbox"
-                      checked={question.kunci[jawabanIndex] || false}
+                      checked={question.kunci[jawabanIndex] === true} // Periksa nilai kunci[jawabanIndex]
                       onChange={(e) =>
                         handleKunciChange(index, jawabanIndex, e.target.checked)
                       }
