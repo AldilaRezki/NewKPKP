@@ -4,6 +4,8 @@ import Header from "../components/Header";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import { addKelas, editKelas, fetchAll, fetchCurrentPaket } from "../services/AdminAPI";
 import { useNavigate, useParams } from "react-router-dom";
+import LoadingPage from "../../Siswa/pages/LoadingPage";
+import NavGuru from "../components/NavGuru";
 
 function EditPaket() {
   const navigate = useNavigate();
@@ -26,6 +28,7 @@ function EditPaket() {
       const data = await fetchCurrentPaket(idKelas);
       setPaket(data.nama_kelas);
       setGuru(data.id_guru);
+      setIsLoading(false);
     }
     fetchData();
   }, []);
@@ -36,6 +39,11 @@ function EditPaket() {
       navigate("/admin/berhasil");
     }
   };
+
+  const [isLoading, setIsLoading] = useState(true);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <div className="bg-white min-h-screen">

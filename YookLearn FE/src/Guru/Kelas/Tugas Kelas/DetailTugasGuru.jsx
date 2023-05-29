@@ -6,13 +6,15 @@ import Header from "../../Header";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { isAuthenticated } from "./../../../Common/services/Auth";
-import { fetchCurrentTugas } from "../../services/GuruAPI";
+import { fetchCurrentMapel, fetchCurrentTugas } from "../../services/GuruAPI";
+import LoadingPage from "../../../Siswa/pages/LoadingPage";
 
 function DetailTugasGuru() {
   const { idMapel, idTugas } = useParams();
   const navigate = useNavigate();
   const login = isAuthenticated("guru");
   const [dataTugas, setTugas] = useState([]);
+  const [dataMapel, setMapel] = useState([]);
 
   useEffect(() => {
     if (!login) {
@@ -22,18 +24,27 @@ function DetailTugasGuru() {
 
   useEffect(() => {
     async function fetchData() {
-      const data = await fetchCurrentTugas(idMapel, idTugas);
-      setTugas(data);
-      // setIsLoading(false);
+      const [mapelData, tugasData] = await Promise.all([
+        fetchCurrentMapel(idMapel),
+        fetchCurrentTugas(idMapel, idTugas),
+      ]);
+      setMapel(mapelData);
+      setTugas(tugasData);
+      setIsLoading(false);
     }
     fetchData();
   }, []);
+
+  const [isLoading, setIsLoading] = useState(true);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <div>
       <Header></Header>
       <HeaderGuru></HeaderGuru>
-      <HeaderKelas idMapel={idMapel}></HeaderKelas>
+      <HeaderKelas dataMapel={dataMapel}></HeaderKelas>
       <div className="flex mt-10 mx-10 justify-between">
         <h1 className="my-auto text-xl font-medium text-biru">
           {dataTugas.judul_tugas}

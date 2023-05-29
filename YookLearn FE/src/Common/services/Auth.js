@@ -5,18 +5,8 @@ export const isAuthenticated = (roles) => {
   const role = localStorage.getItem("role");
 
   if (token && role) {
-    // // decode token dan memeriksa apakah token valid
-    // const decodedToken = jwt_decode(token);
 
-    // if (decodedToken.exp < Date.now() / 1000) {
-    //   // token kadaluarsa
-    //   localStorage.removeItem('token');
-    //   localStorage.removeItem('role');
-
-    //   return false;
-    // }
-
-    // memeriksa role pengguna
+    
     if (role !== roles) {
       return false;
     }

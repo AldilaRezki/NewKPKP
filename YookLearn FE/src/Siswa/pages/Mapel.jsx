@@ -9,6 +9,7 @@ import { BsList } from "react-icons/bs";
 import { FaSearch } from "react-icons/fa";
 import MapelCard from "../components/MapelCard";
 import { fetchKelasMapel } from "../services/SiswaAPI";
+import LoadingPage from "./LoadingPage";
 
 const Mapel = () => {
   const { idKelas } = useParams();
@@ -17,6 +18,7 @@ const Mapel = () => {
   const [mapel, setMapel] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (!login) {
@@ -28,6 +30,7 @@ const Mapel = () => {
     async function fetchData() {
       const data = await fetchKelasMapel(idKelas);
       setMapel(data);
+      setIsLoading(false);
     }
     fetchData();
   }, [idKelas]);
@@ -42,6 +45,10 @@ const Mapel = () => {
     );
     setSearchResults(filteredMapel);
   }, [mapel, searchQuery]);
+
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <>

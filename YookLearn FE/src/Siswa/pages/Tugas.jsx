@@ -10,6 +10,7 @@ import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 import { fetchAllTugasMapel, fetchCurrentMapel } from "../services/SiswaAPI";
 import { isAuthenticated } from "../../Common/services/Auth";
+import LoadingPage from "./LoadingPage";
 
 const Tugas = () => {
   const navigate = useNavigate();
@@ -44,20 +45,21 @@ const Tugas = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const data = await fetchCurrentMapel(idMapel);
-      setMapel(data);
+      const [mapelData, tugasData] = await Promise.all([
+        fetchCurrentMapel(idMapel),
+        fetchAllTugasMapel(idMapel),
+      ]);
+      setMapel(mapelData);
+      setDataTugas(tugasData);
       setIsLoading(false);
     }
     fetchData(idMapel);
   }, []);
 
-  useEffect(() => {
-    async function fetchData() {
-      const data = await fetchAllTugasMapel(idMapel);
-      setDataTugas(data);
-    }
-    fetchData(idMapel);
-  }, []);
+  const [isLoading, setIsLoading] = useState(true);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <>

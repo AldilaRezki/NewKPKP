@@ -11,10 +11,11 @@ import MateriTitle from "../components/MateriTitle";
 import { fetchCurrentMapel, fetchCurrentMateri } from "../services/SiswaAPI";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import LoadingPage from "./LoadingPage";
 
 function Detailmateri() {
   const BASE_URL = import.meta.env.VITE_BASE_DOWNLOAD_URL;
-  
+
   const navigate = useNavigate();
   const login = isAuthenticated("siswa");
   const { idKelas, idMapel, idMateri } = useParams();
@@ -29,23 +30,23 @@ function Detailmateri() {
 
   useEffect(() => {
     async function fetchData() {
-      const data = await fetchCurrentMapel(idMapel);
-      setMapel(data);
+      const [mapelData, materiData] = await Promise.all([
+        fetchCurrentMapel(idMapel),
+        fetchCurrentMateri(idMateri),
+      ]);
+      setMapel(mapelData);
+      setMateri(materiData);
       setIsLoading(false);
     }
-    fetchData(idMapel);
-  }, []);
-
-  useEffect(() => {
-    async function fetchData() {
-      const data = await fetchCurrentMateri(idMateri);
-      setMateri(data);
-      setIsLoading(false);
-    }
-    fetchData(idMateri);
-  }, []);
+    fetchData();
+  }, [idMapel, idMateri]);
 
   const downloadUrl = `${BASE_URL}/${dataMateri.filename}`;
+
+  const [isLoading, setIsLoading] = useState(true);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <>

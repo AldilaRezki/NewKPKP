@@ -6,8 +6,9 @@ import { BiArrowBack } from "react-icons/bi";
 import Header from "../../Header";
 import { useNavigate, useParams } from "react-router-dom";
 import ButtonTambahMateri from "./ButtonTambahMateri";
-import { addMateri } from "../../services/GuruAPI";
+import { addMateri, fetchCurrentMapel } from "../../services/GuruAPI";
 import { isAuthenticated } from "../../../Common/services/Auth";
+import LoadingPage from "../../../Siswa/pages/LoadingPage";
 
 function TambahMateri({ onFileUpload }) {
   const navigate = useNavigate();
@@ -15,12 +16,22 @@ function TambahMateri({ onFileUpload }) {
   const { idMapel } = useParams();
   const [judul, setJudul] = useState("");
   const [gambar, setGambar] = useState(null);
+  const [dataMapel, setMapel] = useState([]);
 
   useEffect(() => {
     if (!login) {
       navigate("/");
     }
   }, [login, navigate]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchCurrentMapel(idMapel);
+      setMapel(data);
+      setIsLoading(false);
+    }
+    fetchData();
+  }, []);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -49,11 +60,16 @@ function TambahMateri({ onFileUpload }) {
     }
   };
 
+  const [isLoading, setIsLoading] = useState(true);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+
   return (
     <div>
       <Header></Header>
       <HeaderGuru></HeaderGuru>
-      <HeaderKelas idMapel={idMapel}></HeaderKelas>
+      <HeaderKelas dataMapel={dataMapel}></HeaderKelas>
       <div className="bg-tosca mt-10 mx-10 p-2">
         <a href={`/guru/mapel/${idMapel}/daftar-materi`}>
           <BiArrowBack className="bg-white text-xl"></BiArrowBack>
@@ -114,7 +130,9 @@ function TambahMateri({ onFileUpload }) {
           >
             Lampiran
           </label>
-          <input id="fileInput" type="file" onChange={handleFileChange} />
+          <div>
+            <input  className="ml-10" id="fileInput" type="file" onChange={handleFileChange} />
+          </div>
         </div>
 
         {/* <div>

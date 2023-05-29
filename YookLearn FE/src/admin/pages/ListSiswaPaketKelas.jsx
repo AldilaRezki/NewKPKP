@@ -19,6 +19,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { isAuthenticated } from "../../Common/services/Auth";
 import { fetchSiswaByKelas, removeAccount } from "../services/AdminAPI";
 import NavGuru from "../components/NavGuru";
+import LoadingPage from "../../Siswa/pages/LoadingPage";
 
 function Daftar() {
   const students = [
@@ -66,6 +67,7 @@ function Daftar() {
     async function fetchData() {
       const data = await fetchSiswaByKelas(idKelas);
       setSiswa(data);
+      setIsLoading(false);
     }
     fetchData(idKelas);
   }, []);
@@ -99,6 +101,11 @@ function Daftar() {
       setIsRemoving(false);
     }
   };
+
+  const [isLoading, setIsLoading] = useState(true);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <div className="bg-white min-h-screen">

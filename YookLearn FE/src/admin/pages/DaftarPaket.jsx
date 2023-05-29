@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import { addKelas, fetchAll } from "../services/AdminAPI";
 import { useNavigate } from "react-router-dom";
+import NavGuru from "../components/NavGuru";
 
 function tadmin() {
   const navigate = useNavigate();

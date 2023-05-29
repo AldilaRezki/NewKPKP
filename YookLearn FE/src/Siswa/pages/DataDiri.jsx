@@ -6,11 +6,12 @@ import { fetchSiswaProfile } from "../services/SiswaAPI";
 import Header from "../components/Header";
 import Nav from "../components/Nav";
 import { FaRegUser } from "react-icons/fa";
+import LoadingPage from "./LoadingPage";
 
 function DataDiri() {
   const navigate = useNavigate();
   const login = isAuthenticated("siswa");
-  const [siswa, setSiswa] = useState(null);
+  const [siswa, setSiswa] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -29,7 +30,7 @@ function DataDiri() {
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingPage />;
   }
 
   return (

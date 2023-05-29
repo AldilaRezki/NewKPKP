@@ -7,8 +7,9 @@ import { AiFillCaretDown } from "react-icons/ai";
 import Header from "../../Header";
 import ButtonTambahMateri from "../Materi Kelas/ButtonTambahMateri";
 import { useNavigate, useParams } from "react-router-dom";
-import { addTugas } from "../../services/GuruAPI";
+import { addTugas, fetchCurrentMapel } from "../../services/GuruAPI";
 import { isAuthenticated } from "../../../Common/services/Auth";
+import LoadingPage from "../../../Siswa/pages/LoadingPage";
 
 function TambahTugas({ onFileUpload }) {
   const navigate = useNavigate();
@@ -21,12 +22,22 @@ function TambahTugas({ onFileUpload }) {
   const [waktu, setWaktu] = useState(null);
   const [nilai, setNilai] = useState(0);
   const [tipeDeadline, setTipeDeadline] = useState("strict");
+  const [dataMapel, setMapel] = useState([]);
 
   useEffect(() => {
     if (!login) {
       navigate("/");
     }
   }, [login, navigate]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchCurrentMapel(idMapel);
+      setMapel(data);
+      setIsLoading(false);
+    }
+    fetchData();
+  }, []);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -44,7 +55,9 @@ function TambahTugas({ onFileUpload }) {
       return;
     }
     try {
-      const combinedDeadline = waktu ? `${tenggat} ${waktu}` : `${tenggat} 23:59`;
+      const combinedDeadline = waktu
+        ? `${tenggat} ${waktu}`
+        : `${tenggat} 23:59`;
       const isSuccess = await addTugas(
         idMapel,
         judul,
@@ -63,11 +76,16 @@ function TambahTugas({ onFileUpload }) {
     }
   };
 
+  const [isLoading, setIsLoading] = useState(true);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+
   return (
     <div>
       <Header></Header>
       <HeaderGuru></HeaderGuru>
-      <HeaderKelas idMapel={idMapel}></HeaderKelas>
+      <HeaderKelas dataMapel={dataMapel}></HeaderKelas>
       <div className="bg-tosca mt-10 mx-10 p-2">
         <a href={`/guru/mapel/${idMapel}/daftar-tugas`}>
           <BiArrowBack className="bg-white text-xl"></BiArrowBack>

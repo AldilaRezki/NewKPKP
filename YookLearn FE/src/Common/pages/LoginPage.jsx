@@ -7,7 +7,6 @@ import { isAuthenticated } from "../services/Auth";
 export default function LoginPage() {
   const navigate = useNavigate();
   const role = localStorage.getItem("role");
-
   const login = isAuthenticated(role);
 
   useEffect(() => {

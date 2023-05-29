@@ -4,14 +4,18 @@ import HeaderKelas from "../HeaderKelas";
 import { BiArrowBack } from "react-icons/bi";
 import TabelAnggotaKelas from "./TabelAnggotaKelas";
 import Header from "../../Header";
-import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import { isAuthenticated } from './../../../Common/services/Auth';
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { isAuthenticated } from "./../../../Common/services/Auth";
+import LoadingPage from "../../../Siswa/pages/LoadingPage";
+import { fetchCurrentMapel, fetchStudent } from "../../services/GuruAPI";
 
 function DaftarAnggotaKelas() {
   const { idMapel } = useParams();
   const navigate = useNavigate();
   const login = isAuthenticated("guru");
+  const [dataMapel, setMapel] = useState([]);
+  const [dataSiswa, setSiswa] = useState([]);
 
   useEffect(() => {
     if (!login) {
@@ -19,13 +23,31 @@ function DaftarAnggotaKelas() {
     }
   }, [login, navigate]);
 
+  useEffect(() => {
+    async function fetchData() {
+      const [mapelData, siswaData] = await Promise.all([
+        fetchCurrentMapel(idMapel),
+        fetchStudent(idMapel),
+      ]);
+      setMapel(mapelData);
+      setSiswa(siswaData);
+      setIsLoading(false);
+    }
+    fetchData();
+  }, []);
+
+  const [isLoading, setIsLoading] = useState(true);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+
   return (
     <div>
       <Header></Header>
       <HeaderGuru></HeaderGuru>
-      <HeaderKelas idMapel = {idMapel}></HeaderKelas>
+      <HeaderKelas dataMapel={dataMapel}></HeaderKelas>
       <div className="bg-tosca mt-10 mx-10 p-2">
-        <a href="/guru/xipa1">
+        <a href={`/guru/mapel/${idMapel}`}>
           <BiArrowBack className="bg-white text-xl"></BiArrowBack>
         </a>
       </div>
@@ -33,7 +55,7 @@ function DaftarAnggotaKelas() {
         Daftar Anggota Kelas
       </h1>
 
-      <TabelAnggotaKelas idMapel = {idMapel}></TabelAnggotaKelas>
+      <TabelAnggotaKelas dataSiswa={dataSiswa}></TabelAnggotaKelas>
     </div>
   );
 }

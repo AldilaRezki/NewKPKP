@@ -20,6 +20,7 @@ import { fetchAllKelas, removeClass } from "../services/AdminAPI";
 import { useNavigate } from "react-router-dom";
 import { isAuthenticated } from "../../Common/services/Auth";
 import NavGuru from "../components/NavGuru";
+import LoadingPage from "../../Siswa/pages/LoadingPage";
 
 function Daftar3() {
   const navigate = useNavigate();
@@ -39,6 +40,7 @@ function Daftar3() {
     async function fetchData() {
       const data = await fetchAllKelas();
       setKelas(data);
+      setIsLoading(false);
     }
     fetchData();
   }, []);
@@ -78,6 +80,11 @@ function Daftar3() {
       navigate(`/admin/edit/kelas/${idKelas}`);
     }
   };
+
+  const [isLoading, setIsLoading] = useState(true);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <div className="bg-white min-h-screen">
