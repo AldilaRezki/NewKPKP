@@ -1,9 +1,10 @@
 import React from "react";
 import HeaderGuru from "../../HeaderGuru";
 import HeaderKelas from "../HeaderKelas";
-import Form from "../../Form";
 import { BiArrowBack } from "react-icons/bi";
 import Header from "../../Header";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 function TambahForum() {
   return (
@@ -33,7 +34,11 @@ function TambahForum() {
 
       <div>
         <h2 className="text-md mt-8 ml-10 font-normal text-biru">Isi Forum</h2>
-        <Form></Form>
+        <ReactQuill
+            className="mt-8 ml-10 h-30"
+            value=""
+            onChange=""
+        />
       </div>
 
       <div className="mt-20 flex justify-end mr-10 gap-x-10 mb-20">

@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import HeaderGuru from "../../HeaderGuru";
 import HeaderKelas from "../HeaderKelas";
-import Form from "../../Form";
 import { BiArrowBack } from "react-icons/bi";
 import { AiFillCaretDown } from "react-icons/ai";
 import Header from "../../Header";
@@ -10,6 +9,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { addTugas, fetchCurrentMapel } from "../../services/GuruAPI";
 import { isAuthenticated } from "../../../Common/services/Auth";
 import LoadingPage from "../../../Siswa/pages/LoadingPage";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 function TambahTugas({ onFileUpload }) {
   const navigate = useNavigate();
@@ -111,7 +112,11 @@ function TambahTugas({ onFileUpload }) {
             <h2 className="text-md mt-8 ml-10 mb-4 font-normal text-biru">
               Penjelasan
             </h2>
-            <Form></Form>
+            <ReactQuill
+              className="mt-8 ml-10 h-30"
+              value=""
+              onChange=""
+            />
           </div>
 
           <div className="form-input-row mt-5">
