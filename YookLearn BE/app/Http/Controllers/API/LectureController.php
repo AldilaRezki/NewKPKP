@@ -14,6 +14,7 @@ use App\Models\Forum_Comment;
 use App\Models\Assignment;
 use App\Models\Lecturer;
 use App\Models\Material;
+use App\Models\Test;
 use Illuminate\Support\Facades\Redis;
 
 class LectureController extends Controller
@@ -914,8 +915,59 @@ class LectureController extends Controller
         return response()->json($materi);
     }
 
-    public function addUjian()
+    public function addUjian(Request $request, $id_matpel)
     {
+
+        $user = auth()->user();
+        $subject = DB::table('subjects')->get()->where('id', $id_matpel)->first();
+
+
+        if ($user['id'] != $subject->id_guru) {
+            return response()->json([
+                'success' => false,
+                'massage' => 'Tidak memiliki otoritas',
+            ]);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'judul_ujian' => 'required',
+            'waktu' => 'required',
+            'filename' => 'optional|file|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Terjadi Kesalahan',
+                'data' => $validator->errors(),
+            ]);
+        }
+
+        $input = $request->all();
+
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $filename);
+
+            $input['filename'] = $filename;
+        }
+
+        $input['id_matpel'] = $subject->id;
+
+        $affected = Test::create($input);
+
+        $res = [
+            'success' => true,
+        ];
+
+        if (!$affected) {
+            $res = [
+                'success' => false,
+            ];
+        }
+
+        return response()->json($affected);
     }
 
     public function getUjian()

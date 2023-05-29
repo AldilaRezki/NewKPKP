@@ -207,7 +207,7 @@ const router = createBrowserRouter([
     element: <TambahUjian />,
   },
   {
-    path: "/guru/mapel/:idMapel/tambah-soal-ujian",
+    path: "/guru/mapel/:idMapel/ujian/:idUjian/tambah-soal-ujian",
     element: <TambahSoal />,
   },
   {
