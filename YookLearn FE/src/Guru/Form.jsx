@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ListItem from '@tiptap/extension-list-item'
 import TextStyle from '@tiptap/extension-text-style'
 import { useEditor, EditorContent } from '@tiptap/react'
@@ -193,7 +193,12 @@ const MenuBar = ({ editor }) => {
     )
   }
   
-  export default function Form({ mx = "mx-10", width = "" }) {
+  export default function Form({ mx = "mx-10", width = "", content }) {
+
+    const [json, setJson] = useState({});
+    const [html, setHtml] = useState("");
+
+        // const [editorContent, setEditorContent] = useState("");
     const editor = useEditor({
       extensions: [
         TextStyle.configure({ types: [ListItem.name] }),
@@ -221,14 +226,73 @@ const MenuBar = ({ editor }) => {
           types: ['heading', 'paragraph'],
         })
       ],
-      content: `
-      `,
-    })
+      // content: editorContent,
+      content: {
+        type: "doc",
+        content: [
+          {
+            type: "paragraph",
+            content: [
+              {
+                type: "text",
+                content: content 
+              }
+            ]
+          }
+        ]
+      },
+
+      onCreate: ({ editor }) => {
+        setJson(editor.getJSON());
+        setHtml(generateHTML(editor.getJSON(), [StarterKit]));
+      },
+      onUpdate: ({ editor }) => {
+        setJson(editor.getJSON());
+        setHtml(generateHTML(editor.getJSON(), [StarterKit]));
+      }
+
+      // onUpdate: ({ editor }) => {
+      //   const html = editor.getHTML();
+      //   setDescription(html);
+      // }
+
+      // onUpdate({ editor }) {
+      //   setEditorContent(editor.getHTML());
+      // },
+    });
+
+    // useEffect(() => {
+    //   if (editor) {
+    //     editor.commands.setContent(value);
+    //   }
+    // }, [value])
+
+    // useEffect(() => {
+    //   if (editor) {
+    //     const updateListener = () => {
+    //       const html = editor.getHTML();
+    //       setValue(html);
+    //     };  
+    //     editor.on('update', updateListener);
+    //     return() => {
+    //       editor.off('update', updateListener);
+    //     };
+    //   }
+    // }, [editor, setValue])
   
+    // const handleChange = (event) => {
+    //   event.preventDefault();
+    //   setEditorContent(event.target.value)
+    // }
+
+
     return (
       <div className={`${mx} ${width}`}>
         <MenuBar editor={editor} />
-        <EditorContent editor={editor} />
+        <EditorContent editor={editor}
+        // value={editorContent}
+        // onChange={handleChange}
+         />
       </div>
     )
   }

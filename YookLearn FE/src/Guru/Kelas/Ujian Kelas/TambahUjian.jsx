@@ -28,44 +28,56 @@ function TambahUjian({ onFileUpload }) {
 
       <h1 className="text-xl mt-8 ml-10 font-medium text-biru">Tambah Ujian</h1>
 
-      <div>
-        <h2 className="text-md mt-8 ml-10 font-normal text-biru">
-          Judul Ujian
-        </h2>
-        <form>
-          <input
-            type="text"
-            className="bg-white mx-10 mt-3 h-8 border-[0.3px] shadow-md w-[95%] py-1 px-2 focus:outline-none focus:ring-1"
-          />
-        </form>
-      </div>
-
-      <div>
-        <h2 className="text-md mt-8 ml-10 font-normal text-biru">Isi Ujian</h2>
-        <Form></Form>
-      </div>
-
-      <div>
-        <h2 className="text-md mt-8 ml-10 font-normal text-biru">Lampiran</h2>
-        <div className="flex">
-          <div>
-            <ButtonTambahMateri onFileUpload={handleFileUpload} />
-          </div>
-          <span className="ml-5 my-auto ">Tidak ada file yang dipilih</span>
+      <form>
+        <div>
+          <h2 className="text-md mt-8 ml-10 font-normal text-biru">
+            Judul Ujian
+          </h2>
+            <input
+              type="text"
+              className="bg-white mx-10 mt-3 h-8 border-[0.3px] shadow-md w-[95%] py-1 px-2 focus:outline-none focus:ring-1"
+            />
         </div>
-      </div>
 
-      <div className="mt-20 flex justify-end mr-10 gap-x-10 mb-20">
-        <a href={`/guru/mapel/${idMapel}/ujian`} className="text-biru py-2">
-          Batal
-        </a>
-        <a
-          href={`/guru/mapel/${idMapel}/tambah-soal-ujian`}
-          className="text-white bg-biru py-2 px-5 rounded-md"
-        >
-          Tambah Soal
-        </a>
-      </div>
+        <div>
+          <h2 className="text-md mt-8 ml-10 font-normal text-biru">Isi Ujian</h2>
+          <Form></Form>
+        </div>
+
+        <div className="flex gap-x-10 ml-10">
+          <div>
+            <h2 className="text-md mt-8 font-normal text-biru">Waktu Ujian</h2>
+            <div className="flex gap-x-8">
+              <input
+                type="time"
+                name=""
+                id=""
+                className="mt-4 py-2 px-5 border-[0.3px] shadow-md"
+              />
+            </div>
+          </div>
+          <div>
+            <h2 className="text-md mt-8 font-normal text-biru ml-10">Lampiran</h2>
+            <div className="flex">
+              <div>
+                <ButtonTambahMateri onFileUpload={handleFileUpload} />
+              </div>
+              <span className="ml-5 my-auto ">Tidak ada file yang dipilih</span>
+            </div>
+          </div>
+        </div>
+        <div className="mt-20 flex justify-end mr-10 gap-x-10 mb-20">
+          <a href={`/guru/mapel/${idMapel}/ujian`} className="text-biru py-2">
+            Batal
+          </a>
+          <a
+            href={`/guru/mapel/${idMapel}/tambah-soal-ujian`}
+            className="text-white bg-biru py-2 px-5 rounded-md"
+          >
+            Tambah Soal
+          </a>
+        </div>
+      </form>
     </div>
   );
 }
