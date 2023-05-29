@@ -10,126 +10,44 @@ import "react-quill/dist/quill.snow.css";
 
 function TambahSoal() {
     const { idMapel } = useParams();
-    const [opsiList, setOpsiList] = useState([]);
-    const [kotakCentangList, setKotakCentangList] = useState([]);
-    // const [selectedOption, setSelectedOption] = useState('pilgan');
-    const [selectedOptions, setSelectedOptions] = useState(['pilgan']);
+    const [formList, setFormList] = useState([{pertanyaan: '', selectedOption: 'pilgan', opsiList: [], kotakCentangList: []}])
 
-    const handleAddOpsi = () => {
-        setOpsiList([...opsiList, ""]);
-    };
-        
-    const handleOpsiChange = (index, value) => {
-    const updatedOpsiList = [...opsiList];
-        updatedOpsiList[index] = value;
-        setOpsiList(updatedOpsiList);
-    };  
-
-   const handleAddKotakCentang = () => {
-     setKotakCentangList([...kotakCentangList, { value: "", checked: false }]);
-   };
-
-   // Inside the handleKotakCentangChange function
-   const handleKotakCentangChange = (index, value, checked) => {
-     const updatedKotakCentangList = [...kotakCentangList];
-     updatedKotakCentangList[index].value = value;
-     updatedKotakCentangList[index].checked = checked;
-     setKotakCentangList(updatedKotakCentangList);
-   };
-
-    const [formList, setFormList] = useState([{pertanyaan: ''}])
-
-    let handleChange = (i, e) => {
-        let newFormList = [...formList];
-        newFormList[i][e.target.name] = e.target.value;
-        setFormList(newFormList)
-    }
-
-    let addFormList = () => {
-        event.preventDefault();
-        // console.log("Tambah button clicked");
-        setFormList([...formList, {pertanyaan: ''}]);
-        setSelectedOptions([...selectedOptions, 'pilgan']);
-    }
-
-    let removeFormList = (i) => {
-        let newFormList = [...formList];
-        newFormList.splice(i, 1);
-        setFormList(newFormList)
-    }
-
-    const handleSelectChange = (index, e) => {
-        const value = e.target.value
-        const updatedSelectedOptions = [...selectedOptions];
-        updatedSelectedOptions[index] = value;
-        setSelectedOptions(updatedSelectedOptions);
+    const handleChange = (formIndex, e) => {
+        const { name, value } = e.target;
+        const updatedFormList = [...formList];
+        updatedFormList[formIndex][name] = value;
+        setFormList(updatedFormList);
     };
 
-    const renderJawabanSection = (index) => {
-        const selectedOption = selectedOptions[index]
-        if (selectedOption == 'pilgan') {
-            return (
-                <div className="ml-8 flex flex-col gap-y-3">
-                    <span>Jawaban</span>
-                    <div className="container flex gap-x-8">
-                        <div className="flex flex-col gap-y-5">
-                        {opsiList.map((opsi, index) => (
-                            <Opsi
-                            key={index}
-                            value={opsi}
-                            onChange={(value) => handleOpsiChange(index, value)}
-                            />
-                        ))}
-                        </div>
-                        <p
-                        className="text-biru cursor-pointer flex items-end mb-2"
-                        onClick={handleAddOpsi}
-                        >
-                        Tambahkan Opsi
-                        </p>
-                    </div>
-                    </div>
-            );
-        } else if (selectedOption === "kotakcentang") {
-            return (
-                <div className="ml-8 flex flex-col gap-y-3">
-                  <span>Jawaban</span>
-                  <div className="container flex gap-x-8">
-                        <div className="flex flex-col gap-y-5">
-                            {kotakCentangList.map((kotakCentang, index) => (
-                                <KotakCentang
-                                key={index}
-                                value={kotakCentang.value}
-                                checked={kotakCentang.checked}
-                                onChange={(value, checked) =>
-                                handleKotakCentangChange(index, value, checked)
-                                }
-                                />
-                            ))}
-                        </div>
-                        <p
-                        className="text-biru cursor-pointer flex items-end mb-2"
-                        onClick={handleAddKotakCentang}
-                        >
-                        Tambahkan Opsi
-                        </p>
-                    </div>
-                </div>
-            );
-        } else if (selectedOption === "essai") {
-            return (
-                <div className="ml-8 flex flex-col gap-y-2 w-[600px]">
-                    <span>Jawaban</span>
-                    <div className="flex gap-x-8 w-[600px] overflow-hidden">
-                        <ReactQuill
-                            className=" h-30 w-[600px] bg-white"
-                            value=""
-                            onChange=""
-                        />
-                    </div>
-                </div>
-            );
-        }
+    const handleSelectChange = (formIndex, e) => {
+        const value = e.target.value;
+        const updatedFormList = [...formList];
+        updatedFormList[formIndex].selectedOption = value;
+        setFormList(updatedFormList);
+    };
+
+    const handleOpsiChange = (formIndex, opsiIndex, value) => {
+        const updatedFormList = [...formList];
+        updatedFormList[formIndex].opsiList[opsiIndex] = value;
+        setFormList(updatedFormList);
+    };
+
+    const handleKotakCentangChange = (formIndex, kotakCentangIndex, value, checked) => {
+        const updatedFormList = [...formList];
+        updatedFormList[formIndex].kotakCentangList[kotakCentangIndex] = { value, checked };
+        setFormList(updatedFormList);
+    };
+
+    const handleAddQuestion = () => {
+        const updatedFormList = [...formList];
+        updatedFormList.push({ pertanyaan: "", selectedOption: "pilgan", opsiList: [], kotakCentangList: [] });
+        setFormList(updatedFormList);
+    };
+
+    const handleRemoveQuestion = (formIndex) => {
+        const updatedFormList = [...formList];
+        updatedFormList.splice(formIndex, 1);
+        setFormList(updatedFormList);
     };
 
   return (
@@ -138,10 +56,10 @@ function TambahSoal() {
         <HeaderGuru></HeaderGuru>
         <HeaderKelas idMapel={idMapel}></HeaderKelas>
         <form>
-            {formList.map((element, index) => (
-                <div className="mt-10" key={index}>
+            {formList.map((form, formIndex) => (
+                <div className="mt-10" key={formIndex}>
                     <div>
-                        <span className="text-xl ml-10 font-medium text-biru">{index + 1}.</span>
+                        <span className="text-xl ml-10 font-medium text-biru">{formIndex + 1}.</span>
                     </div>
                     <div className="bg-tosca mx-10 mt-5 pb-5">
                     <div className="flex justify-between">
@@ -149,8 +67,8 @@ function TambahSoal() {
                             <span>Pertanyaan</span>
                             <ReactQuill
                                 className="mt-8 mx-0 h-30 bg-white"
-                                value={element.pertanyaan}
-                                onChange={e => handleChange(index, e)}
+                                value={form.pertanyaan}
+                                onChange={e => handleChange(formIndex, e)}
                             />
                         </div>
                         <div className="mr-10 flex flex-col gap-y-5 mt-8">
@@ -160,8 +78,8 @@ function TambahSoal() {
                                         name=""
                                         id=""
                                         className="w-[210px] bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 border-[0.3px] shadow-md mt-4"
-                                        onChange={(e) => handleSelectChange(index, e)}
-                                        value={selectedOptions[index]}
+                                        onChange={(e) => handleSelectChange(formIndex, e)}
+                                        value={form.selectedOption}
                                     >
                                         <option value="pilgan">Pilihan Ganda</option>
                                         <option value="kotakcentang">Kotak Centang</option>
@@ -179,8 +97,50 @@ function TambahSoal() {
                     </div>
                     <div className="flex gap-x-24 mt-8">
                         <div className="flex flex-col gap-y-3">
-                            <div className=" flex gap-x-8">
-                                {renderJawabanSection(index)}
+                            <div className="ml-8 flex gap-x-8">
+                                <span>Jawaban</span>
+                                {form.selectedOption === "pilgan" && (
+                                    <div className="container flex gap-x-8">
+                                        <div className='flex flex-col gap-y-5'>
+                                            {form.opsiList.map((opsi, opsiIndex) => (
+                                                <Opsi
+                                                key={opsiIndex}
+                                                value={opsi}
+                                                onChange={(value) => handleOpsiChange(formIndex, opsiIndex, value)}
+                                                />
+                                            ))}
+                                        </div>
+                                        <p className='text-bitu cursor-pointer flex items-end, mb-2'
+                                        onClick={() => handleOpsiChange(formIndex, form.opsiList.length, "")}>Masukkan Opsi</p>
+                                    </div>
+                                )}
+                                {form.selectedOption === "kotakCentang" && (
+                                    <div className="container flex gap-x-8">
+                                        <div className='flex flex-col gap-y-5'>
+                                            {form.kotakCentangList.map((kotakCentang, kotakCentangIndex) => (
+                                                <div className=''>
+                                                    <Opsi
+                                                    key={kotakCentangIndex}
+                                                    value={kotakCentang.value}
+                                                    checked={kotakCentang.checked}
+                                                    onChange={(value, checked) => handleKotakCentangChange(formIndex, kotakCentangIndex, value, checked)}
+                                                    />  
+                                                </div>
+                                            ))}
+                                        </div>
+                                        <p className='text-bitu cursor-pointer flex items-end, mb-2'
+                                        onClick={() => handleKotakCentangChange(formIndex, form.kotakCentangList.length, "", false)}>Masukkan Opsi</p>
+                                    </div>
+                                )}
+                                {form.selectedOption === "essai" && (
+                                    <div className="flex gap-x-8 w-[600px] overflow-hidden">
+                                    <ReactQuill
+                                        className=" h-30 w-[600px] bg-white"
+                                        value=""
+                                        onChange=""
+                                    />
+                                </div>            
+                                )}
                             </div>
                         </div>
                         <div className="flex flex-col gap-y-2">
@@ -194,20 +154,16 @@ function TambahSoal() {
                         </div>
                     </div>
                     <div className="flex gap-x-6 mt-4 justify-end mr-8">
-                        {
-                            index ? 
-                                <button className="text-biru my-auto"
-                                onClick={() => removeFormList(index)}>
-                                    Hapus
-                                </button>
-                            : null
-                        }
+                        <button
+                        onClick={() => handleRemoveQuestion(formIndex)}
+                        className= "text-biru my-auto"> Hapus Pertanyaan
+                        </button>
                     </div>
                 </div>
             </div>
             ))}
             <div className="flex gap-x-6 mt-10 mb-10 justify-end mr-10">
-                <button className="text-white bg-biru py-2 px-3 rounded-lg" onClick={() => addFormList()}>
+                <button className="text-white bg-biru py-2 px-3 rounded-lg" onClick={handleAddQuestion}>
                     Tambah Soal
                 </button>
                 <a href={`/guru/mapel/${idMapel}/tambah-ujian`} className="text-white bg-biru py-2 px-3 rounded-lg">
