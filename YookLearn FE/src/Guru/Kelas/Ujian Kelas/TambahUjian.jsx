@@ -77,17 +77,31 @@ function TambahUjian() {
           />
         </div>
 
-        <div>
-          <h2 className="text-md mt-8 ml-10 font-normal text-biru">Lampiran</h2>
-          <div className="flex">
-            <input
-              className="mt-15 ml-10"
-              id="fileInput"
-              type="file"
-              onChange={handleFileChange}
-            />
+       <div className="flex gap-x-10 ml-10">
+          <div>
+            <h2 className="text-md mt-8 font-normal text-biru">Waktu Ujian</h2>
+            <div className="flex gap-x-8">
+              <input
+                type="time"
+                name=""
+                id=""
+                className="mt-4 py-2 px-5 border-[0.3px] shadow-md"
+              />
+            </div>
+          </div>
+          <div>
+            <h2 className="text-md mt-8 ml-10 font-normal text-biru">Lampiran</h2>
+            <div className="flex">
+              <input
+                className="mt-5 ml-10"
+                id="fileInput"
+                type="file"
+                onChange={handleFileChange}
+              />
+            </div>
           </div>
         </div>
+
 
         <div className="mt-20 flex justify-end mr-10 gap-x-10 mb-20">
           <a href={`/guru/mapel/${idMapel}/ujian`} className="text-biru py-2">
