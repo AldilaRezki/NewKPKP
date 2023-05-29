@@ -282,6 +282,36 @@ export async function addMateri(idMapel, judul, file) {
   }
 }
 
+export async function addUjian(idMapel, judul, isiUjian, file) {
+  try {
+    const token = localStorage.getItem("token");
+
+    const formData = new FormData();
+    formData.append("judul_ujian", judul);
+    formData.append("file", file);
+    formData.append("deskripsi", isiUjian);
+    formData.append("waktu", 30);
+
+    const response = await fetch(`${BASE_URL}/matpel/${idMapel}/ujian/add`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+    return data;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
+
 export async function addTugas(
   idMapel,
   judul,

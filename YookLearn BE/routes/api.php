@@ -93,6 +93,8 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'lecture'], function
     Route::post('matpel/{id_matpel}/materi/add', [LectureController::class, 'addMateri']);
     Route::get('matpel/{id_matpel}/materi/', [LectureController::class, 'getMateri']);
     Route::get('matpel/{id_matpel}/materi/{id_materi}', [LectureController::class, 'getDetailMateri']);
+
+    Route::post('matpel/{id_matpel}/ujian/add', [LectureController::class, 'addUjian']);
 });
 
 // Student Routes
