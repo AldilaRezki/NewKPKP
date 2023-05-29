@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { isAuthenticated } from "../../Common/services/Auth";
 import { useEffect } from "react";
 import IsiCarouselJadwal from "./IsiCarouselJadwal";
+import Sapa from './Sapa';
 
 function HomepageUtama() {
 
@@ -23,13 +24,9 @@ function HomepageUtama() {
       <Header></Header>
       <HeaderGuru></HeaderGuru>
 
-      <div className="flex justify-between">
+      <div className="flex justify-between mb-20">
         <div className="flex mt-16 ml-10 flex-col gap-y-8 w-3/5">
-          <div className="homepage_Card text-xl flex bg-tosca p-4 rounded-lg shadow-md">
-            <h1>
-              Selamat Pagi, Lorem! Terdapat 3 Kelas untuk diajar hari ini.
-            </h1>
-          </div>
+          <Sapa />
 
           <div className="homepage_Kelas bg-tosca rounded-lg shadow-md">
             <h1 className="text-2xl ml-4 mt-5 mb-5">Kelas Hari Ini</h1>
@@ -39,20 +36,14 @@ function HomepageUtama() {
               <HomepageKelas></HomepageKelas>
             </div>
           </div>
-
-          <div className="buttonKelas bg-tosca mb-20">
+        </div>
+        <div className="buttonKelas bg-tosca mt-16 mb-20 rounded-lg mr-10 h-fit">
             <a
               href="/guru/daftarkelas"
-              className="flex text-2xl bg-white my-7 py-5 px-20 shadow-md justify-center item-center m-auto mx-5"
+              className="flex text-2xl bg-white mt-8 my-7 py-5 px-20 shadow-md justify-center item-center m-auto mx-5"
             >
               Lihat Daftar Kelas
             </a>
-          </div>
-        </div>
-
-        <div className="flex flex-col jadwalAjarKelas mt-16 mr-10 bg-tosca px-10 pt-8 mb-20">
-          <h1 className="text-xl mb-10">Jadwal Hari Ini</h1>
-          <IsiCarouselJadwal></IsiCarouselJadwal>
         </div>
       </div>
     </div>
