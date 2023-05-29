@@ -282,7 +282,7 @@ export async function addMateri(idMapel, judul, file) {
   }
 }
 
-export async function addUjian(idMapel, judul, isiUjian, file) {
+export async function addUjian(idMapel, judul, isiUjian, waktu, file) {
   try {
     const token = localStorage.getItem("token");
 
@@ -290,7 +290,7 @@ export async function addUjian(idMapel, judul, isiUjian, file) {
     formData.append("judul_ujian", judul);
     formData.append("file", file);
     formData.append("deskripsi", isiUjian);
-    formData.append("waktu", 30);
+    formData.append("waktu", waktu);
 
     const response = await fetch(`${BASE_URL}/matpel/${idMapel}/ujian/add`, {
       method: "POST",
