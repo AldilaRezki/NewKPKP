@@ -6,7 +6,8 @@ import { BsSaveFill } from "react-icons/bs";
 import HeaderGuru from "../../HeaderGuru";
 import { useNavigate, useParams } from "react-router-dom";
 import { isAuthenticated } from "../../../Common/services/Auth";
-import { fetchAllMateri, fetchCurrentMateri } from "../../services/GuruAPI";
+import { fetchAllMateri, fetchCurrentMapel, fetchCurrentMateri } from "../../services/GuruAPI";
+import LoadingPage from "../../../Siswa/pages/LoadingPage";
 
 function IsiMateri() {
   const BASE_URL = import.meta.env.VITE_BASE_DOWNLOAD_URL;
@@ -14,6 +15,7 @@ function IsiMateri() {
   const navigate = useNavigate();
   const login = isAuthenticated("guru");
   const [dataMateri, setMateri] = useState([]);
+  const [dataMapel, setMapel] = useState([]);
 
   useEffect(() => {
     if (!login) {
@@ -23,17 +25,26 @@ function IsiMateri() {
 
   useEffect(() => {
     async function fetchData() {
-      const data = await fetchCurrentMateri(idMapel, idMateri);
-      setMateri(data);
-      // setIsLoading(false);
+      const [materiData, mapelData] = await Promise.all([
+        fetchCurrentMateri(idMapel, idMateri),
+        fetchCurrentMapel(idMapel),
+      ]);
+      setMateri(materiData);
+      setMapel(mapelData);
+      setIsLoading(false);
     }
     fetchData();
   }, []);
 
+  const [isLoading, setIsLoading] = useState(true);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+
   return (
     <div>
       <Header></Header>
-      <HeaderKelas idMapel={idMapel}></HeaderKelas>
+      <HeaderKelas dataMapel={dataMapel}></HeaderKelas>
 
       <div className="bg-tosca mt-10 mx-10 p-2">
         <a href={`/guru/mapel/${idMapel}/daftar-materi`}>

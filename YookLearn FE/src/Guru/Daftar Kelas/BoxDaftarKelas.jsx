@@ -39,6 +39,7 @@ import React, { useEffect, useState } from "react";
 import clsx from "clsx";
 import BoxKelas from "./BoxKelas";
 import { fetchMapel } from "../services/GuruAPI";
+import LoadingPage from "../../Siswa/pages/LoadingPage";
 
 function BoxDaftarKelas(props) {
   const { className, kelas } = props;
@@ -53,7 +54,6 @@ function BoxDaftarKelas(props) {
     async function fetchData() {
       const data = await fetchMapel();
       setKelas(data);
-      // setIsLoading(false);
     }
     fetchData();
   }, []);

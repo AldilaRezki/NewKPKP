@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { isAuthenticated } from "../../Common/services/Auth";
 import { addAkun, editAkun, fetchCurrentAkun } from "../services/AdminAPI";
 import NavGuru from "../components/NavGuru";
+import LoadingPage from "../../Siswa/pages/LoadingPage";
 
 function AdminEditAkun() {
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ function AdminEditAkun() {
       setUserName(data.username);
       setStatus(data.role);
       setRole(data.role);
+      setIsLoading(false);
     }
     fetchData();
   }, []);
@@ -37,6 +39,11 @@ function AdminEditAkun() {
       navigate("/admin/berhasil");
     }
   };
+
+  const [isLoading, setIsLoading] = useState(true);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <div className="bg-white min-h-screen">

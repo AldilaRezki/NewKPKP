@@ -13,6 +13,7 @@ import {
 } from "../services/SiswaAPI";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import LoadingPage from "./LoadingPage";
 
 function Materi() {
   const navigate = useNavigate();
@@ -29,21 +30,21 @@ function Materi() {
 
   useEffect(() => {
     async function fetchData() {
-      const data = await fetchCurrentMapel(idMapel);
-      setMapel(data);
+      const [mapelData, materiData] = await Promise.all([
+        fetchCurrentMapel(idMapel),
+        fetchCurentMapelMateri(idMapel),
+      ]);
+      setMapel(mapelData);
+      setMateri(materiData);
       setIsLoading(false);
     }
-    fetchData(idMapel);
-  }, []);
+    fetchData();
+  }, [idMapel]);
 
-  useEffect(() => {
-    async function fetchData() {
-      const data = await fetchCurentMapelMateri(idMapel);
-      setMateri(data);
-      setIsLoading(false);
-    }
-    fetchData(idMapel);
-  }, []);
+  const [isLoading, setIsLoading] = useState(true);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <>

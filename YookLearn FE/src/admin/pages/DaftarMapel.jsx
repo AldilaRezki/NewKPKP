@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import { useNavigate, useParams } from "react-router-dom";
 import { addMapel, fetchAll } from "../services/AdminAPI";
+import NavGuru from "../components/NavGuru";
 
 function tadmin() {
   const navigate = useNavigate();

@@ -3,18 +3,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import { MdModeEditOutline } from "react-icons/md";
 import { fetchTugas } from "../../services/GuruAPI";
 
-function TabelDaftarTugas({ idMapel }) {
-  const [dataTugas, setTugas] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      const data = await fetchTugas(idMapel);
-      setTugas(data);
-      // setIsLoading(false);
-    }
-    fetchData();
-  }, []);
-  
+function TabelDaftarTugas({ idMapel, dataTugas }) {
   return (
     <div>
       <div className="flex flex-col ml-10 mt-14 mr-10 border-[0.3px] py-2 px-5 shadow-md">

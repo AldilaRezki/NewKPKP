@@ -18,6 +18,7 @@ import { fetchAll, removeAccount } from "../../Admin/services/AdminAPI";
 import { useNavigate, useParams } from "react-router-dom";
 import { isAuthenticated } from "../../Common/services/Auth";
 import NavGuru from "../components/NavGuru";
+import LoadingPage from "../../Siswa/pages/LoadingPage";
 
 function Daftar3() {
   const accounts = [
@@ -46,6 +47,7 @@ function Daftar3() {
     async function fetchData() {
       const data = await fetchAll("account");
       setDataAccount(data);
+      setIsLoading(false);
     }
     fetchData();
   }, []);
@@ -79,6 +81,11 @@ function Daftar3() {
       setIsRemoving(false);
     }
   };
+
+  const [isLoading, setIsLoading] = useState(true);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <div className="bg-white min-h-screen">

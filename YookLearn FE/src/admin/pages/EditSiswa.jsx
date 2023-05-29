@@ -8,6 +8,7 @@ import {
   fetchCurrentSiswa,
 } from "../services/AdminAPI";
 import NavGuru from "../components/NavGuru";
+import LoadingPage from "../../Siswa/pages/LoadingPage";
 
 function EditSiswa() {
   const navigate = useNavigate();
@@ -44,6 +45,7 @@ function EditSiswa() {
       setAgama(data.agama);
       setKelas(data.id_kelas);
       setKelasLama(data.nama_kelas);
+      setIsLoading(false);
     }
     fetchData();
   }, []);
@@ -54,6 +56,11 @@ function EditSiswa() {
       navigate("/admin/berhasil");
     }
   };
+
+  const [isLoading, setIsLoading] = useState(true);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <div className="bg-white max-h-screen">

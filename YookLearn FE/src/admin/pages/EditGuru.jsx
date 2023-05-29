@@ -3,6 +3,8 @@ import Header from "../components/Header";
 import { useNavigate, useParams } from "react-router-dom";
 import { isAuthenticated } from "../../Common/services/Auth";
 import { addGuru, editGuru, fetchCurrentGuru } from "../services/AdminAPI";
+import LoadingPage from "../../Siswa/pages/LoadingPage";
+import NavGuru from "../components/NavGuru";
 
 function EditGuru() {
   const navigate = useNavigate();
@@ -28,6 +30,7 @@ function EditGuru() {
       setPangkat(data.pangkat);
       setGolongan(data.golongan);
       setMapel(data.matpel);
+      setIsLoading(false);
     }
     fetchData();
   }, []);
@@ -38,6 +41,11 @@ function EditGuru() {
       navigate("/admin/berhasil");
     }
   };
+
+  const [isLoading, setIsLoading] = useState(true);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <div className="bg-white min-h-screen">

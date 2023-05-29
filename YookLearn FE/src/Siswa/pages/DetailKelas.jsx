@@ -12,6 +12,7 @@ import { RiFilePaperLine } from "react-icons/ri";
 import Fiturkelas from "../components/Fiturkelas";
 import { Link } from "react-router-dom";
 import { fetchCurrentMapel } from "../services/SiswaAPI";
+import LoadingPage from "./LoadingPage";
 
 function DetailKelas() {
   const navigate = useNavigate();
@@ -29,9 +30,15 @@ function DetailKelas() {
     async function fetchData() {
       const data = await fetchCurrentMapel(idMapel);
       setMapel(data);
+      setIsLoading(false);
     }
     fetchData(idMapel);
   }, []);
+
+  const [isLoading, setIsLoading] = useState(true);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <>

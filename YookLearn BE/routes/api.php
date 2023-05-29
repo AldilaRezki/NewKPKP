@@ -22,7 +22,7 @@ Route::post('login', [AuthController::class, 'login']);
 Route::get('materi/{idMateri}/download', [StudentController::class, 'downloadMateri']);
 
 Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
-Route::middleware('auth:sanctum')->post('user', [AuthController::class, 'currentUser']);
+Route::middleware('auth:sanctum')->get('user', [AuthController::class, 'currentUser']);
 
 // Admin Routes
 Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'admin'], function () {

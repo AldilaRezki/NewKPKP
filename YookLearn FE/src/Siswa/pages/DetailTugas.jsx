@@ -8,12 +8,14 @@ import { fetchCurrentMapel, fetchCurrentTugas } from "../services/SiswaAPI";
 import { isAuthenticated } from "../../Common/services/Auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import LoadingPage from "./LoadingPage";
 
 function DetailTugas() {
   const navigate = useNavigate();
   const login = isAuthenticated("siswa");
   const { idKelas, idMapel, idTugas } = useParams();
   const [mapel, setMapel] = useState([]);
+  const [dataTugas, setDataTugas] = useState([]);
 
   useEffect(() => {
     if (!login) {
@@ -23,12 +25,21 @@ function DetailTugas() {
 
   useEffect(() => {
     async function fetchData() {
-      const data = await fetchCurrentMapel(idMapel);
-      setMapel(data);
+      const [tugasData, mapelData] = await Promise.all([
+        fetchCurrentTugas(idTugas),
+        fetchCurrentMapel(idMapel),
+      ]);
+      setDataTugas(tugasData);
+      setMapel(mapelData);
       setIsLoading(false);
     }
-    fetchData(idMapel);
+    fetchData();
   }, []);
+
+  const [isLoading, setIsLoading] = useState(true);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <>
@@ -51,7 +62,12 @@ function DetailTugas() {
         <h1 className="text-xl ml-5 text-slate-400 font-bold">Tugas</h1>
       </div>
       <div>
-        <DetailTgsCard idKelas={idKelas} idTugas={idTugas} idMapel={idMapel} />
+        <DetailTgsCard
+          idKelas={idKelas}
+          idTugas={idTugas}
+          idMapel={idMapel}
+          dataTugas={dataTugas}
+        />
       </div>
     </>
   );
