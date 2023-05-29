@@ -12,7 +12,8 @@ function TambahSoal() {
     const { idMapel } = useParams();
     const [opsiList, setOpsiList] = useState([]);
     const [kotakCentangList, setKotakCentangList] = useState([]);
-    const [selectedOption, setSelectedOption] = useState('pilgan');
+    // const [selectedOption, setSelectedOption] = useState('pilgan');
+    const [selectedOptions, setSelectedOptions] = useState(['pilgan']);
 
     const handleAddOpsi = () => {
         setOpsiList([...opsiList, ""]);
@@ -47,7 +48,8 @@ function TambahSoal() {
     let addFormList = () => {
         event.preventDefault();
         // console.log("Tambah button clicked");
-        setFormList([...formList, {pertanyaan: ''}])
+        setFormList([...formList, {pertanyaan: ''}]);
+        setSelectedOptions([...selectedOptions, 'pilgan']);
     }
 
     let removeFormList = (i) => {
@@ -56,12 +58,15 @@ function TambahSoal() {
         setFormList(newFormList)
     }
 
-    const handleSelectChange = (e) => {
+    const handleSelectChange = (index, e) => {
         const value = e.target.value
-        setSelectedOption(value);
+        const updatedSelectedOptions = [...selectedOptions];
+        updatedSelectedOptions[index] = value;
+        setSelectedOptions(updatedSelectedOptions);
     };
 
-    const renderJawabanSection = () => {
+    const renderJawabanSection = (index) => {
+        const selectedOption = selectedOptions[index]
         if (selectedOption == 'pilgan') {
             return (
                 <div className="ml-8 flex flex-col gap-y-3">
@@ -155,8 +160,8 @@ function TambahSoal() {
                                         name=""
                                         id=""
                                         className="w-[210px] bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 border-[0.3px] shadow-md mt-4"
-                                        onChange={handleSelectChange}
-                                        defaultValue={selectedOption}
+                                        onChange={(e) => handleSelectChange(index, e)}
+                                        value={selectedOptions[index]}
                                     >
                                         <option value="pilgan">Pilihan Ganda</option>
                                         <option value="kotakcentang">Kotak Centang</option>
@@ -175,7 +180,7 @@ function TambahSoal() {
                     <div className="flex gap-x-24 mt-8">
                         <div className="flex flex-col gap-y-3">
                             <div className=" flex gap-x-8">
-                                {renderJawabanSection()}
+                                {renderJawabanSection(index)}
                             </div>
                         </div>
                         <div className="flex flex-col gap-y-2">
