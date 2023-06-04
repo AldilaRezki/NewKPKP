@@ -78,108 +78,117 @@ const ExamPage = () => {
     setQuestions(newQuestions);
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Perform actions to submit the answers
+    console.log("Answers submitted!");
+  };
+
   return (
     <>
       <Header />
       <Nav />
-      <div className="flex flex-row items-center mt-[45px] ml-[103px]">
-        <RiFilePaperLine className="rounded-full bg-[#EEF4FA] text-[#1A1F5A] text-5xl p-2 align-middle" />
-        <h1 className="font-bold text-[#1A1F5A] ml-10">
-          {" "}
-          Soal Nomor {currentQuestionIndex + 1}{" "}
-        </h1>
-        <h1 className="text-slate-400 font-bold ml-60">
-          Sisa Waktu: {formattedMinutes}:{formattedSeconds}
-        </h1>
-      </div>
-      <div className="flex flex-col">
-        <div className="container mx-auto flex text-biru ml-[103px]">
-          <div className="w-[60%]">
-            {questions[currentQuestionIndex] && (
-              <div key={questions[currentQuestionIndex].id} className="my-6">
-                <div className="flex items-center mb-2">
-                  <span className="font-bold mr-2">
-                    {questions[currentQuestionIndex].id}.
-                  </span>
-                  <span className="text-[15px]">
-                    {questions[currentQuestionIndex].question}
-                  </span>
+      <form onSubmit={handleSubmit}>
+        <div className="flex flex-row items-center mt-[45px] ml-[103px]">
+          <RiFilePaperLine className="rounded-full bg-[#EEF4FA] text-[#1A1F5A] text-5xl p-2 align-middle" />
+          <h1 className="font-bold text-[#1A1F5A] ml-10">
+            {" "}
+            Soal Nomor {currentQuestionIndex + 1}{" "}
+          </h1>
+          <h1 className="text-slate-400 font-bold ml-60">
+            Sisa Waktu: {formattedMinutes}:{formattedSeconds}
+          </h1>
+        </div>
+        <div className="flex flex-col">
+          <div className="container mx-auto flex text-biru ml-[103px]">
+            <div className="w-[60%]">
+              {questions[currentQuestionIndex] && (
+                <div key={questions[currentQuestionIndex].id} className="my-6">
+                  <div className="flex items-center mb-2">
+                    <span className="font-bold mr-2">
+                      {questions[currentQuestionIndex].id}.
+                    </span>
+                    <span className="text-[15px]">
+                      {questions[currentQuestionIndex].question}
+                    </span>
+                  </div>
+                  {questions[currentQuestionIndex].type === "essay" ? (
+                    <textarea
+                      rows="2"
+                      className="border border-biru rounded-md w-96 "
+                      value={questions[currentQuestionIndex].answer}
+                      onChange={(e) => {
+                        const newQuestions = [...questions];
+                        newQuestions[currentQuestionIndex].answer =
+                          e.target.value;
+                        setQuestions(newQuestions);
+                      }}
+                    ></textarea>
+                  ) : (
+                    <ul className="ml-6">
+                      {questions[currentQuestionIndex].choices.map(
+                        (choice, index) => (
+                          <li key={index} className="my-2">
+                            {questions[currentQuestionIndex].type === "checkbox" ? (
+                              <label className="inline-flex items-center">
+                                <input
+                                  type="checkbox"
+                                  name={`question-${questions[currentQuestionIndex].id}`}
+                                  value={choice}
+                                  checked={questions[currentQuestionIndex].answer.includes(choice)}
+                                  onChange={handleCheckboxChange}
+                                />
+                                <span className="ml-2">{choice}</span>
+                              </label>
+                            ) : (
+                              <label className="inline-flex items-center">
+                                <input
+                                  type="radio"
+                                  name={`question-${questions[currentQuestionIndex].id}`}
+                                  value={choice}
+                                />
+                                <span className="ml-2">{choice}</span>
+                              </label>
+                            )}
+                          </li>
+                        )
+                      )}
+                    </ul>
+                  )}
                 </div>
-                {questions[currentQuestionIndex].type === "essay" ? (
-                  <textarea
-                    rows="2"
-                    className="border border-biru rounded-md w-96 "
-                    value={questions[currentQuestionIndex].answer}
-                    onChange={(e) => {
-                      const newQuestions = [...questions];
-                      newQuestions[currentQuestionIndex].answer =
-                        e.target.value;
-                      setQuestions(newQuestions);
-                    }}
-                  ></textarea>
-                ) : (
-                  <ul className="ml-6">
-                    {questions[currentQuestionIndex].choices.map(
-                      (choice, index) => (
-                        <li key={index} className="my-2">
-                          {questions[currentQuestionIndex].type === "checkbox" ? (
-                            <label className="inline-flex items-center">
-                              <input
-                                type="checkbox"
-                                name={`question-${questions[currentQuestionIndex].id}`}
-                                value={choice}
-                                checked={questions[currentQuestionIndex].answer.includes(choice)}
-                                onChange={handleCheckboxChange}
-                              />
-                              <span className="ml-2">{choice}</span>
-                            </label>
-                          ) : (
-                            <label className="inline-flex items-center">
-                              <input
-                                type="radio"
-                                name={`question-${questions[currentQuestionIndex].id}`}
-                                value={choice}
-                              />
-                              <span className="ml-2">{choice}</span>
-                            </label>
-                          )}
-                        </li>
-                      )
-                    )}
-                  </ul>
-                )}
-              </div>
-            )}
-          </div>
-          <div className="w-[10%] mt-0">
-            <NomorUjian />
+              )}
+            </div>
+            <div className="w-[10%] mt-0">
+              <NomorUjian />
+            </div>
           </div>
         </div>
-      </div>
-      <div className="flex justify-center mt-2">
-        <button
-          className="px-4 py-2 bg-gray-300 text-white rounded-md mr-2"
-          onClick={handlePreviousClick}
-          disabled={currentQuestionIndex === 0}
-        >
-          Soal Sebelumnya
-        </button>
-        <button
-          className="px-4 py-2 bg-biru text-white rounded-md"
-          onClick={handleNextClick}
-          disabled={currentQuestionIndex === questions.length - 1}
-        >
-          Soal Selanjutnya
-        </button>
-        {currentQuestionIndex === questions.length - 1 && (
+        <div className="flex justify-center mt-2">
           <button
-            className="px-4 py-2 bg-green-500 text-white rounded-md ml-2"
-            onClick={handleFinishClick}
+            className="px-4 py-2 bg-gray-300 text-white rounded-md mr-2"
+            onClick={handlePreviousClick}
+            disabled={currentQuestionIndex === 0}
           >
-            Selesai
+            Soal Sebelumnya
           </button>
-        )}
-      </div>
+          <button
+            className="px-4 py-2 bg-biru text-white rounded-md"
+            onClick={handleNextClick}
+            disabled={currentQuestionIndex === questions.length - 1}
+          >
+            Soal Selanjutnya
+          </button>
+          {currentQuestionIndex === questions.length - 1 && (
+            <button
+              type="submit"
+              className="px-4 py-2 bg-green-500 text-white rounded-md ml-2"
+              onClick={handleFinishClick}
+            >
+              Selesai
+            </button>
+          )}
+        </div>
+      </form>
     </>
   );
 };
