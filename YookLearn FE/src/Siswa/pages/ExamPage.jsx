@@ -12,12 +12,14 @@ const ExamPage = () => {
       id: 1,
       question: "What is the capital of France?",
       choices: ["London", "Paris", "Berlin", "Rome"],
+      type: "pilgan",
       answer: "Paris",
     },
     {
       id: 2,
       question: "What is the highest mountain in the world?",
       choices: ["K2", "Makalu", "Everest", "Lhotse"],
+      type: "pilgan",
       answer: "Everest",
     },
     {
@@ -25,6 +27,13 @@ const ExamPage = () => {
       question: "Write a short essay about your favorite book.",
       type: "essay",
       answer: "",
+    },
+    {
+      id: 4,
+      question: "hobby?",
+      choices: ["watching movie", "Music", "read a book", "sport"],
+      type: "checkbox",
+      answer: [],
     },
   ]);
 
@@ -57,6 +66,25 @@ const ExamPage = () => {
 
   const handleNextClick = () => {
     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+  };
+
+  const handleFinishClick = () => {
+    // Logic to handle finishing the exam
+    console.log("Exam finished!");
+  };
+
+  const handleCheckboxChange = (event) => {
+    const { value, checked } = event.target;
+    const newQuestions = [...questions];
+    const answerIndex = newQuestions[currentQuestionIndex].answer.indexOf(value);
+
+    if (checked && answerIndex === -1) {
+      newQuestions[currentQuestionIndex].answer.push(value);
+    } else if (!checked && answerIndex !== -1) {
+      newQuestions[currentQuestionIndex].answer.splice(answerIndex, 1);
+    }
+
+    setQuestions(newQuestions);
   };
 
   return (
@@ -103,14 +131,27 @@ const ExamPage = () => {
                     {questions[currentQuestionIndex].choices.map(
                       (choice, index) => (
                         <li key={index} className="my-2">
-                          <label className="inline-flex items-center">
-                            <input
-                              type="radio"
-                              name={`question-${questions[currentQuestionIndex].id}`}
-                              value={choice}
-                            />
-                            <span className="ml-2">{choice}</span>
-                          </label>
+                          {questions[currentQuestionIndex].type === "checkbox" ? (
+                            <label className="inline-flex items-center">
+                              <input
+                                type="checkbox"
+                                name={`question-${questions[currentQuestionIndex].id}`}
+                                value={choice}
+                                checked={questions[currentQuestionIndex].answer.includes(choice)}
+                                onChange={handleCheckboxChange}
+                              />
+                              <span className="ml-2">{choice}</span>
+                            </label>
+                          ) : (
+                            <label className="inline-flex items-center">
+                              <input
+                                type="radio"
+                                name={`question-${questions[currentQuestionIndex].id}`}
+                                value={choice}
+                              />
+                              <span className="ml-2">{choice}</span>
+                            </label>
+                          )}
                         </li>
                       )
                     )}
@@ -139,6 +180,14 @@ const ExamPage = () => {
         >
           Soal Selanjutnya
         </button>
+        {currentQuestionIndex === questions.length - 1 && (
+          <button
+            className="px-4 py-2 bg-green-500 text-white rounded-md ml-2"
+            onClick={handleFinishClick}
+          >
+            Selesai
+          </button>
+        )}
       </div>
     </>
   );

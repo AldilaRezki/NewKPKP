@@ -109,6 +109,27 @@ function TambahUjian() {
             </div>
           </div>
           <div>
+            <h2 className="text-md mt-8 font-normal text-biru">Batas Waktu Pengerjaan Ujian</h2>
+            <div className="flex gap-x-8">
+              <div className="flex gap-x-8">
+                <input
+                  type="date"
+                  className="mt-4 py-2 px-5 border-[0.3px] shadow-md"
+                  value=""
+                  onChange=""
+                />
+              </div>
+              <div className="flex gap-x-8">
+                <input
+                  type="time"
+                  className="mt-4 py-2 px-5 border-[0.3px] shadow-md"
+                  value=""
+                  onChange=""
+                />
+              </div>
+            </div>
+          </div>
+          <div>
             <h2 className="text-md mt-8 ml-10 font-normal text-biru">
               Lampiran
             </h2>
