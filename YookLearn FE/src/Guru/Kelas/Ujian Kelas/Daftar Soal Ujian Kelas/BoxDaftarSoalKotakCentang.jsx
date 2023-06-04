@@ -34,6 +34,7 @@ function BoxDaftarSoalKotakCentang({ dataSoal }) {
               value={dataSoal.nilai}
               min={dataSoal.nilai}
               max={dataSoal.nilai}
+              readOnly
               className="bg-white border-[0.3px] py-2 pl-3 shadow-md"
             ></input>
           </div>
@@ -45,7 +46,8 @@ function BoxDaftarSoalKotakCentang({ dataSoal }) {
           {dataSoal.opsi.map((opsi) => (
             <DaftarPilihanSoalKotakCentang
               key={opsi.id}
-              labelTextPilihanGanda={opsi.deskripsi}
+              labeltextKotakCentang={opsi.deskripsi}
+              tipeOpsi={opsi.tipe_opsi}
             ></DaftarPilihanSoalKotakCentang>
           ))}
         </div>

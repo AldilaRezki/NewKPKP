@@ -33,6 +33,7 @@ function BoxDaftarSoalEssay({ dataSoal }) {
               value={dataSoal.nilai}
               min={dataSoal.nilai}
               max={dataSoal.nilai}
+              readOnly
               className="bg-white border-[0.3px] py-2 pl-3 shadow-md"
             ></input>
           </div>

@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Header from "../../../Header";
 import HeaderGuru from "../../../HeaderGuru";
 import HeaderKelas from "../../HeaderKelas";
-import Opsi from "./Opsi";
-import KotakCentang from "./KotakCentang";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import LoadingPage from "../../../../Siswa/pages/LoadingPage";
@@ -13,6 +11,7 @@ import { addSoal, fetchCurrentMapel } from "../../../services/GuruAPI";
 const TambahSoal = () => {
   const { idMapel, idUjian } = useParams();
   const [dataMapel, setMapel] = useState([]);
+  navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
@@ -54,17 +53,17 @@ const TambahSoal = () => {
     const newList = [...formList];
     newList[index].jawaban[jawabanIndex] = value;
     setFormList(newList);
+    handlePertanyaanChange(index, newList[index].pertanyaan);
   };
 
   const handleKunciChange = (index, jawabanIndex, value) => {
     const newList = [...formList];
     if (newList[index].jenis === "kotakcentang") {
-      const kunci = newList[index].kunci.slice(); // Copy array kunci menggunakan slice()
-      if (value) {
-        kunci[jawabanIndex] = true; // Set nilai kunci[jawabanIndex] menjadi true
-      } else {
-        kunci[jawabanIndex] = false; // Set nilai kunci[jawabanIndex] menjadi false
+      const kunci = newList[index].kunci.slice();
+      while (kunci.length < newList[index].jawaban.length) {
+        kunci.push(false);
       }
+      kunci[jawabanIndex] = value;
       newList[index].kunci = kunci;
     } else {
       newList[index].kunci = jawabanIndex;
@@ -111,15 +110,13 @@ const TambahSoal = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(formList);
     try {
       const data = await addSoal(idUjian, formList);
       console.log(data);
 
-      // if (isSuccess) {
-      //   console.log("Assigment added successfully");
-      //   navigate(`/guru/mapel/${idMapel}/daftar-tugas`);
-      // }
+      if (data.success === true) {
+        navigate(`/guru/mapel/${idMapel}/ujian`);
+      }
     } catch (error) {
       console.log("Error adding assigment:", error);
     }
@@ -137,11 +134,11 @@ const TambahSoal = () => {
       <HeaderKelas dataMapel={dataMapel}></HeaderKelas>
       <form onSubmit={handleSubmit}>
         {formList.map((question, index) => (
-          <div
-          className="mt-10" 
-          key={index}>
+          <div className="mt-10" key={index}>
             <div>
-              <h3 className="text-xl ml-10 font-medium text-biru">Pertanyaan {index + 1}</h3>
+              <h3 className="text-xl ml-10 font-medium text-biru">
+                Pertanyaan {index + 1}
+              </h3>
             </div>
             <div className="bg-tosca mx-10 mt-5 pb-5">
               <div className="flex justify-between">
@@ -151,7 +148,7 @@ const TambahSoal = () => {
                     className="mt-3 mx-0 h-36 overflow-hidden bg-white"
                     type="text"
                     value={question.pertanyaan}
-                    onChange={(e) => handlePertanyaanChange(index, e.target.value)}
+                    onChange={(value) => handlePertanyaanChange(index, value)}
                   />
                 </div>
                 <div className="mr-10 flex flex-col gap-y-5 mt-8">
@@ -167,7 +164,6 @@ const TambahSoal = () => {
                       <option value="essai">Essai</option>
                     </select>
                   </div>
-                  
                 </div>
               </div>
               <div className="flex gap-x-24 mt-8">
@@ -177,30 +173,37 @@ const TambahSoal = () => {
                       <div>
                         <label>Jawaban:</label>
                         {question.jawaban.map((jawaban, jawabanIndex) => (
-                            <div
-                            className="flex gap-x-3" key={jawabanIndex}>
-                              <input
-                                className="mt-2 py-2 pl-3"
-                                type="text"
-                                value={jawaban}
-                                onChange={(e) =>
-                                  handleJawabanChange(index, jawabanIndex, e.target.value)
+                          <div className="flex gap-x-3" key={jawabanIndex}>
+                            <input
+                              className="mt-2 py-2 pl-3"
+                              type="text"
+                              value={jawaban}
+                              onChange={(e) =>
+                                handleJawabanChange(
+                                  index,
+                                  jawabanIndex,
+                                  e.target.value
+                                )
+                              }
+                            />
+                            {question.jawaban.length > 1 && (
+                              <button
+                                className="text-biru"
+                                type="button"
+                                onClick={() =>
+                                  handleRemoveOption(index, jawabanIndex)
                                 }
-                              />
-                              {question.jawaban.length > 1 && (
-                                <button
-                                  className="text-biru"
-                                  type="button"
-                                  onClick={() => handleRemoveOption(index, jawabanIndex)}
-                                >
-                                  Hapus Opsi
-                                </button>
-                              )}
-                              </div>
+                              >
+                                Hapus Opsi
+                              </button>
+                            )}
+                          </div>
                         ))}
-                        <button 
-                        className="text-bitu cursor-pointer flex items-end mt-2 mb-2 text-biru"
-                        type="button" onClick={() => handleAddOption(index)}>
+                        <button
+                          className="text-bitu cursor-pointer flex items-end mt-2 mb-2 text-biru"
+                          type="button"
+                          onClick={() => handleAddOption(index)}
+                        >
                           Tambah Opsi
                         </button>
                         <div className="flex flex-col gap-y-3 mt-6">
@@ -226,44 +229,55 @@ const TambahSoal = () => {
                       <div>
                         <label>Opsi:</label>
                         {question.jawaban.map((jawaban, jawabanIndex) => (
-                          <div 
-                          className="flex gap-x-3"
-                          key={jawabanIndex}>
+                          <div className="flex gap-x-3" key={jawabanIndex}>
                             <input
                               className="mt-2 py-2 pl-3"
                               type="text"
                               value={jawaban}
                               onChange={(e) =>
-                                handleJawabanChange(index, jawabanIndex, e.target.value)
+                                handleJawabanChange(
+                                  index,
+                                  jawabanIndex,
+                                  e.target.value
+                                )
                               }
                             />
                             {question.jawaban.length > 1 && (
                               <button
                                 className="text-biru"
                                 type="button"
-                                onClick={() => handleRemoveOption(index, jawabanIndex)}
+                                onClick={() =>
+                                  handleRemoveOption(index, jawabanIndex)
+                                }
                               >
                                 Hapus Opsi
                               </button>
                             )}
                           </div>
                         ))}
-                        <button 
-                        className="text-bitu cursor-pointer flex items-end mt-2 mb-2 text-biru"
-                        type="button" onClick={() => handleAddOption(index)}>
+                        <button
+                          className="text-bitu cursor-pointer flex items-end mt-2 mb-2 text-biru"
+                          type="button"
+                          onClick={() => handleAddOption(index)}
+                        >
                           Tambah Opsi
                         </button>
                         <div className="flex flex-col gap-y-3 mt-6">
                           <label>Opsi Benar:</label>
                           {question.jawaban.map((jawaban, jawabanIndex) => (
-                            <div 
-                            className="flex gap-x-3 bg-white py-3 px-2"
-                            key={jawabanIndex}>
+                            <div
+                              className="flex gap-x-3 bg-white py-3 px-2"
+                              key={jawabanIndex}
+                            >
                               <input
                                 type="checkbox"
                                 checked={question.kunci[jawabanIndex] === true} // Periksa nilai kunci[jawabanIndex]
                                 onChange={(e) =>
-                                  handleKunciChange(index, jawabanIndex, e.target.checked)
+                                  handleKunciChange(
+                                    index,
+                                    jawabanIndex,
+                                    e.target.checked
+                                  )
                                 }
                               />
                               <span>{jawaban}</span>
@@ -280,9 +294,10 @@ const TambahSoal = () => {
                           className="mt-3 w-[600px] h-36 bg-white"
                           type="text"
                           value={question.jawaban[0]}
-                          onChange={(e) =>
-                            handleJawabanChange(index, 0, e.target.value)
-                          }
+                          onChange={(value) => {
+                            handleJawabanChange(index, 0, value);
+                            handlePertanyaanChange(index, question.pertanyaan);
+                          }}
                         />
                       </div>
                     )}
@@ -297,27 +312,32 @@ const TambahSoal = () => {
                     onChange={(e) => handlePoinChange(index, e.target.value)}
                   />
                 </div>
-                
               </div>
               <div className="flex justify-end mr-10 mb-2">
                 <button
-                type="button" onClick={() => handleRemoveQuestion(index)}>
+                  type="button"
+                  onClick={() => handleRemoveQuestion(index)}
+                >
                   Hapus Pertanyaan
-                </button>  
+                </button>
               </div>
-              
             </div>
           </div>
         ))}
         <div className="flex mb-20 gap-x-6 mt-10 justify-end mr-10">
-          <button 
-          className="text-white bg-biru py-2 px-3 rounded-lg" 
-          type="button" onClick={handleAddQuestion}>
+          <button
+            className="text-white bg-biru py-2 px-3 rounded-lg"
+            type="button"
+            onClick={handleAddQuestion}
+          >
             Tambah Pertanyaan
           </button>
-          <button 
-          className="text-white bg-biru py-2 px-3 rounded-lg" 
-          type="submit">Submit</button>  
+          <button
+            className="text-white bg-biru py-2 px-3 rounded-lg"
+            type="submit"
+          >
+            Submit
+          </button>
         </div>
       </form>
     </div>

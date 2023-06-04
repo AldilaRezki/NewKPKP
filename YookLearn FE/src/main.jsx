@@ -142,7 +142,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/siswa/kelas/:idKelas/detailkelas/:idMapel/ujian/detailujian",
+    path: "/siswa/kelas/:idKelas/detailkelas/:idMapel/ujian/:idUjian/detailujian",
     element: <DetailUjianSiswa />,
     errorElement: <ErrorPage />,
   },

@@ -1041,13 +1041,14 @@ class LectureController extends Controller
         $subject = DB::table('subjects')->get()->where('id', $id_mapel)->first();
 
         $soal = DB::table('questions')
-            ->select('questions.id', 'questions.pertanyaan', 'questions.tipe_soal', 'questions.nilai', 'question_options.id as opsi_id', 'question_options.deskripsi as opsi_deskripsi')
+            ->select('questions.id', 'questions.pertanyaan', 'questions.tipe_soal', 'questions.nilai', 'question_options.id as opsi_id', 'question_options.deskripsi as opsi_deskripsi', 'question_options.tipe_opsi')
             ->leftJoin('question_options', 'questions.id', '=', 'question_options.id_soal')
             ->where('questions.id_ujian', $id_ujian)
             ->whereIn('questions.tipe_soal', ['pilgan', 'kotakcentang'])
             ->get();
 
         $formattedSoal = [];
+
         foreach ($soal as $item) {
             $soalItem = [
                 'id' => $item->id,
@@ -1063,6 +1064,7 @@ class LectureController extends Controller
                     $opsi = [
                         'id' => $item->opsi_id,
                         'deskripsi' => $item->opsi_deskripsi,
+                        'tipe_opsi' => $item->tipe_opsi,
                     ];
                     $soalItem['opsi'][] = $opsi;
                 }
@@ -1072,6 +1074,7 @@ class LectureController extends Controller
                     $opsi = [
                         'id' => $item->opsi_id,
                         'deskripsi' => $item->opsi_deskripsi,
+                        'tipe_opsi' => $item->tipe_opsi,
                     ];
                     $formattedSoal[$index]['opsi'][] = $opsi;
                 }

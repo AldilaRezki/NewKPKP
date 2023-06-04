@@ -8,7 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 import { isAuthenticated } from "../../Common/services/Auth";
-import { fetchCurrentMapel } from "../services/SiswaAPI";
+import { fetchCurrentMapel, fetchUjian } from "../services/SiswaAPI";
+import LoadingPage from "./LoadingPage";
 
 function Ujian() {
   const navigate = useNavigate();
@@ -25,12 +26,23 @@ function Ujian() {
 
   useEffect(() => {
     async function fetchData() {
-      const data = await fetchCurrentMapel(idMapel);
-      setMapel(data);
+      const [mapelData, ujianData] = await Promise.all([
+        fetchCurrentMapel(idMapel),
+        fetchUjian(idMapel),
+      ]);
+
+      setMapel(mapelData);
+      setDataUjian(ujianData);
       setIsLoading(false);
     }
-    fetchData(idMapel);
+
+    fetchData();
   }, []);
+
+  const [isLoading, setIsLoading] = useState(true);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <>
@@ -53,25 +65,20 @@ function Ujian() {
           <h1 className="text-xl ml-5 text-slate-400 font-bold">Ujian</h1>
         </div>
       </div>
-      <Link
-        to={`/siswa/kelas/${idKelas}/detailkelas/${idMapel}/ujian/detailujian`}
-      >
-        {" "}
-        <div className="flex flex-row items-center mt-[75px] ml-[103px]">
-          <RiFilePaperLine className="rounded-full bg-[#EEF4FA] text-[#1A1F5A] text-5xl p-2 align-middle"></RiFilePaperLine>
-          <h1 className="font-bold text-[#1A1F5A] ml-10"> Ulangan Harian 1 </h1>
-          <h1 className="text-slate-400 font-bold ml-60">
-            Batas Pengerjaan: 11 Maret 2023, 23.59
-          </h1>
-        </div>
-        <div className="flex flex-row items-center mt-[75px] ml-[103px]">
-          <RiFilePaperLine className="rounded-full bg-[#EEF4FA] text-[#1A1F5A] text-5xl p-2 align-middle"></RiFilePaperLine>
-          <h1 className="font-bold text-[#1A1F5A] ml-10"> Ulangan Harian 2 </h1>
-          <h1 className="text-slate-400 font-bold ml-60">
-            Batas Pengerjaan: 11 Maret 2023, 23.59
-          </h1>
-        </div>
-      </Link>
+      {dataUjian.map((ujian) => (
+        <Link
+          key={ujian.id}
+          to={`/siswa/kelas/${idKelas}/detailkelas/${idMapel}/ujian/${ujian.id}/detailujian`}
+        >
+          <div className="flex flex-row items-center mt-[75px] ml-[103px]">
+            <RiFilePaperLine className="rounded-full bg-[#EEF4FA] text-[#1A1F5A] text-5xl p-2 align-middle" />
+            <h1 className="font-bold text-[#1A1F5A] ml-10">{ujian.judul_ujian}</h1>
+            {/* <h1 className="text-slate-400 font-bold ml-60">
+              Batas Pengerjaan: {ujian.batasPengerjaan}
+            </h1> */}
+          </div>
+        </Link>
+      ))}
     </>
   );
 }

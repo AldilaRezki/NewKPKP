@@ -59,7 +59,7 @@ function DaftarSoalUjian() {
             <BoxDaftarSoalPilihanGanda dataSoal={soal} />
           )}
 
-          {soal.tipe_soal === "kotakCentang" && (
+          {soal.tipe_soal === "kotakcentang" && (
             <BoxDaftarSoalKotakCentang dataSoal={soal} />
           )}
 

@@ -117,6 +117,9 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'student'], function
 
     Route::get('/matpel/{idMatpel}/materi', [StudentController::class, 'getMateri']);
     Route::get('/materi/{idMateri}', [StudentController::class, 'getDetailMateri']);
+
+    Route::get('/matpel/{idMatpel}/ujian', [StudentController::class, 'getUjian']);
+    Route::get('/matpel/{idMatpel}/ujian/{idUjian}/detail', [StudentController::class, 'getCurrentUjian']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

@@ -1,5 +1,4 @@
 import React from "react";
-import { IoMdArrowDropdown } from "react-icons/io";
 import DaftarPilihanSoalPilihanGanda from "./DaftarPilihanSoalPilihanGanda";
 
 function BoxDaftarSoalPilihanGanda({ dataSoal }) {
@@ -38,6 +37,7 @@ function BoxDaftarSoalPilihanGanda({ dataSoal }) {
                 value={dataSoal.nilai}
                 min={dataSoal.nilai}
                 max={dataSoal.nilai}
+                readOnly
                 className="bg-white border-[0.3px] py-2 pl-3 shadow-md"
               ></input>
             </div>
@@ -46,12 +46,15 @@ function BoxDaftarSoalPilihanGanda({ dataSoal }) {
         <div className="pilihanSoalPilihanGanda">
           <span>Jawaban</span>
           <div className="flex flex-col gap-y-2">
-            {dataSoal.opsi.map((opsi) => (
-              <DaftarPilihanSoalPilihanGanda
-                key={opsi.id}
-                labelTextPilihanGanda={opsi.deskripsi}
-              ></DaftarPilihanSoalPilihanGanda>
-            ))}
+            <div className="flex flex-col gap-y-2">
+              {dataSoal.opsi.map((opsi) => (
+                <DaftarPilihanSoalPilihanGanda
+                  key={opsi.id}
+                  labelTextPilihanGanda={opsi.deskripsi}
+                  tipeOpsi={opsi.tipe_opsi}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

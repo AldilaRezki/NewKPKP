@@ -185,11 +185,14 @@ export async function fetchUjian(idMapel) {
 export async function fetchSoalUjian(idMapel, idUjian) {
   try {
     const token = localStorage.getItem("token");
-    const response = await fetch(`${BASE_URL}/matpel/${idMapel}/ujian/${idUjian}/soal`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await fetch(
+      `${BASE_URL}/matpel/${idMapel}/ujian/${idUjian}/soal`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
     const data = await response.json();
 
