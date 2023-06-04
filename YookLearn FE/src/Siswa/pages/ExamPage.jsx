@@ -13,27 +13,26 @@ const ExamPage = () => {
       question: "What is the capital of France?",
       choices: ["London", "Paris", "Berlin", "Rome"],
       type: "pilgan",
-      answer: "Paris",
+      answer: 1,
     },
     {
       id: 2,
       question: "What is the highest mountain in the world?",
       choices: ["K2", "Makalu", "Everest", "Lhotse"],
       type: "pilgan",
-      answer: "Everest",
+      answer: 2,
     },
     {
       id: 3,
       question: "Write a short essay about your favorite book.",
       type: "essay",
-      answer: "",
     },
     {
       id: 4,
       question: "hobby?",
       choices: ["watching movie", "Music", "read a book", "sport"],
       type: "checkbox",
-      answer: [],
+      answer: [false, true, true, false],
     },
   ]);
 
