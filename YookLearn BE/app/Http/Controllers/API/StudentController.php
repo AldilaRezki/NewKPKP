@@ -266,6 +266,12 @@ class StudentController extends Controller
 
         return $ujian;
     }
+    public function Soal($idUjian)
+    {
+        $user = auth()->user();
+
+        
+    }
 
 
     // public function downloadMateri($fileId)

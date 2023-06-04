@@ -147,7 +147,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/siswa/exam",
+    path: "/siswa/exam/:idUjian",
     element: <ExamPage />,
     errorElement: <ErrorPage />,
   },

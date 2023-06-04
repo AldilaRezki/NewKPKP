@@ -36,6 +36,15 @@ const ExamPage = () => {
     return () => clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchCurrentMapel(idMapel);
+      setMapel(data);
+      setIsLoading(false);
+    }
+    fetchData();
+  }, []);
+
   const minutes = Math.floor(countdown / 60);
   const seconds = countdown % 60;
 

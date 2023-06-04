@@ -223,6 +223,30 @@ export async function fetchCurrentUjian(idMapel, idUjian) {
   }
 }
 
+export async function fetchSoal(idUjian) {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(
+      `${BASE_URL}/ujian/${idUjian}/soal`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export async function fetchCurrentTugas(idTugas) {
   try {
     const token = localStorage.getItem("token");

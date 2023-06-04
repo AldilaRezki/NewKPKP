@@ -29,7 +29,7 @@ function DetailUjianCard({ Ujian }) {
         <h1 className="ml-[206px] text-[#1A1F5A] "> 20 Maret 2023 </h1>
       </div>
       <div className="flex justify-center mt-10">
-        <Link to="/siswa/exam">
+        <Link to={`/siswa/exam/${Ujian.id}`}>
           {" "}
           <button className="bg-[#1A1F5A] text-white py-5 px-10 rounded-md hover:bg-[#303371]">
             Mulai
