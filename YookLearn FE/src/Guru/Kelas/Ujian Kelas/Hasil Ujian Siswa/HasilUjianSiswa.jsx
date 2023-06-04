@@ -27,7 +27,7 @@ function HasilUjianSiswa() {
   if (isLoading) {
     return <LoadingPage />;
   }
-  
+
   return (
     <div className="mb-20">
       <Header></Header>

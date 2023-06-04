@@ -5,8 +5,6 @@ export const isAuthenticated = (roles) => {
   const role = localStorage.getItem("role");
 
   if (token && role) {
-
-    
     if (role !== roles) {
       return false;
     }

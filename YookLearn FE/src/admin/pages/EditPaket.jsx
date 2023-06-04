@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Header from "../components/Header";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
-import { addKelas, editKelas, fetchAll, fetchCurrentPaket } from "../services/AdminAPI";
+import {
+  addKelas,
+  editKelas,
+  fetchAll,
+  fetchCurrentPaket,
+} from "../services/AdminAPI";
 import { useNavigate, useParams } from "react-router-dom";
 import LoadingPage from "../../Siswa/pages/LoadingPage";
 import NavGuru from "../components/NavGuru";

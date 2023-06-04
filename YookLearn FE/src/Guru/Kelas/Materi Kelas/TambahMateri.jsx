@@ -130,7 +130,12 @@ function TambahMateri({ onFileUpload }) {
             Lampiran
           </label>
           <div>
-            <input  className="ml-10" id="fileInput" type="file" onChange={handleFileChange} />
+            <input
+              className="ml-10"
+              id="fileInput"
+              type="file"
+              onChange={handleFileChange}
+            />
           </div>
         </div>
 

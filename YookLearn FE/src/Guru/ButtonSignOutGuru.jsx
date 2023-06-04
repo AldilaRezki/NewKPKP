@@ -8,7 +8,7 @@ const ButtonSignOutGuru = () => {
   const [open, setOpen] = useState(false);
   const Menus = [
     { label: "Profile", route: "/guru/profil" },
-    { label: "Logout", route: "/" }
+    { label: "Logout", route: "/" },
   ];
 
   const handleSubmit = async (route) => {

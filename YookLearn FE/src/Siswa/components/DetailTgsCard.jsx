@@ -4,10 +4,14 @@ import FileUploadButton from "./FileUploadButton";
 import { fetchCurrentTugas, uploadFile } from "../services/SiswaAPI";
 import { useNavigate } from "react-router-dom";
 
-export default function DetailTgsCard({ idKelas, idMapel, idTugas, dataTugas }) {
+export default function DetailTgsCard({
+  idKelas,
+  idMapel,
+  idTugas,
+  dataTugas,
+}) {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
-
 
   const handleFileUpload = async () => {
     const file = fileInputRef.current.files[0];

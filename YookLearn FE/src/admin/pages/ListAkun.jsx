@@ -71,7 +71,9 @@ function Daftar3() {
 
       if (isSuccess) {
         console.log("Siswa removed successfully");
-        setDataAccount((prevAccount) => prevAccount.filter((account) => account.id !== id));
+        setDataAccount((prevAccount) =>
+          prevAccount.filter((account) => account.id !== id)
+        );
       } else {
         console.log("Failed to remove siswa");
       }
@@ -90,7 +92,7 @@ function Daftar3() {
   return (
     <div className="bg-white min-h-screen">
       <Header />
-      < NavGuru />
+      <NavGuru />
       <div className="container mx-auto px-4 py-6">
         <div className="flex">
           <a href="/admin/homepage">
