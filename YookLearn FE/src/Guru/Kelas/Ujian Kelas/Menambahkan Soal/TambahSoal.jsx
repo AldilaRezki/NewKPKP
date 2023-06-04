@@ -1,471 +1,356 @@
-// import React, { useEffect, useState } from "react";
-// import { useParams } from "react-router-dom";
-// import Header from "../../../Header";
-// import HeaderGuru from "../../../HeaderGuru";
-// import HeaderKelas from "../../HeaderKelas";
-// import Opsi from "./Opsi";
-// import KotakCentang from "./KotakCentang";
-// import ReactQuill from "react-quill";
-// import "react-quill/dist/quill.snow.css";
-// import LoadingPage from "../../../../Siswa/pages/LoadingPage";
-// import { fetchCurrentMapel } from "../../../services/GuruAPI";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import Header from "../../../Header";
+import HeaderGuru from "../../../HeaderGuru";
+import HeaderKelas from "../../HeaderKelas";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import LoadingPage from "../../../../Siswa/pages/LoadingPage";
+import { addSoal, fetchCurrentMapel } from "../../../services/GuruAPI";
 
-// function TambahSoal() {
-//   const { idMapel } = useParams();
-//   const [opsiList, setOpsiList] = useState([]);
-//   const [kotakCentangList, setKotakCentangList] = useState([]);
-//   // const [selectedOption, setSelectedOption] = useState("pilgan");
+const TambahSoal = () => {
+  const { idMapel, idUjian } = useParams();
+  const [dataMapel, setMapel] = useState([]);
+  const navigate = useNavigate();
 
-//   const [dataMapel, setMapel] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchCurrentMapel(idMapel);
+      setMapel(data);
+      setIsLoading(false);
+    }
+    fetchData();
+  }, []);
 
-//   useEffect(() => {
-//     async function fetchData() {
-//       const data = await fetchCurrentMapel(idMapel);
-//       setMapel(data);
-//       setIsLoading(false);
-//     }
-//     fetchData();
-//   }, []);
-//     const [selectedOptions, setSelectedOptions] = useState(['pilgan']);
+  const [formList, setFormList] = useState([
+    {
+      pertanyaan: "",
+      jenis: "pilgan",
+      jawaban: ["", "", ""],
+      kunci: 0,
+      poin: 0,
+    },
+  ]);
 
-//   const handleAddOpsi = () => {
-//     setOpsiList([...opsiList, ""]);
-//   };
+  const handlePertanyaanChange = (index, value) => {
+    const newList = [...formList];
+    newList[index].pertanyaan = value;
+    setFormList(newList);
+  };
 
-//   const handleOpsiChange = (index, value) => {
-//     const updatedOpsiList = [...opsiList];
-//     updatedOpsiList[index] = value;
-//     setOpsiList(updatedOpsiList);
-//   };
+  const handleJenisChange = (index, value) => {
+    const newList = [...formList];
+    newList[index].jenis = value;
+    if (value === "kotakcentang") {
+      newList[index].kunci = [];
+    } else {
+      newList[index].kunci = 0;
+    }
+    setFormList(newList);
+  };
 
-//   const handleAddKotakCentang = () => {
-//     setKotakCentangList([...kotakCentangList, { value: "", checked: false }]);
-//   };
+  const handleJawabanChange = (index, jawabanIndex, value) => {
+    const newList = [...formList];
+    newList[index].jawaban[jawabanIndex] = value;
+    setFormList(newList);
+    handlePertanyaanChange(index, newList[index].pertanyaan);
+  };
 
-//   // Inside the handleKotakCentangChange function
-//   const handleKotakCentangChange = (index, value, checked) => {
-//     const updatedKotakCentangList = [...kotakCentangList];
-//     updatedKotakCentangList[index].value = value;
-//     updatedKotakCentangList[index].checked = checked;
-//     setKotakCentangList(updatedKotakCentangList);
-//   };
+  const handleKunciChange = (index, jawabanIndex, value) => {
+    const newList = [...formList];
+    if (newList[index].jenis === "kotakcentang") {
+      const kunci = newList[index].kunci.slice();
+      while (kunci.length < newList[index].jawaban.length) {
+        kunci.push(false);
+      }
+      kunci[jawabanIndex] = value;
+      newList[index].kunci = kunci;
+    } else {
+      newList[index].kunci = jawabanIndex;
+    }
+    setFormList(newList);
+  };
 
-//   const [formList, setFormList] = useState([{ pertanyaan: "" }]);
+  const handlePoinChange = (index, value) => {
+    const newList = [...formList];
+    const poin = parseInt(value, 10);
 
-//   let handleChange = (i, e) => {
-//     let newFormList = [...formList];
-//     newFormList[i][e.target.name] = e.target.value;
-//     setFormList(newFormList);
-//   };
+    let totalPoinSebelumnya = 0;
+    for (let i = 0; i < index; i++) {
+      totalPoinSebelumnya += newList[i].poin;
+    }
 
-//     let addFormList = () => {
-//         event.preventDefault();
-//         // console.log("Tambah button clicked");
-//         setFormList([...formList, {pertanyaan: ''}]);
-//         setSelectedOptions([...selectedOptions, 'pilgan']);
-//     }
+    const maxPoin = 100 - totalPoinSebelumnya;
+    newList[index].poin = Math.min(poin, maxPoin);
 
-//   let removeFormList = (i) => {
-//     let newFormList = [...formList];
-//     newFormList.splice(i, 1);
-//     setFormList(newFormList);
-//   };
+    setFormList(newList);
+  };
 
-//     const handleSelectChange = (index, e) => {
-//         const value = e.target.value
-//         const updatedSelectedOptions = [...selectedOptions];
-//         updatedSelectedOptions[index] = value;
-//         setSelectedOptions(updatedSelectedOptions);
-//     };
+  const handleAddQuestion = () => {
+    setFormList([
+      ...formList,
+      {
+        pertanyaan: "",
+        jenis: "pilgan",
+        jawaban: ["", "", ""],
+        kunci: 0,
+        poin: 0,
+      },
+    ]);
+  };
 
-//     const handleSelectChange = (formIndex, e) => {
-//         const value = e.target.value;
-//         const updatedFormList = [...formList];
-//         updatedFormList[formIndex].selectedOption = value;
-//         setFormList(updatedFormList);
-//     };
+  const handleRemoveQuestion = (index) => {
+    const newList = [...formList];
+    newList.splice(index, 1);
+    setFormList(newList);
+  };
 
-//     const handleOpsiChange = (formIndex, opsiIndex, value) => {
-//         const updatedFormList = [...formList];
-//         updatedFormList[formIndex].opsiList[opsiIndex] = value;
-//         setFormList(updatedFormList);
-//     };
+  const handleAddOption = (index) => {
+    const newList = [...formList];
+    newList[index].jawaban.push("");
+    setFormList(newList);
+  };
 
-//     const handleKotakCentangChange = (formIndex, kotakCentangIndex, value, checked) => {
-//         const updatedFormList = [...formList];
-//         updatedFormList[formIndex].kotakCentangList[kotakCentangIndex] = { value, checked };
-//         setFormList(updatedFormList);
-//     };
+  const handleRemoveOption = (index, optionIndex) => {
+    const newList = [...formList];
+    newList[index].jawaban.splice(optionIndex, 1);
+    setFormList(newList);
+  };
 
-//     const handleAddQuestion = () => {
-//         const updatedFormList = [...formList];
-//         updatedFormList.push({ pertanyaan: "", selectedOption: "pilgan", opsiList: [], kotakCentangList: [] });
-//         setFormList(updatedFormList);
-//     };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const data = await addSoal(idUjian, formList);
+      console.log(data);
 
-//     const handleRemoveQuestion = (formIndex) => {
-//         const updatedFormList = [...formList];
-//         updatedFormList.splice(formIndex, 1);
-//         setFormList(updatedFormList);
-//     };
+      if (data.success === true) {
+        navigate(`/guru/mapel/${idMapel}/ujian`);
+      }
+    } catch (error) {
+      console.log("Error adding assignment:", error);
+    }
+  };
 
-//   const [isLoading, setIsLoading] = useState(true);
-//   if (isLoading) {
-//     return <LoadingPage />;
-//   }
+  const [isLoading, setIsLoading] = useState(true);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
-//   return (
-//     <div>
-//       <Header></Header>
-//       <HeaderGuru></HeaderGuru>
-//       <HeaderKelas dataMapel={dataMapel}></HeaderKelas>
-//       <form>
-//         {formList.map((element, index) => (
-//           <div className="mt-10" key={index}>
-//             <div>
-//               <span className="text-xl ml-10 font-medium text-biru">
-//                 {index + 1}.
-//               </span>
-//             </div>
-//             <div className="bg-tosca mx-10 mt-5 pb-5">
-//               <div className="flex justify-between">
-//                 <div className="w-full ml-8 mr-16 mt-8">
-//                   <span>Pertanyaan</span>
-//                   <ReactQuill
-//                     className="mt-8 mx-0 h-30 bg-white"
-//                     value={element.pertanyaan}
-//                     onChange={(e) => handleChange(index, e)}
-//                   />
-//                 </div>
-//                 <div className="mr-10 flex flex-col gap-y-5 mt-8">
-//                   <div>
-//                     <span>Jenis Pertanyaan</span>
-//                     <select
-//                       name=""
-//                       id=""
-//                       className="w-[210px] bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 border-[0.3px] shadow-md mt-4"
-//                       onChange={(e) => handleSelectChange(index, e)}
-//                       value={selectedOptions[index]}
-//                     >
-//                       <option value="pilgan">Pilihan Ganda</option>
-//                       <option value="kotakcentang">Kotak Centang</option>
-//                       <option value="essai">Essai</option>
-//                     </select>
-//                   </div>
-//                   <div>
-//                     <span>Lampiran</span>
-//                     <div className="w-fit mt-4">
-//                       <input type="file" />
-//                     </div>
-//                   </div>
-//                 </div>
-//               </div>
-//               <div className="flex gap-x-24 mt-8">
-//                 <div className="flex flex-col gap-y-3">
-//                   <div className=" flex gap-x-8">{renderJawabanSection(index)}</div>
-//                 </div>
-//                 <div className="flex flex-col gap-y-2">
-//                   <span>Poin Soal</span>
-//                   <input
-//                     type="number"
-//                     min={0}
-//                     max={100}
-//                     className="bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 w-fit border-[0.3px] shadow-md"
-//                   />
-//                 </div>
-//               </div>
-//               <div className="flex gap-x-6 mt-4 justify-end mr-8">
-//                 {index ? (
-//                   <button
-//                     className="text-biru my-auto"
-//                     onClick={() => removeFormList(index)}
-//                   >
-//                     Hapus
-//                   </button>
-//                 ) : null}
-//               </div>
-//             </div>
-//           </div>
-//         ))}
-//         <div className="flex gap-x-6 mt-10 mb-10 justify-end mr-10">
-//           <button
-//             className="text-white bg-biru py-2 px-3 rounded-lg"
-//             onClick={() => addFormList()}
-//           >
-//             Tambah Soal
-//           </button>
-//           <a
-//             href={`/guru/mapel/${idMapel}/tambah-ujian`}
-//             className="text-white bg-biru py-2 px-3 rounded-lg"
-//           >
-//             Batal
-//           </a>
-//           <a href="" className="text-white bg-biru py-2 px-3 rounded-lg">
-//             Kirim
-//           </a>
-//         </div>
-//       </form>
-//     </div>
-//   );
-// }
+  return (
+    <div>
+      <Header></Header>
+      <HeaderGuru></HeaderGuru>
+      <HeaderKelas dataMapel={dataMapel}></HeaderKelas>
+      <form onSubmit={handleSubmit}>
+        {formList.map((question, index) => (
+          <div className="mt-10" key={index}>
+            <div>
+              <h3 className="text-xl ml-10 font-medium text-biru">
+                Pertanyaan {index + 1}
+              </h3>
+            </div>
+            <div className="bg-tosca mx-10 mt-5 pb-5">
+              <div className="flex justify-between">
+                <div className="flex flex-col w-full ml-8 mr-16 mt-8">
+                  <label>Pertanyaan:</label>
+                  <ReactQuill
+                    className="mt-3 mx-0 h-36 overflow-hidden bg-white"
+                    type="text"
+                    value={question.pertanyaan}
+                    onChange={(value) => handlePertanyaanChange(index, value)}
+                  />
+                </div>
+                <div className="mr-10 flex flex-col gap-y-5 mt-8">
+                  <div>
+                    <label>Jenis Pertanyaan:</label>
+                    <select
+                      value={question.jenis}
+                      onChange={(e) => handleJenisChange(index, e.target.value)}
+                      className="w-[210px] bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 border-[0.3px] shadow-md mt-4"
+                    >
+                      <option value="pilgan">Pilihan Ganda</option>
+                      <option value="kotakcentang">Kotak Centang</option>
+                      <option value="essai">Essai</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div className="flex gap-x-24 mt-8">
+                <div className="flex flex-col gap-y-3">
+                  <div className="ml-8 flex gap-x-8">
+                    {question.jenis === "pilgan" && (
+                      <div>
+                        <label>Jawaban:</label>
+                        {question.jawaban.map((jawaban, jawabanIndex) => (
+                          <div className="flex gap-x-3" key={jawabanIndex}>
+                            <input
+                              className="mt-2 py-2 pl-3"
+                              type="text"
+                              value={jawaban}
+                              onChange={(e) =>
+                                handleJawabanChange(
+                                  index,
+                                  jawabanIndex,
+                                  e.target.value
+                                )
+                              }
+                            />
+                            {question.jawaban.length > 1 && (
+                              <button
+                                className="text-biru"
+                                type="button"
+                                onClick={() =>
+                                  handleRemoveOption(index, jawabanIndex)
+                                }
+                              >
+                                Hapus Opsi
+                              </button>
+                            )}
+                          </div>
+                        ))}
+                        <button
+                          className="text-bitu cursor-pointer flex items-end mt-2 mb-2 text-biru"
+                          type="button"
+                          onClick={() => handleAddOption(index)}
+                        >
+                          Tambah Opsi
+                        </button>
+                        <div className="flex flex-col gap-y-3 mt-6">
+                          <label>Jawaban Benar:</label>
+                          <select
+                            className="bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 border-[0.3px] shadow-md"
+                            value={question.kunci}
+                            onChange={(e) =>
+                              handleKunciChange(index, e.target.value, true)
+                            }
+                          >
+                            {question.jawaban.map((jawaban, jawabanIndex) => (
+                              <option key={jawabanIndex} value={jawabanIndex}>
+                                {jawaban}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      </div>
+                    )}
 
-// export default TambahSoal;
+                    {question.jenis === "kotakcentang" && (
+                      <div>
+                        <label>Opsi:</label>
+                        {question.jawaban.map((jawaban, jawabanIndex) => (
+                          <div className="flex gap-x-3" key={jawabanIndex}>
+                            <input
+                              className="mt-2 py-2 pl-3"
+                              type="text"
+                              value={jawaban}
+                              onChange={(e) =>
+                                handleJawabanChange(
+                                  index,
+                                  jawabanIndex,
+                                  e.target.value
+                                )
+                              }
+                            />
+                            {question.jawaban.length > 1 && (
+                              <button
+                                className="text-biru"
+                                type="button"
+                                onClick={() =>
+                                  handleRemoveOption(index, jawabanIndex)
+                                }
+                              >
+                                Hapus Opsi
+                              </button>
+                            )}
+                          </div>
+                        ))}
+                        <button
+                          className="text-bitu cursor-pointer flex items-end mt-2 mb-2 text-biru"
+                          type="button"
+                          onClick={() => handleAddOption(index)}
+                        >
+                          Tambah Opsi
+                        </button>
+                        <div className="flex flex-col gap-y-3 mt-6">
+                          <label>Opsi Benar:</label>
+                          {question.jawaban.map((jawaban, jawabanIndex) => (
+                            <div
+                              className="flex gap-x-3 bg-white py-3 px-2"
+                              key={jawabanIndex}
+                            >
+                              <input
+                                type="checkbox"
+                                checked={question.kunci[jawabanIndex] === true} // Periksa nilai kunci[jawabanIndex]
+                                onChange={(e) =>
+                                  handleKunciChange(
+                                    index,
+                                    jawabanIndex,
+                                    e.target.checked
+                                  )
+                                }
+                              />
+                              <span>{jawaban}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
 
-// // import React, { useState } from "react";
-// // import HeaderGuru from "../../../HeaderGuru";
-// // import HeaderKelas from "../../HeaderKelas";
-// // import KotakCentang from "./KotakCentang";
-// // import Form from "../../../Form";
-// // import Opsi from "./Opsi";
-// // import Header from "../../../Header";
-// // import { useParams } from "react-router-dom";
+                    {question.jenis === "essai" && (
+                      <div className="flex flex-col gap-x-8 w-[600px] overflow-hidden">
+                        <label>Jawaban:</label>
+                        <ReactQuill
+                          className="mt-3 w-[600px] h-36 bg-white"
+                          type="text"
+                          value={question.jawaban[0]}
+                          onChange={(value) => {
+                            handleJawabanChange(index, 0, value);
+                            handlePertanyaanChange(index, question.pertanyaan);
+                          }}
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div className="flex flex-col gap-y-2">
+                  <label className="text-biru">Poin:</label>
+                  <input
+                    className="bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 w-fit border-[0.3px] shadow-md"
+                    type="number"
+                    value={question.poin}
+                    onChange={(e) => handlePoinChange(index, e.target.value)}
+                  />
+                </div>
+              </div>
+              <div className="flex justify-end mr-10 mb-2">
+                <button
+                  type="button"
+                  onClick={() => handleRemoveQuestion(index)}
+                >
+                  Hapus Pertanyaan
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+        <div className="flex mb-20 gap-x-6 mt-10 justify-end mr-10">
+          <button
+            className="text-white bg-biru py-2 px-3 rounded-lg"
+            type="button"
+            onClick={handleAddQuestion}
+          >
+            Tambah Pertanyaan
+          </button>
+          <button
+            className="text-white bg-biru py-2 px-3 rounded-lg"
+            type="submit"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};
 
-// // function TambahSoal() {
-// //   const { idMapel } = useParams();
-// //   const [opsiList, setOpsiList] = useState([]);
-// //   const [kotakCentangList, setKotakCentangList] = useState([]);
-
-// //   const handleAddOpsi = () => {
-// //     setOpsiList([...opsiList, ""]);
-// //   };
-
-// //   const handleOpsiChange = (index, value) => {
-// //     const updatedOpsiList = [...opsiList];
-// //     updatedOpsiList[index] = value;
-// //     setOpsiList(updatedOpsiList);
-// //   };
-
-// //   const handleAddKotakCentang = () => {
-// //     setKotakCentangList([...kotakCentangList, { value: "", checked: false }]);
-// //   };
-
-// //   // Inside the handleKotakCentangChange function
-// //   const handleKotakCentangChange = (index, value, checked) => {
-// //     const updatedKotakCentangList = [...kotakCentangList];
-// //     updatedKotakCentangList[index].value = value;
-// //     updatedKotakCentangList[index].checked = checked;
-// //     setKotakCentangList(updatedKotakCentangList);
-// //   };
-
-// //   return (
-// //     <div>
-// //       <Header></Header>
-// //       <HeaderGuru></HeaderGuru>
-// //       <HeaderKelas idMapel={idMapel}></HeaderKelas>
-
-// //       <h1 className="text-xl mt-8 ml-10 font-medium text-biru">Tambah Soal</h1>
-
-// //       <form>
-// //       <div className="mt-10">
-// //         <div>
-// //           <span className="text-xl ml-10 font-medium text-biru">1.</span>
-// //         </div>
-// //         <div className="bg-tosca mx-10 mt-5 pb-5">
-// //           <div className="flex justify-between">
-// //             <div className="w-full ml-8 mr-16 mt-8">
-// //               <span>Pertanyaan</span>
-// //               <Form mx="mx-0"></Form>
-// //             </div>
-// //             <div className="mr-10 flex flex-col gap-y-5 mt-8">
-// //               <div>
-// //                 <span>Jenis Pertanyaan</span>
-// //                   <select
-// //                     name=""
-// //                     id=""
-// //                     className="w-[210px] bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 border-[0.3px] shadow-md mt-4"
-// //                   >
-// //                     <option value="">Pilihan Ganda</option>
-// //                     <option value="">Kotak Centang</option>
-// //                     <option value="">Essai</option>
-// //                   </select>
-// //               </div>
-// //               <div>
-// //                 <span>Lampiran</span>
-// //                 <div className="w-fit mt-4">
-// //                   <input type="file" />
-// //                 </div>
-// //               </div>
-// //             </div>
-// //           </div>
-// //           <div className="flex gap-x-24 mt-8">
-// //             <div className="ml-8 flex flex-col gap-y-3">
-// //               <span>Jawaban</span>
-// //               <div className="container flex gap-x-8">
-// //                 <div className="flex flex-col gap-y-5">
-// //                   {opsiList.map((opsi, index) => (
-// //                     <Opsi
-// //                       key={index}
-// //                       value={opsi}
-// //                       onChange={(value) => handleOpsiChange(index, value)}
-// //                     />
-// //                   ))}
-// //                 </div>
-
-// //                 <p
-// //                   className="text-biru cursor-pointer flex items-end mb-2"
-// //                   onClick={handleAddOpsi}
-// //                 >
-// //                   Tambahkan Opsi
-// //                 </p>
-// //               </div>
-// //             </div>
-// //             <div className="flex flex-col gap-y-2">
-// //               <span>Poin Soal</span>
-// //               <input
-// //                 type="number"
-// //                 min={0}
-// //                 max={100}
-// //                 className="bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 w-fit border-[0.3px] shadow-md"
-// //               />
-// //             </div>
-// //           </div>
-// //           <div className="flex gap-x-6 mt-4 justify-end mr-8">
-// //             <a href="" className="text-biru my-auto">
-// //               Hapus
-// //             </a>
-// //             <a href="" className="text-white bg-biru py-2 px-3 rounded-lg">
-// //               Tambah
-// //             </a>
-// //           </div>
-// //         </div>
-// //       </div>
-// //       <div className="mt-10">
-// //         <div>
-// //           <span className="text-xl ml-10 font-medium text-biru">2.</span>
-// //         </div>
-// //         <div className="bg-tosca mx-10 mt-5 pb-5">
-// //           <div className="flex justify-between">
-// //             <div className="w-full ml-8 mr-16 mt-8">
-// //               <span>Pertanyaan</span>
-// //               <Form mx="mx-0"></Form>
-// //             </div>
-// //             <div className="mr-10 flex flex-col gap-y-5 mt-8">
-// //               <div>
-// //                 <span>Jenis Pertanyaan</span>
-// //                   <select
-// //                     name=""
-// //                     id=""
-// //                     className="bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 w-[210px] border-[0.3px] shadow-md mt-4"
-// //                   >
-// //                     <option value="">Pilihan Ganda</option>
-// //                     <option value="">Kotak Centang</option>
-// //                     <option value="">Essai</option>
-// //                   </select>
-// //               </div>
-// //               <div>
-// //                 <span>Lampiran</span>
-// //                 <div className="w-fit mt-4">
-// //                   <input type="file" />
-// //                 </div>
-// //               </div>
-// //             </div>
-// //           </div>
-// //           <div className="flex gap-x-24 mt-8">
-// //             <div className="ml-8 flex flex-col gap-y-3">
-// //               <span>Jawaban</span>
-// //               <div className="container flex gap-x-8">
-// //                 <div className="flex flex-col gap-y-5">
-// //                   {kotakCentangList.map((kotakCentang, index) => (
-// //                     <KotakCentang
-// //                       key={index}
-// //                       value={kotakCentang.value}
-// //                       checked={kotakCentang.checked}
-// //                       onChange={(value, checked) =>
-// //                         handleKotakCentangChange(index, value, checked)
-// //                       }
-// //                     />
-// //                   ))}
-// //                 </div>
-
-// //                 <p
-// //                   className="text-biru cursor-pointer flex items-end mb-2"
-// //                   onClick={handleAddKotakCentang}
-// //                 >
-// //                   Tambahkan Opsi
-// //                 </p>
-// //               </div>
-// //             </div>
-// //             <div className="flex flex-col gap-y-2">
-// //               <span>Poin Soal</span>
-// //               <input
-// //                 type="number"
-// //                 min={0}
-// //                 max={100}
-// //                 className="bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 w-fit border-[0.3px] shadow-md"
-// //               />
-// //             </div>
-// //           </div>
-// //           <div className="flex gap-x-6 mt-4 justify-end mr-8">
-// //             <a href="" className="text-biru my-auto">
-// //               Hapus
-// //             </a>
-// //             <a href="" className="text-white bg-biru py-2 px-3 rounded-lg">
-// //               Tambah
-// //             </a>
-// //           </div>
-// //         </div>
-// //       </div>
-// //       <div className="mt-10">
-// //         <div>
-// //           <span className="text-xl ml-10 font-medium text-biru">3.</span>
-// //         </div>
-// //         <div className="bg-tosca mx-10 mt-5 pb-5">
-// //           <div className="flex justify-between">
-// //             <div className="w-full ml-8 mr-16 mt-8">
-// //               <span>Pertanyaan</span>
-// //               <Form mx="mx-0"></Form>
-// //             </div>
-// //             <div className="mr-10 flex flex-col gap-y-5 mt-8">
-// //               <div>
-// //                 <span>Jenis Pertanyaan</span>
-// //                   <select
-// //                     name=""
-// //                     id=""
-// //                     className="bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 w-[210px] border-[0.3px] shadow-md mt-4"
-// //                   >
-// //                     <option value="">Pilihan Ganda</option>
-// //                     <option value="">Kotak Centang</option>
-// //                     <option value="">Essai</option>
-// //                   </select>
-// //               </div>
-// //               <div>
-// //                 <span>Lampiran</span>
-// //                 <div className="w-fit mt-4">
-// //                   <input type="file" />
-// //                 </div>
-// //               </div>
-// //             </div>
-// //           </div>
-// //           <div className="flex gap-x-24 mt-8">
-// //             <div className="ml-8 flex flex-col gap-y-2 w-[600px]">
-// //               <span>Jawaban</span>
-// //               <div className="container flex gap-x-8 w-[600px]">
-// //                 <Form mx="mx-0" width="w-[600px]"></Form>
-// //               </div>
-// //             </div>
-// //             <div className="flex flex-col gap-y-2">
-// //               <span>Poin Soal</span>
-// //               <input
-// //                 type="number"
-// //                 min={0}
-// //                 max={100}
-// //                 className="bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 w-fit border-[0.3px] shadow-md"
-// //               />
-// //             </div>
-// //           </div>
-// //           <div className="flex gap-x-6 mt-4 justify-end mr-8">
-// //             <a href="" className="text-biru my-auto">
-// //               Hapus
-// //             </a>
-// //             <a href="" className="text-white bg-biru py-2 px-3 rounded-lg">
-// //               Tambah
-// //             </a>
-// //           </div>
-// //         </div>
-// //       </div>
-// //       </form>
-// //     </div>
-// //   );
-// // }
-
-// // export default TambahSoal;
+export default TambahSoal;

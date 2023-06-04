@@ -62,7 +62,7 @@ import AdListMataPelajaranPaketKelas from "./admin/pages/ListMataPelajaranPaketK
 import AdListSiswaPaketKelas from "./admin/pages/ListSiswaPaketKelas";
 import AdTest from "./admin/pages/test";
 import DetailTugasGuru from "./Guru/Kelas/Tugas Kelas/DetailTugasGuru";
-import TambahSoal from "./Guru/Kelas/Ujian Kelas/Menambahkan Soal/TambahSoal copy 2";
+import TambahSoal from "./Guru/Kelas/Ujian Kelas/Menambahkan Soal/TambahSoal";
 import ExamPage from "./Siswa/pages/ExamPage";
 import IsiMateri from "./Guru/Kelas/Materi Kelas/IsiMateri";
 import HasilUjianSiswa from "./Guru/Kelas/Ujian Kelas/Hasil Ujian Siswa/HasilUjianSiswa";
