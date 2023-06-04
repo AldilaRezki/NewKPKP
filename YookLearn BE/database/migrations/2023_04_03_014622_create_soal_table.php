@@ -15,14 +15,14 @@ return new class extends Migration
             $table->id('id');
             $table->text('pertanyaan');
             $table->string('filename')->nullable();
-            $table->enum('tipe_soal',['ganda', 'centang', 'essay']);
+            $table->enum('tipe_soal', ['pilgan', 'kotakcentang', 'essai']);
             $table->integer('nilai');
             $table->timestamps();
             $table->unsignedBigInteger('id_ujian');
 
             $table->foreign('id_ujian')->references('id')->on('tests')->onDelete('cascade');
 
-            $table->index('id','id');
+            $table->index('id', 'id');
         });
     }
 

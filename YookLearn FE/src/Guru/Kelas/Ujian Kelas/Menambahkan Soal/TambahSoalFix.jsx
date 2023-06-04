@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Header from "../../../Header";
 import HeaderGuru from "../../../HeaderGuru";
 import HeaderKelas from "../../HeaderKelas";
@@ -11,6 +11,7 @@ import LoadingPage from "../../../../Siswa/pages/LoadingPage";
 import { addSoal, fetchCurrentMapel } from "../../../services/GuruAPI";
 
 const TambahSoal = () => {
+  const navigate = useNavigate();
   const { idMapel, idUjian } = useParams();
   const [dataMapel, setMapel] = useState([]);
 
@@ -59,12 +60,11 @@ const TambahSoal = () => {
   const handleKunciChange = (index, jawabanIndex, value) => {
     const newList = [...formList];
     if (newList[index].jenis === "kotakcentang") {
-      const kunci = newList[index].kunci.slice(); // Copy array kunci menggunakan slice()
-      if (value) {
-        kunci[jawabanIndex] = true; // Set nilai kunci[jawabanIndex] menjadi true
-      } else {
-        kunci[jawabanIndex] = false; // Set nilai kunci[jawabanIndex] menjadi false
+      const kunci = newList[index].kunci.slice();
+      while (kunci.length < newList[index].jawaban.length) {
+        kunci.push(false);
       }
+      kunci[jawabanIndex] = value;
       newList[index].kunci = kunci;
     } else {
       newList[index].kunci = jawabanIndex;
@@ -116,10 +116,9 @@ const TambahSoal = () => {
       const data = await addSoal(idUjian, formList);
       console.log(data);
 
-      // if (isSuccess) {
-      //   console.log("Assigment added successfully");
-      //   navigate(`/guru/mapel/${idMapel}/daftar-tugas`);
-      // }
+      if (data.success === true) {
+        navigate(`/guru/mapel/${idMapel}/ujian`);
+      }
     } catch (error) {
       console.log("Error adding assigment:", error);
     }

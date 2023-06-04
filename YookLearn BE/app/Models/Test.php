@@ -24,7 +24,8 @@ class Test extends Authenticatable
         'deskripsi',
         'waktu',
         'filename',
-        'id_matpel'
+        "jumlah_soal",
+        'id_matpel',
     ];
 
     /**
@@ -42,9 +43,5 @@ class Test extends Authenticatable
      *
      * @var array<string, string>
      */
-    protected $casts = [
-        
-    ];
-
-
+    protected $casts = [];
 }

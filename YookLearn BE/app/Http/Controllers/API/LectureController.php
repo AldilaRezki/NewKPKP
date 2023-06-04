@@ -15,6 +15,7 @@ use App\Models\Assignment;
 use App\Models\Lecturer;
 use App\Models\Material;
 use App\Models\Test;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Redis;
 
 class LectureController extends Controller
@@ -970,9 +971,141 @@ class LectureController extends Controller
         return response()->json($affected);
     }
 
-    public function getUjian()
+    public function addSoal(Request $request, $id_Ujian)
     {
+        $user = auth()->user();
+
+        $input = json_decode($request->list_soal, true);
+        $jumlahSoal = 0;
+
+        foreach ($input as $data) {
+            $jumlahSoal += 1;
+            $pertanyaan = DB::table('questions')->insertGetId([
+                'pertanyaan' => $data['pertanyaan'],
+                'tipe_soal' => $data['jenis'],
+                'nilai' => $data['poin'],
+                'id_ujian' => $id_Ujian
+            ]);
+
+            if ($data['jenis'] === 'pilgan' || $data['jenis'] === 'kotakcentang') {
+                foreach ($data['jawaban'] as $index => $jawaban) {
+                    if ($data['jenis'] === 'pilgan') {
+                        $tipe_opsi = ($data['jenis'] === 'pilgan' && $data['kunci'] == $index) ? 'benar' : 'salah';
+                    } else if ($data['jenis'] === 'kotakcentang') {
+                        $tipe_opsi = ($data['jenis'] === 'kotakcentang' && $data['kunci'][$index] === true) ? 'benar' : 'salah';
+                    }
+
+                    DB::table('question_options')->insert([
+                        'deskripsi' => $jawaban,
+                        'tipe_opsi' => $tipe_opsi,
+                        'id_soal' => $pertanyaan
+                    ]);
+                }
+            }
+        }
+
+        DB::table('tests')
+            ->where('id', $id_Ujian)
+            ->update(['jumlah_soal' => $jumlahSoal]);
+
+        return response()->json([
+            'success' => true,
+        ]);
     }
+
+    public function getUjian($id_mapel)
+    {
+        $user = auth()->user();
+        $subject = DB::table('subjects')->get()->where('id', $id_mapel)->first();
+
+        if ($user['id'] != $subject->id_guru) {
+            return response()->json([
+                'success' => false,
+                'massage' => 'Tidak memiliki otoritas',
+            ]);
+        }
+
+        $test = DB::table('tests')->get(['id', 'judul_ujian', 'waktu', 'jumlah_soal', 'created_at', 'id_matpel'])->where('id_matpel', $id_mapel);
+
+        foreach ($test as $data) {
+            $formattedDate = Carbon::parse($data->created_at)->format('l, d F Y');
+            $data->created_at = $formattedDate;
+        }
+
+        return response()->json($test);
+    }
+
+    public function daftarSoal($id_mapel, $id_ujian)
+    {
+        $user = auth()->user();
+        $subject = DB::table('subjects')->get()->where('id', $id_mapel)->first();
+
+        $soal = DB::table('questions')
+            ->select('questions.id', 'questions.pertanyaan', 'questions.tipe_soal', 'questions.nilai', 'question_options.id as opsi_id', 'question_options.deskripsi as opsi_deskripsi')
+            ->leftJoin('question_options', 'questions.id', '=', 'question_options.id_soal')
+            ->where('questions.id_ujian', $id_ujian)
+            ->whereIn('questions.tipe_soal', ['pilgan', 'kotakcentang'])
+            ->get();
+
+        $formattedSoal = [];
+        foreach ($soal as $item) {
+            $soalItem = [
+                'id' => $item->id,
+                'pertanyaan' => $item->pertanyaan,
+                'tipe_soal' => $item->tipe_soal,
+                'opsi' => [],
+                'nilai' => $item->nilai,
+            ];
+
+            $index = array_search($soalItem['id'], array_column($formattedSoal, 'id'));
+            if ($index === false) {
+                if (isset($item->opsi_id)) {
+                    $opsi = [
+                        'id' => $item->opsi_id,
+                        'deskripsi' => $item->opsi_deskripsi,
+                    ];
+                    $soalItem['opsi'][] = $opsi;
+                }
+                $formattedSoal[] = $soalItem;
+            } else {
+                if ($item->opsi_id) {
+                    $opsi = [
+                        'id' => $item->opsi_id,
+                        'deskripsi' => $item->opsi_deskripsi,
+                    ];
+                    $formattedSoal[$index]['opsi'][] = $opsi;
+                }
+            }
+        }
+
+        $essai = DB::table('questions')
+            ->select('id', 'pertanyaan', 'tipe_soal', 'nilai')
+            ->where('id_ujian', $id_ujian)
+            ->where('tipe_soal', 'essai')
+            ->get();
+
+        foreach ($essai as $item) {
+            $index = array_search($item->id, array_column($formattedSoal, 'id'));
+            if ($index === false) {
+                $soalItem = [
+                    'id' => $item->id,
+                    'pertanyaan' => $item->pertanyaan,
+                    'tipe_soal' => $item->tipe_soal,
+                    'opsi' => [],
+                    'nilai' => $item->nilai,
+                ];
+                $formattedSoal[] = $soalItem;
+            }
+        }
+
+        return response()->json($formattedSoal);
+    }
+
+
+
+
+
+
 
     public function getDetailUjian()
     {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HeaderGuru from "../../../HeaderGuru";
 import HeaderKelas from "../../HeaderKelas";
 import { BiArrowBack } from "react-icons/bi";
@@ -7,44 +7,65 @@ import BoxDaftarSoalKotakCentang from "./BoxDaftarSoalKotakCentang";
 import BoxDaftarSoalEssay from "./BoxDaftarSoalEssay";
 import Header from "../../../Header";
 import { useParams } from "react-router-dom";
+import { fetchCurrentMapel, fetchSoalUjian } from "../../../services/GuruAPI";
+import LoadingPage from "../../../../Siswa/pages/LoadingPage";
 
 function DaftarSoalUjian() {
-  const { idMapel } = useParams();
+  const { idMapel, idUjian } = useParams();
+  const [dataMapel, setMapel] = useState([]);
+  const [dataSoal, setSoal] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const [mapelData, soalData] = await Promise.all([
+        fetchCurrentMapel(idMapel),
+        fetchSoalUjian(idMapel, idUjian),
+      ]);
+      setMapel(mapelData);
+      setSoal(soalData);
+      setIsLoading(false);
+    }
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    console.log(dataSoal);
+  }, [dataSoal]);
+
+  const [isLoading, setIsLoading] = useState(true);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+
   return (
     <div className="mb-20">
       <Header></Header>
       <HeaderGuru></HeaderGuru>
-      <HeaderKelas idMapel={idMapel}></HeaderKelas>
+      <HeaderKelas dataMapel={dataMapel}></HeaderKelas>
       <div className="bg-tosca mt-10 mx-10 p-2">
-        <a href={`/guru/mapel/${idMapel}/ujian/ujian-pekan-1`}>
+        <a href={`/guru/mapel/${idMapel}/ujian/${idUjian}`}>
           <BiArrowBack className="bg-white text-xl"></BiArrowBack>
         </a>
       </div>
       <h1 className="text-xl mt-8 ml-10 font-medium text-biru">Daftar Soal</h1>
 
-      <div className="pilihanGanda">
-        <span className="flex mt-6 ml-10 text-lg font-semibold text-biru">
-          1
-        </span>
+      {dataSoal.map((soal, index) => (
+        <div key={soal.id} className={soal.tipe_soal}>
+          <span className="flex mt-6 ml-10 text-lg font-semibold text-biru">
+            {index + 1}
+          </span>
 
-        <BoxDaftarSoalPilihanGanda></BoxDaftarSoalPilihanGanda>
-      </div>
+          {soal.tipe_soal === "pilgan" && (
+            <BoxDaftarSoalPilihanGanda dataSoal={soal} />
+          )}
 
-      <div className="kotakCentang">
-        <span className="flex mt-10 ml-10 text-lg font-semibold text-biru">
-          2
-        </span>
+          {soal.tipe_soal === "kotakCentang" && (
+            <BoxDaftarSoalKotakCentang dataSoal={soal} />
+          )}
 
-        <BoxDaftarSoalKotakCentang></BoxDaftarSoalKotakCentang>
-      </div>
-
-      <div className="essay">
-        <span className="flex mt-10 ml-10 text-lg font-semibold text-biru">
-          3
-        </span>
-
-        <BoxDaftarSoalEssay></BoxDaftarSoalEssay>
-      </div>
+          {soal.tipe_soal === "essai" && <BoxDaftarSoalEssay dataSoal={soal} />}
+        </div>
+      ))}
     </div>
   );
 }
