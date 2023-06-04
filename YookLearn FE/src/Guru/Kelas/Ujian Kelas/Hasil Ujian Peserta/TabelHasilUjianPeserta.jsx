@@ -1,6 +1,6 @@
 import React from "react";
 
-function TabelHasilUjianPeserta() {
+function TabelHasilUjianPeserta({ idMapel, idUjian }) {
   return (
     <div>
       <div className="flex flex-col ml-10 mt-10 mr-10 border-[0.3px] py-2 px-5 shadow-md">
@@ -29,7 +29,7 @@ function TabelHasilUjianPeserta() {
               <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru">
                 <a
                   className="block"
-                  href="/guru/xipa1/ujian/ujian-pekan-1/hasil-ujian-siswa"
+                  href={`/guru/mapel/${idMapel}/ujian/${idUjian}/hasil-ujian-siswa`}
                 >
                   Lorem Ipsum
                 </a>

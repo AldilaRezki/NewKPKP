@@ -57,9 +57,8 @@ class StudentController extends Controller
 
         $input = $request->all();
 
-        
-        if (!Hash::check($request['old_password'], $user['password']))
-        {
+
+        if (!Hash::check($request['old_password'], $user['password'])) {
             $res = [
                 'success' => false,
                 'message' => 'password lama tidak sama dengan yang dimasukkan'
@@ -67,7 +66,7 @@ class StudentController extends Controller
 
             return response()->json($res);
         }
-        
+
         $input['new_password'] = bcrypt($input['new_password']);
         $affected = Account::where('id', $user['id'])->update(['password' => $input['new_password']]);
 
@@ -182,7 +181,7 @@ class StudentController extends Controller
         return $tugas;
     }
 
-    public function uploadTugas(Request $request,$idTugas)
+    public function uploadTugas(Request $request, $idTugas)
     {
         $user = auth()->user();
 
@@ -225,10 +224,7 @@ class StudentController extends Controller
         }
 
         return $res;
-
     }
-
-    
 
     public function getMateri($idMatpel)
     {
@@ -248,31 +244,54 @@ class StudentController extends Controller
         return $materi;
     }
 
-    
+    public function getUjian($idMapel)
+    {
+        $user = auth()->user();
+
+        $ujian = DB::table("tests")->get(["id", "judul_ujian", "id_matpel"])->where('id_matpel', $idMapel);
+
+        return $ujian;
+    }
+    public function getCurrentUjian($idMapel, $idUjian)
+    {
+        $user = auth()->user();
+
+        $ujian = DB::table("tests")->get(["id", "judul_ujian", "jumlah_soal", "waktu"])->where('id', $idUjian)->first();
+
+        $waktuJam = $ujian->waktu;
+        $waktuCarbon = Carbon::createFromFormat('H:i:s', $waktuJam);
+        $totalMenit = $waktuCarbon->diffInMinutes(Carbon::today());
+        
+        $ujian->waktu = $totalMenit;
+
+        return $ujian;
+    }
+
+
     // public function downloadMateri($fileId)
     // {
     //     // Retrieve the file name based on the fileId
     //     $file = DB::table('materials')->get('filename')->where('id', $fileId)->first();
-    
+
     //     if ($file->filename) {
     //         $filePath = public_path('upload/' . $file->filename);
-    
+
     //         // Check if the file exists in the public/upload directory
     //         if (File::exists($filePath)) {
     //             // Get the file's content type
     //             $contentType = File::mimeType($filePath);
-    
+
     //             // Generate the response with the file content
     //             $response = response()->download($filePath, null, [
     //                 'Content-Type' => $contentType,
     //             ]);
-    
+
     //             return $response;
     //         }
     //     }
-    
+
     //     // File not found, return an error response
     //     return response()->json(['message' => 'File not found'], Response::HTTP_NOT_FOUND);
     // }
-    
+
 }

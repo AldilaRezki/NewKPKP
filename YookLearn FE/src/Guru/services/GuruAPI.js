@@ -161,6 +161,51 @@ export async function fetchTugas(idMapel) {
   }
 }
 
+export async function fetchUjian(idMapel) {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${BASE_URL}/matpel/${idMapel}/ujian`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function fetchSoalUjian(idMapel, idUjian) {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(
+      `${BASE_URL}/matpel/${idMapel}/ujian/${idUjian}/soal`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export async function fetchCurrentTugas(idMapel, idTugas) {
   try {
     const token = localStorage.getItem("token");
@@ -293,6 +338,33 @@ export async function addUjian(idMapel, judul, isiUjian, waktu, file) {
     formData.append("waktu", waktu);
 
     const response = await fetch(`${BASE_URL}/matpel/${idMapel}/ujian/add`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+    return data;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
+
+export async function addSoal(idUjian, listSoal) {
+  try {
+    const token = localStorage.getItem("token");
+
+    const formData = new FormData();
+    formData.append("list_soal", JSON.stringify(listSoal));
+
+    const response = await fetch(`${BASE_URL}/ujian/${idUjian}/tambahSoal`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,

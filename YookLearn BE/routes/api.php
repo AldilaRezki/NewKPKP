@@ -96,7 +96,10 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'lecture'], function
     Route::get('matpel/{id_matpel}/materi/', [LectureController::class, 'getMateri']);
     Route::get('matpel/{id_matpel}/materi/{id_materi}', [LectureController::class, 'getDetailMateri']);
 
+    Route::get('matpel/{id_matpel}/ujian', [LectureController::class, 'getUjian']);
+    Route::get('matpel/{id_matpel}/ujian/{id_ujian}/soal', [LectureController::class, 'daftarSoal']);
     Route::post('matpel/{id_matpel}/ujian/add', [LectureController::class, 'addUjian']);
+    Route::post('ujian/{id_ujian}/tambahSoal', [LectureController::class, 'addSoal']);
 });
 
 // Student Routes
@@ -114,6 +117,9 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'student'], function
 
     Route::get('/matpel/{idMatpel}/materi', [StudentController::class, 'getMateri']);
     Route::get('/materi/{idMateri}', [StudentController::class, 'getDetailMateri']);
+
+    Route::get('/matpel/{idMatpel}/ujian', [StudentController::class, 'getUjian']);
+    Route::get('/matpel/{idMatpel}/ujian/{idUjian}/detail', [StudentController::class, 'getCurrentUjian']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

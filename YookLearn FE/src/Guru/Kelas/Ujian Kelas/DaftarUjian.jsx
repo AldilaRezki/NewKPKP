@@ -5,16 +5,21 @@ import BoxDaftarUjian from "./BoxDaftarUjian";
 import Header from "../../Header";
 import { useParams } from "react-router-dom";
 import LoadingPage from "../../../Siswa/pages/LoadingPage";
-import { fetchCurrentMapel } from "../../services/GuruAPI";
+import { fetchCurrentMapel, fetchUjian } from "../../services/GuruAPI";
 
 function DaftarUjian() {
   const { idMapel } = useParams();
   const [dataMapel, setMapel] = useState([]);
+  const [dataUjian, setUjian] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
-      const data = await fetchCurrentMapel(idMapel);
-      setMapel(data);
+      const [mapelData, ujianData] = await Promise.all([
+        fetchCurrentMapel(idMapel),
+        fetchUjian(idMapel),
+      ]);
+      setMapel(mapelData);
+      setUjian(ujianData);
       setIsLoading(false);
     }
     fetchData();
@@ -40,7 +45,7 @@ function DaftarUjian() {
         </a>
       </div>
 
-      <BoxDaftarUjian idMapel={idMapel}></BoxDaftarUjian>
+      <BoxDaftarUjian idMapel={idMapel} dataUjian={dataUjian}></BoxDaftarUjian>
     </div>
   );
 }

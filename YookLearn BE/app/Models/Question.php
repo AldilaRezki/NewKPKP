@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Question extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    use Uuids;
 
     /**
      * The attributes that are mass assignable.

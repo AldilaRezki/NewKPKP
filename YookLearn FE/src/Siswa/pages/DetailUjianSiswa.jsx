@@ -5,15 +5,17 @@ import DetailUjianCard from "../components/DetailUjianCard";
 import { BsFillJournalBookmarkFill } from "react-icons/bs";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { isAuthenticated } from "../../Common/services/Auth";
-import { fetchCurrentMapel } from "../services/SiswaAPI";
+import { fetchCurrentMapel, fetchCurrentUjian } from "../services/SiswaAPI";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import LoadingPage from "./LoadingPage";
 
 function DetailUjianSiswa() {
   const navigate = useNavigate();
   const login = isAuthenticated("siswa");
-  const { idKelas, idMapel } = useParams();
+  const { idKelas, idMapel, idUjian } = useParams();
   const [mapel, setMapel] = useState([]);
+  const [dataUjian, setDataUjian] = useState([]);
 
   useEffect(() => {
     if (!login) {
@@ -23,12 +25,30 @@ function DetailUjianSiswa() {
 
   useEffect(() => {
     async function fetchData() {
-      const data = await fetchCurrentMapel(idMapel);
+      const [mapelData, ujianData] = await Promise.all([
+        fetchCurrentMapel(idMapel),
+        fetchCurrentUjian(idMapel, idUjian),
+      ]);
+      setMapel(mapelData);
+      setDataUjian(ujianData);
+      setIsLoading(false);
+    }
+    fetchData();
+  }, [idMapel, idUjian]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchCurrentMapel(idMapel, idUjian);
       setMapel(data);
       setIsLoading(false);
     }
     fetchData(idMapel);
   }, []);
+
+  const [isLoading, setIsLoading] = useState(true);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <>
@@ -52,7 +72,7 @@ function DetailUjianSiswa() {
         </div>
       </div>
       <div>
-        <DetailUjianCard />
+        <DetailUjianCard Ujian={dataUjian} />
       </div>
     </>
   );

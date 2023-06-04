@@ -142,7 +142,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/siswa/kelas/:idKelas/detailkelas/:idMapel/ujian/detailujian",
+    path: "/siswa/kelas/:idKelas/detailkelas/:idMapel/ujian/:idUjian/detailujian",
     element: <DetailUjianSiswa />,
     errorElement: <ErrorPage />,
   },
@@ -211,23 +211,23 @@ const router = createBrowserRouter([
     element: <TambahSoal />,
   },
   {
-    path: "/guru/mapel/:idMapel/ujian/ujian-pekan-1",
+    path: "/guru/mapel/:idMapel/ujian/:idUjian",
     element: <DetailUjian />,
   },
   {
-    path: "/guru/mapel/:idMapel/ujian/ujian-pekan-1/daftar-soal",
+    path: "/guru/mapel/:idMapel/ujian/:idUjian/daftar-soal",
     element: <DaftarSoalUjian />,
   },
   {
-    path: "/guru/mapel/:idMapel/ujian/ujian-pekan-1/hasil-ujian-peserta",
+    path: "/guru/mapel/:idMapel/ujian/:idUjian/hasil-ujian-peserta",
     element: <HasilUjianPeserta />,
   },
   {
-    path: "/guru/mapel/:idMapel/ujian/ujian-pekan-1/hasil-ujian-siswa",
+    path: "/guru/mapel/:idMapel/ujian/:idUjian/hasil-ujian-siswa",
     element: <HasilUjianSiswa />,
   },
   {
-    path: "/guru/mapel/:idMapel/ujian/ujian-pekan-1/hasil-ujian-kelas",
+    path: "/guru/mapel/:idMapel/ujian/:idUjian/hasil-ujian-kelas",
     element: <HasilUjianKelas />,
   },
   {

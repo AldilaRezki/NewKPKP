@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('deskripsi')->nullable();
             $table->time('waktu');
             $table->string('filename')->nullable();
+            $table->integer('jumlah_soal')->nullable();
             // $table->dateTime('tanggal_ujian')->nullable();
             // $table->enum('tipe_soal', ['acak', 'tidak acak']);
             $table->timestamps();
