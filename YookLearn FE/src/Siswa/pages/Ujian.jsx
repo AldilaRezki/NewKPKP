@@ -72,7 +72,9 @@ function Ujian() {
         >
           <div className="flex flex-row items-center mt-[75px] ml-[103px]">
             <RiFilePaperLine className="rounded-full bg-[#EEF4FA] text-[#1A1F5A] text-5xl p-2 align-middle" />
-            <h1 className="font-bold text-[#1A1F5A] ml-10">{ujian.judul_ujian}</h1>
+            <h1 className="font-bold text-[#1A1F5A] ml-10">
+              {ujian.judul_ujian}
+            </h1>
             {/* <h1 className="text-slate-400 font-bold ml-60">
               Batas Pengerjaan: {ujian.batasPengerjaan}
             </h1> */}

@@ -112,11 +112,7 @@ function TambahTugas({ onFileUpload }) {
             <h2 className="text-md mt-8 ml-10 mb-4 font-normal text-biru">
               Penjelasan
             </h2>
-            <ReactQuill
-              className="mt-8 ml-10 h-30"
-              value=""
-              onChange=""
-            />
+            <ReactQuill className="mt-8 ml-10 h-30" value="" onChange="" />
           </div>
 
           <div className="form-input-row mt-5">

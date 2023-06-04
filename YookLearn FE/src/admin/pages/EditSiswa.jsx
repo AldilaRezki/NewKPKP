@@ -51,7 +51,14 @@ function EditSiswa() {
   }, []);
 
   const handleAddSiswa = async () => {
-    const isSuccess = await editSiswa(nama, nisn, jenisKelamin, agama, kelas, idSiswa);
+    const isSuccess = await editSiswa(
+      nama,
+      nisn,
+      jenisKelamin,
+      agama,
+      kelas,
+      idSiswa
+    );
     if (isSuccess) {
       navigate("/admin/berhasil");
     }

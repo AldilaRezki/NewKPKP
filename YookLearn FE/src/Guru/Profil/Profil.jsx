@@ -8,7 +8,6 @@ import { isAuthenticated } from "../../Common/services/Auth";
 import { fetchProfile } from "../services/GuruAPI";
 
 function Profil() {
-
   const navigate = useNavigate();
   const login = isAuthenticated("guru");
   const [dataGuru, setGuru] = useState([]);

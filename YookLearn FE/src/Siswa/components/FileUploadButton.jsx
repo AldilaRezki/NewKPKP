@@ -5,7 +5,7 @@ function FileUploadButton({ uploadFile }) {
 
   const handleFileUpload = () => {
     const file = fileInputRef.current.files[0];
-    uploadFile(file, );
+    uploadFile(file);
   };
 
   return (

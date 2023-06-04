@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Dialog } from '@headlessui/react';
-import '@headlessui/react/dist/index.css';
+import React, { useState } from "react";
+import { Dialog } from "@headlessui/react";
+import "@headlessui/react/dist/index.css";
 
 const PopUpDelete = ({ isOpen, onClose, onDelete }) => {
   return (

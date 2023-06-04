@@ -2,7 +2,14 @@ import React, { useEffect, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { fetchIndividualSubmit, submitNilai } from "../../services/GuruAPI";
 
-function TambahPoin({ visible, onClose, idSubmit, idMapel, idTugas, updateDataTugas}) {
+function TambahPoin({
+  visible,
+  onClose,
+  idSubmit,
+  idMapel,
+  idTugas,
+  updateDataTugas,
+}) {
   if (!visible) return null;
 
   const [poin, setPoin] = useState(0);
@@ -21,10 +28,9 @@ function TambahPoin({ visible, onClose, idSubmit, idMapel, idTugas, updateDataTu
     const success = await submitNilai(idMapel, idSubmit, poin);
 
     if (success) {
-        onClose();
-        updateDataTugas(idSubmit, poin);
+      onClose();
+      updateDataTugas(idSubmit, poin);
     }
-
   };
 
   return (

@@ -5,27 +5,9 @@ import Nav from "../components/Nav";
 import { RiFilePaperLine } from "react-icons/ri";
 
 const ExamPage = () => {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // Keep track of the current question index
-  const [countdown, setCountdown] = useState(60); // Set the initial countdown time in seconds
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCountdown((prevCountdown) => prevCountdown - 1);
-    }, 1000);
-
-    // Clear the interval when the component is unmounted
-    return () => clearInterval(timer);
-  }, []);
-
-  // Convert the countdown time to minutes and seconds
-  const minutes = Math.floor(countdown / 60);
-  const seconds = countdown % 60;
-
-  // Format the minutes and seconds with leading zeros if necessary
-  const formattedMinutes = String(minutes).padStart(2, "0");
-  const formattedSeconds = String(seconds).padStart(2, "0");
-
-  const questions = [
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [countdown, setCountdown] = useState(60);
+  const [questions, setQuestions] = useState([
     {
       id: 1,
       question: "What is the capital of France?",
@@ -38,8 +20,27 @@ const ExamPage = () => {
       choices: ["K2", "Makalu", "Everest", "Lhotse"],
       answer: "Everest",
     },
-    // Add more questions here
-  ];
+    {
+      id: 3,
+      question: "Write a short essay about your favorite book.",
+      type: "essay",
+      answer: "",
+    },
+  ]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCountdown((prevCountdown) => prevCountdown - 1);
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const minutes = Math.floor(countdown / 60);
+  const seconds = countdown % 60;
+
+  const formattedMinutes = String(minutes).padStart(2, "0");
+  const formattedSeconds = String(seconds).padStart(2, "0");
 
   const handlePreviousClick = () => {
     setCurrentQuestionIndex((prevIndex) => prevIndex - 1);
@@ -76,22 +77,36 @@ const ExamPage = () => {
                     {questions[currentQuestionIndex].question}
                   </span>
                 </div>
-                <ul className="ml-6">
-                  {questions[currentQuestionIndex].choices.map(
-                    (choice, index) => (
-                      <li key={index} className="my-2">
-                        <label className="inline-flex items-center">
-                          <input
-                            type="radio"
-                            name={`question-${questions[currentQuestionIndex].id}`}
-                            value={choice}
-                          />
-                          <span className="ml-2">{choice}</span>
-                        </label>
-                      </li>
-                    )
-                  )}
-                </ul>
+                {questions[currentQuestionIndex].type === "essay" ? (
+                  <textarea
+                    rows="2"
+                    className="border border-biru rounded-md w-96 "
+                    value={questions[currentQuestionIndex].answer}
+                    onChange={(e) => {
+                      const newQuestions = [...questions];
+                      newQuestions[currentQuestionIndex].answer =
+                        e.target.value;
+                      setQuestions(newQuestions);
+                    }}
+                  ></textarea>
+                ) : (
+                  <ul className="ml-6">
+                    {questions[currentQuestionIndex].choices.map(
+                      (choice, index) => (
+                        <li key={index} className="my-2">
+                          <label className="inline-flex items-center">
+                            <input
+                              type="radio"
+                              name={`question-${questions[currentQuestionIndex].id}`}
+                              value={choice}
+                            />
+                            <span className="ml-2">{choice}</span>
+                          </label>
+                        </li>
+                      )
+                    )}
+                  </ul>
+                )}
               </div>
             )}
           </div>

@@ -7,7 +7,10 @@ function DetailUjianCard({ Ujian }) {
     <>
       <div className="flex flex-row items-center mt-[75px] ml-[103px]">
         <RiFilePaperLine className="rounded-full bg-[#EEF4FA] text-[#1A1F5A] text-5xl p-2 align-middle"></RiFilePaperLine>
-        <h1 className="font-bold text-[#1A1F5A] ml-10"> {Ujian.judul_ujian} </h1>
+        <h1 className="font-bold text-[#1A1F5A] ml-10">
+          {" "}
+          {Ujian.judul_ujian}{" "}
+        </h1>
       </div>
       <div className="flex flex-row ml-[116px] mt-5">
         <h1 className="font-bold text-[#1A1F5A] "> Status Test:</h1>

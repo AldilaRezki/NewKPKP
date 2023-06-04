@@ -1,7 +1,6 @@
 import React from "react";
 
 function TabelSiswa({ dataSiswa }) {
-
   return (
     <>
       <div>

@@ -36,7 +36,14 @@ function EditGuru() {
   }, []);
 
   const handleAddGuru = async () => {
-    const isSuccess = await editGuru(nama, nip, golongan, pangkat, mapel, idGuru);
+    const isSuccess = await editGuru(
+      nama,
+      nip,
+      golongan,
+      pangkat,
+      mapel,
+      idGuru
+    );
     if (isSuccess) {
       navigate("/admin/berhasil");
     }

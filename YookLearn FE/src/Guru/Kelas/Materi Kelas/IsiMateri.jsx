@@ -6,7 +6,11 @@ import { BsSaveFill } from "react-icons/bs";
 import HeaderGuru from "../../HeaderGuru";
 import { useNavigate, useParams } from "react-router-dom";
 import { isAuthenticated } from "../../../Common/services/Auth";
-import { fetchAllMateri, fetchCurrentMapel, fetchCurrentMateri } from "../../services/GuruAPI";
+import {
+  fetchAllMateri,
+  fetchCurrentMapel,
+  fetchCurrentMateri,
+} from "../../services/GuruAPI";
 import LoadingPage from "../../../Siswa/pages/LoadingPage";
 
 function IsiMateri() {

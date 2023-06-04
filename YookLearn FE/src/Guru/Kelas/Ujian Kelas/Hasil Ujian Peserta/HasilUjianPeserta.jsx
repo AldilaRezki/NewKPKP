@@ -42,7 +42,10 @@ function HasilUjianPeserta() {
 
       <DetailUjian_HasilUjianPeserta></DetailUjian_HasilUjianPeserta>
 
-      <TabelHasilUjianPeserta idMapel={idMapel} idUjian={idUjian}></TabelHasilUjianPeserta>
+      <TabelHasilUjianPeserta
+        idMapel={idMapel}
+        idUjian={idUjian}
+      ></TabelHasilUjianPeserta>
     </div>
   );
 }
