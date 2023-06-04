@@ -137,136 +137,188 @@ const TambahSoal = () => {
       <HeaderKelas dataMapel={dataMapel}></HeaderKelas>
       <form onSubmit={handleSubmit}>
         {formList.map((question, index) => (
-          <div key={index}>
-            <h3>Pertanyaan {index + 1}</h3>
-            <label>Pertanyaan:</label>
-            <input
-              type="text"
-              value={question.pertanyaan}
-              onChange={(e) => handlePertanyaanChange(index, e.target.value)}
-            />
+          <div
+          className="mt-10" 
+          key={index}>
+            <div>
+              <h3 className="text-xl ml-10 font-medium text-biru">Pertanyaan {index + 1}</h3>
+            </div>
+            <div className="bg-tosca mx-10 mt-5 pb-5">
+              <div className="flex justify-between">
+                <div className="flex flex-col w-full ml-8 mr-16 mt-8">
+                  <label>Pertanyaan:</label>
+                  <ReactQuill
+                    className="mt-3 mx-0 h-36 overflow-hidden bg-white"
+                    type="text"
+                    value={question.pertanyaan}
+                    onChange={(e) => handlePertanyaanChange(index, e.target.value)}
+                  />
+                </div>
+                <div className="mr-10 flex flex-col gap-y-5 mt-8">
+                  <div>
+                    <label>Jenis Pertanyaan:</label>
+                    <select
+                      value={question.jenis}
+                      onChange={(e) => handleJenisChange(index, e.target.value)}
+                      className="w-[210px] bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 border-[0.3px] shadow-md mt-4"
+                    >
+                      <option value="pilgan">Pilihan Ganda</option>
+                      <option value="kotakcentang">Kotak Centang</option>
+                      <option value="essai">Essai</option>
+                    </select>
+                  </div>
+                  
+                </div>
+              </div>
+              <div className="flex gap-x-24 mt-8">
+                <div className="flex flex-col gap-y-3">
+                  <div className="ml-8 flex gap-x-8">
+                    {question.jenis === "pilgan" && (
+                      <div>
+                        <label>Jawaban:</label>
+                        {question.jawaban.map((jawaban, jawabanIndex) => (
+                            <div
+                            className="flex gap-x-3" key={jawabanIndex}>
+                              <input
+                                className="mt-2 py-2 pl-3"
+                                type="text"
+                                value={jawaban}
+                                onChange={(e) =>
+                                  handleJawabanChange(index, jawabanIndex, e.target.value)
+                                }
+                              />
+                              {question.jawaban.length > 1 && (
+                                <button
+                                  className="text-biru"
+                                  type="button"
+                                  onClick={() => handleRemoveOption(index, jawabanIndex)}
+                                >
+                                  Hapus Opsi
+                                </button>
+                              )}
+                              </div>
+                        ))}
+                        <button 
+                        className="text-bitu cursor-pointer flex items-end mt-2 mb-2 text-biru"
+                        type="button" onClick={() => handleAddOption(index)}>
+                          Tambah Opsi
+                        </button>
+                        <div className="flex flex-col gap-y-3 mt-6">
+                          <label>Jawaban Benar:</label>
+                          <select
+                            className="bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 border-[0.3px] shadow-md"
+                            value={question.kunci}
+                            onChange={(e) =>
+                              handleKunciChange(index, e.target.value, true)
+                            }
+                          >
+                            {question.jawaban.map((jawaban, jawabanIndex) => (
+                              <option key={jawabanIndex} value={jawabanIndex}>
+                                {jawaban}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      </div>
+                    )}
 
-            <label>Jenis:</label>
-            <select
-              value={question.jenis}
-              onChange={(e) => handleJenisChange(index, e.target.value)}
-            >
-              <option value="pilgan">Pilihan Ganda</option>
-              <option value="kotakcentang">Kotak Centang</option>
-              <option value="essai">Essai</option>
-            </select>
+                    {question.jenis === "kotakcentang" && (
+                      <div>
+                        <label>Opsi:</label>
+                        {question.jawaban.map((jawaban, jawabanIndex) => (
+                          <div 
+                          className="flex gap-x-3"
+                          key={jawabanIndex}>
+                            <input
+                              className="mt-2 py-2 pl-3"
+                              type="text"
+                              value={jawaban}
+                              onChange={(e) =>
+                                handleJawabanChange(index, jawabanIndex, e.target.value)
+                              }
+                            />
+                            {question.jawaban.length > 1 && (
+                              <button
+                                className="text-biru"
+                                type="button"
+                                onClick={() => handleRemoveOption(index, jawabanIndex)}
+                              >
+                                Hapus Opsi
+                              </button>
+                            )}
+                          </div>
+                        ))}
+                        <button 
+                        className="text-bitu cursor-pointer flex items-end mt-2 mb-2 text-biru"
+                        type="button" onClick={() => handleAddOption(index)}>
+                          Tambah Opsi
+                        </button>
+                        <div className="flex flex-col gap-y-3 mt-6">
+                          <label>Opsi Benar:</label>
+                          {question.jawaban.map((jawaban, jawabanIndex) => (
+                            <div 
+                            className="flex gap-x-3 bg-white py-3 px-2"
+                            key={jawabanIndex}>
+                              <input
+                                type="checkbox"
+                                checked={question.kunci[jawabanIndex] === true} // Periksa nilai kunci[jawabanIndex]
+                                onChange={(e) =>
+                                  handleKunciChange(index, jawabanIndex, e.target.checked)
+                                }
+                              />
+                              <span>{jawaban}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
 
-            {question.jenis === "pilgan" && (
-              <div>
-                <label>Jawaban:</label>
-                {question.jawaban.map((jawaban, jawabanIndex) => (
-                  <div key={jawabanIndex}>
-                    <input
-                      type="text"
-                      value={jawaban}
-                      onChange={(e) =>
-                        handleJawabanChange(index, jawabanIndex, e.target.value)
-                      }
-                    />
-                    {question.jawaban.length > 1 && (
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveOption(index, jawabanIndex)}
-                      >
-                        Hapus Opsi
-                      </button>
+                    {question.jenis === "essai" && (
+                      <div className="flex flex-col gap-x-8 w-[600px] overflow-hidden">
+                        <label>Jawaban:</label>
+                        <ReactQuill
+                          className="mt-3 w-[600px] h-36 bg-white"
+                          type="text"
+                          value={question.jawaban[0]}
+                          onChange={(e) =>
+                            handleJawabanChange(index, 0, e.target.value)
+                          }
+                        />
+                      </div>
                     )}
                   </div>
-                ))}
-                <button type="button" onClick={() => handleAddOption(index)}>
-                  Tambah Opsi
-                </button>
-                <label>Jawaban Benar:</label>
-                <select
-                  value={question.kunci}
-                  onChange={(e) =>
-                    handleKunciChange(index, e.target.value, true)
-                  }
-                >
-                  {question.jawaban.map((jawaban, jawabanIndex) => (
-                    <option key={jawabanIndex} value={jawabanIndex}>
-                      {jawaban}
-                    </option>
-                  ))}
-                </select>
+                </div>
+                <div className="flex flex-col gap-y-2">
+                  <label className="text-biru">Poin:</label>
+                  <input
+                    className="bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 w-fit border-[0.3px] shadow-md"
+                    type="number"
+                    value={question.poin}
+                    onChange={(e) => handlePoinChange(index, e.target.value)}
+                  />
+                </div>
+                
               </div>
-            )}
-
-            {question.jenis === "kotakcentang" && (
-              <div>
-                <label>Opsi:</label>
-                {question.jawaban.map((jawaban, jawabanIndex) => (
-                  <div key={jawabanIndex}>
-                    <input
-                      type="text"
-                      value={jawaban}
-                      onChange={(e) =>
-                        handleJawabanChange(index, jawabanIndex, e.target.value)
-                      }
-                    />
-                    {question.jawaban.length > 1 && (
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveOption(index, jawabanIndex)}
-                      >
-                        Hapus Opsi
-                      </button>
-                    )}
-                  </div>
-                ))}
-                <button type="button" onClick={() => handleAddOption(index)}>
-                  Tambah Opsi
-                </button>
-                <label>Opsi Benar:</label>
-                {question.jawaban.map((jawaban, jawabanIndex) => (
-                  <div key={jawabanIndex}>
-                    <input
-                      type="checkbox"
-                      checked={question.kunci[jawabanIndex] === true}
-                      onChange={(e) =>
-                        handleKunciChange(index, jawabanIndex, e.target.checked)
-                      }
-                    />
-                    <span>{jawaban}</span>
-                  </div>
-                ))}
+              <div className="flex justify-end mr-10 mb-2">
+                <button
+                type="button" onClick={() => handleRemoveQuestion(index)}>
+                  Hapus Pertanyaan
+                </button>  
               </div>
-            )}
-
-            {question.jenis === "essai" && (
-              <div>
-                <label>Jawaban:</label>
-                <input
-                  type="text"
-                  value={question.jawaban[0]}
-                  onChange={(e) =>
-                    handleJawabanChange(index, 0, e.target.value)
-                  }
-                />
-              </div>
-            )}
-
-            <label>Poin:</label>
-            <input
-              type="number"
-              value={question.poin}
-              onChange={(e) => handlePoinChange(index, e.target.value)}
-            />
-
-            <button type="button" onClick={() => handleRemoveQuestion(index)}>
-              Hapus Pertanyaan
-            </button>
+              
+            </div>
           </div>
         ))}
-        <button type="button" onClick={handleAddQuestion}>
-          Tambah Pertanyaan
-        </button>
-        <button type="submit">Submit</button>
+        <div className="flex mb-20 gap-x-6 mt-10 justify-end mr-10">
+          <button 
+          className="text-white bg-biru py-2 px-3 rounded-lg" 
+          type="button" onClick={handleAddQuestion}>
+            Tambah Pertanyaan
+          </button>
+          <button 
+          className="text-white bg-biru py-2 px-3 rounded-lg" 
+          type="submit">Submit</button>  
+        </div>
       </form>
     </div>
   );
