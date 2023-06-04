@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import HeaderGuru from "../HeaderGuru";
 import HomepageKelas from "./ListKelasAjar.jsx";
 import Header from "../Header";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { isAuthenticated } from "../../Common/services/Auth";
 import { useEffect } from "react";
 import IsiCarouselJadwal from "./IsiCarouselJadwal";
-import Sapa from './Sapa';
+import Sapa from "./Sapa";
 
 function HomepageUtama() {
-
   const navigate = useNavigate();
   const login = isAuthenticated("guru");
 
@@ -38,12 +37,12 @@ function HomepageUtama() {
           </div>
         </div>
         <div className="buttonKelas bg-tosca mt-16 mb-20 rounded-lg mr-10 h-fit">
-            <a
-              href="/guru/daftarkelas"
-              className="flex text-2xl bg-white mt-8 my-7 py-5 px-20 shadow-md justify-center item-center m-auto mx-5"
-            >
-              Lihat Daftar Kelas
-            </a>
+          <a
+            href="/guru/daftarkelas"
+            className="flex text-2xl bg-white mt-8 my-7 py-5 px-20 shadow-md justify-center item-center m-auto mx-5"
+          >
+            Lihat Daftar Kelas
+          </a>
         </div>
       </div>
     </div>

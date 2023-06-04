@@ -145,7 +145,7 @@ export default DaftarKelas;
 // import Header from '../Header';
 // import BoxDaftarKelas from './BoxDaftarKelas';
 // import BoxKelas from './BoxKelas';
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import { fetchMapel } from "../services/GuruAPI";
 import LoadingPage from "../../Siswa/pages/LoadingPage";
 

@@ -34,11 +34,7 @@ function TambahForum() {
 
       <div>
         <h2 className="text-md mt-8 ml-10 font-normal text-biru">Isi Forum</h2>
-        <ReactQuill
-            className="mt-8 ml-10 h-30"
-            value=""
-            onChange=""
-        />
+        <ReactQuill className="mt-8 ml-10 h-30" value="" onChange="" />
       </div>
 
       <div className="mt-20 flex justify-end mr-10 gap-x-10 mb-20">

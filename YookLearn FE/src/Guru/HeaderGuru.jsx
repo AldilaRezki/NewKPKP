@@ -54,10 +54,7 @@ function HeaderGuru() {
             ></path>
           </svg>
         </button>
-        <ButtonSignOutGuru
-          className="header_profile flex bg-tosca items-center rounded-full w-10 h-10"
-          
-        >
+        <ButtonSignOutGuru className="header_profile flex bg-tosca items-center rounded-full w-10 h-10">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="icon icon-tabler icon-tabler-user-circle"
