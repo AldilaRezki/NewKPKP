@@ -299,6 +299,69 @@ export async function fetchStudent(idMapel) {
   }
 }
 
+export async function fetchUjianSubmit(idMapel, idUjian) {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${BASE_URL}/mapel/${idMapel}/ujian/${idUjian}/kumpul`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function fetchUjianDetail(idUjian) {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${BASE_URL}/ujian/${idUjian}/infoUjian`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function fetchHasilUjianKelas(idMapel, idUjian) {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${BASE_URL}/mapel/${idMapel}/ujian/${idUjian}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export async function addMateri(idMapel, judul, file) {
   try {
     const token = localStorage.getItem("token");
@@ -327,7 +390,7 @@ export async function addMateri(idMapel, judul, file) {
   }
 }
 
-export async function addUjian(idMapel, judul, isiUjian, waktu, file) {
+export async function addUjian(idMapel, judul, isiUjian, waktu, file, deadline) {
   try {
     const token = localStorage.getItem("token");
 
@@ -336,6 +399,7 @@ export async function addUjian(idMapel, judul, isiUjian, waktu, file) {
     formData.append("file", file);
     formData.append("deskripsi", isiUjian);
     formData.append("waktu", waktu);
+    formData.append("deadline", deadline);
 
     const response = await fetch(`${BASE_URL}/matpel/${idMapel}/ujian/add`, {
       method: "POST",

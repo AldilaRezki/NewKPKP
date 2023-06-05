@@ -100,6 +100,11 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'lecture'], function
     Route::get('matpel/{id_matpel}/ujian/{id_ujian}/soal', [LectureController::class, 'daftarSoal']);
     Route::post('matpel/{id_matpel}/ujian/add', [LectureController::class, 'addUjian']);
     Route::post('ujian/{id_ujian}/tambahSoal', [LectureController::class, 'addSoal']);
+
+    Route::get('ujian/{id_ujian}/infoUjian', [LectureController::class, 'getDetailUjian']);
+    Route::get('mapel/{id_mapel}/ujian/{id_ujian}/kumpul', [LectureController::class, 'getDetailKumpulUjian']);
+    Route::get('mapel/{id_mapel}/ujian/{id_ujian}/siswa/{id_siswa}', [LectureController::class, 'getDetailKumpulSiswa']);
+    Route::get('mapel/{id_mapel}/ujian/{id_ujian}', [LectureController::class, 'getDetailUjianKelas']);
 });
 
 // Student Routes
@@ -120,6 +125,9 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'student'], function
 
     Route::get('/matpel/{idMatpel}/ujian', [StudentController::class, 'getUjian']);
     Route::get('/matpel/{idMatpel}/ujian/{idUjian}/detail', [StudentController::class, 'getCurrentUjian']);
+    Route::get('/ujian/{idUjian}/soal', [StudentController::class, 'getSoal']);
+
+    Route::post('/ujian/{idUjian}/submit', [StudentController::class, 'submitUjian']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

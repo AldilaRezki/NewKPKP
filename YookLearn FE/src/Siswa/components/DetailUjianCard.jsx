@@ -2,7 +2,7 @@ import React from "react";
 import { RiFilePaperLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
-function DetailUjianCard({ Ujian }) {
+function DetailUjianCard({ Ujian, idKelas, idMapel }) {
   return (
     <>
       <div className="flex flex-row items-center mt-[75px] ml-[103px]">
@@ -29,7 +29,7 @@ function DetailUjianCard({ Ujian }) {
         <h1 className="ml-[206px] text-[#1A1F5A] "> 20 Maret 2023 </h1>
       </div>
       <div className="flex justify-center mt-10">
-        <Link to="/siswa/exam">
+        <Link to={`/siswa/kelas/${idKelas}/detailkelas/${idMapel}/ujian/${Ujian.id}/exam`}>
           {" "}
           <button className="bg-[#1A1F5A] text-white py-5 px-10 rounded-md hover:bg-[#303371]">
             Mulai

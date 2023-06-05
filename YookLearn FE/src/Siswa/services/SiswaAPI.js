@@ -223,6 +223,57 @@ export async function fetchCurrentUjian(idMapel, idUjian) {
   }
 }
 
+export async function fetchSoal(idUjian) {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${BASE_URL}/ujian/${idUjian}/soal`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function submitUjian(idUjian, listJawaban) {
+  try {
+    const token = localStorage.getItem("token");
+
+    const formData = new FormData();
+    formData.append("user_answers", JSON.stringify(listJawaban));
+
+    const response = await fetch(`${BASE_URL}/ujian/${idUjian}/submit`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
+
+    const data = await response.json();
+
+    console.log(JSON.stringify(data));
+    // return console.log(data);
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+    return data;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
+
 export async function fetchCurrentTugas(idTugas) {
   try {
     const token = localStorage.getItem("token");

@@ -1,6 +1,6 @@
 import React from "react";
 
-function TabelHasilUjianKelas() {
+function TabelHasilUjianKelas({ dataUjian }) {
   return (
     <div>
       <div className="flex flex-col ml-10 mt-10 mr-10 border-[0.3px] py-2 px-5 shadow-md">
@@ -28,106 +28,28 @@ function TabelHasilUjianKelas() {
             </tr>
           </thead>
           <tbody>
-            <tr className="border-[0.3px] shadow-md">
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                1
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                Pilihan Ganda
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                8
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                15
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                5
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] shadow-md border-biru text-center">
-                50%
-              </td>
-            </tr>
-            <tr className="border-[0.3px] shadow-md">
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                2
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                Pilihan Ganda
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                8
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                15
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                5
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] shadow-md border-biru text-center">
-                50%
-              </td>
-            </tr>
-            <tr className="border-[0.3px] shadow-md">
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                3
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                Pilihan Ganda
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                8
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                15
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                5
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] shadow-md border-biru text-center">
-                50%
-              </td>
-            </tr>
-            <tr className="border-[0.3px] shadow-md">
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                4
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                Pilihan Ganda
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                8
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                15
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                5
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] shadow-md border-biru text-center">
-                50%
-              </td>
-            </tr>
-            <tr className="border-[0.3px] shadow-md">
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                5
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                Pilihan Ganda
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                8
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                15
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                5
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] shadow-md border-biru text-center">
-                50%
-              </td>
-            </tr>
+            {dataUjian.map((ujian, index) => (
+              <tr key={index} className="border-[0.3px] shadow-md">
+                <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
+                  {index + 1}
+                </td>
+                <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
+                  {ujian.tipe_soal}
+                </td>
+                <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
+                  {ujian.benar}
+                </td>
+                <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
+                  {ujian.salah}
+                </td>
+                <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
+                  {ujian.tidak_menjawab}
+                </td>
+                <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] shadow-md border-biru text-center">
+                  {ujian.persentase}%
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
