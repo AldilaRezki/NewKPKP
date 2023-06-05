@@ -1,6 +1,6 @@
 import React from "react";
 
-function TabelHasilUjianPeserta({ idMapel, idUjian }) {
+function TabelHasilUjianPeserta({ idMapel, idUjian, dataSiswa }) {
   return (
     <div>
       <div className="flex flex-col ml-10 mt-10 mr-10 border-[0.3px] py-2 px-5 shadow-md">
@@ -22,81 +22,27 @@ function TabelHasilUjianPeserta({ idMapel, idUjian }) {
             </tr>
           </thead>
           <tbody>
-            <tr className="border-[0.3px] shadow-md">
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru">
-                XXXXXXXX
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru">
-                <a
-                  className="block"
-                  href={`/guru/mapel/${idMapel}/ujian/${idUjian}/hasil-ujian-siswa`}
-                >
-                  Lorem Ipsum
-                </a>
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                Ujian Sedang Berlangsung
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] shadow-md border-biru text-center">
-                100/100
-              </td>
-            </tr>
-            <tr className="border-[0.3px] shadow-md">
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru">
-                XXXXXXXX
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru">
-                Lorem Ipsum
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                Ujian Sedang Berlangsung
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] shadow-md border-biru text-center">
-                100/100
-              </td>
-            </tr>
-            <tr className="border-[0.3px] shadow-md">
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru">
-                XXXXXXXX
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru">
-                Lorem Ipsum
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                Ujian Belum Dimulai
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] shadow-md border-biru text-center">
-                -/100
-              </td>
-            </tr>
-            <tr className="border-[0.3px] shadow-md">
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru">
-                XXXXXXXX
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru">
-                Lorem Ipsum
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                Ujian Telah Selesai
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] shadow-md border-biru text-center">
-                100/100
-              </td>
-            </tr>
-            <tr className="border-[0.3px] shadow-md">
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru">
-                XXXXXXXX
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru">
-                Lorem Ipsum
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                Ujian Sedang Berlangsung
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] shadow-md border-biru text-center">
-                100/100
-              </td>
-            </tr>
+            {dataSiswa.map((siswa) => (
+              <tr key={siswa.id} className="border-[0.3px] shadow-md">
+                <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru">
+                  {siswa.nisn}
+                </td>
+                <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru">
+                  <a
+                    className="block"
+                    // href={`/guru/mapel/${idMapel}/ujian/${idUjian}/hasil-ujian-siswa`}
+                  >
+                    {siswa.nama_lengkap}
+                  </a>
+                </td>
+                <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
+                  {siswa.status}
+                </td>
+                <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] shadow-md border-biru text-center">
+                  {siswa.nilai}/100
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

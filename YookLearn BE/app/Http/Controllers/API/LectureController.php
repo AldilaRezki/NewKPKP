@@ -1103,14 +1103,111 @@ class LectureController extends Controller
 
         return response()->json($formattedSoal);
     }
-
-
-
-
-
-
-
-    public function getDetailUjian()
+    public function getDetailUjian($id_ujian)
     {
+        $user = auth()->user();
+
+        $test = DB::table("tests")->get(["id", "judul_ujian", "waktu", "jumlah_soal", "deadline", "id_matpel"])->where("id", $id_ujian)->first();
+
+        $carbon = Carbon::createFromFormat('H:i:s', $test->waktu);
+        $totalMinutes = $carbon->hour * 60 + $carbon->minute;
+        $test->waktu = $totalMinutes;
+
+        $carbon = Carbon::parse($test->deadline);
+        $date = $carbon->toDateString();
+        $test->deadline = $date;
+
+        $matpel = DB::table("subjects")->get(["id", "nama_matpel", "id_kelas", "id_guru"])->where("id", $test->id_matpel)->first();
+        $test->matpel = $matpel->nama_matpel;
+
+
+        return $test;
+    }
+    public function getDetailKumpulUjian($id_mapel, $id_ujian)
+    {
+        $user = auth()->user();
+
+        $subject = DB::table("subjects")->get(["id", "nama_matpel", "id_kelas"])->where("id", $id_mapel)->first();
+        $student = DB::table("students")->get(["id", "nisn", "nama_lengkap", "id_kelas"])->where('id_kelas', $subject->id_kelas);
+
+        foreach ($student as $row) {
+            $test = DB::table("collect_tests")->get(["id", "id_siswa", "id_ujian", "nilai"])->where("id_ujian", $id_ujian)->where("id_siswa", $row->id)->first();
+            if ($test) {
+                $row->status = "Ujian Telah Diselesaikan";
+                $row->nilai = $test->nilai;
+            } else {
+                $row->status = "Ujian Belum Dikerjakan";
+                $row->nilai = 0;
+            }
+        }
+
+        return response()->json($student);
+    }
+
+    public function getDetailKumpulSiswa($id_mapel, $id_ujian, $id_siswa)
+    {
+        $user = auth()->user();
+
+        $soal = DB::table('questions AS q')
+            ->leftJoin('question_options AS qo', 'qo.id_soal', '=', 'q.id')
+            ->leftJoin('test_submit_questions AS tsq', function ($join) use ($id_siswa, $id_ujian) {
+                $join->on('tsq.id_soal', '=', 'q.id')
+                    ->where('tsq.id_siswa', '=', $id_siswa)
+                    ->where('tsq.id_ujian', '=', $id_ujian);
+            })
+            ->select(
+                'q.id',
+                'q.pertanyaan',
+                'q.filename',
+                'q.tipe_soal',
+                'q.nilai',
+                'qo.id AS opsi_id',
+                'qo.deskripsi',
+                'qo.tipe_opsi',
+                DB::raw("CASE WHEN tsq.jawaban LIKE CONCAT('%', CAST(qo.id AS CHAR), '%') THEN true ELSE false END AS checked")
+            )
+            ->orderBy('q.id')
+            ->orderBy('qo.id')
+            ->get();
+
+        $soalArray = $soal->groupBy('id')->toArray();
+
+        return response()->json($soalArray);
+    }
+
+    public function getDetailUjianKelas($id_mapel, $id_ujian)
+    {
+        $user = auth()->user();
+
+        $soal = DB::table('questions')->get(["id", "tipe_soal", "id_ujian"])->where('id_ujian', $id_ujian)
+        ->where('tipe_soal', "!=" , "essai");
+
+        foreach ($soal as $row) {
+
+            $jumlahIdSiswa = DB::table('test_submit_questions')
+                ->select(DB::raw('COUNT(DISTINCT id_siswa) as jumlah_id_siswa'))
+                ->value("jumlah_id_siswa");
+
+            $jumlahBenar = DB::table('test_submit_questions')
+                ->where('id_soal', '=', $row->id)
+                ->where('status_jawaban', '=', 'benar')
+                ->count();
+
+            $jumlahSalah = DB::table('test_submit_questions')
+                ->where('id_soal', '=', $row->id)
+                ->where('status_jawaban', '=', 'salah')
+                ->count();
+
+            $tidakMenjawab = $jumlahIdSiswa - ($jumlahBenar + $jumlahSalah);
+
+            $persentase = ($jumlahBenar/$jumlahIdSiswa) * 100;
+
+            $row->benar = $jumlahBenar;
+            $row->salah = $jumlahSalah;
+            $row->tidak_menjawab = $tidakMenjawab;
+            $row->persentase = $persentase;
+        }
+
+        return response()->json($soal);
     }
 }

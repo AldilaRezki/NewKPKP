@@ -41,7 +41,7 @@ function BoxDaftarUjian({ idMapel, dataUjian }) {
                   Nomor soal: {ujian.jumlah_soal} nomor
                 </span>
                 <span className="text-slate-700">
-                  Waktu pengerjaan: {ujian.waktu} menit
+                  Waktu pengerjaan: {ujian.waktu}
                 </span>
               </div>
             </div>

@@ -163,8 +163,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('student_assigments')->insert([
-            'id' => 'uuidkumpultugas3',
-            'filename' => 'filetugas3',
+            'id' => 'uuidkumpultugas4',
+            'filename' => 'filetugas4',
             'nilai' => 0,
             'id_siswa' => 'siswauuid2',
             'id_tugas' => 2,

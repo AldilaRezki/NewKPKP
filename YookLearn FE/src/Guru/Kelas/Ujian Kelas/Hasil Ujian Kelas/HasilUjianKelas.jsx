@@ -5,19 +5,29 @@ import { BiArrowBack } from "react-icons/bi";
 import TabelHasilUjianKelas from "./TabelHasilUjianKelas";
 import Header from "../../../Header";
 import { useParams } from "react-router-dom";
-import { fetchCurrentMapel } from "../../../services/GuruAPI";
+import {
+  fetchCurrentMapel,
+  fetchHasilUjianKelas,
+} from "../../../services/GuruAPI";
 import LoadingPage from "../../../../Siswa/pages/LoadingPage";
 
 function HasilUjianKelas() {
   const { idMapel, idUjian } = useParams();
   const [dataMapel, setMapel] = useState([]);
+  const [dataUjian, setUjian] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
-      const data = await fetchCurrentMapel(idMapel);
-      setMapel(data);
+      const [mapelData, ujianData] = await Promise.all([
+        fetchCurrentMapel(idMapel),
+        fetchHasilUjianKelas(idMapel, idUjian),
+      ]);
+
+      setMapel(mapelData);
+      setUjian(ujianData);
       setIsLoading(false);
     }
+
     fetchData();
   }, []);
 
@@ -40,7 +50,7 @@ function HasilUjianKelas() {
         Hasil Ujian Peserta
       </h1>
 
-      <TabelHasilUjianKelas></TabelHasilUjianKelas>
+      <TabelHasilUjianKelas dataUjian={dataUjian}></TabelHasilUjianKelas>
     </div>
   );
 }

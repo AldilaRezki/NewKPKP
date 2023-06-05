@@ -261,17 +261,273 @@ class StudentController extends Controller
         $waktuJam = $ujian->waktu;
         $waktuCarbon = Carbon::createFromFormat('H:i:s', $waktuJam);
         $totalMenit = $waktuCarbon->diffInMinutes(Carbon::today());
-        
+
         $ujian->waktu = $totalMenit;
 
         return $ujian;
     }
-    public function Soal($idUjian)
+    public function getSoal($idUjian)
     {
         $user = auth()->user();
 
-        
+        $data = DB::table('questions')
+            ->select('questions.id', 'questions.pertanyaan as question', 'questions.tipe_soal as type', 'question_options.id as option_id', 'question_options.deskripsi as choice')
+            ->leftJoin('question_options', 'questions.id', '=', 'question_options.id_soal')
+            ->where('questions.id_ujian', $idUjian)
+            ->orderBy('questions.id')
+            ->get();
+
+        $result = [];
+        $prevId = null;
+        $item = null;
+
+        foreach ($data as $row) {
+            if ($row->id !== $prevId) {
+                if ($item !== null) {
+                    $result[] = $item;
+                }
+
+                $item = [
+                    'id' => $row->id,
+                    'question' => $row->question,
+                    'type' => $row->type,
+                ];
+
+                if ($row->type === 'pilgan') {
+                    $item['answer'] = 0;
+                    $item['choices'] = [];
+                } elseif ($row->type === 'kotakcentang') {
+                    $item['choices'] = [];
+                    $item['answer'] = array_fill(0, count($item['choices']), false);
+                } elseif ($row->type === 'essai') {
+                    $item['answer'] = '';
+                }
+
+                $prevId = $row->id;
+            }
+
+            if ($row->type === 'pilgan' || $row->type === 'kotakcentang') {
+                $item['choices'][] = [
+                    'id' => count($item['choices']),
+                    'choice' => $row->choice,
+                    'answer' => false,
+                ];
+            }
+        }
+
+        if ($item !== null) {
+            $result[] = $item;
+        }
+
+        return response()->json($result);
     }
+
+    public function submitUjian(Request $request, $idUjian)
+    {
+        $user = auth()->user();
+
+        $data = DB::table("questions")
+            ->select('questions.id', 'questions.pertanyaan', 'questions.tipe_soal', 'questions.nilai', 'questions.id_ujian', 'question_options.id as option_id', 'question_options.deskripsi as choice', 'question_options.tipe_opsi')
+            ->leftJoin('question_options', 'questions.id', '=', 'question_options.id_soal')
+            ->where('questions.id_ujian', $idUjian)
+            ->orderBy('questions.id')
+            ->get();
+
+        $result = [];
+
+        foreach ($data as $row) {
+            $option = [
+                'id' => $row->option_id,
+                'deskripsi' => $row->choice,
+                'tipe_opsi' => $row->tipe_opsi,
+                'id_soal' => $row->id,
+            ];
+
+            if (!isset($result[$row->id])) {
+                $result[$row->id] = [
+                    'id' => $row->id,
+                    'pertanyaan' => $row->pertanyaan,
+                    'tipe_soal' => $row->tipe_soal,
+                    'nilai' => $row->nilai,
+                    'id_ujian' => $row->id_ujian,
+                    'opsi' => [],
+                ];
+            }
+
+            $result[$row->id]['opsi'][] = $option;
+        }
+
+        $soal = array_values($result);
+        $userAnswers = json_decode($request->input('user_answers'), true);
+
+        $totalNilai = 0;
+
+        foreach ($userAnswers as $jawaban) {
+            $idSoal = $jawaban['id'];
+            $answer = $jawaban['answer'];
+
+            $answer_status['id_siswa'] = $user['id'];
+            $answer_status['id_ujian'] = $idUjian;
+            $answer_status['id_soal'] = $idSoal;
+            $answer_status['jawaban'] = $answer;
+            $answer_status['status_jawaban'] = 'salah';
+
+
+
+            foreach ($soal as $pertanyaan) {
+                if ($pertanyaan['id'] === $idSoal) {
+                    if ($pertanyaan['tipe_soal'] === 'kotakcentang') {
+
+                        $answer_status['tipe_soal'] = 'kotakcentang';
+                        $answer_status['jawaban'] = implode(',', $answer_status['jawaban']);
+
+                        $opsiBenar = array_filter($pertanyaan['opsi'], function ($opsi) {
+                            return $opsi['tipe_opsi'] === 'benar';
+                        });
+
+                        $isAllBenar = true;
+                        foreach ($answer as $index) {
+                            $opsi = $pertanyaan['opsi'][$index];
+                            if ($opsi['tipe_opsi'] !== 'benar') {
+                                $isAllBenar = false;
+                                break;
+                            }
+                        }
+                        if ($isAllBenar && count($answer) === count($opsiBenar)) {
+                            $totalNilai += $pertanyaan['nilai'];
+                            $answer_status['status_jawaban'] = 'benar';
+                        }
+
+                        DB::table('test_submit_questions')->insert($answer_status);
+                    } elseif ($pertanyaan['tipe_soal'] === 'pilgan') {
+
+                        $answer_status['tipe_soal'] = 'pilgan';
+
+                        $answer_status['jawaban'] = array_keys($answer, true);
+                        $answer_status['jawaban'] = implode('', $answer_status['jawaban']);
+
+                        $jawabanBenar = true;
+                        foreach ($pertanyaan['opsi'] as $index => $opsi) {
+                            $isOpsiDipilih = isset($answer[$index]) && $answer[$index];
+                            $isOpsiBenar = $opsi['tipe_opsi'] === 'benar';
+
+                            if ($isOpsiDipilih !== $isOpsiBenar) {
+                                $jawabanBenar = false;
+                                break;
+                            }
+                        }
+                        if ($jawabanBenar) {
+                            $totalNilai += $pertanyaan['nilai'];
+                            $answer_status['status_jawaban'] = 'benar';
+                        }
+
+                        DB::table('test_submit_questions')->insert($answer_status);
+                    } elseif ($pertanyaan['tipe_soal'] === 'essai') {
+                        $answer_status['tipe_soal'] = 'essai';
+                        DB::table('test_submit_questions')->insert($answer_status);
+                    }
+                    break;
+                }
+            }
+        }
+
+        $input['id_siswa'] =  $user['id'];
+        $input['id_ujian'] =  $idUjian;
+        $input['nilai'] =  $totalNilai;
+
+        DB::table('collect_tests')->insert($input);
+
+        return true;
+    }
+
+    // public function submitUjian(Request $request, $idUjian)
+    // {
+    //     $user = auth()->user();
+
+    //     $data = DB::table("questions")
+    //         ->select('questions.id', 'questions.pertanyaan', 'questions.tipe_soal', 'questions.nilai', 'questions.id_ujian', 'question_options.id as option_id', 'question_options.deskripsi as choice', 'question_options.tipe_opsi')
+    //         ->leftJoin('question_options', 'questions.id', '=', 'question_options.id_soal')
+    //         ->where('questions.id_ujian', $idUjian)
+    //         ->where('questions.tipe_soal', '!=', 'essai')
+    //         ->orderBy('questions.id')
+    //         ->get();
+
+    //     $result = [];
+
+    //     foreach ($data as $row) {
+    //         $option = [
+    //             'id' => $row->option_id,
+    //             'deskripsi' => $row->choice,
+    //             'tipe_opsi' => $row->tipe_opsi,
+    //             'id_soal' => $row->id,
+    //         ];
+
+    //         if (!isset($result[$row->id])) {
+    //             $result[$row->id] = [
+    //                 'id' => $row->id,
+    //                 'pertanyaan' => $row->pertanyaan,
+    //                 'tipe_soal' => $row->tipe_soal,
+    //                 'nilai' => $row->nilai,
+    //                 'id_ujian' => $row->id_ujian,
+    //                 'opsi' => [],
+    //             ];
+    //         }
+
+    //         $result[$row->id]['opsi'][] = $option;
+    //     }
+
+    //     $soal = array_values($result);
+    //     $userAnswers = json_decode($request->input('user_answers'), true);
+
+    //     $totalNilai = 0;
+
+    //     foreach ($userAnswers as $jawaban) {
+    //         $idSoal = $jawaban['id'];
+    //         $answer = $jawaban['answer'];
+
+    //         foreach ($soal as $pertanyaan) {
+    //             if ($pertanyaan['id'] === $idSoal) {
+    //                 if ($pertanyaan['tipe_soal'] === 'kotakcentang') {
+    //                     $opsiBenar = array_filter($pertanyaan['opsi'], function ($opsi) {
+    //                         return $opsi['tipe_opsi'] === 'benar';
+    //                     });
+
+    //                     $isAllBenar = true;
+    //                     foreach ($answer as $index) {
+    //                         $opsi = $pertanyaan['opsi'][$index];
+    //                         if ($opsi['tipe_opsi'] !== 'benar') {
+    //                             $isAllBenar = false;
+    //                             break;
+    //                         }
+    //                     }
+
+    //                     if ($isAllBenar && count($answer) === count($opsiBenar)) {
+    //                         $totalNilai += $pertanyaan['nilai'];
+    //                     }
+    //                 } elseif ($pertanyaan['tipe_soal'] === 'pilgan') {
+    //                     $jawabanBenar = true;
+    //                     foreach ($pertanyaan['opsi'] as $index => $opsi) {
+    //                         $isOpsiDipilih = isset($answer[$index]) && $answer[$index];
+    //                         $isOpsiBenar = $opsi['tipe_opsi'] === 'benar';
+
+    //                         if ($isOpsiDipilih !== $isOpsiBenar) {
+    //                             $jawabanBenar = false;
+    //                             break;
+    //                         }
+    //                     }
+
+    //                     if ($jawabanBenar) {
+    //                         $totalNilai += $pertanyaan['nilai'];
+    //                     }
+    //                 }
+
+    //                 break;
+    //             }
+    //         }
+    //     }
+
+    //     return $totalNilai;
+    // }
 
 
     // public function downloadMateri($fileId)

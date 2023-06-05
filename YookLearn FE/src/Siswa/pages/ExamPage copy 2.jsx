@@ -3,23 +3,20 @@ import NomorUjian from "../components/NomorUjian";
 import Header from "../components/Header";
 import Nav from "../components/Nav";
 import { RiFilePaperLine } from "react-icons/ri";
-import { fetchSoal, submitUjian } from "../services/SiswaAPI";
-import { useNavigate, useParams } from "react-router-dom";
+import { fetchSoal } from "../services/SiswaAPI";
+import { useParams } from "react-router-dom";
 import LoadingPage from "./LoadingPage";
 
 const ExamPage = () => {
-  const { idKelas, idMapel, idUjian } = useParams();
+  const { idUjian } = useParams();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [countdown, setCountdown] = useState(10);
+  const [countdown, setCountdown] = useState(60);
   const [questions, setQuestions] = useState([]);
   const [userAnswers, setUserAnswers] = useState([]);
-  const [isSubmitCalled, setIsSubmitCalled] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
       const data = await fetchSoal(idUjian);
-      // console.log(data);
       setQuestions(data);
       setUserAnswers(
         new Array(data.length).fill().map(() => ({ id: null, answer: [] }))
@@ -30,26 +27,16 @@ const ExamPage = () => {
   }, [idUjian]);
 
   useEffect(() => {
-    let timer;
-    if (countdown > 0) {
-      timer = setInterval(() => {
-        setCountdown((prevCountdown) => {
-          if (prevCountdown === 0 && !isSubmitCalled) {
-            setIsSubmitCalled(true);
-            handleSubmit();
-            return prevCountdown;
-          } else {
-            return prevCountdown - 1;
-          }
-        });
-      }, 1000);
-    } else if (countdown === 0 && !isSubmitCalled) {
-      setIsSubmitCalled(true);
-      handleSubmit();
-    }
+    console.log(questions);
+  }, [questions]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCountdown((prevCountdown) => prevCountdown - 1);
+    }, 1000);
 
     return () => clearInterval(timer);
-  }, [countdown, isSubmitCalled]);
+  }, [questions]);
 
   const minutes = Math.floor(countdown / 60);
   const seconds = countdown % 60;
@@ -105,7 +92,7 @@ const ExamPage = () => {
     const newQuestions = [...questions];
     const question = newQuestions[currentQuestionIndex];
 
-    if (question && question.type === "kotakcentang") {
+    if (question) {
       const choiceIndex = question.choices.findIndex(
         (choice) => choice.id === parseInt(value)
       );
@@ -147,19 +134,10 @@ const ExamPage = () => {
     setUserAnswers(prevAnswers);
   };
 
-  const handleSubmit = async (event) => {
-    try {
-      console.log("Answers submitted!");
-      // console.log(userAnswers);
-      setIsLoading(true);
-      const data = await submitUjian(idUjian, userAnswers);
-      if (data) {
-        navigate(`/siswa/kelas/${idKelas}/detailkelas/${idMapel}/ujian`);
-      }
-
-    } catch (error) {
-      console.log("Error adding assignment:", error);
-    }
+  const handleSubmit = () => {
+    console.log("Answers submitted!");
+    console.log(userAnswers);
+    // Perform actions to submit the answers
   };
 
   const [isLoading, setIsLoading] = useState(true);
@@ -195,7 +173,6 @@ const ExamPage = () => {
                       {questions[currentQuestionIndex].question}
                     </span>
                   </div>
-
                   {questions[currentQuestionIndex].type === "essai" ? (
                     <textarea
                       rows="2"
@@ -225,9 +202,12 @@ const ExamPage = () => {
                               <input
                                 type="checkbox"
                                 name={`question-${questions[currentQuestionIndex].id}`}
-                                value={choice.id}
-                                checked={choice.answer}
+                                value={choice.choice}
+                                checked={userAnswers[
+                                  currentQuestionIndex
+                                ]?.answer.includes(choice.id.toString())}
                                 onChange={handleCheckboxChange}
+                                key={choice.id}
                               />
 
                               <span className="ml-2">{choice.choice}</span>

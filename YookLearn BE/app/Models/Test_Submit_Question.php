@@ -2,19 +2,17 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Traits\Uuids;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Collect_Test extends Authenticatable
+class Test_Submit_Question extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
+    protected $table = "test_submit_questions";
+        /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -22,7 +20,10 @@ class Collect_Test extends Authenticatable
     protected $fillable = [
         'id_siswa',
         'id_ujian',
-        'nilai'
+        'id_soal',
+        'tipe_soal',
+        'status_jawaban',
+        'jawaban'
     ];
 
     /**
@@ -31,8 +32,6 @@ class Collect_Test extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
-        'remember_token',
     ];
 
     /**
@@ -40,9 +39,8 @@ class Collect_Test extends Authenticatable
      *
      * @var array<string, string>
      */
-    protected $casts = [
-        
-    ];
+    protected $casts = [];
+
 
 
 }

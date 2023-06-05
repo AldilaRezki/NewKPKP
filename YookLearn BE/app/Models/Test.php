@@ -25,6 +25,7 @@ class Test extends Authenticatable
         'waktu',
         'filename',
         "jumlah_soal",
+        "deadline",
         'id_matpel',
     ];
 

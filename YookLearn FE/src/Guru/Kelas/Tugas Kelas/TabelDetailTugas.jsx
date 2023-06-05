@@ -7,19 +7,21 @@ import { fetchStudentSubmit } from "../../services/GuruAPI";
 function TabelDetailTugas({ idMapel, idTugas, nilai }) {
   const BASE_URL = import.meta.env.VITE_BASE_DOWNLOAD_URL;
   const [dataTugas, setTugas] = useState([]);
-  const [showMyModal, setShowMyModal] = useState(false);
-
-  const handleOnClose = () => setShowMyModal(false);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedSubmit, setSelectedSubmit] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
       const data = await fetchStudentSubmit(idMapel, idTugas);
       setTugas(data);
-      setUpdatedNilai(data); // Menyimpan data awal sebelum diupdate
-      // setIsLoading(false);
     }
     fetchData();
   }, []);
+
+  const handleOnClose = () => {
+    setShowModal(false);
+    setSelectedSubmit(null);
+  };
 
   const updateNilaiSiswa = (idSubmit, poin) => {
     setTugas((prevData) => {
@@ -78,87 +80,31 @@ function TabelDetailTugas({ idMapel, idTugas, nilai }) {
                   <a href={`${BASE_URL}/${tugas.filename}`} download>
                     <MdSave className="text-2xl mr-2 inline-block" />
                   </a>
-                  <button onClick={() => setShowMyModal(true)}>
-                    <BiPencil className="text-2xl inline-block mb-[1px]"></BiPencil>
+                  <button
+                    onClick={() => {
+                      setShowModal(true);
+                      setSelectedSubmit(tugas.id);
+                    }}
+                  >
+                    <BiPencil className="text-2xl inline-block mb-[1px]" />
                   </button>
-                  <TambahPoin
-                    onClose={handleOnClose}
-                    visible={showMyModal}
-                    idSubmit={tugas.id}
-                    idMapel={idMapel}
-                    idTugas={idTugas}
-                    dataTugas={dataTugas}
-                    updateDataTugas={updateNilaiSiswa}
-                  ></TambahPoin>
                 </td>
               </tr>
             ))}
-            {/* <tr className="border-[0.3px] shadow-md">
-            <tr className="border-[0.3px] shadow-md">
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                Lorem Ipsum
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                12-03-2023 23:59:59
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                Lorem Ipsum.pdf
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                <input type="number" min={0} max={100} className="bg-white outline-none appearance-none border-[0.1px] flex py-2 pl-5 w-[72%] mx-auto"
-                placeholder="Masukkan poin"/>
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] shadow-md border-biru text-center">
-                <a href="/path/to/tugas1.pdf" download>
-                  <MdSave className="text-2xl mr-2 inline-block" />
-                </a>
-              </td>
-            </tr>
-            <tr className="border-[0.3px] shadow-md">
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                Lorem Ipsum
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                12-03-2023 23:59:59
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                Lorem Ipsum.pdf
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                100/100
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] shadow-md border-biru text-center">
-                <MdSave className="text-2xl mr-2 inline-block"></MdSave>
-                <button onClick={() => setShowMyModal(true)}>
-                  <BiPencil className="text-2xl inline-block mb-[1px]"></BiPencil>
-                </button>
-                <TambahPoin onClose={handleOnClose} visible={showMyModal}></TambahPoin>
-              </td>
-            </tr>
-            <tr className="border-[0.3px] shadow-md">
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                Lorem Ipsum
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                12-03-2023 23:59:59
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                Lorem Ipsum.pdf
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                100/100
-              </td>
-              <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] shadow-md border-biru text-center">
-                <MdSave className="text-2xl mr-2 inline-block"></MdSave>
-                <button onClick={() => setShowMyModal(true)}>
-                  <BiPencil className="text-2xl inline-block mb-[1px]"></BiPencil>
-                </button>
-                <TambahPoin onClose={handleOnClose} visible={showMyModal}></TambahPoin>
-              </td>
-            </tr> */}
           </tbody>
         </table>
       </div>
+      {showModal && (
+        <TambahPoin
+          onClose={handleOnClose}
+          visible={showModal}
+          idSubmit={selectedSubmit}
+          idMapel={idMapel}
+          idTugas={idTugas}
+          dataTugas={dataTugas}
+          updateDataTugas={updateNilaiSiswa}
+        />
+      )}
     </div>
   );
 }

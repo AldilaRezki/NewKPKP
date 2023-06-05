@@ -7,18 +7,32 @@ import TabelHasilUjianPeserta from "./TabelHasilUjianPeserta";
 import Header from "../../../Header";
 import { useParams } from "react-router-dom";
 import LoadingPage from "../../../../Siswa/pages/LoadingPage";
-import { fetchCurrentMapel } from "../../../services/GuruAPI";
+import {
+  fetchCurrentMapel,
+  fetchUjianDetail,
+  fetchUjianSubmit,
+} from "../../../services/GuruAPI";
 
 function HasilUjianPeserta() {
   const { idMapel, idUjian } = useParams();
   const [dataMapel, setMapel] = useState([]);
+  const [dataUjian, setUjian] = useState([]);
+  const [dataSiswa, setSiswa] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
-      const data = await fetchCurrentMapel(idMapel);
-      setMapel(data);
+      const [mapelData, siswaData, ujianData] = await Promise.all([
+        fetchCurrentMapel(idMapel),
+        fetchUjianSubmit(idMapel, idUjian),
+        fetchUjianDetail(idUjian),
+      ]);
+
+      setMapel(mapelData);
+      setSiswa(siswaData);
+      setUjian(ujianData);
       setIsLoading(false);
     }
+
     fetchData();
   }, []);
 
@@ -40,11 +54,12 @@ function HasilUjianPeserta() {
         Hasil Ujian Peserta
       </h1>
 
-      <DetailUjian_HasilUjianPeserta></DetailUjian_HasilUjianPeserta>
+      <DetailUjian_HasilUjianPeserta dataUjian={dataUjian}></DetailUjian_HasilUjianPeserta>
 
       <TabelHasilUjianPeserta
         idMapel={idMapel}
         idUjian={idUjian}
+        dataSiswa={dataSiswa}
       ></TabelHasilUjianPeserta>
     </div>
   );

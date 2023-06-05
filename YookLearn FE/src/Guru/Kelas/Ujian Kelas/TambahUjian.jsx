@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import moment from "moment";
 import HeaderGuru from "../../HeaderGuru";
 import HeaderKelas from "../HeaderKelas";
 import { BiArrowBack } from "react-icons/bi";
@@ -14,6 +15,8 @@ function TambahUjian() {
   const navigate = useNavigate();
   const [judul, setJudul] = useState("");
   const [waktu, setWaktu] = useState(0);
+  const [deadlineHari, setDeadlineHari] = useState(0);
+  const [deadlineJam, setDeadlineJam] = useState(0);
   const [file, setFile] = useState(null);
   const [isiUjian, setIsiUjian] = useState("");
   const [dataMapel, setMapel] = useState([]);
@@ -43,7 +46,11 @@ function TambahUjian() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const isSuccess = await addUjian(idMapel, judul, isiUjian, waktu, file);
+      const deadline = moment(
+        `${deadlineHari} ${deadlineJam}`,
+        "YYYY-MM-DD HH:mm"
+      ).format("YYYY-MM-DD HH:mm:ss");
+      const isSuccess = await addUjian(idMapel, judul, isiUjian, waktu, file, deadline);
       if (isSuccess) {
         navigate(
           `/guru/mapel/${idMapel}/ujian/${isSuccess.id}/tambah-soal-ujian`
@@ -109,22 +116,24 @@ function TambahUjian() {
             </div>
           </div>
           <div>
-            <h2 className="text-md mt-8 font-normal text-biru">Batas Waktu Pengerjaan Ujian</h2>
+            <h2 className="text-md mt-8 font-normal text-biru">
+              Batas Waktu Pengerjaan Ujian
+            </h2>
             <div className="flex gap-x-8">
               <div className="flex gap-x-8">
                 <input
                   type="date"
                   className="mt-4 py-2 px-5 border-[0.3px] shadow-md"
-                  value=""
-                  onChange=""
+                  value={deadlineHari}
+                  onChange={(e) => setDeadlineHari(e.target.value)}
                 />
               </div>
               <div className="flex gap-x-8">
                 <input
                   type="time"
                   className="mt-4 py-2 px-5 border-[0.3px] shadow-md"
-                  value=""
-                  onChange=""
+                  value={deadlineJam}
+                  onChange={(e) => setDeadlineJam(e.target.value)}
                 />
               </div>
             </div>
