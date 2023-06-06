@@ -256,15 +256,27 @@ class StudentController extends Controller
     {
         $user = auth()->user();
 
-        $ujian = DB::table("tests")->get(["id", "judul_ujian", "jumlah_soal", "waktu"])->where('id', $idUjian)->first();
+        $ujian = DB::table("tests")->get(["id", "judul_ujian", "jumlah_soal", "waktu", "deadline"])->where('id', $idUjian)->first();
 
         $waktuJam = $ujian->waktu;
         $waktuCarbon = Carbon::createFromFormat('H:i:s', $waktuJam);
         $totalMenit = $waktuCarbon->diffInMinutes(Carbon::today());
+        $deadline = Carbon::createFromFormat('Y-m-d H:i:s', $ujian->deadline)->format('d F Y');
 
+        $ujian->deadline = $deadline;
         $ujian->waktu = $totalMenit;
 
         return $ujian;
+    }
+    public function getWaktuUjian($idUjian)
+    {
+        $user = auth()->user();
+
+        $ujian = DB::table("tests")->select("id", "judul_ujian", "jumlah_soal", "waktu")->where('id', $idUjian)->first();
+
+        $waktu_ujian = strtotime($ujian->waktu) - strtotime('TODAY');
+
+        return $waktu_ujian;
     }
     public function getSoal($idUjian)
     {

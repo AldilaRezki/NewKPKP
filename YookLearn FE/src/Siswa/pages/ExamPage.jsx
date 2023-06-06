@@ -3,29 +3,57 @@ import NomorUjian from "../components/NomorUjian";
 import Header from "../components/Header";
 import Nav from "../components/Nav";
 import { RiFilePaperLine } from "react-icons/ri";
-import { fetchSoal, submitUjian } from "../services/SiswaAPI";
+import { fetchSoal, fetchWaktuUjian, submitUjian } from "../services/SiswaAPI";
 import { useNavigate, useParams } from "react-router-dom";
 import LoadingPage from "./LoadingPage";
 
 const ExamPage = () => {
   const { idKelas, idMapel, idUjian } = useParams();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [countdown, setCountdown] = useState(10);
+  const [countdown, setCountdown] = useState(120);
   const [questions, setQuestions] = useState([]);
   const [userAnswers, setUserAnswers] = useState([]);
   const [isSubmitCalled, setIsSubmitCalled] = useState(false);
   const navigate = useNavigate();
 
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const data = await fetchSoal(idUjian);
+  //     setQuestions(data);
+  //     setUserAnswers(
+  //       new Array(data.length).fill().map(() => ({ id: null, answer: [] }))
+  //     );
+  //     setIsLoading(false);
+  //   }
+  //   fetchData();
+  // }, [idUjian]);
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const data = await fecthWaktuUjian(idUjian);
+  //     setCountdown(data);
+  //     setIsLoading(false);
+  //   }
+  //   fetchData();
+  // }, []);
+
   useEffect(() => {
     async function fetchData() {
-      const data = await fetchSoal(idUjian);
-      // console.log(data);
-      setQuestions(data);
+      const [questionsData, countdownData] = await Promise.all([
+        fetchSoal(idUjian),
+        fetchWaktuUjian(idUjian),
+      ]);
+
+      setQuestions(questionsData);
       setUserAnswers(
-        new Array(data.length).fill().map(() => ({ id: null, answer: [] }))
+        new Array(questionsData.length)
+          .fill()
+          .map(() => ({ id: null, answer: [] }))
       );
+      setCountdown(countdownData);
       setIsLoading(false);
     }
+
     fetchData();
   }, [idUjian]);
 
@@ -69,6 +97,7 @@ const ExamPage = () => {
 
     if (currentQuestionIndex > 0) {
       setUserAnswers(newUserAnswers); // Simpan jawaban sebelum mengubah currentQuestionIndex
+
       setCurrentQuestionIndex((prevIndex) => prevIndex - 1);
     }
   };
@@ -156,7 +185,6 @@ const ExamPage = () => {
       if (data) {
         navigate(`/siswa/kelas/${idKelas}/detailkelas/${idMapel}/ujian`);
       }
-
     } catch (error) {
       console.log("Error adding assignment:", error);
     }

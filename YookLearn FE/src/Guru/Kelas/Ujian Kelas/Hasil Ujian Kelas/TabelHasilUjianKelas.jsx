@@ -37,16 +37,16 @@ function TabelHasilUjianKelas({ dataUjian }) {
                   {ujian.tipe_soal}
                 </td>
                 <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                  {ujian.benar}
+                  {ujian.benar || 0} 
                 </td>
                 <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                  {ujian.salah}
+                  {ujian.salah || 0}
                 </td>
                 <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                  {ujian.tidak_menjawab}
+                  {ujian.tidak_menjawab || 0}
                 </td>
                 <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] shadow-md border-biru text-center">
-                  {ujian.persentase}%
+                  {ujian.persentase || 0}%
                 </td>
               </tr>
             ))}

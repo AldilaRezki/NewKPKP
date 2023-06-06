@@ -128,6 +128,7 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'student'], function
     Route::get('/ujian/{idUjian}/soal', [StudentController::class, 'getSoal']);
 
     Route::post('/ujian/{idUjian}/submit', [StudentController::class, 'submitUjian']);
+    Route::get('/ujian/{idUjian}/waktu', [StudentController::class, 'getWaktuUjian']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

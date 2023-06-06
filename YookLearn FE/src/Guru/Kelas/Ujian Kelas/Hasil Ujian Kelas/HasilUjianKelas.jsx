@@ -15,6 +15,15 @@ function HasilUjianKelas() {
   const { idMapel, idUjian } = useParams();
   const [dataMapel, setMapel] = useState([]);
   const [dataUjian, setUjian] = useState([]);
+  const [dataMap, setMap] = useState([
+    {
+      tipe_soal: "default",
+      benar: 0,
+      salah: 0,
+      tidak_menjawab: 0,
+      persentase: 0,
+    },
+  ]);
 
   useEffect(() => {
     async function fetchData() {
@@ -50,7 +59,7 @@ function HasilUjianKelas() {
         Hasil Ujian Peserta
       </h1>
 
-      <TabelHasilUjianKelas dataUjian={dataUjian}></TabelHasilUjianKelas>
+      <TabelHasilUjianKelas dataUjian={dataUjian || dataMap}></TabelHasilUjianKelas>
     </div>
   );
 }
