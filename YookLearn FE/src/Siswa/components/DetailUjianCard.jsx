@@ -18,18 +18,20 @@ function DetailUjianCard({ Ujian, idKelas, idMapel }) {
       </div>
       <div className="flex flex-row ml-[116px] mt-5">
         <h1 className="font-bold text-[#1A1F5A] "> Jumlah Test:</h1>
-        <h1 className="ml-[300px] text-[#1A1F5A] "> {Ujian.jumlah_soal} </h1>
+        <h1 className="ml-[300px] text-[#1A1F5A] "> {Ujian.jumlah_soal} Soal </h1>
       </div>
       <div className="flex flex-row ml-[116px] mt-5">
         <h1 className="font-bold text-[#1A1F5A] "> Waktu Pengerjaan:</h1>
-        <h1 className="ml-[250px] text-[#1A1F5A] "> {Ujian.waktu} </h1>
+        <h1 className="ml-[250px] text-[#1A1F5A] "> {Ujian.waktu} Menit </h1>
       </div>
       <div className="flex flex-row ml-[116px] mt-5">
-        <h1 className="font-bold text-[#1A1F5A] "> Tanggal Pengerjaan Test:</h1>
-        <h1 className="ml-[206px] text-[#1A1F5A] "> 20 Maret 2023 </h1>
+        <h1 className="font-bold text-[#1A1F5A] "> Batas Pengerjaan Test:</h1>
+        <h1 className="ml-[206px] text-[#1A1F5A] "> {Ujian.deadline} </h1>
       </div>
       <div className="flex justify-center mt-10">
-        <Link to={`/siswa/kelas/${idKelas}/detailkelas/${idMapel}/ujian/${Ujian.id}/exam`}>
+        <Link
+          to={`/siswa/kelas/${idKelas}/detailkelas/${idMapel}/ujian/${Ujian.id}/exam`}
+        >
           {" "}
           <button className="bg-[#1A1F5A] text-white py-5 px-10 rounded-md hover:bg-[#303371]">
             Mulai
