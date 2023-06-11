@@ -32,12 +32,10 @@ function DaftarKelas() {
 
   return (
     <div>
-      <Header></Header>
-      <HeaderGuru></HeaderGuru>
 
-      <h1 className="text-biru mt-10 ml-10 text-xl font-semibold ">
+      {/* <h1 className="text-biru mt-10 ml-10 text-xl font-semibold ">
         Daftar Kelas
-      </h1>
+      </h1> */}
 
       {/* <BoxDaftarKelas kelas='X'></BoxDaftarKelas> */}
       {/* <BoxKelas namaKelas='X IPA 1'></BoxKelas>

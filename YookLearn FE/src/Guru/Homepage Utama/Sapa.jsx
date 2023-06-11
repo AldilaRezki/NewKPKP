@@ -4,17 +4,19 @@ function Sapa() {
   const currentHour = new Date().getHours();
   let greeting;
 
-  if (currentHour >= 0 && currentHour < 12) {
+  if (currentHour >= 4 && currentHour < 12) {
     greeting = "Selamat Pagi";
-  } else if (currentHour >= 12 && currentHour < 18) {
+  } else if (currentHour >= 12 && currentHour < 15) {
     greeting = "Selamat Siang";
+  } else if (currentHour >= 15 && currentHour < 18) {
+    greeting = "Selamat Sore";
   } else {
     greeting = "Selamat Malam";
   }
 
   return (
-    <div className="homepage_Card text-xl flex bg-tosca p-4 rounded-lg shadow-md">
-      <h1>{`${greeting}, Lorem! Terdapat 3 Kelas untuk diajar hari ini.`}</h1>
+    <div className="homepage_Card text-lg flex bg-white border-biru p-4 rounded-lg shadow-md text-biru">
+      <h1>{`${greeting}! Berikut Daftar Kelas yang Harus Kamu Ajar!`}</h1>
     </div>
   );
 }

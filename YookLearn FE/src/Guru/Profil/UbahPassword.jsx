@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import HeaderGuru from "../HeaderGuru";
 import { BsEye } from "react-icons/bs";
 import Header from "../Header";
