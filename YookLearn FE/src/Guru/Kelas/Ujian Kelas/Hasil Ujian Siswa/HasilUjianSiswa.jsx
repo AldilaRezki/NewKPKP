@@ -39,7 +39,7 @@ function HasilUjianSiswa() {
       <HeaderGuru></HeaderGuru>
       <HeaderKelas dataMapel={dataMapel}></HeaderKelas>
       <div className="bg-tosca mt-10 mx-10 p-2">
-        <a href={`/guru/mapel/${idMapel}/ujian/${idUjian}`}>
+        <a href={`/guru/mapel/${idMapel}/ujian/${idUjian}/hasil-ujian-peserta`}>
           <BiArrowBack className="bg-white text-xl"></BiArrowBack>
         </a>
       </div>
