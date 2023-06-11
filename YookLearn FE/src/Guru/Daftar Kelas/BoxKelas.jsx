@@ -9,7 +9,7 @@ function BoxKelas(props) {
         href={href}
         className={clsx(
           className,
-          "text-l mt-10 mr-10 py-3 px-6 rounded-md bg-tosca/40 block cursor-pointer text-biru"
+          "text-l mt-10 mr-10 py-3 px-6 rounded-md bg-white shadow-md block cursor-pointer text-biru"
         )}
       >
         Kelas {namaKelas}
