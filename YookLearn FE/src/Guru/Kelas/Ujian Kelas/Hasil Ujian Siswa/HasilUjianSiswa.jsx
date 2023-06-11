@@ -44,7 +44,7 @@ function HasilUjianSiswa() {
         </a>
       </div>
       <div className="flex justify-between mt-8 ml-10">
-        <h1 className="text-xl font-medium text-biru">Daftar Soal</h1>
+        <h1 className="text-xl font-medium text-biru">Hasil Ujian Siswa</h1>
         <div className="mr-28 flex flex-col">
           <span>Poin yang diperoleh</span>
           <span className="text-md mt-5 py-2 px-3 border-[0,3px] shadow-md text-biru">
