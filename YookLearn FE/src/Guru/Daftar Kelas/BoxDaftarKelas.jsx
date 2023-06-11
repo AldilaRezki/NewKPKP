@@ -156,7 +156,7 @@ function BoxDaftarKelas(props) {
         {...props}
         className={clsx(
           className,
-          "text-xl ml-10 mt-10 mr-10 py-3 px-6 rounded-md bg-tosca block cursor-pointer text-biru"
+          "text-lg ml-10 mt-10 mr-10 py-2 px-4 rounded-md shadow-md bg-white/100 block cursor-pointer text-biru"
         )}
         onClick={toggleDropdown}
       >

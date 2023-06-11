@@ -227,7 +227,7 @@ const ExamPage = () => {
                   {questions[currentQuestionIndex].type === "essai" ? (
                     <textarea
                       rows="2"
-                      className="border border-biru rounded-md w-96"
+                      className="border border-biru rounded-md w-96 max-w-2xl"
                       value={questions[currentQuestionIndex].answer}
                       onChange={(e) => {
                         const newQuestions = [...questions];
@@ -279,9 +279,9 @@ const ExamPage = () => {
                 </div>
               )}
             </div>
-            <div className="w-[10%] mt-0">
-              {/* <NomorUjian /> */}
-            </div>
+            {/* <div className="w-[10%] mt-0">
+              <NomorUjian />
+            </div> */}
           </div>
         </div>
         <div className="flex justify-center mt-2">

@@ -30,7 +30,7 @@ function TabelHasilUjianPeserta({ idMapel, idUjian, dataSiswa }) {
                 <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru">
                   <a
                     className="block"
-                    // href={`/guru/mapel/${idMapel}/ujian/${idUjian}/hasil-ujian-siswa`}
+                    href={`/guru/mapel/${idMapel}/ujian/${idUjian}/hasil-ujian-siswa`}
                   >
                     {siswa.nama_lengkap}
                   </a>

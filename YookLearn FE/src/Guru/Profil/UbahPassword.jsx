@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import HeaderGuru from "../HeaderGuru";
-import { BsEye } from "react-icons/bs";
+import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import Header from "../Header";
 import { useNavigate } from "react-router-dom";
 import { resetPassword } from "../services/GuruAPI";
@@ -11,6 +11,8 @@ function UbahPassword() {
   const login = isAuthenticated("guru");
   const [new_password, setnew_password] = useState("");
   const [old_password, setold_password] = useState("");
+  const [showOldPassword, setShowOldPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
 
   useEffect(() => {
     if (!login) {
@@ -25,6 +27,14 @@ function UbahPassword() {
     }
   };
 
+  const handleToggleOldPassword = () => {
+    setShowOldPassword((prevShowOldPassword) => !prevShowOldPassword);
+  };
+
+  const handleToggleNewPassword = () => {
+    setShowNewPassword((prevShowNewPassword) => !prevShowNewPassword);
+  };
+
   return (
     <div>
       <Header></Header>
@@ -34,26 +44,46 @@ function UbahPassword() {
           <span>Password Lama</span>
           <form className="flex justify-between pr-6 gap-x-6 border-[1px] border-slate-200 shadow-md w-[330px]">
             <input
-              type="text"
+              type={showOldPassword ? 'text' : 'password'}
               placeholder="Masukkan password lama"
               value={old_password}
               onChange={(e) => setold_password(e.target.value)}
               className="flex py-3 pl-3 focus:outline-none w-[80%]"
             />
-            <BsEye className="opacity-75 my-auto"></BsEye>
+            {showOldPassword ? (
+              <BsEyeSlash
+                className="opacity-75 my-auto cursor-pointer"
+                onClick={handleToggleOldPassword}
+              />
+            ) : (
+              <BsEye
+                className="opacity-75 my-auto cursor-pointer"
+                onClick={handleToggleOldPassword}
+              />
+            )}
           </form>
         </div>
         <div className="flex mt-5 gap-y-2 flex-col">
           <span>Password Baru</span>
           <form className="flex justify-between pr-6 gap-x-6 border-[1px] border-slate-200 shadow-md w-[330px]">
             <input
-              type="text"
+              type={showNewPassword ? 'text' : 'password'}
               placeholder="Masukkan password baru"
               className="flex py-3 pl-3 focus:outline-none w-[80%]"
               value={new_password}
               onChange={(e) => setnew_password(e.target.value)}
             />
-            <BsEye className="opacity-75 my-auto"></BsEye>
+            {showNewPassword ? (
+              <BsEyeSlash
+                className="opacity-75 my-auto cursor-pointer"
+                onClick={handleToggleNewPassword}
+              />
+            ) : (
+              <BsEye
+                className="opacity-75 my-auto cursor-pointer"
+                onClick={handleToggleNewPassword}
+              />
+            )}
           </form>
         </div>
         <div className="flex gap-x-8 mt-10">
