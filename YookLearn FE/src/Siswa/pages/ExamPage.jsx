@@ -280,7 +280,7 @@ const ExamPage = () => {
               )}
             </div>
             <div className="w-[10%] mt-0">
-              <NomorUjian />
+              {/* <NomorUjian /> */}
             </div>
           </div>
         </div>
