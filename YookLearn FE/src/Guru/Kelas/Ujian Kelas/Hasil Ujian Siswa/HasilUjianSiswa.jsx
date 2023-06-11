@@ -66,7 +66,7 @@ function HasilUjianSiswa() {
       </div>
 
       <div className="essay">
-        <span className="flex mt-10 ml-10 text-lg font-semibold text-biru">
+        <span className="flex mt-2 ml-10 text-lg font-semibold text-biru">
           1
         </span>
 
