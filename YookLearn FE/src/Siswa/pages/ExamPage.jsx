@@ -279,9 +279,9 @@ const ExamPage = () => {
                 </div>
               )}
             </div>
-            <div className="w-[10%] mt-0">
+            {/* <div className="w-[10%] mt-0">
               <NomorUjian />
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="flex justify-center mt-2">
