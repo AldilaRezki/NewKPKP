@@ -48,11 +48,11 @@ export default function DetailTgsCard({
         <h1 className=" font-bold text-biru mt-5"> 
         Pengumpulan Tugas
         </h1>
-        <table className="border-collapse border border-biru mt-5 text-biru">
+        <table className="border-collapse border border-biru mt-5 text-biru ">
       <thead>
         <tr>
-          <th className="border border-biru p-2"> File </th>
-          <th className="border border-biru p-2"> Tanggal Upload</th>
+          <th className="border border-biru p-2 w-[200px] "> File </th>
+          <th className="border border-biru p-2 w-[250px]"> Tanggal Upload</th>
         </tr>
       </thead>
       <tbody>
