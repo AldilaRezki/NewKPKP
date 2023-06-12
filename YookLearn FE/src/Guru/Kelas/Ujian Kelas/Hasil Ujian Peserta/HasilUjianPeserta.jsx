@@ -54,7 +54,9 @@ function HasilUjianPeserta() {
         Hasil Ujian Peserta
       </h1>
 
-      <DetailUjian_HasilUjianPeserta dataUjian={dataUjian}></DetailUjian_HasilUjianPeserta>
+      <DetailUjian_HasilUjianPeserta
+        dataUjian={dataUjian}
+      ></DetailUjian_HasilUjianPeserta>
 
       <TabelHasilUjianPeserta
         idMapel={idMapel}

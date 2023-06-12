@@ -302,11 +302,14 @@ export async function fetchStudent(idMapel) {
 export async function fetchUjianSubmit(idMapel, idUjian) {
   try {
     const token = localStorage.getItem("token");
-    const response = await fetch(`${BASE_URL}/mapel/${idMapel}/ujian/${idUjian}/kumpul`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await fetch(
+      `${BASE_URL}/mapel/${idMapel}/ujian/${idUjian}/kumpul`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
     const data = await response.json();
 
@@ -344,11 +347,14 @@ export async function fetchUjianDetail(idUjian) {
 export async function fetchHasilUjianKelas(idMapel, idUjian) {
   try {
     const token = localStorage.getItem("token");
-    const response = await fetch(`${BASE_URL}/mapel/${idMapel}/ujian/${idUjian}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await fetch(
+      `${BASE_URL}/mapel/${idMapel}/ujian/${idUjian}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
     const data = await response.json();
 
@@ -390,7 +396,14 @@ export async function addMateri(idMapel, judul, file) {
   }
 }
 
-export async function addUjian(idMapel, judul, isiUjian, waktu, file, deadline) {
+export async function addUjian(
+  idMapel,
+  judul,
+  isiUjian,
+  waktu,
+  file,
+  deadline
+) {
   try {
     const token = localStorage.getItem("token");
 

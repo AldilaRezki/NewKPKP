@@ -59,7 +59,9 @@ function HasilUjianKelas() {
         Hasil Ujian Peserta
       </h1>
 
-      <TabelHasilUjianKelas dataUjian={dataUjian || dataMap}></TabelHasilUjianKelas>
+      <TabelHasilUjianKelas
+        dataUjian={dataUjian || dataMap}
+      ></TabelHasilUjianKelas>
     </div>
   );
 }

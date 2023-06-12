@@ -1,7 +1,6 @@
 import React from "react";
 
 function BoxDaftarSoalEssay() {
-  
   return (
     <div className="flex flex-col mx-10 mt-8 bg-tosca px-[20px] py-[15px] gap-y-5">
       <div className="atasSoalEssay flex justify-between">
@@ -32,7 +31,8 @@ function BoxDaftarSoalEssay() {
         <span>Jawaban</span>
         <div className="bg-white flex flex-col gap-y-2 border-[0.3px] my-4 py-3 px-5 shadow-md h-fit">
           <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste, commodi?
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste,
+            commodi?
           </p>
         </div>
       </div>

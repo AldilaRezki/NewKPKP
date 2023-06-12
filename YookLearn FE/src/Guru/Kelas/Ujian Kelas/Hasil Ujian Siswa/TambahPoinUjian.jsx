@@ -1,9 +1,8 @@
-import React from 'react'
-import { RxCross2 } from 'react-icons/rx';
+import React from "react";
+import { RxCross2 } from "react-icons/rx";
 
-function TambahPoinUjian({visible, onClose}) {
-
-    if (!visible) return null;
+function TambahPoinUjian({ visible, onClose }) {
+  if (!visible) return null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-20 backdrop-blur-sm flex justify-center items-center">
@@ -15,7 +14,7 @@ function TambahPoinUjian({visible, onClose}) {
           </button>
         </div>
         <div className="flex flex-col gap-y-4">
-          <label className='flex align-center justify-center'>Poin Tugas</label>
+          <label className="flex align-center justify-center">Poin Tugas</label>
           <input
             type="number"
             id=""
@@ -31,7 +30,7 @@ function TambahPoinUjian({visible, onClose}) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default TambahPoinUjian
+export default TambahPoinUjian;
