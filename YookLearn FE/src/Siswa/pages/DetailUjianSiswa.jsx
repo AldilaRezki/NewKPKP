@@ -72,7 +72,11 @@ function DetailUjianSiswa() {
         </div>
       </div>
       <div>
-        <DetailUjianCard Ujian={dataUjian} idKelas={idKelas} idMapel={idMapel} />
+        <DetailUjianCard
+          Ujian={dataUjian}
+          idKelas={idKelas}
+          idMapel={idMapel}
+        />
       </div>
     </>
   );

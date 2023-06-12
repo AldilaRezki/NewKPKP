@@ -50,7 +50,14 @@ function TambahUjian() {
         `${deadlineHari} ${deadlineJam}`,
         "YYYY-MM-DD HH:mm"
       ).format("YYYY-MM-DD HH:mm:ss");
-      const isSuccess = await addUjian(idMapel, judul, isiUjian, waktu, file, deadline);
+      const isSuccess = await addUjian(
+        idMapel,
+        judul,
+        isiUjian,
+        waktu,
+        file,
+        deadline
+      );
       if (isSuccess) {
         navigate(
           `/guru/mapel/${idMapel}/ujian/${isSuccess.id}/tambah-soal-ujian`

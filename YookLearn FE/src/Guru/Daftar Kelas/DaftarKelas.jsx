@@ -32,7 +32,6 @@ function DaftarKelas() {
 
   return (
     <div>
-
       {/* <h1 className="text-biru mt-10 ml-10 text-xl font-semibold ">
         Daftar Kelas
       </h1> */}

@@ -94,7 +94,6 @@ const Tugas = () => {
                 {tugas.deadline}
               </h1>
             </div>
-
           </button>
           <Link to={`${tugas.id}/detail`}>
             {tugas.isOpen && (

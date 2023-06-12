@@ -42,7 +42,9 @@ function TambahPoin({
           </button>
         </div>
         <div className="flex flex-col gap-y-4">
-          <label className="flex justify-center">Poin Tugas {tugasIndividu.nama_pengirim}</label>
+          <label className="flex justify-center">
+            Poin Tugas {tugasIndividu.nama_pengirim}
+          </label>
           <input
             type="number"
             id=""
