@@ -18,7 +18,10 @@ function DetailUjianCard({ Ujian, idKelas, idMapel }) {
       </div>
       <div className="flex flex-row ml-[116px] mt-5">
         <h1 className="font-bold text-[#1A1F5A] "> Jumlah Test:</h1>
-        <h1 className="ml-[300px] text-[#1A1F5A] "> {Ujian.jumlah_soal} Soal </h1>
+        <h1 className="ml-[300px] text-[#1A1F5A] ">
+          {" "}
+          {Ujian.jumlah_soal} Soal{" "}
+        </h1>
       </div>
       <div className="flex flex-row ml-[116px] mt-5">
         <h1 className="font-bold text-[#1A1F5A] "> Waktu Pengerjaan:</h1>

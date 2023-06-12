@@ -52,15 +52,13 @@ function HasilUjianSiswa() {
           </span>
           <button
             onClick={() => {
-            setShowModal(true);
+              setShowModal(true);
             }}
           >
-          <span className="text-md flex mt-1 text-biru">Tambahkan Poin</span>
+            <span className="text-md flex mt-1 text-biru">Tambahkan Poin</span>
           </button>
           {showModal && (
-            <TambahPoinUjian
-              onClose={handleOnClose} visible={showModal}
-            />
+            <TambahPoinUjian onClose={handleOnClose} visible={showModal} />
           )}
         </div>
       </div>
@@ -77,4 +75,3 @@ function HasilUjianSiswa() {
 }
 
 export default HasilUjianSiswa;
-

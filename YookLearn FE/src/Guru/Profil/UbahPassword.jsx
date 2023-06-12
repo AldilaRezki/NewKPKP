@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import HeaderGuru from "../HeaderGuru";
-import { BsEye, BsEyeSlash } from 'react-icons/bs';
+import { BsEye, BsEyeSlash } from "react-icons/bs";
 import Header from "../Header";
 import { useNavigate } from "react-router-dom";
 import { resetPassword } from "../services/GuruAPI";
@@ -44,7 +44,7 @@ function UbahPassword() {
           <span>Password Lama</span>
           <form className="flex justify-between pr-6 gap-x-6 border-[1px] border-slate-200 shadow-md w-[330px]">
             <input
-              type={showOldPassword ? 'text' : 'password'}
+              type={showOldPassword ? "text" : "password"}
               placeholder="Masukkan password lama"
               value={old_password}
               onChange={(e) => setold_password(e.target.value)}
@@ -67,7 +67,7 @@ function UbahPassword() {
           <span>Password Baru</span>
           <form className="flex justify-between pr-6 gap-x-6 border-[1px] border-slate-200 shadow-md w-[330px]">
             <input
-              type={showNewPassword ? 'text' : 'password'}
+              type={showNewPassword ? "text" : "password"}
               placeholder="Masukkan password baru"
               className="flex py-3 pl-3 focus:outline-none w-[80%]"
               value={new_password}

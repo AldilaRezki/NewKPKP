@@ -37,7 +37,7 @@ function TabelHasilUjianKelas({ dataUjian }) {
                   {ujian.tipe_soal}
                 </td>
                 <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
-                  {ujian.benar || 0} 
+                  {ujian.benar || 0}
                 </td>
                 <td className="py-2 px-3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru text-center">
                   {ujian.salah || 0}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAddressCard,
@@ -21,6 +21,18 @@ import NavGuru from "../components/NavGuru";
 import LoadingPage from "../../Siswa/pages/LoadingPage";
 
 function Daftar2() {
+  const fileInputRef = useRef(null);
+
+  const handleImportClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    // Process the uploaded file here
+    console.log("Uploaded file:", file);
+  };
+
   const navigate = useNavigate();
   const login = isAuthenticated("admin");
   const [dataGuru, setDataGuru] = useState([]);
@@ -157,9 +169,14 @@ function Daftar2() {
               </a>
             </div>
           </span>
+          
           <span className="flex items-center">
             <div className="bg-gray-200 p-2 rounded-md m-2">
-              <a href="">
+              <button
+                type="button"
+                className=" text-white px-10 rounded-md "
+                onClick={handleImportClick}
+              >
                 <FontAwesomeIcon
                   icon={faFileImport}
                   className="text-[#1A1F5A] text-3xl ml-2"
@@ -167,7 +184,13 @@ function Daftar2() {
                 <span className=" ml-2 mr-4 font-bold text-xl text-[#1A1F5A]">
                   Import
                 </span>
-              </a>
+              </button>
+              <input
+                type="file"
+                style={{ display: "none" }}
+                ref={fileInputRef}
+                onChange={handleFileUpload}
+              />
             </div>
             <div className="bg-gray-200 p-2 rounded-md">
               <a href="/admin/daftarguru">
