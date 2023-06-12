@@ -842,13 +842,9 @@ class AdminController extends Controller
 
     public function importExcelSiswa(Request $request, $id_kelas)
     {
-        if ($request->hasFile('file')) {
-            $file = $request->file('file');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('uploads'), $filename);
-        }
+        $file = $request->file('excel_file');
+        $path = $file->getRealPath();
 
-        $path = public_path("public/uploads/$filename.xlsx");
 
         $data = Excel::import(new SiswaImport, $path);
 
