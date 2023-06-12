@@ -3,6 +3,7 @@ import LoginForm from "../components/LoginForm";
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { isAuthenticated } from "../services/Auth";
+import LoadingPage from "../../Siswa/pages/LoadingPage";
 
 export default function LoginPage() {
   const navigate = useNavigate();

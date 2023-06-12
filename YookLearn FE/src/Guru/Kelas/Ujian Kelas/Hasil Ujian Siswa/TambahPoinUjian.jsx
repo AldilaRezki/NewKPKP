@@ -1,9 +1,20 @@
-import React from 'react'
-import { RxCross2 } from 'react-icons/rx';
+import React, { useState } from "react";
+import { RxCross2 } from "react-icons/rx";
+import { submitNilaiUjian } from "../../../services/GuruAPI";
 
-function TambahPoinUjian({visible, onClose}) {
+function TambahPoinUjian({ visible, onClose, nilai, idSiswa, idUjian, setDataPoin }) {
+  if (!visible) return null;
 
-    if (!visible) return null;
+  const [poin, setPoin] = useState(nilai);
+
+  const handleSubmit = async () => {
+    const success = await submitNilaiUjian(idUjian, idSiswa, poin);
+
+    if (success) {
+      setDataPoin(poin);
+      onClose();
+    }
+  };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-20 backdrop-blur-sm flex justify-center items-center">
@@ -15,23 +26,27 @@ function TambahPoinUjian({visible, onClose}) {
           </button>
         </div>
         <div className="flex flex-col gap-y-4">
-          <label className='flex align-center justify-center'>Poin Tugas</label>
+          <label className="flex align-center justify-center">Poin Tugas</label>
           <input
             type="number"
             id=""
             name=""
+            value={poin}
+            onChange={(e) => setPoin(e.target.value)}
             className="w-[50%] mx-auto bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 border-[0.3px] shadow-md"
+            max={100}
+            min={nilai}
           />
           <button
             className="mt-6 py-2 px-5 bg-biru text-white w-fit mx-auto rounded-sm mb-8"
-            onClick={onClose}
+            onClick={handleSubmit}
           >
             Enter
           </button>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default TambahPoinUjian
+export default TambahPoinUjian;

@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import LoadingPage from "../../../../Siswa/pages/LoadingPage";
 import {
   fetchCurrentMapel,
+  fetchHasilPerseta,
   fetchUjianDetail,
   fetchUjianSubmit,
 } from "../../../services/GuruAPI";
@@ -21,7 +22,7 @@ function HasilUjianPeserta() {
 
   useEffect(() => {
     async function fetchData() {
-      const [mapelData, siswaData, ujianData] = await Promise.all([
+      const [mapelData, siswaData, ujianData, hasilData] = await Promise.all([
         fetchCurrentMapel(idMapel),
         fetchUjianSubmit(idMapel, idUjian),
         fetchUjianDetail(idUjian),

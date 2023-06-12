@@ -19,7 +19,6 @@ function TambahPoin({
     async function fetchData() {
       const data = await fetchIndividualSubmit(idMapel, idSubmit, idTugas);
       setTugasIndividu(data);
-      // setIsLoading(false);
     }
     fetchData();
   }, []);

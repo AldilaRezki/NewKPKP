@@ -1,16 +1,13 @@
 import React from "react";
 
-function BoxDaftarSoalEssay() {
-  
+function BoxDaftarSoalEssay({ soal }) {
   return (
     <div className="flex flex-col mx-10 mt-8 bg-tosca px-[20px] py-[15px] gap-y-5">
       <div className="atasSoalEssay flex justify-between">
         <div className="pertanyaanSoalEssay flex flex-col w-2/3 gap-y-2">
           <span>Pertanyaan</span>
           <span className="bg-white border-[0.3px]  p-5 shadow-md">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius
-            euismod nulla ut fermentum. Nunc ut risus auctor, iaculis nisi
-            euismod, faucibus sapien. Cras fringilla rutrum nisi id gravida.
+            {soal.pertanyaan}
           </span>
         </div>
         <div className="detailSoalEssay flex flex-col mr-28 gap-y-6">
@@ -23,7 +20,7 @@ function BoxDaftarSoalEssay() {
           <div className="poinSoalEssay flex flex-col">
             <span>Poin Soal</span>
             <span className="bg-white border-[0.3px] py-2 pl-3 shadow-md">
-              5
+              {soal.nilai}
             </span>
           </div>
         </div>
@@ -32,7 +29,7 @@ function BoxDaftarSoalEssay() {
         <span>Jawaban</span>
         <div className="bg-white flex flex-col gap-y-2 border-[0.3px] my-4 py-3 px-5 shadow-md h-fit">
           <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste, commodi?
+            {soal.jawaban || ""}
           </p>
         </div>
       </div>

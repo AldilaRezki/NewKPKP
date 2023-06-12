@@ -4,7 +4,7 @@ import Nav from "../components/Nav";
 import DetailTgsCard from "../components/DetailTgsCard";
 import { BsFillJournalBookmarkFill } from "react-icons/bs";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { fetchCurrentMapel, fetchCurrentTugas } from "../services/SiswaAPI";
+import { fetchCurrentMapel, fetchCurrentTugas, fetchCurrentUpload } from "../services/SiswaAPI";
 import { isAuthenticated } from "../../Common/services/Auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
@@ -16,6 +16,7 @@ function DetailTugas() {
   const { idKelas, idMapel, idTugas } = useParams();
   const [mapel, setMapel] = useState([]);
   const [dataTugas, setDataTugas] = useState([]);
+  const [dataUpload, setDataUpload] = useState([]);
 
   useEffect(() => {
     if (!login) {
@@ -25,12 +26,14 @@ function DetailTugas() {
 
   useEffect(() => {
     async function fetchData() {
-      const [tugasData, mapelData] = await Promise.all([
+      const [tugasData, mapelData, uploadData] = await Promise.all([
         fetchCurrentTugas(idTugas),
         fetchCurrentMapel(idMapel),
+        fetchCurrentUpload(idTugas)
       ]);
       setDataTugas(tugasData);
       setMapel(mapelData);
+      setDataUpload(uploadData);
       setIsLoading(false);
     }
     fetchData();
@@ -67,6 +70,7 @@ function DetailTugas() {
           idTugas={idTugas}
           idMapel={idMapel}
           dataTugas={dataTugas}
+          dataUpload={dataUpload}
         />
       </div>
     </>

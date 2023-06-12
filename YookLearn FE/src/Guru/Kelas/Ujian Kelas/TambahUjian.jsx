@@ -89,6 +89,7 @@ function TambahUjian() {
             className="bg-white mx-10 mt-3 h-8 border-[0.3px] shadow-md w-[95%] py-1 px-2 focus:outline-none focus:ring-1"
             value={judul}
             onChange={(e) => setJudul(e.target.value)}
+            required
           />
         </div>
 
@@ -112,6 +113,7 @@ function TambahUjian() {
                 className="mt-4 py-2 px-5 border-[0.3px] shadow-md"
                 value={waktu}
                 onChange={(e) => setWaktu(e.target.value)}
+                required
               />
             </div>
           </div>
@@ -126,6 +128,7 @@ function TambahUjian() {
                   className="mt-4 py-2 px-5 border-[0.3px] shadow-md"
                   value={deadlineHari}
                   onChange={(e) => setDeadlineHari(e.target.value)}
+                  required
                 />
               </div>
               <div className="flex gap-x-8">
@@ -134,6 +137,7 @@ function TambahUjian() {
                   className="mt-4 py-2 px-5 border-[0.3px] shadow-md"
                   value={deadlineJam}
                   onChange={(e) => setDeadlineJam(e.target.value)}
+                  required
                 />
               </div>
             </div>

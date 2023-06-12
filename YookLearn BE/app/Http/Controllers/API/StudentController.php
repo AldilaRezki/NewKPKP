@@ -181,6 +181,14 @@ class StudentController extends Controller
         return $tugas;
     }
 
+    public function getUploadTugas($idTugas)
+    {
+        $user = auth()->user();
+        $upload = DB::table('student_assigments')->get(['id', 'filename', 'created_at', 'id_siswa','id_tugas'])->where('id_siswa', $user['id'])->where('id_tugas', $idTugas);
+
+        return $upload;
+    }
+
     public function uploadTugas(Request $request, $idTugas)
     {
         $user = auth()->user();

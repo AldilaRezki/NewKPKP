@@ -316,6 +316,27 @@ export async function fetchCurentMapelMateri(idMapel) {
   }
 }
 
+export async function fetchCurrentUpload(idTugas) {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${BASE_URL}/tugas/${idTugas}/upload`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export async function fetchWaktuUjian(idUjian) {
   try {
     const token = localStorage.getItem("token");

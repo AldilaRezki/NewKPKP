@@ -76,13 +76,27 @@ function Detailmateri() {
         <div className="h-[49px] bg-[#EEF4FA] flex items-center rounded-lg">
           <h1 className="mx-4 text-[#1A1F5A]">{dataMateri.filename}</h1>
         </div>
-        
+
         <a href={downloadUrl} download>
           <MdDownloadForOffline className="mt-2 ml-2 flex-shrink-0 text-4xl" />
         </a>
-        <div className="w-[395px] h-[488px] bg-[#EEF4FA] rounded-lg ml-10 mb-10">
-          {/* Place your preview content here */}
-        </div>
+        {/* <div className="w-[395px] h-[488px] bg-[#EEF4FA] rounded-lg ml-10 mb-10">
+          {dataMateri.file_type === "pdf" && (
+            <iframe
+              src={`https://docs.google.com/gview?url=${BASE_URL}/${dataMateri.filename}&embedded=true`}
+              title="PDF Preview"
+              width="100%"
+              height="100%"
+              frameBorder="0"
+            ></iframe>
+          )}
+          {dataMateri.file_type === "image" && (
+            <img
+              src={`${BASE_URL}/${dataMateri.filename}`}
+              alt="Image Preview"
+            />
+          )}
+        </div> */}
       </div>
     </>
   );

@@ -3,6 +3,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { useState } from "react";
 // import { useHistory } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+import LoadingPage from "../../Siswa/pages/LoadingPage";
 
 export default function LoginForm() {
   const BASE_URL = import.meta.env.VITE_BASE_API;
@@ -14,6 +15,7 @@ export default function LoginForm() {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
+    setIsLoading(true);
     try {
       const response = await fetch(`${BASE_URL}/login`, {
         method: "POST",
@@ -37,6 +39,8 @@ export default function LoginForm() {
       // Menyimpan role user dari respons API
       const userRole = data.role;
 
+      setIsLoading(false);
+
       // Menyimpan token dan role user dari respons API pada local storage
       localStorage.setItem("token", data.token);
       localStorage.setItem("role", data.role);
@@ -52,6 +56,11 @@ export default function LoginForm() {
       setError(error.message);
     }
   };
+
+  const [isLoading, setIsLoading] = useState(false);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <div className="flex flex-col items-center mb-3">

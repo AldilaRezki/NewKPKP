@@ -1,9 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { MdDeleteOutline } from "react-icons/md";
 import { MdModeEditOutline } from "react-icons/md";
-import { fetchTugas } from "../../services/GuruAPI";
+import { fetchTugas, removeTugas } from "../../services/GuruAPI";
 
-function TabelDaftarTugas({ idMapel, dataTugas }) {
+function TabelDaftarTugas({ idMapel, idTugas, dataTugas, setTugas }) {
+  const [isRemoving, setIsRemoving] = useState(false);
+
+  const handleRemove = async (id) => {
+    try {
+      setIsRemoving(true);
+
+      const isSuccess = await removeTugas(idMapel, id);
+
+      if (isSuccess) {
+        console.log("Tugas removed successfully");
+        setTugas((prevTugas) => prevTugas.filter((tugas) => tugas.id !== id));
+      } else {
+        console.log("Failed to remove Tugas");
+      }
+    } catch (error) {
+      console.log("Error removing Tugas:", error);
+    } finally {
+      setIsRemoving(false);
+    }
+  };
+
   return (
     <div>
       <div className="flex flex-col ml-10 mt-14 mr-10 border-[0.3px] py-2 px-5 shadow-md">
@@ -46,7 +67,11 @@ function TabelDaftarTugas({ idMapel, dataTugas }) {
                     <MdModeEditOutline className="text-2xl mr-2 inline-block" />
                   </a>
                   <button>
-                    <MdDeleteOutline className="text-2xl inline-block mb-[1px]" />
+                    <MdDeleteOutline
+                      className="text-2xl inline-block mb-[1px]"
+                      onClick={() => handleRemove(tugas.id)}
+                      disabled={isRemoving}
+                    />
                   </button>
                 </td>
               </tr>

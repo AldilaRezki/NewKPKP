@@ -94,6 +94,7 @@ function TambahMateri({ onFileUpload }) {
               type="text"
               value={judul}
               onChange={(e) => setJudul(e.target.value)}
+              required
             />
           </div>
           {/* <h2 className="text-md mt-8 ml-10 font-normal text-biru">
@@ -135,6 +136,7 @@ function TambahMateri({ onFileUpload }) {
               id="fileInput"
               type="file"
               onChange={handleFileChange}
+              required
             />
           </div>
         </div>

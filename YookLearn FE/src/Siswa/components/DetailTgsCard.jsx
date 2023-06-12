@@ -9,9 +9,11 @@ export default function DetailTgsCard({
   idMapel,
   idTugas,
   dataTugas,
+  dataUpload,
 }) {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
+  const dataArray = Object.values(dataUpload);
 
   const handleFileUpload = async () => {
     const file = fileInputRef.current.files[0];
@@ -45,36 +47,26 @@ export default function DetailTgsCard({
         <hr className="border-t border-[#1A1F5A] w-[798px] ml-[103px] mt-6"></hr>
       </div>
       <div className="ml-[103px]">
-        <h1 className=" font-bold text-biru mt-5"> 
-        Pengumpulan Tugas
-        </h1>
+        <h1 className=" font-bold text-biru mt-5">Pengumpulan Tugas</h1>
         <table className="border-collapse border border-biru mt-5 text-biru ">
-      <thead>
-        <tr>
-          <th className="border border-biru p-2 w-[200px] "> File </th>
-          <th className="border border-biru p-2 w-[250px]"> Tanggal Upload</th>
-        </tr>
-      </thead>
-      <tbody>
-       <tr>
-        <td className="border border-biru p-2">
-          tugas1.pdf
-        </td>
-        <td className="border border-biru p-2">
-          2023-05-05
-        </td>
-       </tr>
-       <tr>
-       <td className="border border-biru p-2">
-          tugas1.ipynb
-        </td>
-        <td className="border border-biru p-2">
-          2023-05-05
-        </td>
-       </tr>
-      </tbody>
-    </table>
-
+          <thead>
+            <tr>
+              <th className="border border-biru p-2 w-[200px] "> File </th>
+              <th className="border border-biru p-2 w-[250px]">
+                {" "}
+                Tanggal Upload
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {dataArray.map((item, index) => (
+              <tr key={index}>
+                <td className="border border-biru p-2">{item.filename}</td>
+                <td className="border border-biru p-2">{item.created_at}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
       <div className="flex justify-center mt-6">
         <div>

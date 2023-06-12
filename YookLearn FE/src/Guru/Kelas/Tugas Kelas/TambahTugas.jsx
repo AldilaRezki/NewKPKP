@@ -106,6 +106,7 @@ function TambahTugas({ onFileUpload }) {
             type="text"
             value={judul}
             onChange={(e) => setJudul(e.target.value)}
+            required
           />
 
           <div className="mt-10 mb-8">
@@ -122,7 +123,7 @@ function TambahTugas({ onFileUpload }) {
             >
               Lampiran
             </label>
-            <input id="fileInput" type="file" onChange={handleFileChange} />
+            <input id="fileInput" type="file" onChange={handleFileChange} required />
           </div>
 
           <div className="flex ml-10 gap-x-9">
@@ -179,6 +180,7 @@ function TambahTugas({ onFileUpload }) {
                   className="bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 w-[360px] border-[0.3px] shadow-md mt-4"
                   value={tipeDeadline}
                   onChange={(e) => setTipeDeadline(e.target.value)}
+                  required
                 >
                   <option value="strict">Tidak dapat mengumpulkan tugas</option>
                   <option value="unstrict">Dapat mengumpulkan tugas</option>
@@ -204,7 +206,7 @@ function TambahTugas({ onFileUpload }) {
         </form>
       </div>
 
-      {/* <div>
+      {/* <div>F
         <h2 className="text-md mt-8 ml-10 font-normal text-biru">Isi Tugas</h2>
         <Form></Form>
       </div> */}

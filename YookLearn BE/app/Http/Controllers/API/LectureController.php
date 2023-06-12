@@ -762,9 +762,9 @@ class LectureController extends Controller
         $input['filename'] = $filename;
         $input['id_matpel'] = $subject->id;
 
-        //Test
-        $input['nilai'] = 100;
-        $input['tipe_deadline'] = 'unstrict';
+        // //Test
+        // $input['nilai'] = 100;
+        // $input['tipe_deadline'] = 'unstrict';
 
         // return $input;
 
@@ -1180,7 +1180,7 @@ class LectureController extends Controller
         $user = auth()->user();
 
         $soal = DB::table('questions')->get(["id", "tipe_soal", "id_ujian"])->where('id_ujian', $id_ujian)
-        ->where('tipe_soal', "!=" , "essai");
+            ->where('tipe_soal', "!=", "essai");
 
         foreach ($soal as $row) {
 
@@ -1200,7 +1200,7 @@ class LectureController extends Controller
 
             $tidakMenjawab = $jumlahIdSiswa - ($jumlahBenar + $jumlahSalah);
 
-            $persentase = ($jumlahBenar/$jumlahIdSiswa) * 100;
+            $persentase = ($jumlahBenar / $jumlahIdSiswa) * 100;
 
             $row->benar = $jumlahBenar;
             $row->salah = $jumlahSalah;
@@ -1209,5 +1209,41 @@ class LectureController extends Controller
         }
 
         return response()->json($soal);
+    }
+
+    public function getJawabanSiswa($idUjian, $idSiswa)
+    {
+        $soal = DB::table("questions")->get(['id', 'pertanyaan', 'tipe_soal', 'id_ujian'])->where('id_ujian', $idUjian)->where('tipe_soal', "essai");
+        $result = [];
+
+        foreach ($soal as $item) {
+            $jawaban = DB::table('test_submit_questions')->get(['id', 'id_siswa', 'tipe_soal', 'jawaban'])->where('tipe_soal', 'essai')->where('id_siswa', $idSiswa)->first();
+            if ($jawaban) {
+                $item->jawaban = $jawaban->jawaban;
+            } else {
+                $item->jawaban = "";
+            }
+
+            $result[] = $item;
+        }
+
+        return $result;
+    }
+    public function getPoinSiswa($idUjian, $idSiswa)
+    {
+        $poin = DB::table("collect_tests")->get(['id', 'id_siswa', 'nilai', 'id_ujian'])->where('id_siswa', $idSiswa)->where('id_ujian', $idUjian)->first();
+
+        return $poin;
+    }
+    public function updateNilaiUjian(Request $request, $idUjian, $idSiswa)
+    {
+        $poin = $request->input('nilai');
+
+        $affected = DB::table('collect_tests')
+            ->where('id_ujian', $idUjian)
+            ->where('id_siswa', $idSiswa)
+            ->update(['nilai' => $poin]);
+
+        return $affected;
     }
 }

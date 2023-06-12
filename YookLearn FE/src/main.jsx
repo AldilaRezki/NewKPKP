@@ -223,7 +223,7 @@ const router = createBrowserRouter([
     element: <HasilUjianPeserta />,
   },
   {
-    path: "/guru/mapel/:idMapel/ujian/:idUjian/hasil-ujian-siswa",
+    path: "/guru/mapel/:idMapel/ujian/:idUjian/hasil-ujian-siswa/:idSiswa",
     element: <HasilUjianSiswa />,
   },
   {
