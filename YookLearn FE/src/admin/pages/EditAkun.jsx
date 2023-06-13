@@ -36,7 +36,7 @@ function AdminEditAkun() {
   const handleSubmit = async () => {
     const isSuccess = await editAkun(userName, password, status, idAkun);
     if (isSuccess) {
-      navigate("/admin/berhasil");
+      navigate("/admin/berhasil/akunBiasa");
     }
   };
 

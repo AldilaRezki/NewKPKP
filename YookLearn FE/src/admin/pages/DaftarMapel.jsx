@@ -22,7 +22,7 @@ function tadmin() {
   const handleSubmit = async () => {
     const isSuccess = await addMapel(mapel, guru, idKelas);
     if (isSuccess) {
-      navigate("/admin/berhasil");
+      navigate(`/admin/berhasil/${idKelas}/mapel`);
     }
   };
 

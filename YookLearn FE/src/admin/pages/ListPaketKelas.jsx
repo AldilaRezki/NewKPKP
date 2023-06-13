@@ -117,7 +117,7 @@ function Daftar3() {
 
         <div className="flex justify-end">
           <span className="flex items-center">
-            <div className="bg-gray-200 p-2 rounded-md m-2">
+            {/* <div className="bg-gray-200 p-2 rounded-md m-2">
               <button
                 type="button"
                 className=" text-white px-10 rounded-md "
@@ -137,7 +137,7 @@ function Daftar3() {
                 ref={fileInputRef}
                 onChange={handleFileUpload}
               />
-            </div>
+            </div> */}
             <div className="bg-gray-200 p-2 rounded-md">
               <a href="/admin/daftarpaket">
                 <FontAwesomeIcon

@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LoadingPage from "../../Siswa/pages/LoadingPage";
 
-export default function LoginForm() {
+export default function LoginForm({ setIsLoading }) {
   const BASE_URL = import.meta.env.VITE_BASE_API;
 
   const [username, setUsername] = useState("");
@@ -56,11 +56,6 @@ export default function LoginForm() {
       setError(error.message);
     }
   };
-
-  const [isLoading, setIsLoading] = useState(false);
-  if (isLoading) {
-    return <LoadingPage />;
-  }
 
   return (
     <div className="flex flex-col items-center mb-3">

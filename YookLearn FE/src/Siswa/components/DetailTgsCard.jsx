@@ -12,6 +12,7 @@ export default function DetailTgsCard({
   dataUpload,
 }) {
   const navigate = useNavigate();
+
   const fileInputRef = useRef(null);
   const dataArray = Object.values(dataUpload);
 

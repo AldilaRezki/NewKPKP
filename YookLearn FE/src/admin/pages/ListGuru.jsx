@@ -14,37 +14,42 @@ import {
   faUserTie,
 } from "@fortawesome/free-solid-svg-icons";
 import Header from "../components/Header";
-import { fetchAll, removeAccount } from "../../Admin/services/AdminAPI";
+import { fetchAll, importGuru, removeAccount } from "../../Admin/services/AdminAPI";
 import { useNavigate } from "react-router-dom";
 import { isAuthenticated } from "../../Common/services/Auth";
 import NavGuru from "../components/NavGuru";
 import LoadingPage from "../../Siswa/pages/LoadingPage";
 
 function Daftar2() {
-  const fileInputRef = useRef(null);
-
-  const handleImportClick = () => {
-    fileInputRef.current.click();
-  };
-
-  const handleFileUpload = (e) => {
-    const file = e.target.files[0];
-    // Process the uploaded file here
-    console.log("Uploaded file:", file);
-  };
-
   const navigate = useNavigate();
   const login = isAuthenticated("admin");
   const [dataGuru, setDataGuru] = useState([]);
   const [isRemoving, setIsRemoving] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const fileInputRef = useRef(null);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const displayedResults = searchResults.slice(startIndex, endIndex);
 
   useEffect(() => {
     if (!login) {
       navigate("/");
     }
   }, [login, navigate]);
+
+  const handleFileUpload = async () => {
+    const file = fileInputRef.current.files[0];
+    setIsLoading(true);
+    const result = await importGuru(file);
+    if (result) {
+      setDataGuru(result);
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -84,36 +89,6 @@ function Daftar2() {
       setIsRemoving(false);
     }
   };
-
-  const students = [
-    {
-      id: 1,
-      name: "Phoenix Wells",
-      username: "Phoenix",
-      nip: "197410052007011006",
-      pangkat: "Pembina",
-      golongan: "Golongan II a",
-      mapel: "Matematika",
-    },
-    {
-      id: 2,
-      name: "Luna Frost",
-      username: "Luna",
-      nip: "198501102016011003",
-      pangkat: "Penata Muda",
-      golongan: "Golongan I a",
-      mapel: "Bahasa Indonesia",
-    },
-    {
-      id: 3,
-      name: "Orion Blackwood",
-      username: "Blackwood",
-      nip: "197907012009011005",
-      pangkat: "Penata Tingkat Satu",
-      golongan: "Golongan III a",
-      mapel: "Bahasa Inggris",
-    },
-  ];
 
   const [isLoading, setIsLoading] = useState(true);
   if (isLoading) {
@@ -169,13 +144,13 @@ function Daftar2() {
               </a>
             </div>
           </span>
-          
+
           <span className="flex items-center">
             <div className="bg-gray-200 p-2 rounded-md m-2">
               <button
                 type="button"
                 className=" text-white px-10 rounded-md "
-                onClick={handleImportClick}
+                onClick={() => fileInputRef.current.click()}
               >
                 <FontAwesomeIcon
                   icon={faFileImport}
@@ -270,7 +245,7 @@ function Daftar2() {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {searchResults.map((lecture, i) => (
+              {displayedResults.map((lecture, i) => (
                 <tr key={i}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                     {i + 1}
@@ -317,12 +292,20 @@ function Daftar2() {
             <div className="px-2">
               <FontAwesomeIcon icon={faLessThan} className="text-[#1A1F5A]" />
             </div>
-            <div className="px-2">1</div>
-            <div className="px-2">2</div>
-            <div className="px-2">3</div>
-            <div className="px-2">...</div>
-            <div className="px-2">9</div>
-            <div className="px-2">10</div>
+            {Array.from(
+              { length: Math.ceil(searchResults.length / itemsPerPage) },
+              (_, index) => (
+                <div
+                  key={index + 1}
+                  className={`px-2 ${
+                    currentPage === index + 1 ? "font-bold" : ""
+                  }`}
+                  onClick={() => setCurrentPage(index + 1)}
+                >
+                  {index + 1}
+                </div>
+              )
+            )}
             <div className="px-2">
               <FontAwesomeIcon
                 icon={faGreaterThan}

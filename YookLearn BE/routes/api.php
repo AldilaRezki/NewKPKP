@@ -45,6 +45,10 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'admin'], function (
     Route::post('siswa/edit/{id}', [AdminController::class, 'updateSiswa']);
     Route::delete('siswa/delete/{id}', [AdminController::class, 'deleteSiswa']);
 
+    Route::post('import/siswa/kelas/{id_kelas}', [AdminController::class, 'importExcelSiswa']);
+    Route::post('import/guru', [AdminController::class, 'importExcelGuru']);
+    Route::post('import/akun', [AdminController::class, 'importExcelAkun']);
+
     Route::post('kelas/add', [AdminController::class, 'addKelas']);
     Route::get('kelas/', [AdminController::class, 'getKelas']);
     Route::get('kelas/{id}', [AdminController::class, 'getKelasById']);
@@ -89,7 +93,7 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'lecture'], function
     Route::delete('matpel/{id_matpel}/tugas/{id_tugas}/delete', [LectureController::class, 'deleteTugas']);
     Route::get('matpel/{id_matpel}/tugas/{id_tugas}/submit/{id_kumpul}', [LectureController::class, 'getDetailIndividuTugas']);
     Route::post('matpel/{id_matpel}/tugas/{id_tugas}/submit/{id_kumpul}/comment/add', [LectureController::class, 'addKomentarTugas']);
-    
+
     Route::post('matpel/{id_matpel}/kumpul/{id_submit}', [LectureController::class, 'submitNilai']);
 
     Route::post('matpel/{id_matpel}/materi/add', [LectureController::class, 'addMateri']);

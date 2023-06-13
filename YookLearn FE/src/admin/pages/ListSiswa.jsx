@@ -21,24 +21,18 @@ import NavGuru from "../components/NavGuru";
 import LoadingPage from "../../Siswa/pages/LoadingPage";
 
 function Daftar() {
-  const fileInputRef = useRef(null);
-
-  const handleImportClick = () => {
-    fileInputRef.current.click();
-  };
-
-  const handleFileUpload = (e) => {
-    const file = e.target.files[0];
-    // Process the uploaded file here
-    console.log("Uploaded file:", file);
-  };
-
   const navigate = useNavigate();
   const login = isAuthenticated("admin");
   const [dataSiswa, setSiswa] = useState([]);
   const [isRemoving, setIsRemoving] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const displayedResults = searchResults.slice(startIndex, endIndex);
 
   useEffect(() => {
     if (!login) {
@@ -84,33 +78,6 @@ function Daftar() {
       setIsRemoving(false);
     }
   };
-
-  const students = [
-    {
-      id: 1,
-      name: "John Doe",
-      username: "John",
-      nisn: "1234567890",
-      gender: "L",
-      agama: "Islam",
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      username: "Jane",
-      nisn: "1234567890",
-      gender: "P",
-      agama: "Protestan",
-    },
-    {
-      id: 3,
-      name: "Bob Johnson",
-      username: "Bob",
-      nisn: "1234567890",
-      gender: "L",
-      agama: "Hindu",
-    },
-  ];
 
   const [isLoading, setIsLoading] = useState(true);
   if (isLoading) {
@@ -166,9 +133,9 @@ function Daftar() {
               </a>
             </div>
           </span>
-          
+
           <span className="flex items-center">
-            <div className="bg-gray-200 p-2 rounded-md m-2">
+            {/* <div className="bg-gray-200 p-2 rounded-md m-2">
               <button
                 type="button"
                 className=" text-white px-10 rounded-md "
@@ -188,7 +155,7 @@ function Daftar() {
                 ref={fileInputRef}
                 onChange={handleFileUpload}
               />
-            </div>
+            </div> */}
             <div className="bg-gray-200 p-2 rounded-md">
               <a href="/admin/daftarsiswa">
                 <FontAwesomeIcon
@@ -261,7 +228,7 @@ function Daftar() {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {searchResults.map((student, i) => (
+              {displayedResults.map((student, i) => (
                 <tr key={i}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                     {i + 1}
@@ -308,12 +275,20 @@ function Daftar() {
             <div className="px-2">
               <FontAwesomeIcon icon={faLessThan} className="text-[#1A1F5A]" />
             </div>
-            <div className="px-2">1</div>
-            <div className="px-2">2</div>
-            <div className="px-2">3</div>
-            <div className="px-2">...</div>
-            <div className="px-2">9</div>
-            <div className="px-2">10</div>
+            {Array.from(
+              { length: Math.ceil(searchResults.length / itemsPerPage) },
+              (_, index) => (
+                <div
+                  key={index + 1}
+                  className={`px-2 ${
+                    currentPage === index + 1 ? "font-bold" : ""
+                  }`}
+                  onClick={() => setCurrentPage(index + 1)}
+                >
+                  {index + 1}
+                </div>
+              )
+            )}
             <div className="px-2">
               <FontAwesomeIcon
                 icon={faGreaterThan}

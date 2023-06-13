@@ -60,7 +60,7 @@ function EditSiswa() {
       idSiswa
     );
     if (isSuccess) {
-      navigate("/admin/berhasil");
+      navigate("/admin/berhasil/akunSiswa");
     }
   };
 

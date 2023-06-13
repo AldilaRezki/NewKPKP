@@ -981,7 +981,7 @@ class LectureController extends Controller
         foreach ($input as $data) {
             $jumlahSoal += 1;
             $pertanyaan = DB::table('questions')->insertGetId([
-                'pertanyaan' => $data['pertanyaan'],
+                'pertanyaan' => strip_tags($data['pertanyaan']),
                 'tipe_soal' => $data['jenis'],
                 'nilai' => $data['poin'],
                 'id_ujian' => $id_Ujian
@@ -996,7 +996,7 @@ class LectureController extends Controller
                     }
 
                     DB::table('question_options')->insert([
-                        'deskripsi' => $jawaban,
+                        'deskripsi' => strip_tags($jawaban),
                         'tipe_opsi' => $tipe_opsi,
                         'id_soal' => $pertanyaan
                     ]);
@@ -1052,7 +1052,7 @@ class LectureController extends Controller
         foreach ($soal as $item) {
             $soalItem = [
                 'id' => $item->id,
-                'pertanyaan' => $item->pertanyaan,
+                'pertanyaan' => strip_tags($item->pertanyaan),
                 'tipe_soal' => $item->tipe_soal,
                 'opsi' => [],
                 'nilai' => $item->nilai,

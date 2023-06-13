@@ -35,7 +35,7 @@ function tadmin() {
     const isSuccess = await addKelas(paket, guru);
     console.log(isSuccess);
     if (isSuccess) {
-      navigate("/admin/berhasil");
+      navigate("/admin/berhasil/Kelas");
     }
   };
 

@@ -2,7 +2,10 @@
 
 namespace App\Imports;
 
+use App\Models\Account;
+use App\Models\Student;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Illuminate\Support\Facades\Request;
@@ -15,18 +18,21 @@ class SiswaImport implements ToCollection, WithHeadingRow
 
         foreach ($rows as $row) {
 
-            $nisn = $row['nisn'];
-            $namaLengkap = $row['nama_lengkap'];
-            $jenisKelamin = $row['jenis_kelamin'];
-            $agama = $row['agama'];
+            $inputAkun['username'] = $row['username'];
+            $inputAkun['password'] = bcrypt($row['password']);
+            $inputAkun['role'] = "siswa";
+            $inputAkun['namaUser'] = $row['nama_lengkap'];
 
-            DB::table('students')->insert([
-                'nisn' => $nisn,
-                'nama_lengkap' => $namaLengkap,
-                'jenis_kelamin' => $jenisKelamin,
-                'agama' => $agama,
-                'id_kelas' => $idKelas,
-            ]);
+            $akun = Account::create($inputAkun);
+
+            $input['id'] = $akun['id'];
+            $input['nisn'] = $row['nisn'];
+            $input['nama_lengkap'] = $row['nama_lengkap'];
+            $input['jenis_kelamin'] = $row['jenis_kelamin'];
+            $input['agama'] = $row['agama'];
+            $input['id_kelas'] = $idKelas;
+
+            Student::create($input);
         }
     }
 }

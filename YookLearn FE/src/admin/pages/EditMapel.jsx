@@ -40,7 +40,7 @@ function EditMapel() {
   const handleSubmit = async () => {
     const isSuccess = await editMapel(mapel, guru, idMapel, idKelas);
     if (isSuccess) {
-      navigate("/admin/berhasil");
+      navigate(`/admin/berhasil/${idKelas}/mapel`);
     }
   };
 

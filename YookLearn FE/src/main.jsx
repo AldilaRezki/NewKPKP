@@ -74,6 +74,7 @@ import EditGuru from "./Admin/pages/EditGuru";
 import AdminEditAkun from "./Admin/pages/EditAkun";
 import EditMapel from "./Admin/pages/EditMapel";
 import EditTugas from "./Guru/Kelas/Tugas Kelas/EditTugas";
+import BerhasilKelas from "./admin/pages/BerhasilKelas";
 
 const router = createBrowserRouter([
   {
@@ -223,7 +224,7 @@ const router = createBrowserRouter([
     element: <HasilUjianPeserta />,
   },
   {
-    path: "/guru/mapel/:idMapel/ujian/:idUjian/hasil-ujian-siswa/:idSiswa",
+    path: "/guru/mapel/:idMapel/ujian/:idUjian/hasil-ujian-siswa",
     element: <HasilUjianSiswa />,
   },
   {
@@ -257,8 +258,13 @@ const router = createBrowserRouter([
 
   //Admin
   {
-    path: "/admin/berhasil",
+    path: "/admin/berhasil/:nav",
     element: <AdBerhasil />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/admin/berhasil/:idKelas/:nav",
+    element: <BerhasilKelas />,
     errorElement: <ErrorPage />,
   },
   {

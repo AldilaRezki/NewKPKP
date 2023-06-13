@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Imports\AkunImport;
+use App\Imports\GuruImport;
 use App\Imports\SiswaImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -843,10 +845,44 @@ class AdminController extends Controller
     public function importExcelSiswa(Request $request, $id_kelas)
     {
         $file = $request->file('excel_file');
-        $path = $file->getRealPath();
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('uploads'), $filename);
 
+        $path = public_path('uploads/' . $filename);
 
-        $data = Excel::import(new SiswaImport, $path);
+        Excel::import(new SiswaImport, $path);
+
+        $data = DB::table("students")->get(['id', 'nisn', 'nama_lengkap', 'jenis_kelamin', 'agama', 'id_kelas'])->where('id_kelas', $id_kelas);
+
+        return $data;
+    }
+    public function importExcelGuru(Request $request)
+    {
+
+        $file = $request->file('excel_file');
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('uploads'), $filename);
+
+        $path = public_path('uploads/' . $filename);
+
+        Excel::import(new GuruImport, $path);
+
+        $data = DB::table("lecturers")->get(['id', 'nip', 'nama_lengkap', 'golongan', 'pangkat', 'matpel']);
+
+        return $data;
+    }
+    public function importExcelAkun(Request $request)
+    {
+
+        $file = $request->file('excel_file');
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('uploads'), $filename);
+
+        $path = public_path('uploads/' . $filename);
+
+        Excel::import(new AkunImport, $path);
+
+        $data = DB::table("accounts")->get(['id', 'username', 'role', 'nama_user']);
 
         return $data;
     }

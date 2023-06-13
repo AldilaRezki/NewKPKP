@@ -41,7 +41,7 @@ function EditPaket() {
   const handleSubmit = async () => {
     const isSuccess = await editKelas(paket, guru, idKelas);
     if (isSuccess) {
-      navigate("/admin/berhasil");
+      navigate("/admin/berhasil/Kelas");
     }
   };
 

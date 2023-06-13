@@ -5,19 +5,15 @@ import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import NavGuru from "../components/NavGuru";
 import { useParams } from "react-router-dom";
 
-function Berhasil() {
-  const { nav } = useParams();
+function BerhasilKelas() {
+  const { idKelas, nav } = useParams();
 
   let url = "/admin/homepage";
 
-  if (nav === "akunSiswa") {
-    url = "/admin/listsiswa";
-  } else if (nav === "akunGuru") {
-    url = "/admin/listguru";
-  } else if (nav === "akunBiasa") {
-    url = "/admin/listakun";
-  } else if (nav === "Kelas") {
-    url = "/admin/ListPaketKelas";
+  if (nav === "siswa") {
+    url = `/admin/ListPaketKelas/${idKelas}/siswa`;
+  } else if (nav === "mapel") {
+    url = `/admin/ListPaketKelas/${idKelas}/matapelajaran`;
   } else {
     url = "/admin/homepage";
   }
@@ -47,4 +43,4 @@ function Berhasil() {
   );
 }
 
-export default Berhasil;
+export default BerhasilKelas;
