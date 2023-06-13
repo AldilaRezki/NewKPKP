@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Imports\AkunImport;
+use App\Imports\GuruImport;
+use App\Imports\SiswaImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -11,6 +14,8 @@ use App\Models\Account;
 use App\Models\Student;
 use App\Models\Classes;
 use App\Models\Subject;
+use Maatwebsite\Excel\Facades\Excel;
+use stdClass;
 
 class AdminController extends Controller
 {
@@ -44,15 +49,14 @@ class AdminController extends Controller
 
         $akun = Account::create($input);
 
-        $success['token'] = $akun->createToken('auth_token')->plainTextToken;
-        $succes['name'] = $akun->nama_user;
-        $succes['role'] = $akun->role;
-        $succes['id'] = $akun->id;
+        // $success['token'] = $akun->createToken('auth_token')->plainTextToken;
+        // $succes['name'] = $akun->nama_user;
+        // $succes['role'] = $akun->role;
+        // $succes['id'] = $akun->id;
 
         $res = [
             'succes' => true,
             'massage' => 'Akun berhasil dibuat',
-            'data' => $succes
         ];
 
         return response()->json($res);
@@ -83,7 +87,7 @@ class AdminController extends Controller
             ]);
         }
 
-        $account = DB::table('accounts')->get()->where('id', $id);
+        $account = DB::table('accounts')->get(['id', 'role', 'username'])->where('id', $id)->first();
 
         return response()->json($account);
     }
@@ -103,43 +107,9 @@ class AdminController extends Controller
             'massage' => 'Akun berhasil di hapus'
         ];
 
-        if ($account = Account::where('id', $id)->delete()) {
-            $res = [
-                'success' => true,
-                'massage' => 'Akun berhasil di hapus'
-            ];
-        }
+        Account::where('id', $id)->delete();
 
         return response()->json($res);
-
-
-        // if (Lecturer::find($id)->delete()) {
-        //     if (Account::find($id)->delete()) {
-        //         return response()->json([
-        //             'success' => true,
-        //             'message' => 'Guru berhasil dihapus'
-        //         ]);
-        //     } else {
-        //         return response()->json([
-        //             'success' => false,
-        //             'message' => 'Guru gagal dihapus dihapus'
-        //         ]);
-        //     }
-        // }
-
-        // if (Student::find($id)->delete()) {
-        //     if (Account::find($id)->delete()) {
-        //         return response()->json([
-        //             'success' => true,
-        //             'message' => 'Siswa berhasil dihapus'
-        //         ]);
-        //     } else {
-        //         return response()->json([
-        //             'success' => false,
-        //             'message' => 'Siswa gagal dihapus dihapus'
-        //         ]);
-        //     }
-        // }
     }
 
     public function editAccount(Request $request, $id)
@@ -199,7 +169,7 @@ class AdminController extends Controller
 
         $user = auth()->user();
 
-        if (!$user['role'] == 'admin') {
+        if ($user['role'] != 'admin') {
             return response()->json([
                 'success' => false,
                 'massage' => 'Tidak memiliki otoritas',
@@ -210,12 +180,11 @@ class AdminController extends Controller
             'username' => 'required',
             'password' => 'required',
             'nama_lengkap' => 'required',
-            'jenis_kelamin' => 'required',
         ]);
 
         if ($validator->fails()) {
             return response()->json([
-                'success' => true,
+                'success' => false,
                 'message' => 'Ada Kesalahan',
                 'data' => $validator->errors(),
             ]);
@@ -274,7 +243,7 @@ class AdminController extends Controller
             ]);
         }
 
-        $lecture = DB::table('lecturers')->get()->where('id', $id);
+        $lecture = DB::table('lecturers')->get()->where('id', $id)->first();
 
         return response()->json($lecture);
     }
@@ -282,10 +251,11 @@ class AdminController extends Controller
     public function updateGuru(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'username' => 'required',
-            'password' => 'required',
             'nama_lengkap' => 'required',
-            'jenis_kelamin' => 'required',
+            'nip' => 'required',
+            'golongan' => 'required',
+            'pangkat' => 'required',
+            'matpel' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -318,9 +288,9 @@ class AdminController extends Controller
         $affected = DB::table('lecturers')->where('id', $id)->update($input);
 
         if ($affected) {
-            $akun = $affected;
+            $input = [];
+            $input['nama_user'] = $request->nama_lengkap;
             DB::table('accounts')->where('id', $id)->update($input);
-
             $res = [
                 'success' => true,
                 'message' => 'guru berhasil di update'
@@ -344,8 +314,7 @@ class AdminController extends Controller
             'message' => 'Guru berhasil dihapus'
         ];
 
-        if (!$affected) 
-        {
+        if (!$affected) {
             $res = [
                 'success' => false,
                 'message' => 'Guru gagal dihapus'
@@ -428,7 +397,9 @@ class AdminController extends Controller
             ]);
         }
 
-        $student = DB::table('student')->get()->where('id', $id);
+        $student = DB::table('students')->get()->where('id', $id)->first();
+        $class = DB::table('classess')->get(['id', 'nama_kelas'])->where('id', $student->id_kelas)->first();
+        $student->nama_kelas = $class->nama_kelas;
 
         return response()->json($student);
     }
@@ -462,7 +433,7 @@ class AdminController extends Controller
         if (!$student = DB::table('students')->get()->where('id', $id)) {
             $res = [
                 'success' => false,
-                'message' => 'guru tidak ditemukan'
+                'message' => 'siswa tidak ditemukan'
             ];
 
             return response()->json($res);
@@ -473,7 +444,8 @@ class AdminController extends Controller
         $affected = DB::table('students')->where('id', $id)->update($input);
 
         if ($affected) {
-            $akun = $affected;
+            $input = [];
+            $input['nama_user'] = $request->nama_lengkap;
             DB::table('accounts')->where('id', $id)->update($input);
 
             $res = [
@@ -563,16 +535,64 @@ class AdminController extends Controller
             ]);
         }
 
-        $class = Classes::get();
-        $subjects = DB::table('subjects')->get()->where('id', $$class['id']);
+        $class = DB::table('classess')->get();
+        $students = DB::table('students')->get();
+        $lecturers = DB::table('lecturers')->get();
 
-        $res = [
-            'success' => true,
-            'Class' => $class,
-            'Subjects' => $subjects
-        ];
+        foreach ($class as $i) {
+            $total = 0;
+            foreach ($students as $student) {
+                if ($student->id_kelas === $i->id) {
+                    $total += 1;
+                }
+            }
+            foreach ($lecturers as $lecturer) {
+                if ($lecturer->id === $i->id_guru) {
+                    $nama_guru = $lecturer->nama_lengkap;
+                }
+            }
+            $i->nama_guru = $nama_guru;
+            $i->jumlah_siswa = $total;
+        }
 
-        return response()->json($res);
+        return response()->json($class);
+    }
+
+    public function getSiswaByKelas($classID)
+    {
+        $user = auth()->user();
+
+        if ($user['role'] != 'admin') {
+            return response()->json([
+                'success' => false,
+                'massage' => 'Tidak memiliki otoritas',
+            ]);
+        }
+
+        $students = DB::table('students')->get()->where('id_kelas', $classID);
+
+        return response()->json($students);
+    }
+
+    public function getMapelByKelas($classID)
+    {
+        $user = auth()->user();
+
+        if ($user['role'] != 'admin') {
+            return response()->json([
+                'success' => false,
+                'massage' => 'Tidak memiliki otoritas',
+            ]);
+        }
+
+        $mapel = DB::table('subjects')->get()->where('id_kelas', $classID);
+
+        foreach ($mapel as $i) {
+            $lecture = DB::table('lecturers')->get()->where('id', $i->id_guru)->first();
+            $i->nama_guru = $lecture->nama_lengkap;
+        }
+
+        return $mapel;
     }
 
     public function getKelasById($id)
@@ -585,7 +605,18 @@ class AdminController extends Controller
             ]);
         }
 
-        $class = DB::table('classess')->get()->where('id', $id);
+        $class = DB::table('classess')->get()->where('id', $id)->first();
+        $lecture = DB::table('lecturers')->get(['id', 'nama_lengkap'])->where('id', $class->id_guru)->first();
+        $class->nama_guru = $lecture->nama_lengkap;
+
+        // $subjects = DB::table('subjects')->get()->where('id', $class->id);
+
+        // $class->subjects = $subjects;
+
+        // $res = [
+        //     'success' => true,
+        //     'class' => $class,
+        // ];
 
         return response()->json($class);
     }
@@ -650,8 +681,7 @@ class AdminController extends Controller
             'message' => 'Kelas berhasil dihapus'
         ];
 
-        if (!$affected) 
-        {
+        if (!$affected) {
             $res = [
                 'success' => false,
                 'message' => 'Kelas gagal dihapus'
@@ -721,8 +751,6 @@ class AdminController extends Controller
         $subjects = Subject::get();
 
         return response()->json($subjects);
-
-
     }
 
     public function getMatpelById($id)
@@ -735,7 +763,9 @@ class AdminController extends Controller
             ]);
         }
 
-        $subject = DB::table('subjects')->get()->where('id', $id);
+        $subject = DB::table('subjects')->get(['id', 'nama_matpel', 'id_guru', 'id_kelas'])->where('id', $id)->first();
+        $lecture = DB::table('lecturers')->get(['id', 'nama_lengkap'])->where('id', $subject->id_guru)->first();
+        $subject->nama_guru = $lecture->nama_lengkap;
 
         return response()->json($subject);
     }
@@ -744,7 +774,7 @@ class AdminController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_matpel' => 'required',
-            'jadwal' => 'required',
+            // 'jadwal' => 'required',
             'id_kelas' => 'required',
             'id_guru' => 'required',
         ]);
@@ -802,8 +832,7 @@ class AdminController extends Controller
             'message' => 'mata pelajaran berhasil dihapus'
         ];
 
-        if (!$affected) 
-        {
+        if (!$affected) {
             $res = [
                 'success' => false,
                 'message' => 'mata pelajaran gagal dihapus'
@@ -813,5 +842,48 @@ class AdminController extends Controller
         return response()->json($res);
     }
 
+    public function importExcelSiswa(Request $request, $id_kelas)
+    {
+        $file = $request->file('excel_file');
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('uploads'), $filename);
 
+        $path = public_path('uploads/' . $filename);
+
+        Excel::import(new SiswaImport, $path);
+
+        $data = DB::table("students")->get(['id', 'nisn', 'nama_lengkap', 'jenis_kelamin', 'agama', 'id_kelas'])->where('id_kelas', $id_kelas);
+
+        return $data;
+    }
+    public function importExcelGuru(Request $request)
+    {
+
+        $file = $request->file('excel_file');
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('uploads'), $filename);
+
+        $path = public_path('uploads/' . $filename);
+
+        Excel::import(new GuruImport, $path);
+
+        $data = DB::table("lecturers")->get(['id', 'nip', 'nama_lengkap', 'golongan', 'pangkat', 'matpel']);
+
+        return $data;
+    }
+    public function importExcelAkun(Request $request)
+    {
+
+        $file = $request->file('excel_file');
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('uploads'), $filename);
+
+        $path = public_path('uploads/' . $filename);
+
+        Excel::import(new AkunImport, $path);
+
+        $data = DB::table("accounts")->get(['id', 'username', 'role', 'nama_user']);
+
+        return $data;
+    }
 }

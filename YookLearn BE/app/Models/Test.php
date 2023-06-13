@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Test extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    use Uuids;
 
     /**
      * The attributes that are mass assignable.
@@ -21,12 +20,13 @@ class Test extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'judul_ujian',
         'deskripsi',
         'waktu',
-        'tanggal_ujian',
         'filename',
-        'tipe_soal',
-        'id_matpel'
+        "jumlah_soal",
+        "deadline",
+        'id_matpel',
     ];
 
     /**
@@ -44,9 +44,5 @@ class Test extends Authenticatable
      *
      * @var array<string, string>
      */
-    protected $casts = [
-        
-    ];
-
-
+    protected $casts = [];
 }

@@ -30,6 +30,7 @@ class AuthController extends Controller
         }
 
         $token = $user->createToken('auth_token')->plainTextToken;
+        $token = explode("|", $token)[1];
 
         $res = [
             'success' => true,
@@ -47,5 +48,10 @@ class AuthController extends Controller
         return [
             'message' => 'user logged out'
         ];
+    }
+    public function currentUser()
+    {
+        $user = auth()->user();
+        return response()->json($user);
     }
 }

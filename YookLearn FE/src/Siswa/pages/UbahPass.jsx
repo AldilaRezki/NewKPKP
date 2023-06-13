@@ -1,48 +1,80 @@
-import React, { useState } from 'react';
-import Header from '../components/Header';
-import Nav from '../components/Nav';
-import FormUbahPass from '../components/FormUbahPass';
+import React, { useEffect, useState } from "react";
+import { isAuthenticated } from "../../Common/services/Auth";
+import { useNavigate } from "react-router-dom";
+import Header from "../components/Header";
+import Nav from "../components/Nav";
+import FormUbahPass from "../components/FormUbahPass";
+import { resetPassword } from "../services/SiswaAPI";
 
 export default function UbahPass() {
+  const navigate = useNavigate();
+  const login = isAuthenticated("siswa");
+  const [new_password, setnew_password] = useState("");
+  const [old_password, setold_password] = useState("");
   const [showFormUbahPass, setShowFormUbahPass] = useState(false);
-
   const handleOnClose = () => setShowFormUbahPass(false);
+
+  useEffect(() => {
+    if (!login) {
+      navigate("/");
+    }
+  }, [login, navigate]);
+
+  const handleResetPassword = async () => {
+    const isSuccess = await resetPassword(new_password, old_password);
+    if (isSuccess) {
+      setShowFormUbahPass(true);
+    }
+  };
+
   return (
     <>
       <div>
         <Header />
         <Nav />
       </div>
-      <div className='flex justify-center items-center h-screen'>
-        <form className='bg-white p-6 rounded-lg shadow-lg'>
-          <h2 className='text-2xl font-bold mb-4 text-center text-[#1A1F5A]'>Ubah Kata Sandi</h2>
-          <div className='mb-4 mt-5'>
-            <label className='block text-[#1A1F5A] font-bold mb-2' htmlFor='password'>
+      <div className="flex justify-center items-center h-screen">
+        <form className="bg-white p-6 rounded-lg shadow-lg">
+          <h2 className="text-2xl font-bold mb-4 text-center text-[#1A1F5A]">
+            Ubah Kata Sandi
+          </h2>
+          <div className="mb-4 mt-5">
+            <label
+              className="block text-[#1A1F5A] font-bold mb-2"
+              htmlFor="password"
+            >
               Kata Sandi Lama
             </label>
             <input
-              type='password'
-              className='shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-[616px]'
-              id='name'
-              placeholder='Masukkan kata sandi lama'
+              type="password"
+              className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-[616px]"
+              placeholder="Masukkan kata sandi lama"
+              value={old_password}
+              onChange={(e) => setold_password(e.target.value)}
             />
           </div>
-          <div className='mt-5'>
-            <label className='block text-[#1A1F5A] font-bold mb-2' htmlFor='password'>
+          <div className="mt-5">
+            <label
+              className="block text-[#1A1F5A] font-bold mb-2"
+              htmlFor="password"
+            >
               Kata Sandi Baru
             </label>
             <input
-              type='password'
-              className='shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-[616px]'
-              id='name'
-              placeholder='Masukkan kata sandi baru'
+              // id="name"
+              type="password"
+              className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-[616px]"
+              placeholder="Masukkan kata sandi baru"
+              value={new_password}
+              onChange={(e) => setnew_password(e.target.value)}
             />
           </div>
 
           <button
-            onClick={() => setShowFormUbahPass(true)}
-            className='bg-[#1A1F5A] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-5'
-            type='button'>
+            onClick={handleResetPassword}
+            className="bg-[#1A1F5A] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-5"
+            type="button"
+          >
             Ubah Kata Sandi
           </button>
         </form>
