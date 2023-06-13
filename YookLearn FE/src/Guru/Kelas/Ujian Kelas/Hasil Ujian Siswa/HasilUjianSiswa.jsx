@@ -6,19 +6,35 @@ import BoxDaftarSoalEssay from "./BoxDaftarSoalEssay";
 import Header from "../../../Header";
 import { useParams } from "react-router-dom";
 import LoadingPage from "../../../../Siswa/pages/LoadingPage";
-import { fetchCurrentMapel } from "../../../services/GuruAPI";
+import {
+  fetchCurrentMapel,
+  fetchHasilPerseta,
+  fetchPoinSiswa,
+} from "../../../services/GuruAPI";
 import TambahPoinUjian from "./TambahPoinUjian";
 
 function HasilUjianSiswa() {
-  const { idMapel, idUjian } = useParams();
+  const { idMapel, idUjian, idSiswa } = useParams();
   const [dataMapel, setMapel] = useState([]);
+  const [dataUjian, setUjian] = useState([]);
+  const [dataPoin, setDataPoin] = useState(0);
 
   useEffect(() => {
     async function fetchData() {
-      const data = await fetchCurrentMapel(idMapel);
-      setMapel(data);
+      const [mapelData, ujianData, poinData] = await Promise.all([
+        fetchCurrentMapel(idMapel),
+        fetchHasilPerseta(idUjian, idSiswa),
+        fetchPoinSiswa(idUjian, idSiswa),
+      ]);
+
+      setMapel(mapelData);
+      setUjian(ujianData);
+      if (poinData) {
+        setDataPoin(poinData.nilai);
+      }
       setIsLoading(false);
     }
+
     fetchData();
   }, []);
 
@@ -48,7 +64,7 @@ function HasilUjianSiswa() {
         <div className="mr-28 flex flex-col">
           <span>Poin yang diperoleh</span>
           <span className="text-md mt-5 py-2 px-3 border-[0,3px] shadow-md text-biru">
-            -/100
+            {dataPoin || 0}/100
           </span>
           <button
             onClick={() => {
@@ -58,18 +74,26 @@ function HasilUjianSiswa() {
             <span className="text-md flex mt-1 text-biru">Tambahkan Poin</span>
           </button>
           {showModal && (
-            <TambahPoinUjian onClose={handleOnClose} visible={showModal} />
+            <TambahPoinUjian
+              onClose={handleOnClose}
+              visible={showModal}
+              nilai={dataPoin || 0}
+              idSiswa={idSiswa}
+              idUjian={idUjian}
+              setDataPoin={setDataPoin}
+            />
           )}
         </div>
       </div>
 
-      <div className="essay">
-        <span className="flex mt-2 ml-10 text-lg font-semibold text-biru">
-          1
-        </span>
-
-        <BoxDaftarSoalEssay></BoxDaftarSoalEssay>
-      </div>
+      {dataUjian.map((item, index) => (
+        <div className="essay" key={index}>
+          <span className="flex mt-2 ml-10 text-lg font-semibold text-biru">
+            {index + 1}
+          </span>
+          <BoxDaftarSoalEssay soal={item} />
+        </div>
+      ))}
     </div>
   );
 }

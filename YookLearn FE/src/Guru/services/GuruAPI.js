@@ -368,6 +368,54 @@ export async function fetchHasilUjianKelas(idMapel, idUjian) {
   }
 }
 
+export async function fetchHasilPerseta(idUjian, idSiswa) {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(
+      `${BASE_URL}/ujian/${idUjian}/hasil/${idSiswa}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function fetchPoinSiswa(idUjian, idSiswa) {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(
+      `${BASE_URL}/ujian/${idUjian}/poin/${idSiswa}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export async function addMateri(idMapel, judul, file) {
   try {
     const token = localStorage.getItem("token");
@@ -524,7 +572,6 @@ export async function updateTugas(
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
         },
         body: formData,
       }
@@ -567,6 +614,60 @@ export async function submitNilai(idMapel, idSubmit, nilai) {
     } else {
       throw new Error("Terjadi kesalahan saat mengirimkan nilai");
     }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function submitNilaiUjian(idUjian, idSiswa, nilai) {
+  try {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(
+      `${BASE_URL}/ujian/${idUjian}/submit/${idSiswa}/update`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          nilai: nilai,
+        }),
+      }
+    );
+
+    const data = await response.json();
+
+    if (response.ok) {
+      return true;
+    } else {
+      throw new Error("Terjadi kesalahan saat mengirimkan nilai");
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function removeTugas(idMapel, idTugas) {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(
+      `${BASE_URL}/matpel/${idMapel}/tugas/${idTugas}/delete`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+    return true;
   } catch (error) {
     console.error(error);
   }

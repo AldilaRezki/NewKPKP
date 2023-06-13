@@ -33,7 +33,7 @@ function tguru() {
       mapel
     );
     if (isSuccess) {
-      navigate("/admin/berhasil");
+      navigate("/admin/berhasil/akunGuru");
     }
   };
 

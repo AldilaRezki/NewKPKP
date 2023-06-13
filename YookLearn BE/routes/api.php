@@ -45,6 +45,10 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'admin'], function (
     Route::post('siswa/edit/{id}', [AdminController::class, 'updateSiswa']);
     Route::delete('siswa/delete/{id}', [AdminController::class, 'deleteSiswa']);
 
+    Route::post('import/siswa/kelas/{id_kelas}', [AdminController::class, 'importExcelSiswa']);
+    Route::post('import/guru', [AdminController::class, 'importExcelGuru']);
+    Route::post('import/akun', [AdminController::class, 'importExcelAkun']);
+
     Route::post('kelas/add', [AdminController::class, 'addKelas']);
     Route::get('kelas/', [AdminController::class, 'getKelas']);
     Route::get('kelas/{id}', [AdminController::class, 'getKelasById']);
@@ -89,7 +93,7 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'lecture'], function
     Route::delete('matpel/{id_matpel}/tugas/{id_tugas}/delete', [LectureController::class, 'deleteTugas']);
     Route::get('matpel/{id_matpel}/tugas/{id_tugas}/submit/{id_kumpul}', [LectureController::class, 'getDetailIndividuTugas']);
     Route::post('matpel/{id_matpel}/tugas/{id_tugas}/submit/{id_kumpul}/comment/add', [LectureController::class, 'addKomentarTugas']);
-    
+
     Route::post('matpel/{id_matpel}/kumpul/{id_submit}', [LectureController::class, 'submitNilai']);
 
     Route::post('matpel/{id_matpel}/materi/add', [LectureController::class, 'addMateri']);
@@ -105,6 +109,9 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'lecture'], function
     Route::get('mapel/{id_mapel}/ujian/{id_ujian}/kumpul', [LectureController::class, 'getDetailKumpulUjian']);
     Route::get('mapel/{id_mapel}/ujian/{id_ujian}/siswa/{id_siswa}', [LectureController::class, 'getDetailKumpulSiswa']);
     Route::get('mapel/{id_mapel}/ujian/{id_ujian}', [LectureController::class, 'getDetailUjianKelas']);
+    Route::get('ujian/{idUjian}/hasil/{idSiswa}', [LectureController::class, 'getJawabanSiswa']);
+    Route::get('ujian/{idUjian}/poin/{idSiswa}', [LectureController::class, 'getPoinSiswa']);
+    Route::post('ujian/{idUjian}/submit/{idSiswa}/update', [LectureController::class, 'updateNilaiUjian']);
 });
 
 // Student Routes
@@ -119,6 +126,7 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'student'], function
     Route::get('/matpel/{id_matpel}/tugas', [StudentController::class, 'getTugas']);
     Route::get('/tugas/{idTugas}', [StudentController::class, 'getDetailTugas']);
     Route::post('/tugas/{idTugas}/add', [StudentController::class, 'uploadTugas']);
+    Route::get('/tugas/{idTugas}/upload', [StudentController::class, 'getUploadTugas']);
 
     Route::get('/matpel/{idMatpel}/materi', [StudentController::class, 'getMateri']);
     Route::get('/materi/{idMateri}', [StudentController::class, 'getDetailMateri']);

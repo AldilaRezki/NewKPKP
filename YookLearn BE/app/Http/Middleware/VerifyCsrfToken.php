@@ -14,7 +14,7 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         //
         'http://localhost:8000/api/login',
-        
+
         'http://localhost:8000/api/admin/siswa/add',
         'http://localhost:8000/api/admin/siswa/edit/*',
         'http://localhost:8000/api/admin/guru/add',
@@ -28,15 +28,21 @@ class VerifyCsrfToken extends Middleware
         'http://localhost:8000/api/admin/matpel/edit/*',
         'http://localhost:8000/api/admin/matpel/delete/*',
         'http://localhost:8000/api/admin/account/delete/*',
-        
+
+        'http://localhost:8000/api/admin/import/siswa/kelas/*',
+        'http://localhost:8000/api/admin/import/guru',
+        'http://localhost:8000/api/admin/import/akun',
+
         'http://localhost:8000/api/lecture/profile/editpassword',
         'http://localhost:8000/api/lecture/matpel/*/materi/add',
         'http://localhost:8000/api/lecture/matpel/*/tugas/add',
         'http://localhost:8000/api/lecture/matpel/*/tugas/*/edit',
+        'http://localhost:8000/api/lecture/matpel/*/tugas/*/delete',
         'http://localhost:8000/api/lecture/matpel/*/kumpul/*',
         'http://localhost:8000/api/lecture/matpel/*/ujian/add',
         'http://localhost:8000/api/lecture/ujian/*/tambahSoal',
-        
+        'http://localhost:8000/api/lecture/ujian/*/submit/*/update',
+
         'http://localhost:8000/api/student/editpassword',
         'http://localhost:8000/api/student/tugas/*/add',
         'http://localhost:8000/api/student/ujian/*/submit',

@@ -24,6 +24,8 @@ class Lecturer extends Authenticatable
         'nama_lengkap',
         'jenis_kelamin',
         'golongan',
+        'pangkat',
+        'matpel',
         'id_matpel',
     ];
 

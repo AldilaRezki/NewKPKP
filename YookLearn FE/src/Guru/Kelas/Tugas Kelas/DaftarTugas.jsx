@@ -58,6 +58,7 @@ function DaftarTugas() {
       <TabelDaftarTugas
         idMapel={idMapel}
         dataTugas={dataTugas}
+        setTugas={setTugas}
       ></TabelDaftarTugas>
     </div>
   );

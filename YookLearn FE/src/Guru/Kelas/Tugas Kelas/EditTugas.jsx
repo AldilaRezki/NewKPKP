@@ -74,9 +74,9 @@ function EditTugas({ onFileUpload }) {
         nilai,
         tipeDeadline
       );
-      console.log(isSuccess);
+
       if (isSuccess) {
-        console.log("Assigment added successfully");
+        console.log("Assigment edit successfully");
         navigate(`/guru/mapel/${idMapel}/daftar-tugas`);
       }
     } catch (error) {
@@ -111,6 +111,7 @@ function EditTugas({ onFileUpload }) {
             type="text"
             value={judul}
             onChange={(e) => setJudul(e.target.value)}
+            required
           />
           <div className="form-input-row mt-5">
             <label
@@ -125,6 +126,7 @@ function EditTugas({ onFileUpload }) {
                 id="fileInput"
                 type="file"
                 onChange={handleFileChange}
+                required
               />
             </div>
           </div>
@@ -140,6 +142,7 @@ function EditTugas({ onFileUpload }) {
                   className="mt-4 py-2 px-5 border-[0.3px] shadow-md"
                   value={tenggat}
                   onChange={(e) => setTenggat(e.target.value)}
+                  required
                 />
               </div>
             </div>
@@ -170,6 +173,7 @@ function EditTugas({ onFileUpload }) {
                   className="mt-4 py-2 px-5 border-[0.3px] shadow-md"
                   value={nilai}
                   onChange={(e) => setNilai(e.target.value)}
+                  required
                 />
               </div>
             </div>
@@ -183,6 +187,7 @@ function EditTugas({ onFileUpload }) {
                   className="bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 w-[360px] border-[0.3px] shadow-md mt-4"
                   value={tipeDeadline}
                   onChange={(e) => setTipeDeadline(e.target.value)}
+                  required
                 >
                   <option value="strict">Tidak dapat mengumpulkan tugas</option>
                   <option value="unstrict">Dapat mengumpulkan tugas</option>

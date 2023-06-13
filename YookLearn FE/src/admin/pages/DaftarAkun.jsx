@@ -22,7 +22,7 @@ function tadmin() {
   const handleSubmit = async () => {
     const isSuccess = await addAkun(username, password, status, nama);
     if (isSuccess) {
-      navigate("/admin/berhasil");
+      navigate("/admin/berhasil/akunBiasa");
     }
   };
 

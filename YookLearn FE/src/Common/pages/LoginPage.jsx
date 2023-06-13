@@ -3,6 +3,7 @@ import LoginForm from "../components/LoginForm";
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { isAuthenticated } from "../services/Auth";
+import LoadingPage from "../../Siswa/pages/LoadingPage";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -15,6 +16,11 @@ export default function LoginPage() {
     }
   }, [login, navigate]);
 
+  const [isLoading, setIsLoading] = useState(false);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+
   return (
     <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center min-h-screen py-2">
       <div className="bg-white rounded-2xl shadow-2xl flex w-2/3 max-w-4xl">
@@ -25,7 +31,7 @@ export default function LoginPage() {
           <div className="py-10 ">
             <h2 className="text-3xl font-bold text-[#1A1F5A] mb-2 ">Login</h2>
             <div className="border-2 w-10 border-[#1A1F5A] inline-block mb-2"></div>
-            <LoginForm />
+            <LoginForm setIsLoading={setIsLoading} />
           </div>
         </div>
         <div className="w-2/5 bg-[#1A1F5A] text-white rounded-tr-2xl rounded-br-2xl py-36">

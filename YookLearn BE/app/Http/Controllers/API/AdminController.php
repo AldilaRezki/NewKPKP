@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Imports\AkunImport;
+use App\Imports\GuruImport;
+use App\Imports\SiswaImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -11,6 +14,7 @@ use App\Models\Account;
 use App\Models\Student;
 use App\Models\Classes;
 use App\Models\Subject;
+use Maatwebsite\Excel\Facades\Excel;
 use stdClass;
 
 class AdminController extends Controller
@@ -53,7 +57,6 @@ class AdminController extends Controller
         $res = [
             'succes' => true,
             'massage' => 'Akun berhasil dibuat',
-            // 'data' => $succes
         ];
 
         return response()->json($res);
@@ -837,5 +840,50 @@ class AdminController extends Controller
         }
 
         return response()->json($res);
+    }
+
+    public function importExcelSiswa(Request $request, $id_kelas)
+    {
+        $file = $request->file('excel_file');
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('uploads'), $filename);
+
+        $path = public_path('uploads/' . $filename);
+
+        Excel::import(new SiswaImport, $path);
+
+        $data = DB::table("students")->get(['id', 'nisn', 'nama_lengkap', 'jenis_kelamin', 'agama', 'id_kelas'])->where('id_kelas', $id_kelas);
+
+        return $data;
+    }
+    public function importExcelGuru(Request $request)
+    {
+
+        $file = $request->file('excel_file');
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('uploads'), $filename);
+
+        $path = public_path('uploads/' . $filename);
+
+        Excel::import(new GuruImport, $path);
+
+        $data = DB::table("lecturers")->get(['id', 'nip', 'nama_lengkap', 'golongan', 'pangkat', 'matpel']);
+
+        return $data;
+    }
+    public function importExcelAkun(Request $request)
+    {
+
+        $file = $request->file('excel_file');
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('uploads'), $filename);
+
+        $path = public_path('uploads/' . $filename);
+
+        Excel::import(new AkunImport, $path);
+
+        $data = DB::table("accounts")->get(['id', 'username', 'role', 'nama_user']);
+
+        return $data;
     }
 }

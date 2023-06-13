@@ -3,8 +3,25 @@ import Header from "../components/Header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import NavGuru from "../components/NavGuru";
+import { useParams } from "react-router-dom";
 
-function simpan() {
+function Berhasil() {
+  const { nav } = useParams();
+
+  let url = "/admin/homepage";
+
+  if (nav === "akunSiswa") {
+    url = "/admin/listsiswa";
+  } else if (nav === "akunGuru") {
+    url = "/admin/listguru";
+  } else if (nav === "akunBiasa") {
+    url = "/admin/listakun";
+  } else if (nav === "Kelas") {
+    url = "/admin/ListPaketKelas";
+  } else {
+    url = "/admin/homepage";
+  }
+
   return (
     <div className=" bg-white max-h-screen">
       <Header />
@@ -17,12 +34,12 @@ function simpan() {
           type="submit"
           className="bg-gradient-to-r from-[#1A1F5A] via-[#203da7] to-[#1c63cf] text-white p-4 rounded-lg"
         >
-          <a href="/admin/homepage" className="flex">
+          <a href={url} className="flex">
             <FontAwesomeIcon
               icon={faCircleCheck}
               className=" text-white text-5xl"
             />
-            <h1 className=" text-xl p-2">Simpan</h1>
+            <h1 className=" text-xl p-2">Oke</h1>
           </a>
         </button>
       </main>
@@ -30,4 +47,4 @@ function simpan() {
   );
 }
 
-export default simpan;
+export default Berhasil;

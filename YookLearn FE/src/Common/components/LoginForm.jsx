@@ -3,8 +3,9 @@ import { FaUserCircle } from "react-icons/fa";
 import { useState } from "react";
 // import { useHistory } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+import LoadingPage from "../../Siswa/pages/LoadingPage";
 
-export default function LoginForm() {
+export default function LoginForm({ setIsLoading }) {
   const BASE_URL = import.meta.env.VITE_BASE_API;
 
   const [username, setUsername] = useState("");
@@ -14,6 +15,7 @@ export default function LoginForm() {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
+    setIsLoading(true);
     try {
       const response = await fetch(`${BASE_URL}/login`, {
         method: "POST",
@@ -36,6 +38,8 @@ export default function LoginForm() {
 
       // Menyimpan role user dari respons API
       const userRole = data.role;
+
+      setIsLoading(false);
 
       // Menyimpan token dan role user dari respons API pada local storage
       localStorage.setItem("token", data.token);

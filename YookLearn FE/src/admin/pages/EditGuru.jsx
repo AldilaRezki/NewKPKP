@@ -45,7 +45,7 @@ function EditGuru() {
       idGuru
     );
     if (isSuccess) {
-      navigate("/admin/berhasil");
+      navigate("/admin/berhasil/akunGuru");
     }
   };
 

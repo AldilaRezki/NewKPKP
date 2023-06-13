@@ -569,3 +569,84 @@ export async function fetchMapelByKelas(idKelas) {
     console.error(error);
   }
 }
+
+export async function importSiswa(file, idKelas) {
+  try {
+    const token = localStorage.getItem("token");
+
+    const formData = new FormData();
+    formData.append("excel_file", file);
+
+    const response = await fetch(`${BASE_URL}/import/siswa/kelas/${idKelas}`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+    return data;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
+
+export async function importGuru(file) {
+  try {
+    const token = localStorage.getItem("token");
+
+    const formData = new FormData();
+    formData.append("excel_file", file);
+
+    const response = await fetch(`${BASE_URL}/import/guru`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+    return data;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
+
+export async function importAkun(file) {
+  try {
+    const token = localStorage.getItem("token");
+
+    const formData = new FormData();
+    formData.append("excel_file", file);
+
+    const response = await fetch(`${BASE_URL}/import/akun`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+    return data;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
