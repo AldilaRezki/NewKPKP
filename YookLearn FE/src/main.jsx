@@ -77,6 +77,10 @@ import AdminEditAkun from "./Admin/pages/EditAkun";
 import EditMapel from "./Admin/pages/EditMapel";
 import EditTugas from "./Guru/Kelas/Tugas Kelas/EditTugas";
 import BerhasilKelas from "./admin/pages/BerhasilKelas";
+import TambahBatch from "./Guru/TambahBatch";
+import TambahAkun from "./Guru/TambahAkun";
+import Logbook from "./Guru/Logbook";
+import DaftarLogbook from "./Guru/DaftarLogbook";
 
 const router = createBrowserRouter([
   {
@@ -180,6 +184,22 @@ const router = createBrowserRouter([
   {
     path: "/guru/daftarkelas",
     element: <DaftarKelas />,
+  },
+  {
+    path: "/guru/tambah-batch",
+    element: <TambahBatch />,
+  },
+  {
+    path: "/guru/tambah-akun",
+    element: <TambahAkun />,
+  },
+  {
+    path: "/guru/logbook",
+    element: <Logbook />,
+  },
+  {
+    path: "/guru/daftar-logbook",
+    element: <DaftarLogbook />,
   },
   {
     path: "/guru/mapel/:idMapel",
