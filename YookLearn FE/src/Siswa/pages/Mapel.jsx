@@ -60,7 +60,7 @@ const Mapel = () => {
         <div className="mt-16 ml-10 w-1/2 flex">
           <BsList className="text-[#1A1F5A] text-2xl" />
           <h1 className="text-xl ml-5 text-slate-400 font-bold">
-            Daftar Mata Pelajaran
+            Daftar Materi
           </h1>
         </div>
         <div className="flex justify-end mr-10">
@@ -68,7 +68,7 @@ const Mapel = () => {
             <input
               className=" rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               type="text"
-              placeholder="Cari Mata Pelajaran"
+              placeholder="Cari Materi"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
