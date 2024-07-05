@@ -5,7 +5,8 @@ import ButtonSignOut from "./ButtonSignOut";
 const Nav = () => {
   let Links = [
     { name: "Homepage", link: "/siswa/homepage" },
-    { name: "Kelas", link: "/siswa/kelas" },
+    { name: "Batch", link: "/siswa/kelas" },
+    { name: "Logbook", link: "/siswa/logbook" },
   ];
   return (
     <div className="shadow-md flex justify-between w-full h-10 bg-[#EEF4FA] ">

@@ -22,6 +22,8 @@ import Materi from "./Siswa/pages/Materi";
 import Detailmateri from "./Siswa/pages/Detailmateri";
 import StudentPage from "./Siswa/pages/StudentPage";
 import DaftarSiswa from "./Siswa/pages/DaftarSiswa";
+import Logbook from "./Siswa/pages/Logbook";
+import LogbookForm from "./Siswa/pages/LogbookForm";
 
 import HomepageUtama from "./Guru/Homepage Utama/HomepageUtama";
 import DaftarKelas from "./Guru/Daftar Kelas/DaftarKelas";
@@ -152,6 +154,18 @@ const router = createBrowserRouter([
     element: <ExamPage />,
     errorElement: <ErrorPage />,
   },
+  {
+    path: "/siswa/logbook",
+    element: <Logbook />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/siswa/logbook/tambahlogbook",
+    element: <LogbookForm />,
+    errorElement: <ErrorPage />,
+  },
+ 
+
   // {
   //   path: "/siswa/test",
   //   element: <InputFormBerita />,
@@ -375,3 +389,4 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 //     <App />
 //   </React.StrictMode>
 // );
+
