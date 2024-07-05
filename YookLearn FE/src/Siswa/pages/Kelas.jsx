@@ -53,7 +53,7 @@ function Kelas() {
         <div className="mt-16 ml-10 w-1/2 flex">
           <MdOutlineDriveFileMove className="text-2xl text-[#1A1F5A]" />
           <h1 className="font-bold ml-4 text-[#1A1F5A]">
-            SEMESTER AWAL 2022/2023
+            BATCH 1
           </h1>
         </div>
         <Link to={`${kelas.id}`}>
@@ -76,9 +76,9 @@ function Kelas() {
       <div className="flex justify-end px-10 pt-8">
         <EditAkun />
       </div>
-      <div className="flex justify-end mt-1.5 mr-10 px-10 mb-20">
+      {/* <div className="flex justify-end mt-1.5 mr-10 px-10 mb-20">
         <ListTugas dataTugas={tugas} />
-      </div>
+      </div> */}
     </>
   );
 }

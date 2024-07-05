@@ -13,6 +13,8 @@ import Tugas from "../Siswa/pages/Tugas";
 import Materi from "../Siswa/pages/Materi";
 import Detailmateri from "../Siswa/pages/Detailmateri";
 import StudentPage from "../Siswa/pages/StudentPage";
+import Logbook from "../Siswa/pages/Logbook";
+import LogbookForm from "../Siswa/pages/LogbookForm";
 
 import HomepageUtama from "../Guru/Homepage Utama/HomepageUtama";
 import DaftarKelas from "../Guru/Daftar Kelas/DaftarKelas";
@@ -29,6 +31,7 @@ import HasilUjianKelas from "../Guru/Kelas/Ujian Kelas/Hasil Ujian Kelas/HasilUj
 import DaftarAnggotaKelas from "../Guru/Kelas/Anggota Kelas/DaftarAnggotaKelas";
 import DaftarTugas from "../Guru/Kelas/Tugas Kelas/DaftarTugas";
 import LoginPage from "../Common/pages/LoginPage";
+
 
 const router = createBrowserRouter([
   {
@@ -81,6 +84,17 @@ const router = createBrowserRouter([
     element: <Detailmateri />,
     errorElement: <ErrorPage />,
   },
+  {
+    path: "/siswa/logbook",
+    element: <Logbook />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/siswa/logbook/tambahlogbook",
+    element: <LogbookForm />,
+    errorElement: <ErrorPage />,
+  },
+ 
 
   // Guru
   {
