@@ -28,14 +28,14 @@ function HomepageUtama() {
         <div className="flex justify-end">
           <a
             className="tombolTambahForum  flex flex-row justify-between mr-5 mt-10 text-white bg-biru w-fit rounded-full py-3"
-            // href={`/guru/mapel/${idMapel}/tambah-ujian`}
+            href="/guru/tambah-batch"
           >
             <span className="px-5">+</span>
             <span className="pr-6"> Tambah Batch</span>
           </a>
           <a
             className="tombolTambahForum  flex flex-row justify-between mr-10 mt-10 text-white bg-biru w-fit rounded-full py-3"
-            // href={`/guru/mapel/${idMapel}/tambah-ujian`}
+            href="/guru/tambah-akun"
           >
             <span className="px-5">+</span>
             <span className="pr-6"> Tambah Akun</span>
