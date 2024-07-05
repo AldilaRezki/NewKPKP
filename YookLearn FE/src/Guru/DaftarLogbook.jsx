@@ -27,6 +27,12 @@ function DaftarLogbook() {
                                 <a href="/guru/logbook">Lorem Ipsum</a>
                             </td>
                         </tr>    
+                        <tr className="bg-tosca">
+                            <td className="xl:w-1/4 min-[320px]:w-1/3 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru">2</td>
+                            <td className="py-2 border-l-[1px] border-t-[1px] border-b-[1px] border-r-[1px] shadow-md border-biru">
+                                <a href="/guru/logbook">Lorem Ipsum</a>
+                            </td>
+                        </tr>    
                     </tbody>
                 </table>
 
