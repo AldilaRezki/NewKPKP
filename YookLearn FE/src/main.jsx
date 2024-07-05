@@ -79,7 +79,7 @@ import EditTugas from "./Guru/Kelas/Tugas Kelas/EditTugas";
 import BerhasilKelas from "./admin/pages/BerhasilKelas";
 import TambahBatch from "./Guru/TambahBatch";
 import TambahAkun from "./Guru/TambahAkun";
-import Logbook from "./Guru/Logbook";
+import LogbookGuru from "./Guru/Logbook";
 import DaftarLogbook from "./Guru/DaftarLogbook";
 
 const router = createBrowserRouter([
@@ -195,7 +195,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/guru/logbook",
-    element: <Logbook />,
+    element: <LogbookGuru />,
   },
   {
     path: "/guru/daftar-logbook",

@@ -2,7 +2,7 @@ import React from "react";
 import Header from "./Header";
 import HeaderGuru from "./HeaderGuru";
 
-function Logbook() {
+function LogbookGuru() {
     return (
       <div>
         <Header></Header>
@@ -103,4 +103,4 @@ function Logbook() {
     );
   }
   
-  export default Logbook;
+  export default LogbookGuru;
