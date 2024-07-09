@@ -137,6 +137,8 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'student'], function
 
     Route::post('/ujian/{idUjian}/submit', [StudentController::class, 'submitUjian']);
     Route::get('/ujian/{idUjian}/waktu', [StudentController::class, 'getWaktuUjian']);
+
+    Route::post('/logbook', [StudentController::class, 'storeLogbook']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

@@ -46,5 +46,6 @@ class VerifyCsrfToken extends Middleware
         'http://localhost:8000/api/student/editpassword',
         'http://localhost:8000/api/student/tugas/*/add',
         'http://localhost:8000/api/student/ujian/*/submit',
+        'http://localhost:8000/api/student/logbook',
     ];
 }
