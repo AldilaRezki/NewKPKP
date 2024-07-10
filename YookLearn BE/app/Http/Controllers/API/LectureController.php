@@ -15,6 +15,7 @@ use App\Models\Assignment;
 use App\Models\Lecturer;
 use App\Models\Material;
 use App\Models\Test;
+use App\Models\Logbook;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Redis;
 
@@ -1245,5 +1246,12 @@ class LectureController extends Controller
             ->update(['nilai' => $poin]);
 
         return $affected;
+    }
+    public function showLogbook(){
+        $data = Logbook::with("peminjam")->get();
+        foreach($data as $value){
+            $value->nama_peminjam = $value->peminjam->nama_user;
+        }
+        return $data;
     }
 }

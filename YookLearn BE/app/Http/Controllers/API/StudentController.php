@@ -16,11 +16,13 @@ use App\Models\Assignment;
 use App\Models\Lecturer;
 use App\Models\Material;
 use App\Models\Student_Assigment;
+use App\Models\Logbook;
 use Illuminate\Support\Facades\Redis;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
@@ -184,7 +186,7 @@ class StudentController extends Controller
     public function getUploadTugas($idTugas)
     {
         $user = auth()->user();
-        $upload = DB::table('student_assigments')->get(['id', 'filename', 'created_at', 'id_siswa','id_tugas'])->where('id_siswa', $user['id'])->where('id_tugas', $idTugas);
+        $upload = DB::table('student_assigments')->get(['id', 'filename', 'created_at', 'id_siswa', 'id_tugas'])->where('id_siswa', $user['id'])->where('id_tugas', $idTugas);
 
         return $upload;
     }
@@ -576,4 +578,27 @@ class StudentController extends Controller
     //     return response()->json(['message' => 'File not found'], Response::HTTP_NOT_FOUND);
     // }
 
+    public function storeLogbook(Request $request)
+    {
+        $request->validate([
+            'nama_buku' => 'required|string|max:255',
+            'nama_penulis' => 'required|string|max:255',
+            'tanggal_pinjam' => 'required|date',
+            'tanggal_pengembalian' => 'required|date|after_or_equal:tanggal_pinjam',
+        ]);
+
+        $logbook = Logbook::create([
+            'nama_buku' => $request->nama_buku,
+            'nama_penulis' => $request->nama_penulis,
+            'tanggal_pinjam' => $request->tanggal_pinjam,
+            'tanggal_pengembalian' => $request->tanggal_pengembalian,
+            'created_by' => Auth::id(),
+        ]);
+
+        if ($logbook->save()) {
+            return response()->json(['message' => 'Logbook berhasil ditambahkan.'], 201);
+        } else {
+            return response()->json(['message' => 'Terjadi kesalahan saat menambahkan logbook.'], 500);
+        }
+    }
 }
