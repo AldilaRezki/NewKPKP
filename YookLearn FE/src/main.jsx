@@ -43,6 +43,7 @@ import TambahMateri from "./Guru/Kelas/Materi Kelas/TambahMateri";
 import TambahTugas from "./Guru/Kelas/Tugas Kelas/TambahTugas";
 import TambahUjian from "./Guru/Kelas/Ujian Kelas/TambahUjian";
 import TambahForum from "./Guru/Kelas/Forum Kelas/TambahForum";
+import LogbookGuru from "./Guru/Logbook/Logbook";
 
 import DetailTugas from "./Siswa/pages/DetailTugas";
 import Ujian from "./Siswa/pages/Ujian";
@@ -263,7 +264,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/guru/logbook",
-        element: <DaftarKelas />,
+        element: <LogbookGuru />,
     },
 
     //Admin

@@ -35,7 +35,7 @@ class Logbook extends Model
     }
 
     // Define relationship with the User model (assuming a User model exists)
-    public function createdBy()
+    public function peminjam()
     {
         return $this->belongsTo(Account::class, 'created_by');
     }
