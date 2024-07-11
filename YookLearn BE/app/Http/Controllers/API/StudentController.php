@@ -16,11 +16,13 @@ use App\Models\Assignment;
 use App\Models\Lecturer;
 use App\Models\Material;
 use App\Models\Student_Assigment;
+use App\Models\Logbook;
 use Illuminate\Support\Facades\Redis;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
@@ -458,6 +460,40 @@ class StudentController extends Controller
         DB::table('collect_tests')->insert($input);
 
         return true;
+    }
+
+    public function getLogbook(Request $request){
+        $data = Logbook::where('created_by', Auth::id())->get();
+        return $data;
+    }
+
+    public function storeLogbook(Request $request){
+        $validatedData = $request->validate([
+            'tanggal' => 'required|date',
+            'deskripsi' => 'required|string',
+            'lampiran' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        // Handle file upload
+        if ($request->hasFile('lampiran')) {
+            $file = $request->file('lampiran');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('logbook', $filename, 'public');
+        }
+
+        // Buat entri logbook baru
+        $logbook = Logbook::create([
+            'tanggal' => $validatedData['tanggal'],
+            'deskripsi' => $validatedData['deskripsi'],
+            'lampiran' => $path, // Simpan jalur file di database
+            'created_by' => Auth::id(),
+        ]);
+
+        // Kembalikan respons, misalnya redirect atau pesan sukses
+        return response()->json([
+            'message' => 'Logbook entry created successfully',
+            'logbook' => $logbook,
+        ], 201);
     }
 
     // public function submitUjian(Request $request, $idUjian)
