@@ -467,6 +467,16 @@ class StudentController extends Controller
         return $data;
     }
 
+    public function downloadLampiran($id){
+        $data = Logbook::where('id', $id)->first();
+        $file = storage_path('app/public/' . $data->lampiran);
+        if (file_exists($file)) {
+            return response()->file($file);
+        } else {
+            return response()->json(['error' => 'File not found.'], 404);
+        }
+    }
+
     public function storeLogbook(Request $request){
         $validatedData = $request->validate([
             'tanggal' => 'required|date',

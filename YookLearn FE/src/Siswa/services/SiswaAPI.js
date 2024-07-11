@@ -438,6 +438,35 @@ export async function fetchLogbook() {
     }
 }
 
+export async function downloadLampiran(id) {
+    try {
+        const token = localStorage.getItem("token");
+        const response = await fetch(`${BASE_URL}/logbook/lampiran/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        const data = await response.blob();
+        const url = window.URL.createObjectURL(data);
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "lampiran"); // Set nama file yang diunduh
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 export async function storeLogbook(formData) {
     try {
         const token = localStorage.getItem("token");

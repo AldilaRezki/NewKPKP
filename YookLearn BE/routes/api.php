@@ -139,6 +139,7 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'student'], function
     Route::get('/ujian/{idUjian}/waktu', [StudentController::class, 'getWaktuUjian']);
 
     Route::get('/logbook', [StudentController::class, 'getLogbook']);
+    Route::get('/logbook/lampiran/{id}', [StudentController::class, 'downloadLampiran']);
     Route::post('/logbook', [StudentController::class, 'storeLogbook']);
 });
 

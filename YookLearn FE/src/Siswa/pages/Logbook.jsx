@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Nav from "../components/Nav";
-import { fetchLogbook } from "../services/SiswaAPI";
+import { fetchLogbook, downloadLampiran } from "../services/SiswaAPI";
 
 const Logbook = () => {
     const navigate = useNavigate();
@@ -23,6 +23,10 @@ const Logbook = () => {
 
     const handlePrintClick = () => {
         window.print();
+    };
+
+    const handleDownload = (id) => {
+        const data = downloadLampiran(id);
     };
 
     return (
@@ -83,7 +87,14 @@ const Logbook = () => {
                                         {item.deskripsi}
                                     </td>
                                     <td className="border px-4 py-2">
-                                        <a>Download</a>
+                                        <button
+                                            type="button"
+                                            onClick={() =>
+                                                handleDownload(item.id)
+                                            }
+                                        >
+                                            Download
+                                        </button>
                                     </td>
                                 </tr>
                             ))}
