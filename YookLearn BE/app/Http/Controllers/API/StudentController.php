@@ -481,7 +481,7 @@ class StudentController extends Controller
         $validatedData = $request->validate([
             'tanggal' => 'required|date',
             'deskripsi' => 'required|string',
-            'lampiran' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'lampiran' => 'required|image|mimes:jpeg,png,jpg,gif',
         ]);
 
         // Handle file upload
