@@ -27,4 +27,9 @@ class Logbook extends Model
         'lampiran',
         'created_by',
     ];
+
+    public function creator()
+    {
+        return $this->belongsTo(Account::class, 'created_by');
+    }
 }
