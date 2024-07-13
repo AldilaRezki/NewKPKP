@@ -40,8 +40,8 @@ function StudentPage() {
     <div>
       <Header />
       <Nav />
-      <div className="flex flex-row justify-between">
-        <div className="mt-16 ml-10 bg-[#EEF4FA] rounded-lg shadow-md text-xl w-1/2">
+      <div className="flex flex-row justify-between items-center mt-16 mx-10">
+        <div className="bg-[#EEF4FA] rounded-lg shadow-md text-xl w-1/2 p-5">
           <h1 className="font-bold text-center">Selamat Datang</h1>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi quia
@@ -52,12 +52,12 @@ function StudentPage() {
         </div>
       </div>
 
-      <div className="flex justify-end px-10 pt-8">
+      <div className="flex justify-end">
         <Editakun />
       </div>
-      <div className="flex justify-end mt-1.5 mr-10 px-10 mb-20">
+      {/* <div className="flex justify-end mt-1.5 mr-10 px-10 mb-20">
         <Listtugas dataTugas={tugas} />
-      </div>
+      </div> */}
     </div>
   );
 }

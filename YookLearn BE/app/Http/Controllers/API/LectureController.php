@@ -15,6 +15,9 @@ use App\Models\Assignment;
 use App\Models\Lecturer;
 use App\Models\Material;
 use App\Models\Test;
+use App\Models\Logbook;
+use App\Models\Student;
+use App\Models\Classes;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Redis;
 
@@ -1245,5 +1248,18 @@ class LectureController extends Controller
             ->update(['nilai' => $poin]);
 
         return $affected;
+    }
+
+    public function showLogbook($id = null){
+        if($id != null){
+            $data = Account::where('id',$id)->whereHas('logbook')->whereHas('student')->with(['logbook','student'])->get();
+        }else{
+        $data = Account::whereHas('logbook')->whereHas('student')->with(['logbook','student'])->get();
+        }
+        foreach ($data as $value){
+            $value->studentDetail = Student::find($value->id);
+            $value->kelas = Classes::find($value->studentDetail->id_kelas);
+        }
+        return $data;
     }
 }
