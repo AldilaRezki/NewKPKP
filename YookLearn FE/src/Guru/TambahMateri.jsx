@@ -33,7 +33,7 @@ function TambahMateri() {
 
             <div>
                 <h1 className="text-xl ml-10 mt-8 font-medium text-text">
-                    Tambah Batch
+                    Tambah Materi
                 </h1>
             </div>
 
@@ -64,7 +64,7 @@ function TambahMateri() {
                                 type="submit"
                                 className="text-white bg-tombol py-2 px-5 rounded-md"
                             >
-                                Tambah Batch
+                                Tambah Materi
                             </button>
                         </div>
                     </form>
