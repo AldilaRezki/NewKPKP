@@ -42,6 +42,8 @@ class VerifyCsrfToken extends Middleware
         'http://localhost:8000/api/lecture/matpel/*/ujian/add',
         'http://localhost:8000/api/lecture/ujian/*/tambahSoal',
         'http://localhost:8000/api/lecture/ujian/*/submit/*/update',
+        'http://localhost:8000/api/lecture/batch',
+        'http://localhost:8000/api/lecture/materi/*',
 
         'http://localhost:8000/api/student/editpassword',
         'http://localhost:8000/api/student/tugas/*/add',

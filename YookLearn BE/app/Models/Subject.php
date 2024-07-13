@@ -23,7 +23,8 @@ class Subject extends Authenticatable
         'jadwal',
         'id_kelas',
         'id_guru',
-        'nama_matpel'
+        'nama_matpel',
+        'batch_id'
     ];
 
     /**
@@ -42,7 +43,7 @@ class Subject extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        
+
     ];
 
 

@@ -18,6 +18,8 @@ use App\Models\Test;
 use App\Models\Logbook;
 use App\Models\Student;
 use App\Models\Classes;
+use App\Models\Batch;
+use App\Models\Subject;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Redis;
 
@@ -1262,4 +1264,45 @@ class LectureController extends Controller
         }
         return $data;
     }
+
+    public function storeBatch(Request $request){
+        $validatedData = $request->validate([
+            'nama' => 'required|string',
+            'tanggal_masuk' => 'required|date',
+            'tanggal_selesai' => 'required|date',
+        ]);
+
+        $batch = Batch::create([
+            'nama' => $validatedData['nama'],
+            'tanggal_masuk' => $validatedData['tanggal_masuk'],
+            'tanggal_selesai' => $validatedData['tanggal_selesai'],
+        ]);
+
+        return response()->json([
+            'message' => 'Batch entry created successfully',
+            'logbook' => $batch,
+        ], 201);
+    }
+
+    public function getBatch(){
+        $data = Batch::with('materi')->get();
+        return $data;
+    }
+
+    public function storeMateri(Request $request, $id){
+        $validatedData = $request->validate([
+            'nama' => 'required|string',
+        ]);
+
+        $batch = Subject::create([
+            'nama_matpel' => $validatedData['nama'],
+            'batch_id' => $id,
+        ]);
+
+        return response()->json([
+            'message' => 'Batch entry created successfully',
+            'logbook' => $batch,
+        ], 201);
+    }
+
 }

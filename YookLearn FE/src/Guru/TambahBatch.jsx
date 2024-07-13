@@ -45,38 +45,70 @@
 //                         </div>
 //                     </div>
 //         </div>
- 
 
 //             </form>
 //         </div>
 //       </div>
 //     );
 //   }
-  
+
 //   export default TambahBatch;
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import HeaderGuru from "./HeaderGuru";
+import { storeBatch } from "./services/GuruAPI";
 
 function TambahBatch() {
+    const [formData, setFormData] = useState({
+        tanggal: null,
+        deskripsi: null,
+        lampiran: null,
+    });
+    const handleChange = (e) => {
+        const { name, value, files } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
+
+        console.log(formData);
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const data = new FormData();
+        data.append("nama", formData.nama);
+        data.append("tanggal_masuk", formData.tanggal_masuk);
+        data.append("tanggal_selesai", formData.tanggal_selesai);
+
+        const result = await storeBatch(data);
+    };
     return (
         <div>
             <Header></Header>
             <HeaderGuru></HeaderGuru>
 
             <div>
-                <h1 className="text-xl ml-10 mt-8 font-medium text-text">Tambah Batch</h1>
+                <h1 className="text-xl ml-10 mt-8 font-medium text-text">
+                    Tambah Batch
+                </h1>
             </div>
 
             <div className="flex justify-center mt-10  min-h-screen">
                 <div className="w-full max-w-lg">
-                    <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                    <form
+                        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+                        onSubmit={handleSubmit}
+                    >
                         <div>
                             <h2 className="text-md mt-8 font-normal text-text">
                                 Nama Batch
                             </h2>
                             <input
+                                onChange={handleChange}
+                                required
+                                name="nama"
                                 type="text"
                                 className="bg-white mt-3 h-8 border-[0.3px] shadow-md w-full py-1 px-2 focus:outline-none focus:ring-1"
                             />
@@ -84,8 +116,13 @@ function TambahBatch() {
 
                         <div className="flex gap-x-10 mt-8">
                             <div className="w-1/2">
-                                <h2 className="text-md font-normal text-text">Tanggal Masuk</h2>
+                                <h2 className="text-md font-normal text-text">
+                                    Tanggal Masuk
+                                </h2>
                                 <input
+                                    onChange={handleChange}
+                                    required
+                                    name="tanggal_masuk"
                                     type="date"
                                     className="mt-4 py-2 px-5 border-[0.3px] shadow-md w-full"
                                 />
@@ -95,6 +132,9 @@ function TambahBatch() {
                                     Tanggal Selesai
                                 </h2>
                                 <input
+                                    onChange={handleChange}
+                                    required
+                                    name="tanggal_selesai"
                                     type="date"
                                     className="mt-4 py-2 px-5 border-[0.3px] shadow-md w-full"
                                 />

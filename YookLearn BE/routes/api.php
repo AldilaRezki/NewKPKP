@@ -114,6 +114,10 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'lecture'], function
     Route::post('ujian/{idUjian}/submit/{idSiswa}/update', [LectureController::class, 'updateNilaiUjian']);
 
     Route::get('/logbook/{id?}', [LectureController::class, 'showLogbook']);
+
+    Route::post('/batch', [LectureController::class, 'storeBatch']);
+    Route::get('/batch', [LectureController::class, 'getBatch']);
+    Route::post('/materi/{id}', [LectureController::class, 'storeMateri']);
 });
 
 // Student Routes
