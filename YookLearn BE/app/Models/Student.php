@@ -25,6 +25,7 @@ class Student extends Authenticatable
         'jenis_kelamin',
         'agama',
         'id_kelas',
+        'batch_id'
     ];
 
     /**

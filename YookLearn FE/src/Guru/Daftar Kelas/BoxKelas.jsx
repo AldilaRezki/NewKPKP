@@ -1,21 +1,21 @@
 import clsx from "clsx";
 
 function BoxKelas(props) {
-  const { className, namaKelas, href } = props;
-  return (
-    <div>
-      <a
-        {...props}
-        href={href}
-        className={clsx(
-          className,
-          "text-l mt-10 mr-10 py-3 px-6 rounded-md bg-white shadow-md block cursor-pointer text-text"
-        )}
-      >
-        Kelas {namaKelas}
-      </a>
-    </div>
-  );
+    const { className, namaKelas, href } = props;
+    return (
+        <div>
+            <a
+                {...props}
+                href={href}
+                className={clsx(
+                    className,
+                    "text-l mt-10 mr-10 py-3 px-6 rounded-md bg-white shadow-md block cursor-pointer text-text"
+                )}
+            >
+                Batch {namaKelas}
+            </a>
+        </div>
+    );
 }
 
 export default BoxKelas;

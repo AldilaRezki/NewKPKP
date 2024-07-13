@@ -1,216 +1,61 @@
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header";
 import HeaderGuru from "../HeaderGuru";
 import BoxDaftarKelas from "./BoxDaftarKelas";
 import BoxKelas from "./BoxKelas";
 import { isAuthenticated } from "../../Common/services/Auth";
+import { getBatch } from "../services/GuruAPI";
+import { Accordion, Button } from "flowbite-react";
 
 function DaftarKelas() {
-  const navigate = useNavigate();
-  const login = isAuthenticated("guru");
-  const [daftarKelas, setKelas] = useState([]);
+    const navigate = useNavigate();
+    const login = isAuthenticated("guru");
+    const [data, setData] = useState([]);
 
-  useEffect(() => {
-    if (!login) {
-      navigate("/");
-    }
-  }, [login, navigate]);
+    useEffect(() => {
+        if (!login) {
+            navigate("/");
+        }
+    }, [login, navigate]);
 
-  useEffect(() => {
-    async function fetchData() {
-      const data = await fetchMapel();
-      setKelas(data);
-      setIsLoading(false);
-    }
-    fetchData();
-  }, []);
+    useEffect(() => {
+        async function fetchData() {
+            const data = await getBatch();
+            setData(data);
+            setIsLoading(false);
+        }
+        fetchData();
+    }, []);
 
-  const [isLoading, setIsLoading] = useState(true);
-  if (isLoading) {
-    return <LoadingPage />;
-  }
-
-  return (
-    <div>
-      {/* <h1 className="text-text mt-10 ml-10 text-xl font-semibold ">
-        Daftar Kelas
-      </h1> */}
-
-      {/* <BoxDaftarKelas kelas='X'></BoxDaftarKelas> */}
-      {/* <BoxKelas namaKelas='X IPA 1'></BoxKelas>
-      <BoxKelas namaKelas='XI IPA 1'></BoxKelas> */}
-      {/* <BoxDaftarKelas kelas='XI'></BoxDaftarKelas>
-      <BoxDaftarKelas kelas='XII'></BoxDaftarKelas> */}
-
-      <BoxDaftarKelas
-        className="mb-5"
-        kelas="X"
-        // options={["IPA 1", "IPA 2"]}
-        // onClick="/guru/xipa1"
-      />
-      <BoxDaftarKelas
-        className="mb-5"
-        kelas="XI"
-        // options={["IPA 1", "IPA 2", "IPS 1", "IPS 2"]}
-      />
-      <BoxDaftarKelas
-        className="mb-5"
-        kelas="XII"
-        // options={["IPS 1", "IPS 2"]}
-      />
-    </div>
-  );
+    return (
+        <div className="mx-10 mt-5">
+            <Accordion>
+                {data.map((item) => (
+                    <Accordion.Panel>
+                        <Accordion.Title>{item.nama}</Accordion.Title>
+                        <Accordion.Content>
+                            <a href={`/guru/daftar-logbook/${item.id}`}>
+                                <Button color="light" className="mb-3">
+                                    Logbook {item.nama}
+                                </Button>
+                            </a>
+                            {item.materi.map((item2) => (
+                                <div className="my-3 p-3 border border-gray-300 rounded-xl w-1/2">
+                                    <a href={`/guru/mapel/${item2.id}`}>
+                                        {item2.nama_matpel}
+                                    </a>
+                                </div>
+                            ))}
+                            <a href={`/guru/tambah-materi/${item.id}`}>
+                                <Button color="light">Tambah Materi</Button>
+                            </a>
+                        </Accordion.Content>
+                    </Accordion.Panel>
+                ))}
+            </Accordion>
+        </div>
+    );
 }
 
 export default DaftarKelas;
-
-// import React from 'react';
-// import Header from '../Header';
-// import BoxDaftarKelas from './BoxDaftarKelas';
-// import BoxKelas from './BoxKelas';
-
-// function DaftarKelas() {
-//   const daftarKelasItems = [
-//     {
-//       id: 1,
-//       kelas: 'X',
-//       items: [
-//         {
-//           id: 1,
-//           kelas: 'X IPA 1',
-//         },
-//         {
-//           id: 2,
-//           kelas: 'X IPA 2',
-//         },
-//       ],
-//     },
-//     {
-//       id: 2,
-//       kelas: 'XI',
-//       items: [
-//         {
-//           id: 1,
-//           kelas: 'XI IPA 1',
-//         },
-//         {
-//           id: 2,
-//           kelas: 'XI IPA 2',
-//         },
-//         {
-//           id: 3,
-//           kelas: 'XI IPS',
-//         },
-//       ],
-//     },
-//     {
-//       id: 3,
-//       kelas: 'XII',
-//       items: [
-//         {
-//           id: 1,
-//           kelas: 'XII IPS 1',
-//         },
-//         {
-//           id: 2,
-//           kelas: 'XII IPS 2',
-//         },
-//       ],
-//     },
-//   ];
-
-//   return (
-//     <div>
-//       <HeaderGuru></HeaderGuru>
-
-//       <h1 className='text-text mt-10 ml-10 text-xl font-semibold '>Daftar Kelas</h1>
-
-//       {daftarKelasItems.map(item => (
-//         <BoxDaftarKelas
-//           key={item.id}
-//           kelas={item.kelas}
-//           items={item.items}
-//         />
-//       ))}
-//     </div>
-//   );
-// }
-
-// export default DaftarKelas;
-
-// import React from 'react';
-// import Header from '../Header';
-// import BoxDaftarKelas from './BoxDaftarKelas';
-// import BoxKelas from './BoxKelas';
-import { useEffect, useState } from "react";
-import { fetchMapel } from "../services/GuruAPI";
-import LoadingPage from "../../Siswa/pages/LoadingPage";
-
-// function DaftarKelas() {
-//   const daftarKelasItems = [
-//     {
-//       id: 1,
-//       kelas: 'X',
-//       items: [
-//         {
-//           id: 1,
-//           kelas: 'X IPA 1',
-//         },
-//         {
-//           id: 2,
-//           kelas: 'X IPA 2',
-//         },
-//       ],
-//     },
-//     {
-//       id: 2,
-//       kelas: 'XI',
-//       items: [
-//         {
-//           id: 1,
-//           kelas: 'XI IPA 1',
-//         },
-//         {
-//           id: 2,
-//           kelas: 'XI IPA 2',
-//         },
-//         {
-//           id: 3,
-//           kelas: 'XI IPS',
-//         },
-//       ],
-//     },
-//     {
-//       id: 3,
-//       kelas: 'XII',
-//       items: [
-//         {
-//           id: 1,
-//           kelas: 'XII IPS 1',
-//         },
-//         {
-//           id: 2,
-//           kelas: 'XII IPS 2',
-//         },
-//       ],
-//     },
-//   ];
-
-//   return (
-//     <div>
-//       <HeaderGuru></HeaderGuru>
-
-//       <h1 className='text-text mt-10 ml-10 text-xl font-semibold '>Daftar Kelas</h1>
-
-//       {daftarKelasItems.map(item => (
-//         <BoxDaftarKelas
-//           key={item.id}
-//           kelas={item.kelas}
-//           items={item.items}
-//         />
-//       ))}
-//     </div>
-//   );
-// }
-
-// export default DaftarKelas;
