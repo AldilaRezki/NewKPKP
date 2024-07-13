@@ -84,14 +84,6 @@ class DatabaseSeeder extends Seeder
             'jadwal' => 'Kamis, 11.00 - 13.00',
         ]);
 
-        DB::table('batch')->insert([
-            'id' => 1,
-            'id_batch' => '1',
-            'nama_batch' => 'Batch 1',
-            'tanggal_masuk' => '2024-01-01',
-            'tanggal_selesai' => '2024-08-08',
-        ]);
-
         DB::table('accounts')->insert([
             'id' => 'siswauuid',
             'Username' => 'siswa',
