@@ -1265,6 +1265,15 @@ class LectureController extends Controller
         return $data;
     }
 
+    public function getBatchLogbook($id){
+        $student = Student::where('batch_id', $id)->get();
+        foreach ($student as $value){
+            $value->id2 = Account::where('nama_user', $value->nama_lengkap)->first()->id;
+            $value->nama_user = $value->nama_lengkap;
+        }
+        return $student;
+    }
+
     public function storeBatch(Request $request){
         $validatedData = $request->validate([
             'nama' => 'required|string',

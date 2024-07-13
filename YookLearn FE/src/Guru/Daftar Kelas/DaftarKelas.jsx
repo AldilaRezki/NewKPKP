@@ -35,9 +35,11 @@ function DaftarKelas() {
                     <Accordion.Panel>
                         <Accordion.Title>{item.nama}</Accordion.Title>
                         <Accordion.Content>
-                            <Button color="light" className="mb-3">
-                                Logbook {item.nama}
-                            </Button>
+                            <a href={`/guru/daftar-logbook/${item.id}`}>
+                                <Button color="light" className="mb-3">
+                                    Logbook {item.nama}
+                                </Button>
+                            </a>
                             {item.materi.map((item2) => (
                                 <div className="my-3 p-3 border border-gray-300 rounded-xl w-1/2">
                                     <a href={`/guru/mapel/${item2.id}`}>

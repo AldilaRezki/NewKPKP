@@ -118,6 +118,7 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'lecture'], function
     Route::post('/batch', [LectureController::class, 'storeBatch']);
     Route::get('/batch', [LectureController::class, 'getBatch']);
     Route::post('/materi/{id}', [LectureController::class, 'storeMateri']);
+    Route::get('/batch/logbook/{id}', [LectureController::class, 'getBatchLogbook']);
 });
 
 // Student Routes

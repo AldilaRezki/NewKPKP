@@ -706,6 +706,27 @@ export async function showLogbook(id = "") {
     }
 }
 
+export async function showLogbookBatch(id = "") {
+    try {
+        const token = localStorage.getItem("token");
+        const response = await fetch(`${BASE_URL}/batch/logbook/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 export async function storeBatch(formData) {
     try {
         const token = localStorage.getItem("token");

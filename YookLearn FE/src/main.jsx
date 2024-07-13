@@ -207,6 +207,10 @@ const router = createBrowserRouter([
         element: <DaftarLogbook />,
     },
     {
+        path: "/guru/daftar-logbook/:id",
+        element: <DaftarLogbook />,
+    },
+    {
         path: "/guru/mapel/:idMapel",
         element: <HomepageKelas />,
     },
