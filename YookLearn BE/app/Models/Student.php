@@ -47,6 +47,6 @@ class Student extends Authenticatable
 
     public function account()
     {
-        return $this->belongsTo(Account::class);
+        return $this->belongsTo(Account::class, 'id', 'id');
     }
 }

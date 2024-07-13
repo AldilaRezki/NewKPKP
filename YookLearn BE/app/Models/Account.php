@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Account extends Authenticatable
 {
@@ -43,7 +44,7 @@ class Account extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        
+
     ];
 
     public function lecture(): HasOne
@@ -53,6 +54,11 @@ class Account extends Authenticatable
 
     public function student(): HasOne
     {
-        return $this->hasOne(Student::class);
+        return $this->hasOne(Student::class, 'id', 'id');
+    }
+
+    public function logbook(): HasMany
+    {
+        return $this->hasMany(Logbook::class, 'created_by', 'id');
     }
 }
