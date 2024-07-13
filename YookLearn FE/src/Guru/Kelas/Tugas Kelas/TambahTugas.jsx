@@ -93,11 +93,11 @@ function TambahTugas({ onFileUpload }) {
         </a>
       </div>
 
-      <h1 className="text-xl mt-8 ml-10 font-medium text-biru">Tambah Tugas</h1>
+      <h1 className="text-xl mt-8 ml-10 font-medium text-text">Tambah Tugas</h1>
 
       <div>
         <form onSubmit={handleSubmit}>
-          <h2 className="text-md mt-8 ml-10 font-normal text-biru">
+          <h2 className="text-md mt-8 ml-10 font-normal text-text">
             Judul Tugas
           </h2>
           <input
@@ -110,7 +110,7 @@ function TambahTugas({ onFileUpload }) {
           />
 
           <div className="mt-10 mb-8">
-            <h2 className="text-md mt-8 ml-10 mb-4 font-normal text-biru">
+            <h2 className="text-md mt-8 ml-10 mb-4 font-normal text-text">
               Penjelasan
             </h2>
             <ReactQuill className="mt-8 ml-10 h-30" value="" onChange="" />
@@ -118,7 +118,7 @@ function TambahTugas({ onFileUpload }) {
 
           <div className="form-input-row mt-5">
             <label
-              className="text-md mt-10 ml-10 font-normal text-biru"
+              className="text-md mt-10 ml-10 font-normal text-text"
               htmlFor="fileInput"
             >
               Lampiran
@@ -128,7 +128,7 @@ function TambahTugas({ onFileUpload }) {
 
           <div className="flex ml-10 gap-x-9">
             <div>
-              <h2 className="text-md mt-8 font-normal text-biru">Tenggat</h2>
+              <h2 className="text-md mt-8 font-normal text-text">Tenggat</h2>
               <div className="flex gap-x-8">
                 <input
                   type="date"
@@ -142,7 +142,7 @@ function TambahTugas({ onFileUpload }) {
             </div>
 
             <div>
-              <h2 className="text-md mt-8 font-normal text-biru">(Opsional)</h2>
+              <h2 className="text-md mt-8 font-normal text-text">(Opsional)</h2>
               <div className="flex gap-x-8">
                 <input
                   type="time"
@@ -156,7 +156,7 @@ function TambahTugas({ onFileUpload }) {
             </div>
 
             <div>
-              <h2 className="text-md mt-8 font-normal text-biru">Poin</h2>
+              <h2 className="text-md mt-8 font-normal text-text">Poin</h2>
               <div className="flex gap-x-8">
                 <input
                   type="number"
@@ -172,7 +172,7 @@ function TambahTugas({ onFileUpload }) {
             </div>
 
             <div>
-              <h2 className="text-md mt-8 font-normal text-biru">
+              <h2 className="text-md mt-8 font-normal text-text">
                 Setelah melewati tenggat waktu
               </h2>
               <div className="flex">
@@ -192,7 +192,7 @@ function TambahTugas({ onFileUpload }) {
           <div className="mt-20 flex justify-end mr-10 gap-x-10 mb-20">
             <a
               href={`/guru/mapel/${idMapel}/daftar-tugas`}
-              className="text-biru py-2"
+              className="text-text py-2"
             >
               Batal
             </a>
@@ -207,12 +207,12 @@ function TambahTugas({ onFileUpload }) {
       </div>
 
       {/* <div>F
-        <h2 className="text-md mt-8 ml-10 font-normal text-biru">Isi Tugas</h2>
+        <h2 className="text-md mt-8 ml-10 font-normal text-text">Isi Tugas</h2>
         <Form></Form>
       </div> */}
 
       {/* <div>
-        <h2 className="text-md mt-8 ml-10 font-normal text-biru">Lampiran</h2>
+        <h2 className="text-md mt-8 ml-10 font-normal text-text">Lampiran</h2>
         <div className="flex">
           <div>
             <ButtonTambahMateri onFileUpload={handleFileUpload} />

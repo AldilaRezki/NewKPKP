@@ -145,11 +145,11 @@ const TambahSoal = () => {
         {formList.map((question, index) => (
           <div className="mt-10" key={index}>
             <div>
-              <h3 className="text-xl ml-10 font-medium text-biru">
+              <h3 className="text-xl ml-10 font-medium text-white">
                 Pertanyaan {index + 1}
               </h3>
             </div>
-            <div className="bg-tosca mx-10 mt-5 pb-5">
+            <div className="bg-biru mx-10 mt-5 pb-5">
               <div className="flex justify-between">
                 <div className="flex flex-col w-full ml-8 mr-16 mt-8">
                   <label>Pertanyaan:</label>
@@ -197,7 +197,7 @@ const TambahSoal = () => {
                             />
                             {question.jawaban.length > 1 && (
                               <button
-                                className="text-biru"
+                                className="text-white"
                                 type="button"
                                 onClick={() =>
                                   handleRemoveOption(index, jawabanIndex)
@@ -209,7 +209,7 @@ const TambahSoal = () => {
                           </div>
                         ))}
                         <button
-                          className="text-bitu cursor-pointer flex items-end mt-2 mb-2 text-biru"
+                          className="text-white cursor-pointer flex items-end mt-2 mb-2"
                           type="button"
                           onClick={() => handleAddOption(index)}
                         >
@@ -253,7 +253,7 @@ const TambahSoal = () => {
                             />
                             {question.jawaban.length > 1 && (
                               <button
-                                className="text-biru"
+                                className="text-white"
                                 type="button"
                                 onClick={() =>
                                   handleRemoveOption(index, jawabanIndex)
@@ -265,7 +265,7 @@ const TambahSoal = () => {
                           </div>
                         ))}
                         <button
-                          className="text-bitu cursor-pointer flex items-end mt-2 mb-2 text-biru"
+                          className="text-bitu cursor-pointer flex items-end mt-2 mb-2 text-text"
                           type="button"
                           onClick={() => handleAddOption(index)}
                         >
@@ -313,7 +313,7 @@ const TambahSoal = () => {
                   </div>
                 </div>
                 <div className="flex flex-col gap-y-2">
-                  <label className="text-biru">Poin:</label>
+                  <label className="text">Poin:</label>
                   <input
                     className="bg-white outline-none appearance-none focus:border-indigo-600 flex py-2 pl-5 w-fit border-[0.3px] shadow-md"
                     type="number"
@@ -335,14 +335,14 @@ const TambahSoal = () => {
         ))}
         <div className="flex mb-20 gap-x-6 mt-10 justify-end mr-10">
           <button
-            className="text-white bg-biru py-2 px-3 rounded-lg"
+            className="text-white bg-tombol py-2 px-3 rounded-lg"
             type="button"
             onClick={handleAddQuestion}
           >
             Tambah Pertanyaan
           </button>
           <button
-            className="text-white bg-biru py-2 px-3 rounded-lg"
+            className="text-white bg-tombol py-2 px-3 rounded-lg"
             type="submit"
           >
             Submit

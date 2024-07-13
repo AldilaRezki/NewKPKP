@@ -9,8 +9,8 @@ function BoxDaftarUjian({ idMapel, dataUjian }) {
         href={`/guru/mapel/${idMapel}/ujian/ujian-pekan-1`}
       >
         <div className="flex gap-x-12">
-          <div className="text-biru bg-tosca w-fit h-fit text-4xl p-1 rounded-full">
-            <CgGoogleTasks></CgGoogleTasks>
+          <div className="text-text bg-tosca w-fit h-fit text-4xl p-1 rounded-full">
+            <CgGoogleTasks className="text-white"></CgGoogleTasks>
           </div>
           <div className="flex flex-col gap-y-4">
             <h2 className="text-xl">Ujian Pekan 1</h2>
@@ -31,8 +31,8 @@ function BoxDaftarUjian({ idMapel, dataUjian }) {
           href={`/guru/mapel/${idMapel}/ujian/${ujian.id}`}
         >
           <div className="flex gap-x-12">
-            <div className="text-biru bg-tosca w-fit h-fit text-4xl p-1 rounded-full">
-              <CgGoogleTasks></CgGoogleTasks>
+            <div className="text-text bg-tosca w-fit h-fit text-4xl p-1 rounded-full">
+              <CgGoogleTasks className="text-white"></CgGoogleTasks>
             </div>
             <div className="flex flex-col gap-y-4">
               <h2 className="text-xl">{ujian.judul_ujian}</h2>

@@ -4,7 +4,7 @@ import DaftarPilihanSoalPilihanGanda from "./DaftarPilihanSoalPilihanGanda";
 function BoxDaftarSoalPilihanGanda({ dataSoal }) {
   return (
     <div>
-      <div className="flex flex-col mx-10 mt-8 bg-tosca px-[20px] py-[15px] gap-y-5">
+      <div className="flex flex-col mx-10 mt-8 bg-biru px-[20px] py-[15px] gap-y-5">
         <div className="atasSoalPilihanGanda flex justify-between mr-10">
           <div className="pertanyaanSoalPilihanGanda flex flex-col w-2/3 gap-y-2">
             <span>Pertanyaan</span>
@@ -64,7 +64,7 @@ function BoxDaftarSoalPilihanGanda({ dataSoal }) {
 
 export default BoxDaftarSoalPilihanGanda;
 
-// <div className="flex flex-col mx-10 mt-8 bg-tosca px-[20px] py-[15px] gap-y-5">
+// <div className="flex flex-col mx-10 mt-8 bg-biru px-[20px] py-[15px] gap-y-5">
 //   <div className="atasSoalPilihanGanda flex justify-between mr-10">
 //     <div className="pertanyaanSoalPilihanGanda flex flex-col w-2/3 gap-y-2">
 //       <span>Pertanyaan</span>

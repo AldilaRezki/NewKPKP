@@ -78,17 +78,17 @@ function TambahUjian() {
       <Header></Header>
       <HeaderGuru></HeaderGuru>
       <HeaderKelas dataMapel={dataMapel}></HeaderKelas>
-      <div className="bg-tosca mt-10 mx-10 p-2">
-        <a href={`/guru/mapel/${idMapel}/tambah-ujian`}>
-          <BiArrowBack className="bg-white text-xl"></BiArrowBack>
+      <div className="bg-biru w-1/12 lg:w-[50px] mt-10 mx-10 p-2">
+        <a href={`/guru/mapel/${idMapel}/ujian`}>
+          <BiArrowBack className="ml-1.5 text-white text-xl"></BiArrowBack>
         </a>
       </div>
 
-      <h1 className="text-xl mt-8 ml-10 font-medium text-biru">Tambah Ujian</h1>
+      <h1 className="text-xl mt-8 ml-10 font-medium text-text">Tambah Ujian</h1>
 
       <form onSubmit={handleSubmit}>
         <div>
-          <h2 className="text-md mt-8 ml-10 font-normal text-biru">
+          <h2 className="text-md mt-8 ml-10 font-normal text-text">
             Judul Ujian
           </h2>
           <input
@@ -101,7 +101,7 @@ function TambahUjian() {
         </div>
 
         <div>
-          <h2 className="text-md mt-8 ml-10 font-normal text-biru">
+          <h2 className="text-md mt-8 ml-10 font-normal text-text">
             Isi Ujian
           </h2>
           <ReactQuill
@@ -113,7 +113,7 @@ function TambahUjian() {
 
         <div className="flex gap-x-10 ml-10">
           <div>
-            <h2 className="text-md mt-8 font-normal text-biru">Waktu Ujian</h2>
+            <h2 className="text-md mt-8 font-normal text-text">Waktu Ujian</h2>
             <div className="flex gap-x-8">
               <input
                 type="time"
@@ -125,7 +125,7 @@ function TambahUjian() {
             </div>
           </div>
           <div>
-            <h2 className="text-md mt-8 font-normal text-biru">
+            <h2 className="text-md mt-8 font-normal text-text">
               Batas Waktu Pengerjaan Ujian
             </h2>
             <div className="flex gap-x-8">
@@ -150,7 +150,7 @@ function TambahUjian() {
             </div>
           </div>
           <div>
-            <h2 className="text-md mt-8 ml-10 font-normal text-biru">
+            <h2 className="text-md mt-8 ml-10 font-normal text-text">
               Lampiran
             </h2>
             <div className="flex">
@@ -165,12 +165,12 @@ function TambahUjian() {
         </div>
 
         <div className="mt-20 flex justify-end mr-10 gap-x-10 mb-20">
-          <a href={`/guru/mapel/${idMapel}/ujian`} className="text-biru py-2">
+          <a href={`/guru/mapel/${idMapel}/ujian`} className="text-text py-2">
             Batal
           </a>
           <button
             type="submit"
-            className="text-white bg-biru py-2 px-5 rounded-md"
+            className="text-white bg-tombol py-2 px-5 rounded-md"
           >
             Tambah Soal
           </button>

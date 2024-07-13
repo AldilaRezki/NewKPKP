@@ -159,7 +159,7 @@ import { fetchCurrentMapel } from "../../../services/GuruAPI";
 //               ))}
 //             </div>
 //             <p
-//               className="text-biru cursor-pointer flex items-end mb-2"
+//               className="text-text cursor-pointer flex items-end mb-2"
 //               onClick={handleAddOpsi}
 //             >
 //               Tambahkan Opsi
@@ -185,7 +185,7 @@ import { fetchCurrentMapel } from "../../../services/GuruAPI";
 //               ))}
 //             </div>
 //             <p
-//               className="text-biru cursor-pointer flex items-end mb-2"
+//               className="text-text cursor-pointer flex items-end mb-2"
 //               onClick={handleAddKotakCentang}
 //             >
 //               Tambahkan Opsi
@@ -222,7 +222,7 @@ import { fetchCurrentMapel } from "../../../services/GuruAPI";
 //         {formList.map((element, index) => (
 //           <div className="mt-10" key={index}>
 //             <div>
-//               <span className="text-xl ml-10 font-medium text-biru">
+//               <span className="text-xl ml-10 font-medium text-text">
 //                 {index + 1}.
 //               </span>
 //             </div>
@@ -284,7 +284,7 @@ import { fetchCurrentMapel } from "../../../services/GuruAPI";
 //               <div className="flex gap-x-6 mt-4 justify-end mr-8">
 //                 {index ? (
 //                   <button
-//                     className="text-biru my-auto"
+//                     className="text-text my-auto"
 //                     onClick={() => handleRemoveFormList(index)}
 //                   >
 //                     Hapus

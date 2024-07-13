@@ -45,7 +45,7 @@ function DaftarTugas() {
       <HeaderGuru></HeaderGuru>
       <HeaderKelas dataMapel={dataMapel}></HeaderKelas>
       <div className="flex mt-10 mx-10 p-2 justify-between">
-        <h1 className="my-auto text-xl font-medium text-biru">Daftar Tugas</h1>
+        <h1 className="my-auto text-xl font-medium text-text">Daftar Tugas</h1>
         <a
           className="tombolTambahForum  flex flex-row justify-between text-white bg-biru w-fit rounded-full py-3"
           href={`/guru/mapel/${idMapel}/tambah-tugas`}

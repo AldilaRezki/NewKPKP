@@ -54,16 +54,16 @@ function HasilUjianSiswa() {
       <Header></Header>
       <HeaderGuru></HeaderGuru>
       <HeaderKelas dataMapel={dataMapel}></HeaderKelas>
-      <div className="bg-tosca mt-10 mx-10 p-2">
-        <a href={`/guru/mapel/${idMapel}/ujian/${idUjian}/hasil-ujian-peserta`}>
-          <BiArrowBack className="bg-white text-xl"></BiArrowBack>
+      <div className="bg-biru w-1/12 lg:w-[50px] mt-10 mx-10 p-2">
+        <a href={`/guru/mapel/${idMapel}/daftar-materi`}>
+          <BiArrowBack className="ml-1.5 text-white text-xl"></BiArrowBack>
         </a>
       </div>
       <div className="flex justify-between mt-8 ml-10">
-        <h1 className="text-xl font-medium text-biru">Hasil Ujian Siswa</h1>
+        <h1 className="text-xl font-medium text-text">Hasil Ujian Siswa</h1>
         <div className="mr-28 flex flex-col">
           <span>Poin yang diperoleh</span>
-          <span className="text-md mt-5 py-2 px-3 border-[0,3px] shadow-md text-biru">
+          <span className="text-md mt-5 py-2 px-3 border-[0,3px] shadow-md text-text">
             {dataPoin || 0}/100
           </span>
           <button
@@ -71,7 +71,7 @@ function HasilUjianSiswa() {
               setShowModal(true);
             }}
           >
-            <span className="text-md flex mt-1 text-biru">Tambahkan Poin</span>
+            <span className="text-md flex mt-1 text-text">Tambahkan Poin</span>
           </button>
           {showModal && (
             <TambahPoinUjian
@@ -88,7 +88,7 @@ function HasilUjianSiswa() {
 
       {dataUjian.map((item, index) => (
         <div className="essay" key={index}>
-          <span className="flex mt-2 ml-10 text-lg font-semibold text-biru">
+          <span className="flex mt-2 ml-10 text-lg font-semibold text-text">
             {index + 1}
           </span>
           <BoxDaftarSoalEssay soal={item} />

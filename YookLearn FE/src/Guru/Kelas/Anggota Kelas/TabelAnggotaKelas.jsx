@@ -7,7 +7,7 @@ function TabelAnggotaKelas({ dataSiswa }) {
       <div className="flex flex-col ml-10 mt-10 mr-10 border-[0.3px] py-2 px-5 shadow-md">
         <table className="border-separate border-spacing-y-5">
           <thead>
-            <tr className="bg-tosca">
+            <tr className="text-white bg-tosca">
               <th className="py-2 border-l-[1px] border-t-[1px] border-b-[1px] shadow-md border-biru">
                 No. Urut
               </th>

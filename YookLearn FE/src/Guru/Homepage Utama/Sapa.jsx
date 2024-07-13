@@ -15,7 +15,7 @@ function Sapa() {
   }
 
   return (
-    <div className="homepage_Card text-lg flex bg-white border-biru p-4 rounded-lg shadow-md text-biru">
+    <div className="homepage_Card text-lg flex bg-white border-biru p-4 rounded-lg shadow-md text-text">
       <h1>{`${greeting}! Berikut Daftar Kelas yang Harus Kamu Ajar!`}</h1>
     </div>
   );

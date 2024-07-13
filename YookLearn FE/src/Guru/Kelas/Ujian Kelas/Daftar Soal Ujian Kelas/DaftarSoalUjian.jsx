@@ -42,16 +42,16 @@ function DaftarSoalUjian() {
       <Header></Header>
       <HeaderGuru></HeaderGuru>
       <HeaderKelas dataMapel={dataMapel}></HeaderKelas>
-      <div className="bg-tosca mt-10 mx-10 p-2">
+      <div className="bg-biru w-1/12 lg:w-[50px] mt-10 mx-10 p-2">
         <a href={`/guru/mapel/${idMapel}/ujian/${idUjian}`}>
-          <BiArrowBack className="bg-white text-xl"></BiArrowBack>
+          <BiArrowBack className="ml-1.5 text-white text-xl"></BiArrowBack>
         </a>
       </div>
-      <h1 className="text-xl mt-8 ml-10 font-medium text-biru">Daftar Soal</h1>
+      <h1 className="text-xl mt-8 ml-10 font-medium text-text">Daftar Soal</h1>
 
       {dataSoal.map((soal, index) => (
         <div key={soal.id} className={soal.tipe_soal}>
-          <span className="flex mt-6 ml-10 text-lg font-semibold text-biru">
+          <span className="flex mt-6 ml-10 text-lg font-semibold text-text">
             {index + 1}
           </span>
 

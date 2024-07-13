@@ -20,7 +20,7 @@ function DaftarLogbook() {
             <HeaderGuru></HeaderGuru>
 
             <div>
-                <h1 className="text-xl mt-8 ml-10 font-medium text-biru">
+                <h1 className="text-xl mt-8 ml-10 font-medium text-text">
                     Logbook
                 </h1>
             </div>
