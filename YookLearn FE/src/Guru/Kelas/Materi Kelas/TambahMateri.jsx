@@ -69,13 +69,13 @@ function TambahMateri({ onFileUpload }) {
       <Header></Header>
       <HeaderGuru></HeaderGuru>
       <HeaderKelas dataMapel={dataMapel}></HeaderKelas>
-      <div className="bg-tosca mt-10 mx-10 p-2">
+      <div className="bg-biru w-1/12 lg:w-[50px] mt-10 mx-10 p-2">
         <a href={`/guru/mapel/${idMapel}/daftar-materi`}>
-          <BiArrowBack className="bg-white text-xl"></BiArrowBack>
+          <BiArrowBack className="ml-1.5 text-white text-xl"></BiArrowBack>
         </a>
       </div>
 
-      <h1 className="text-xl mt-8 mb-10 ml-10 font-medium text-biru">
+      <h1 className="text-xl mt-8 mb-10 ml-10 font-medium text-text">
         Tambah Materi
       </h1>
 
@@ -84,7 +84,7 @@ function TambahMateri({ onFileUpload }) {
           <div className="form-input-row mb-8">
             <label
               htmlFor="judul"
-              className="text-md mt-8 ml-10 font-normal text-biru"
+              className="text-md mt-8 ml-10 font-normal text-text"
             >
               Judul
             </label>
@@ -97,7 +97,7 @@ function TambahMateri({ onFileUpload }) {
               required
             />
           </div>
-          {/* <h2 className="text-md mt-8 ml-10 font-normal text-biru">
+          {/* <h2 className="text-md mt-8 ml-10 font-normal text-text">
           Judul Materi
         </h2>
         <form>
@@ -111,7 +111,7 @@ function TambahMateri({ onFileUpload }) {
         {/* <div className="form-input-row">
         <label
           htmlFor="isi"
-          className="text-md mt-8 ml-10 font-normal text-biru"
+          className="text-md mt-8 ml-10 font-normal text-text"
         >
           Isi
         </label>
@@ -119,20 +119,20 @@ function TambahMateri({ onFileUpload }) {
       </div> */}
 
         {/* <div>
-        <h2 className="text-md mt-8 ml-10 font-normal text-biru">Isi Materi</h2>
+        <h2 className="text-md mt-8 ml-10 font-normal text-text">Isi Materi</h2>
         <Form></Form>
       </div> */}
 
         <div className="form-input-row mt-5">
           <label
-            className="text-md mt-10 ml-10 font-normal text-biru"
+            className="text-md mt-10 ml-10 font-normal text-text"
             htmlFor="fileInput"
           >
             Lampiran
           </label>
           <div>
             <input
-              className="ml-10"
+              className="ml-10 mt-3"
               id="fileInput"
               type="file"
               onChange={handleFileChange}
@@ -142,7 +142,7 @@ function TambahMateri({ onFileUpload }) {
         </div>
 
         {/* <div>
-        <h2 className="text-md mt-8 ml-10 font-normal text-biru">Lampiran</h2>
+        <h2 className="text-md mt-8 ml-10 font-normal text-text">Lampiran</h2>
         <div className="flex">
           <div>
             <ButtonTambahMateri onFileUpload={handleFileUpload} />
@@ -154,7 +154,7 @@ function TambahMateri({ onFileUpload }) {
         <div className="mt-20 flex justify-end mr-10 gap-x-10 mb-20">
           <a
             href={`/guru/mapel/${idMapel}/daftar-materi`}
-            className="text-biru py-2"
+            className="text-text py-2"
           >
             Batal
           </a>

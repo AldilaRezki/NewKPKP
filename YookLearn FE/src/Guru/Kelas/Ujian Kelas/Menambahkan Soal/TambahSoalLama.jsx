@@ -123,7 +123,7 @@
 //         {formList.map((element, index) => (
 //           <div className="mt-10" key={index}>
 //             <div>
-//               <span className="text-xl ml-10 font-medium text-biru">
+//               <span className="text-xl ml-10 font-medium text-text">
 //                 {index + 1}.
 //               </span>
 //             </div>
@@ -177,7 +177,7 @@
 //               <div className="flex gap-x-6 mt-4 justify-end mr-8">
 //                 {index ? (
 //                   <button
-//                     className="text-biru my-auto"
+//                     className="text-text my-auto"
 //                     onClick={() => removeFormList(index)}
 //                   >
 //                     Hapus
@@ -253,12 +253,12 @@
 // //       <HeaderGuru></HeaderGuru>
 // //       <HeaderKelas idMapel={idMapel}></HeaderKelas>
 
-// //       <h1 className="text-xl mt-8 ml-10 font-medium text-biru">Tambah Soal</h1>
+// //       <h1 className="text-xl mt-8 ml-10 font-medium text-text">Tambah Soal</h1>
 
 // //       <form>
 // //       <div className="mt-10">
 // //         <div>
-// //           <span className="text-xl ml-10 font-medium text-biru">1.</span>
+// //           <span className="text-xl ml-10 font-medium text-text">1.</span>
 // //         </div>
 // //         <div className="bg-tosca mx-10 mt-5 pb-5">
 // //           <div className="flex justify-between">
@@ -302,7 +302,7 @@
 // //                 </div>
 
 // //                 <p
-// //                   className="text-biru cursor-pointer flex items-end mb-2"
+// //                   className="text-text cursor-pointer flex items-end mb-2"
 // //                   onClick={handleAddOpsi}
 // //                 >
 // //                   Tambahkan Opsi
@@ -320,7 +320,7 @@
 // //             </div>
 // //           </div>
 // //           <div className="flex gap-x-6 mt-4 justify-end mr-8">
-// //             <a href="" className="text-biru my-auto">
+// //             <a href="" className="text-text my-auto">
 // //               Hapus
 // //             </a>
 // //             <a href="" className="text-white bg-biru py-2 px-3 rounded-lg">
@@ -331,7 +331,7 @@
 // //       </div>
 // //       <div className="mt-10">
 // //         <div>
-// //           <span className="text-xl ml-10 font-medium text-biru">2.</span>
+// //           <span className="text-xl ml-10 font-medium text-text">2.</span>
 // //         </div>
 // //         <div className="bg-tosca mx-10 mt-5 pb-5">
 // //           <div className="flex justify-between">
@@ -378,7 +378,7 @@
 // //                 </div>
 
 // //                 <p
-// //                   className="text-biru cursor-pointer flex items-end mb-2"
+// //                   className="text-text cursor-pointer flex items-end mb-2"
 // //                   onClick={handleAddKotakCentang}
 // //                 >
 // //                   Tambahkan Opsi
@@ -396,7 +396,7 @@
 // //             </div>
 // //           </div>
 // //           <div className="flex gap-x-6 mt-4 justify-end mr-8">
-// //             <a href="" className="text-biru my-auto">
+// //             <a href="" className="text-text my-auto">
 // //               Hapus
 // //             </a>
 // //             <a href="" className="text-white bg-biru py-2 px-3 rounded-lg">
@@ -407,7 +407,7 @@
 // //       </div>
 // //       <div className="mt-10">
 // //         <div>
-// //           <span className="text-xl ml-10 font-medium text-biru">3.</span>
+// //           <span className="text-xl ml-10 font-medium text-text">3.</span>
 // //         </div>
 // //         <div className="bg-tosca mx-10 mt-5 pb-5">
 // //           <div className="flex justify-between">
@@ -454,7 +454,7 @@
 // //             </div>
 // //           </div>
 // //           <div className="flex gap-x-6 mt-4 justify-end mr-8">
-// //             <a href="" className="text-biru my-auto">
+// //             <a href="" className="text-text my-auto">
 // //               Hapus
 // //             </a>
 // //             <a href="" className="text-white bg-biru py-2 px-3 rounded-lg">

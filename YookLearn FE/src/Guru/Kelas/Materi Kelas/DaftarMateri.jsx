@@ -45,9 +45,9 @@ function DaftarMateri() {
       <HeaderGuru></HeaderGuru>
       <HeaderKelas dataMapel={dataMapel}></HeaderKelas>
       <div className="flex mt-10 mx-10 p-2 justify-between">
-        <h1 className="my-auto text-xl font-medium text-biru">Daftar Materi</h1>
+        <h1 className="my-auto text-xl font-medium text-text">Daftar Materi</h1>
         <a
-          className="tombolTambahForum  flex flex-row justify-between text-white bg-biru w-fit rounded-full py-3"
+          className="tombolTambahForum  flex flex-row justify-between text-white bg-tombol w-fit rounded-full py-3"
           href={`/guru/mapel/${idMapel}/materi/tambah-materi`}
         >
           <span className="px-5">+</span>

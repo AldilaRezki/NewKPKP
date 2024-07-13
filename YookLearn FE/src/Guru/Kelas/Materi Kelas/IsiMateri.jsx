@@ -50,26 +50,25 @@ function IsiMateri() {
       <Header></Header>
       <HeaderKelas dataMapel={dataMapel}></HeaderKelas>
 
-      <div className="bg-tosca mt-10 mx-10 p-2">
+      <div className="bg-biru w-1/12 lg:w-[50px] mt-10 mx-10 p-2">
         <a href={`/guru/mapel/${idMapel}/daftar-materi`}>
-          <BiArrowBack className="bg-white text-xl"></BiArrowBack>
+          <BiArrowBack className="ml-1.5 text-white text-xl"></BiArrowBack>
         </a>
       </div>
 
       <div className="flex ml-10 mt-10 gap-x-5">
         <BiBook
-          className="bg-tosca
-        text-biru text-5xl rounded-full p-2"
+          className="outline outline-biru bg-white text-biru text-5xl rounded-full p-[0.7rem]"
         ></BiBook>
-        <span className="text-biru text-xl my-auto font-medium">
+        <span className="text-text text-xl my-auto font-medium">
           {dataMateri.judul_materi}
         </span>
       </div>
 
-      <div className="flex ml-[110px] mt-10 gap-x-5 text-biru">
-        <span className="bg-tosca p-3 rounded-lg">{dataMateri.filename}</span>
+      <div className="flex ml-[110px] mt-5 gap-x-5 text-white">
+        <span className="bg-biru p-3 rounded-lg lg:w-2/12 w-5/12 text-center">{dataMateri.filename}</span>
         <a href={`${BASE_URL}/${dataMateri.filename}`} download>
-          <BsSaveFill className="bg-tosca p-[0.6rem] my-auto text-[2.5rem] rounded-lg"></BsSaveFill>
+          <BsSaveFill className="bg-biru p-[0.6rem] my-auto text-[3rem] p-[0.8rem] rounded-lg"></BsSaveFill>
         </a>
       </div>
     </div>

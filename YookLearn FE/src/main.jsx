@@ -81,6 +81,7 @@ import TambahBatch from "./Guru/TambahBatch";
 import TambahAkun from "./Guru/TambahAkun";
 import LogbookGuru from "./Guru/Logbook";
 import DaftarLogbook from "./Guru/DaftarLogbook";
+import TambahKelas from "./Guru/Daftar Kelas/TambahKelas";
 
 const router = createBrowserRouter([
     {
@@ -203,6 +204,10 @@ const router = createBrowserRouter([
     {
         path: "/guru/mapel/:idMapel",
         element: <HomepageKelas />,
+    },
+    {
+        path: "/guru/tambah-kelas",
+        element: <TambahKelas />,
     },
     {
         path: "/guru/mapel/:idMapel/daftar-materi",

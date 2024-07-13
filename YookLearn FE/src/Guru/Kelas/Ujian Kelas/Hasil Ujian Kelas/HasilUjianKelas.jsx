@@ -50,12 +50,12 @@ function HasilUjianKelas() {
       <Header></Header>
       <HeaderGuru></HeaderGuru>
       <HeaderKelas dataMapel={dataMapel}></HeaderKelas>
-      <div className="bg-tosca mt-10 mx-10 p-2">
+      <div className="bg-biru w-1/12 lg:w-[50px] mt-10 mx-10 p-2">
         <a href={`/guru/mapel/${idMapel}/ujian/${idUjian}`}>
-          <BiArrowBack className="bg-white text-xl"></BiArrowBack>
+          <BiArrowBack className="ml-1.5 text-white text-xl"></BiArrowBack>
         </a>
       </div>
-      <h1 className="text-xl mt-8 ml-10 font-medium text-biru">
+      <h1 className="text-xl mt-8 ml-10 font-medium text-text">
         Hasil Ujian Peserta
       </h1>
 

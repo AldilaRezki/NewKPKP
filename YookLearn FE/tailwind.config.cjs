@@ -4,10 +4,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        biru: "#1A1F5A",
-        tosca: "#EEF4FA",
+        biru: "#749BC2",
+        tosca: "#4775A2",
         hijau: "#4BB274",
         merah: "#F05252",
+        tombol: "#4775A2",
+        text: "#5182B2",
       },
     },
   },

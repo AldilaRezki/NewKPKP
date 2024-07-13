@@ -46,12 +46,12 @@ function DetailTugasGuru() {
       <HeaderGuru></HeaderGuru>
       <HeaderKelas dataMapel={dataMapel}></HeaderKelas>
       <div className="flex mt-10 mx-10 justify-between">
-        <h1 className="my-auto text-xl font-medium text-biru">
+        <h1 className="my-auto text-xl font-medium text-text">
           {dataTugas.judul_tugas}
         </h1>
       </div>
       <div className="mx-10 mt-10 border-[0.3px] shadow-md">
-        <span className="bg-tosca w-full flex py-2 px-4 text-biru font-medium">
+        <span className="bg-tosca w-full flex py-2 px-4 text-text font-medium">
           Detail Tugas
         </span>
         <p className="w-full flex py-4 px-4">{dataTugas.detail_tugas}</p>

@@ -32,7 +32,7 @@ function DaftarKelas() {
 
   return (
     <div>
-      {/* <h1 className="text-biru mt-10 ml-10 text-xl font-semibold ">
+      {/* <h1 className="text-text mt-10 ml-10 text-xl font-semibold ">
         Daftar Kelas
       </h1> */}
 
@@ -123,7 +123,7 @@ export default DaftarKelas;
 //     <div>
 //       <HeaderGuru></HeaderGuru>
 
-//       <h1 className='text-biru mt-10 ml-10 text-xl font-semibold '>Daftar Kelas</h1>
+//       <h1 className='text-text mt-10 ml-10 text-xl font-semibold '>Daftar Kelas</h1>
 
 //       {daftarKelasItems.map(item => (
 //         <BoxDaftarKelas
@@ -200,7 +200,7 @@ import LoadingPage from "../../Siswa/pages/LoadingPage";
 //     <div>
 //       <HeaderGuru></HeaderGuru>
 
-//       <h1 className='text-biru mt-10 ml-10 text-xl font-semibold '>Daftar Kelas</h1>
+//       <h1 className='text-text mt-10 ml-10 text-xl font-semibold '>Daftar Kelas</h1>
 
 //       {daftarKelasItems.map(item => (
 //         <BoxDaftarKelas

@@ -37,7 +37,7 @@ function DaftarUjian() {
       <HeaderKelas dataMapel={dataMapel}></HeaderKelas>
       <div className="flex justify-end">
         <a
-          className="tombolTambahForum  flex flex-row justify-between mr-10 my-10 text-white bg-biru w-fit rounded-full py-3"
+          className="tombolTambahForum  flex flex-row justify-between mr-10 my-10 text-white bg-tombol w-fit rounded-full py-3"
           href={`/guru/mapel/${idMapel}/tambah-ujian`}
         >
           <span className="px-5">+</span>

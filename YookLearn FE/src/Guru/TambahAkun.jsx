@@ -9,14 +9,14 @@ function TambahAkun() {
         <HeaderGuru></HeaderGuru>
 
         <div>
-            <h1 className="text-xl mt-8 ml-10 font-medium text-biru">Tambah Akun</h1>
+            <h1 className="text-xl mt-8 ml-10 font-medium text-text">Tambah Akun</h1>
         </div>
 
         <div className="flex justify-center mt-10  min-h-screen">
             <div className="w-full max-w-lg">
                 <form>
                     <div>
-                        <h2 className="text-md mt-8 ml-10 font-normal text-biru">
+                        <h2 className="text-md mt-8 ml-10 font-normal text-text">
                             Nama Siswa
                         </h2>
                         <input
@@ -25,7 +25,7 @@ function TambahAkun() {
                         />
                     </div>
                     <div>
-                        <h2 className="text-md mt-8 ml-10 font-normal text-biru">
+                        <h2 className="text-md mt-8 ml-10 font-normal text-text">
                             NISN
                         </h2>
                         <input
@@ -34,7 +34,7 @@ function TambahAkun() {
                         />
                     </div>
                     <div className="mt-8">
-                        <label className="text-md mt-8 ml-10 font-normal text-biru">
+                        <label className="text-md mt-8 ml-10 font-normal text-text">
                             Batch
                         </label>
                         <select id="batch" name="batch"
@@ -47,7 +47,7 @@ function TambahAkun() {
                         </select>
                     </div>
                     <div>
-                        <h2 className="text-md mt-8 ml-10 font-normal text-biru">
+                        <h2 className="text-md mt-8 ml-10 font-normal text-text">
                             Asal Sekolah
                         </h2>
                         <input
@@ -56,7 +56,7 @@ function TambahAkun() {
                         />
                     </div>
                     <div className="mt-8">
-                        <label className="text-md mt-8 ml-10 font-normal text-biru">
+                        <label className="text-md mt-8 ml-10 font-normal text-text">
                             Kelas
                         </label>
                         <select id="kelas" name="kelas"
@@ -68,7 +68,7 @@ function TambahAkun() {
                         </select>
                     </div>
                     <div>
-                        <h2 className="text-md mt-8 ml-10 font-normal text-biru">
+                        <h2 className="text-md mt-8 ml-10 font-normal text-text">
                             Jurusan
                         </h2>
                         <input
@@ -76,13 +76,31 @@ function TambahAkun() {
                             className="bg-white mx-10 mt-3 h-8 border-[0.3px] shadow-md w-[90%] py-1 px-2 focus:outline-none focus:ring-1"
                         />
                     </div>
+                    <div>
+                        <h2 className="text-md mt-8 ml-10 font-normal text-text">
+                            Username
+                        </h2>
+                        <input
+                            type="text"
+                            className="bg-white mx-10 mt-3 h-8 border-[0.3px] shadow-md w-[90%] py-1 px-2 focus:outline-none focus:ring-1"
+                        />
+                    </div>
+                    <div>
+                        <h2 className="text-md mt-8 ml-10 font-normal text-text">
+                            Password
+                        </h2>
+                        <input
+                            type="text"
+                            className="bg-white mx-10 mt-3 h-8 border-[0.3px] shadow-md w-[90%] py-1 px-2 focus:outline-none focus:ring-1"
+                        />
+                    </div>
                     <div className="flex justify-end mt-10 gap-x-4 mb-10">
-                            <a href="/guru/homepage" className="text-biru py-2">
+                            <a href="/guru/homepage" className="text-text py-2">
                                 Batal
                             </a>
                             <button
                                 type="submit"
-                                className="text-white bg-biru py-2 px-5 rounded-md"
+                                className="text-white bg-tombol py-2 px-5 rounded-md"
                             >
                                 Tambah Akun
                             </button>

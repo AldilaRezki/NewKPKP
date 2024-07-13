@@ -2,7 +2,7 @@ import React from "react";
 
 function BoxDaftarSoalEssay({ soal }) {
   return (
-    <div className="flex flex-col mx-10 mt-8 bg-tosca px-[20px] py-[15px] gap-y-5">
+    <div className="flex flex-col mx-10 mt-8 bg-biru px-[20px] py-[15px] gap-y-5">
       <div className="atasSoalEssay flex justify-between">
         <div className="pertanyaanSoalEssay flex flex-col w-2/3 gap-y-2">
           <span>Pertanyaan</span>

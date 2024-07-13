@@ -9,10 +9,10 @@
 //         <HeaderGuru></HeaderGuru>
 
 //         <div>
-//             <h1 className="text-xl mt-8 ml-10 font-medium text-biru">Tambah Batch</h1>
+//             <h1 className="text-xl mt-8 ml-10 font-medium text-text">Tambah Batch</h1>
 //             <form  className="flex flex-col xl:justify-center xl:items-center">
 //                 <div>
-//                     <h2 className="text-md mt-8 ml-10 font-normal text-biru">
+//                     <h2 className="text-md mt-8 ml-10 font-normal text-text">
 //                         Nama Batch
 //                     </h2>
 //                     <input
@@ -23,7 +23,7 @@
 
 //                 <div className="flex gap-x-10 ml-10">
 //                     <div>
-//                         <h2 className="text-md mt-8 font-normal text-biru">Tanggal Masuk</h2>
+//                         <h2 className="text-md mt-8 font-normal text-text">Tanggal Masuk</h2>
 //                         <div className="flex gap-x-8">
 //                         <input
 //                             type="date"
@@ -32,7 +32,7 @@
 //                         </div>
 //                     </div>
 //                     <div>
-//                         <h2 className="text-md mt-8 font-normal text-biru">
+//                         <h2 className="text-md mt-8 font-normal text-text">
 //                         Tanggal Selesai
 //                         </h2>
 //                         <div className="flex gap-x-8">
@@ -66,14 +66,14 @@ function TambahBatch() {
             <HeaderGuru></HeaderGuru>
 
             <div>
-                <h1 className="text-xl ml-10 mt-8 font-medium text-biru">Tambah Batch</h1>
+                <h1 className="text-xl ml-10 mt-8 font-medium text-text">Tambah Batch</h1>
             </div>
 
             <div className="flex justify-center mt-10  min-h-screen">
                 <div className="w-full max-w-lg">
                     <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                         <div>
-                            <h2 className="text-md mt-8 font-normal text-biru">
+                            <h2 className="text-md mt-8 font-normal text-text">
                                 Nama Batch
                             </h2>
                             <input
@@ -84,14 +84,14 @@ function TambahBatch() {
 
                         <div className="flex gap-x-10 mt-8">
                             <div className="w-1/2">
-                                <h2 className="text-md font-normal text-biru">Tanggal Masuk</h2>
+                                <h2 className="text-md font-normal text-text">Tanggal Masuk</h2>
                                 <input
                                     type="date"
                                     className="mt-4 py-2 px-5 border-[0.3px] shadow-md w-full"
                                 />
                             </div>
                             <div className="w-1/2">
-                                <h2 className="text-md font-normal text-biru">
+                                <h2 className="text-md font-normal text-text">
                                     Tanggal Selesai
                                 </h2>
                                 <input
@@ -101,12 +101,12 @@ function TambahBatch() {
                             </div>
                         </div>
                         <div className="flex justify-end mt-10 gap-x-4">
-                            <a href="/guru/homepage" className="text-biru py-2">
+                            <a href="/guru/homepage" className="text-text py-2">
                                 Batal
                             </a>
                             <button
                                 type="submit"
-                                className="text-white bg-biru py-2 px-5 rounded-md"
+                                className="text-white bg-tombol py-2 px-5 rounded-md"
                             >
                                 Tambah Batch
                             </button>

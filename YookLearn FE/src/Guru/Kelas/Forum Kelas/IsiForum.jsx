@@ -16,7 +16,7 @@ function IsiForum() {
           <BiArrowBack className="bg-white text-xl"></BiArrowBack>
         </a>
       </div>
-      <h1 className="text-xl mt-8 ml-10 font-medium text-biru">
+      <h1 className="text-xl mt-8 ml-10 font-medium text-text">
         Forum Diskusi Pekan 1
       </h1>
       <IsiBalasanForum></IsiBalasanForum>
