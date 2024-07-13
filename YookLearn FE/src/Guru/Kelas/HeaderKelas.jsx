@@ -3,17 +3,16 @@ import { fetchCurrentMapel, fetchMapel } from "../services/GuruAPI";
 
 function HeaderKelas({ dataMapel }) {
   return (
-    <div className="flex justify-between py-4 px-10 bg-tosca">
-      <h1 className="text-lg font-semibold text-white">
-        {dataMapel.nama_matpel}
+    <div className="flex justify-between items-center py-4 px-10 bg-text w-full">
+      <h1 className="text-lg font-semibold text-white hidden sm:block md:w-auto">
+        {/* {dataMapel.nama_matpel} */}
+        Batch 1
       </h1>
-      <ul className="flex justify-between w-6/12 text-white">
-        <a href={`/guru/mapel/${dataMapel.id}`}>Home</a>
-        {/* <a href="/guru/xipa1/forum">Forum</a> */}
-        <a href={`/guru/mapel/${dataMapel.id}/daftar-materi`}>Materi</a>
-        {/* <a href={`/guru/mapel/${dataMapel.id}/daftar-tugas`}>Tugas</a> */}
-        <a href={`/guru/mapel/${dataMapel.id}/ujian`}>Ujian</a>
-        <a href={`/guru/mapel/${dataMapel.id}/daftar-anggota-kelas`}>Anggota</a>
+      <ul className="flex justify-between w-full text-white sm:w-4/12 sm:mr-10 sm:gap-x-4">
+        <li className="flex-1 text-center"><a href={`/guru/mapel/${dataMapel.id}`}>Home</a></li>
+        <li className="flex-1 text-center"><a href={`/guru/mapel/${dataMapel.id}/daftar-materi`}>Materi</a></li>
+        <li className="flex-1 text-center"><a href={`/guru/mapel/${dataMapel.id}/ujian`}>Ujian</a></li>
+        <li className="flex-1 text-center"><a href={`/guru/mapel/${dataMapel.id}/daftar-anggota-kelas`}>Anggota</a></li>
       </ul>
     </div>
   );
